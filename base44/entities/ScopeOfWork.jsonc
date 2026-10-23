@@ -1,0 +1,258 @@
+{
+  "name": "ScopeOfWork",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "estimate_id": {
+      "type": "string",
+      "title": "Estimate ID"
+    },
+    "estimate_package_id": {
+      "type": "string",
+      "title": "Estimate Package ID",
+      "description": "Links to the EstimatePackage this scope belongs to (v2 workflow). Null for legacy records."
+    },
+    "estimate_group_id": {
+      "type": "string",
+      "title": "Estimate Group ID",
+      "description": "The EstimateGroup this scope belongs to (multi-asset architecture)"
+    },
+    "proposal_option_id": {
+      "type": "string",
+      "title": "Proposal Option ID",
+      "description": "The specific proposal option within the EstimateGroup this scope is for"
+    },
+    "property_asset_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Property Asset IDs",
+      "description": "PropertyAsset records this scope covers"
+    },
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "generated",
+        "approved",
+        "updated",
+        "archived"
+      ],
+      "default": "generated",
+      "title": "Status"
+    },
+    "work_phases": {
+      "type": "string",
+      "title": "Work Phases (JSON)",
+      "description": "JSON array of {phase_name, service_name, estimated_hours, crew_size, tasks[], materials[], equipment[]}"
+    },
+    "total_estimated_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Estimated Hours",
+      "description": "Backward-compatible alias of total_crew_hours. Equals the sum of daily crew_hours for scopes with a daily_schedule; preserved as-is for finalized legacy records."
+    },
+    "estimated_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimated Hours (v2)",
+      "description": "Authoritative estimated hours for the package scope (v2 workflow). Set to total_crew_hours for scopes with a daily_schedule."
+    },
+    "estimated_days": {
+      "type": "number",
+      "default": 1,
+      "title": "Estimated Days",
+      "description": "Estimated production days for this scope (v2 workflow). Set to production_days (days with crew_hours > 0) for scopes with a daily_schedule."
+    },
+    "daily_schedule": {
+      "type": "string",
+      "title": "Daily Schedule (JSON)",
+      "description": "Authoritative per-day labor structure: JSON array of {day_number, crew_hours, apprentice_count}. total_crew_hours, production_days, and apprentice_man_hours are derived from this. Older records without this field preserve their total_estimated_hours/estimated_days and are not back-filled."
+    },
+    "total_crew_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Crew Hours",
+      "description": "Sum of daily crew_hours across all scheduled days. Authoritative labor-duration value for pricing, KPIs, and scheduling. NOT production_days \u00d7 8."
+    },
+    "production_days": {
+      "type": "number",
+      "default": 0,
+      "title": "Production Days",
+      "description": "Number of scheduled workdays with crew_hours greater than zero. Used for per-day KPIs (revenue per production day, gross profit per crew-day)."
+    },
+    "apprentice_man_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Apprentice Man-Hours",
+      "description": "Sum of each day's apprentice_count \u00d7 that day's crew_hours. Authoritative input to apprentice labor cost."
+    },
+    "apprentice_labor_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Apprentice Labor Cost",
+      "description": "apprentice_man_hours \u00d7 the fully-loaded apprentice hourly rate from LoadedLaborCost (role = 'apprentice'). Do not add payroll taxes or labor burden again \u2014 the loaded rate already includes them."
+    },
+    "daily_plan": {
+      "type": "string",
+      "title": "Daily Plan (JSON)",
+      "description": "JSON array of {day_number, scope_summary, estimated_hours, crew_size, production_goal, equipment[], materials[]}"
+    },
+    "total_crew_required": {
+      "type": "number",
+      "default": 1,
+      "title": "Total Crew Required"
+    },
+    "crew_requirements": {
+      "type": "string",
+      "title": "Crew Requirements (JSON)",
+      "description": "JSON array of {role, count, hours} defining crew composition (v2 workflow)"
+    },
+    "required_equipment": {
+      "type": "string",
+      "title": "Required Equipment (JSON)",
+      "description": "JSON array of {equipment_master_id, item_name, quantity, service_name, notes} \u2014 aggregated from all estimate items"
+    },
+    "equipment": {
+      "type": "string",
+      "title": "Equipment (JSON)",
+      "description": "Authoritative equipment list for package scope (v2 workflow): JSON array of {equipment_master_id, item_name, quantity, notes}"
+    },
+    "required_materials": {
+      "type": "string",
+      "title": "Required Materials (JSON)",
+      "description": "JSON array of {material_id, material_name, quantity, unit, unit_price, service_name, chargeable_to_customer} \u2014 aggregated from all estimate items"
+    },
+    "job_conditions": {
+      "type": "string",
+      "title": "Job Conditions (JSON)",
+      "description": "Site-specific conditions: roof_pitch, access_difficulty, safety_concerns, weather_constraints, etc. (v2 workflow)"
+    },
+    "safety_notes": {
+      "type": "string",
+      "title": "Safety Notes (JSON)",
+      "description": "JSON array of safety note strings \u2014 aggregated from all estimate items"
+    },
+    "cleanup_tasks": {
+      "type": "string",
+      "title": "Cleanup Tasks (JSON)",
+      "description": "JSON array of cleanup task strings \u2014 aggregated from all estimate items"
+    },
+    "internal_notes": {
+      "type": "string",
+      "title": "Internal Technician Notes",
+      "description": "Aggregated internal notes from all estimate items"
+    },
+    "internal_instructions": {
+      "type": "string",
+      "title": "Internal Instructions (v2)",
+      "description": "Authoritative internal instructions for the crew (v2 workflow)"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "estimate_package",
+        "legacy_builder",
+        "legacy_estimate",
+        "recommendation_level",
+        "manual"
+      ],
+      "default": "legacy_builder",
+      "title": "Source Type",
+      "description": "Identifies how this scope was created \u2014 used by the resolver for selection priority"
+    },
+    "is_authoritative": {
+      "type": "boolean",
+      "default": false,
+      "title": "Authoritative",
+      "description": "True when this is the current authoritative scope for its package/job. Only one authoritative scope per package."
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "title": "Version",
+      "description": "Incremented on each revision (v2 workflow)"
+    },
+    "scope_version": {
+      "type": "number",
+      "default": 1,
+      "title": "Scope Version",
+      "description": "Version for the multi-asset estimate group scope (incremented on revision)"
+    },
+    "scope_hash": {
+      "type": "string",
+      "title": "Scope Hash",
+      "description": "Deterministic hash of scope-relevant values for change detection within this estimate group option"
+    },
+    "workflow_version": {
+      "type": "string",
+      "enum": [
+        "legacy",
+        "v2_package"
+      ],
+      "default": "legacy",
+      "title": "Workflow Version",
+      "description": "legacy = original workflow, v2_package = estimate package workflow"
+    },
+    "scope_source_type": {
+      "type": "string",
+      "title": "Scope Source Type",
+      "description": "Alias for source_type used in cross-entity version tracking"
+    },
+    "package_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Package Version",
+      "description": "Snapshot of the parent EstimatePackage version when this scope was generated"
+    },
+    "is_legacy": {
+      "type": "boolean",
+      "default": true,
+      "title": "Legacy",
+      "description": "True for records created before the v2 package workflow. Existing records default to true."
+    },
+    "superseded_by_id": {
+      "type": "string",
+      "title": "Superseded By ID",
+      "description": "ID of the scope that replaced this one, if superseded"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Generated At"
+    },
+    "generated_from": {
+      "type": "string",
+      "title": "Generated From",
+      "description": "estimate, proposal, estimate_package, etc."
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By"
+    }
+  },
+  "required": [
+    "job_id"
+  ]
+}

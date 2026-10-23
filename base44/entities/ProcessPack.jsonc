@@ -1,0 +1,108 @@
+{
+  "name": "ProcessPack",
+  "type": "object",
+  "properties": {
+    "pack_id": {
+      "type": "string",
+      "title": "Pack ID",
+      "description": "e.g. PP-WH-101"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "primary_sop_id": {
+      "type": "string",
+      "title": "Primary SOP ID"
+    },
+    "trainual_url": {
+      "type": "string",
+      "title": "Trainual URL"
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Policies"
+    },
+    "form_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Forms"
+    },
+    "workflow_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Workflows"
+    },
+    "dashboard_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Dashboards"
+    },
+    "kpi_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "KPIs"
+    },
+    "automations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Automations"
+    },
+    "reports": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Reports"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "In Development",
+        "Ready",
+        "Live"
+      ],
+      "default": "Planned",
+      "title": "Status"
+    },
+    "owner": {
+      "type": "string",
+      "title": "Owner"
+    },
+    "target_go_live": {
+      "type": "string",
+      "format": "date",
+      "title": "Target Go-Live"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "pack_id",
+    "title"
+  ]
+}

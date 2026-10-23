@@ -1,0 +1,94 @@
+{
+  "name": "BarcodeLabel",
+  "type": "object",
+  "properties": {
+    "label_code": {
+      "type": "string",
+      "title": "Label Code",
+      "description": "e.g. BC-000001"
+    },
+    "inventory_master_id": {
+      "type": "string",
+      "title": "Inventory Master ID",
+      "description": "Links to InventoryMaster record"
+    },
+    "sku": {
+      "type": "string",
+      "title": "SKU",
+      "description": "Denormalized from InventoryMaster"
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Item Name",
+      "description": "Denormalized from InventoryMaster"
+    },
+    "barcode_value": {
+      "type": "string",
+      "title": "Barcode Value",
+      "description": "The encoded value scanned by barcode readers (typically the SKU or a unique identifier)"
+    },
+    "barcode_format": {
+      "type": "string",
+      "enum": [
+        "code_128",
+        "code_39",
+        "ean_13",
+        "upc_a",
+        "qr_code",
+        "data_matrix"
+      ],
+      "default": "code_128",
+      "title": "Barcode Format"
+    },
+    "qr_code_value": {
+      "type": "string",
+      "title": "QR Code Value",
+      "description": "Optional QR code encoding a URL or structured data for mobile lookup"
+    },
+    "vendor_sku": {
+      "type": "string",
+      "title": "Vendor SKU",
+      "description": "Denormalized from InventoryMaster for label printing"
+    },
+    "label_size": {
+      "type": "string",
+      "enum": [
+        "small_1x2",
+        "medium_2x2",
+        "large_2x4",
+        "custom"
+      ],
+      "default": "medium_2x2",
+      "title": "Label Size"
+    },
+    "print_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Print Count",
+      "description": "Number of times this label has been printed"
+    },
+    "last_printed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Printed At"
+    },
+    "last_printed_by": {
+      "type": "string",
+      "title": "Last Printed By"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "inventory_master_id",
+    "barcode_value",
+    "barcode_format"
+  ]
+}

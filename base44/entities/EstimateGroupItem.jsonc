@@ -1,0 +1,95 @@
+{
+  "name": "EstimateGroupItem",
+  "type": "object",
+  "properties": {
+    "estimate_group_id": {
+      "type": "string",
+      "title": "Estimate Group ID",
+      "description": "Links to the EstimateGroup this item belongs to"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID",
+      "description": "Denormalized for filtering"
+    },
+    "property_asset_id": {
+      "type": "string",
+      "title": "Property Asset ID",
+      "description": "The PropertyAsset this item is associated with"
+    },
+    "inspection_finding_id": {
+      "type": "string",
+      "title": "Inspection Finding ID",
+      "description": "The InspectionFinding this item originates from"
+    },
+    "repair_recommendation_id": {
+      "type": "string",
+      "title": "Repair Recommendation ID",
+      "description": "The RepairSystemRecommendation this item references"
+    },
+    "service_catalog_id": {
+      "type": "string",
+      "title": "Service Catalog ID",
+      "description": "The ServiceCatalog item this group item resolves to"
+    },
+    "source_estimate_item_id": {
+      "type": "string",
+      "title": "Source Estimate Item ID",
+      "description": "The DraftEstimateItem this group item was derived from"
+    },
+    "item_role": {
+      "type": "string",
+      "enum": [
+        "primary",
+        "supporting",
+        "optional",
+        "upgrade",
+        "bundled",
+        "discount_eligible"
+      ],
+      "default": "primary",
+      "title": "Item Role"
+    },
+    "inclusion_status": {
+      "type": "string",
+      "enum": [
+        "included",
+        "excluded",
+        "pending",
+        "removed"
+      ],
+      "default": "included",
+      "title": "Inclusion Status"
+    },
+    "required_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Required",
+      "description": "When true, this item must be included in any proposal option within this group"
+    },
+    "optional_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Optional",
+      "description": "When true, this item is an optional add-on"
+    },
+    "committed_work_key": {
+      "type": "string",
+      "title": "Committed Work Key",
+      "description": "Stable identity: job_id + property_asset_id + inspection_finding_id + repair_recommendation_id + service_catalog_id. Used for overlap protection."
+    },
+    "display_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Display Order"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "estimate_group_id",
+    "job_id"
+  ]
+}

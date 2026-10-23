@@ -1,0 +1,504 @@
+{
+  "name": "Appointment",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "title": "Base44 Job ID"
+    },
+    "crm_appointment_id": {
+      "type": "string",
+      "title": "ServiceTitan Appointment ID",
+      "description": "Legacy alias for servicetitan_appointment_id. Kept in sync for backward compatibility."
+    },
+    "crm_job_number": {
+      "type": "string",
+      "title": "ServiceTitan Job Number",
+      "description": "Legacy alias for servicetitan_job_number. Kept in sync for backward compatibility."
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Base44 Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "scheduled_start": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Scheduled Start"
+    },
+    "scheduled_end": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Scheduled End"
+    },
+    "technician_id": {
+      "type": "string",
+      "title": "Technician ID",
+      "description": "Linked EmployeeRegistry ID when mapped, or raw ServiceTitan technician ID when unmapped."
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Lead Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Lead Technician Name"
+    },
+    "apprentice_email": {
+      "type": "string",
+      "title": "Apprentice / Helper Email"
+    },
+    "apprentice_name": {
+      "type": "string",
+      "title": "Apprentice / Helper Name"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "assigned",
+        "confirmed",
+        "dispatched",
+        "started",
+        "en_route",
+        "arrived",
+        "in_progress",
+        "completed",
+        "cancelled",
+        "canceled",
+        "on_hold",
+        "unknown"
+      ],
+      "default": "scheduled",
+      "title": "Status",
+      "description": "Normalized lifecycle status mapped from raw ServiceTitan status via stAppointmentStatusMapping. Unknown ServiceTitan statuses map to 'unknown' \u2014 the raw value is preserved in servicetitan_raw_status."
+    },
+    "dispatch_status": {
+      "type": "string",
+      "enum": [
+        "unassigned",
+        "assigned",
+        "dispatched",
+        "started",
+        "completed",
+        "cancelled"
+      ],
+      "default": "unassigned",
+      "title": "Dispatch Status"
+    },
+    "appointment_type": {
+      "type": "string",
+      "title": "Appointment Type"
+    },
+    "address": {
+      "type": "string",
+      "title": "Service Address"
+    },
+    "city": {
+      "type": "string",
+      "title": "City"
+    },
+    "state": {
+      "type": "string",
+      "title": "State"
+    },
+    "zip": {
+      "type": "string",
+      "title": "Zip"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "day_number": {
+      "type": "number",
+      "title": "Day Number",
+      "description": "Which day of the multi-day job (1, 2, 3...). Single-day jobs = 1."
+    },
+    "total_job_days": {
+      "type": "number",
+      "title": "Total Job Days",
+      "description": "Total number of planned days for this job. Set on all appointments when generated from execution plan."
+    },
+    "appointment_source": {
+      "type": "string",
+      "enum": [
+        "crm",
+        "execution_plan",
+        "manual"
+      ],
+      "default": "crm",
+      "title": "Appointment Source",
+      "description": "crm = synced from ServiceTitan, execution_plan = auto-generated from approved Scope of Work Plan, manual = created by scheduler"
+    },
+    "expected_daily_scope": {
+      "type": "string",
+      "title": "Expected Daily Scope",
+      "description": "From execution plan \u2014 what work is expected this day"
+    },
+    "expected_hours": {
+      "type": "number",
+      "title": "Expected Hours",
+      "description": "Planned hours for this appointment from execution plan"
+    },
+    "daily_production_goal": {
+      "type": "string",
+      "title": "Daily Production Goal",
+      "description": "What should be accomplished by end of this day"
+    },
+    "expected_equipment": {
+      "type": "string",
+      "title": "Expected Equipment (JSON)",
+      "description": "JSON array of equipment expected for this day from execution plan"
+    },
+    "expected_materials": {
+      "type": "string",
+      "title": "Expected Materials (JSON)",
+      "description": "JSON array of materials expected for this day"
+    },
+    "crew_assignment": {
+      "type": "string",
+      "title": "Crew Assignment (JSON)",
+      "description": "JSON array of {email, name, role} assigned to this appointment"
+    },
+    "assigned_vehicle": {
+      "type": "string",
+      "title": "Assigned Vehicle",
+      "description": "Truck number or vehicle ID assigned to this appointment"
+    },
+    "auto_assigned_truck": {
+      "type": "string",
+      "title": "Auto-Assigned Truck",
+      "description": "Truck number automatically resolved from the lead technician's active assignment"
+    },
+    "truck_assignment_source": {
+      "type": "string",
+      "title": "Truck Assignment Source",
+      "description": "vehicle_assignment, technician_profile, employee_registry, none"
+    },
+    "truck_assignment_status": {
+      "type": "string",
+      "enum": [
+        "Auto Assigned",
+        "Truck Assignment Needed",
+        "Manually Overridden",
+        "Not Required"
+      ],
+      "default": "Not Required",
+      "title": "Truck Assignment Status"
+    },
+    "truck_override_used": {
+      "type": "boolean",
+      "default": false,
+      "title": "Truck Override Used"
+    },
+    "truck_override_reason": {
+      "type": "string",
+      "title": "Truck Override Reason"
+    },
+    "truck_override_by": {
+      "type": "string",
+      "title": "Truck Override By"
+    },
+    "truck_override_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Truck Override At"
+    },
+    "is_final_appointment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Final Appointment",
+      "description": "True when this is the last scheduled appointment for the job. Only the final appointment may complete the Job."
+    },
+    "planned_hours": {
+      "type": "number",
+      "title": "Planned Hours",
+      "description": "Planned labor hours for production tracking"
+    },
+    "actual_hours": {
+      "type": "number",
+      "title": "Actual Hours",
+      "description": "Actual labor hours worked"
+    },
+    "production_variance_reason": {
+      "type": "string",
+      "enum": [
+        "none",
+        "weather",
+        "hidden_damage",
+        "material_delay",
+        "customer_request",
+        "equipment_failure",
+        "safety_concern",
+        "other"
+      ],
+      "default": "none",
+      "title": "Production Variance Reason"
+    },
+    "conflict_override_used": {
+      "type": "boolean",
+      "default": false,
+      "title": "Conflict Override Used"
+    },
+    "conflict_override_reason": {
+      "type": "string",
+      "title": "Conflict Override Reason"
+    },
+    "conflict_override_by": {
+      "type": "string",
+      "title": "Conflict Override By"
+    },
+    "conflict_override_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Conflict Override At"
+    },
+    "conflict_warning_details": {
+      "type": "string",
+      "title": "Conflict Warning Details",
+      "description": "JSON array of conflict messages at the time of override"
+    },
+    "servicetitan_appointment_id": {
+      "type": "string",
+      "title": "ServiceTitan Appointment ID",
+      "description": "Primary synchronization key for ServiceTitan appointment webhooks. Never matched by name, date, or job number alone."
+    },
+    "servicetitan_job_id": {
+      "type": "string",
+      "title": "ServiceTitan Job ID"
+    },
+    "servicetitan_job_number": {
+      "type": "string",
+      "title": "ServiceTitan Job Number"
+    },
+    "servicetitan_customer_id": {
+      "type": "string",
+      "title": "ServiceTitan Customer ID"
+    },
+    "servicetitan_customer_name": {
+      "type": "string",
+      "title": "ServiceTitan Customer Name"
+    },
+    "servicetitan_customer_phone": {
+      "type": "string",
+      "title": "ServiceTitan Customer Phone"
+    },
+    "servicetitan_technician_id": {
+      "type": "string",
+      "title": "ServiceTitan Technician ID",
+      "description": "Raw ServiceTitan technician ID used for EmployeeRegistry mapping."
+    },
+    "servicetitan_technician_name": {
+      "type": "string",
+      "title": "ServiceTitan Technician Name"
+    },
+    "servicetitan_tenant_id": {
+      "type": "string",
+      "title": "ServiceTitan Tenant ID"
+    },
+    "servicetitan_business_unit": {
+      "type": "string",
+      "title": "ServiceTitan Business Unit"
+    },
+    "servicetitan_job_type": {
+      "type": "string",
+      "title": "ServiceTitan Job Type"
+    },
+    "servicetitan_arrival_window_start": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Arrival Window Start"
+    },
+    "servicetitan_arrival_window_end": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Arrival Window End"
+    },
+    "servicetitan_notes": {
+      "type": "string",
+      "title": "ServiceTitan Notes",
+      "description": "Notes from the ServiceTitan payload. LVC-only notes in the 'notes' field are never overwritten."
+    },
+    "servicetitan_last_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Synced At",
+      "description": "Timestamp of the most recent ServiceTitan webhook that updated this appointment."
+    },
+    "servicetitan_last_event_type": {
+      "type": "string",
+      "title": "ServiceTitan Last Event Type",
+      "description": "The event_type of the most recent ServiceTitan webhook that updated this appointment."
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At",
+      "description": "Timestamp when the most recent ServiceTitan event occurred (from the payload event_timestamp). Used for event ordering protection \u2014 an older event never overwrites a newer appointment state."
+    },
+    "servicetitan_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "manual",
+        "api"
+      ],
+      "title": "ServiceTitan Source",
+      "description": "How this appointment was last synced from ServiceTitan. webhook = synced from a ServiceTitan webhook event."
+    },
+    "is_canceled": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Canceled",
+      "description": "True when the appointment was canceled by ServiceTitan. The record is preserved for history."
+    },
+    "canceled_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Canceled At"
+    },
+    "canceled_source": {
+      "type": "string",
+      "title": "Canceled Source",
+      "description": "Source of the cancellation (e.g. servicetitan, manual)"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At",
+      "description": "When the appointment was marked completed via ServiceTitan sync."
+    },
+    "completed_source": {
+      "type": "string",
+      "title": "Completed Source",
+      "description": "Source of the completion (e.g. servicetitan, manual)"
+    },
+    "sync_conflict_history_json": {
+      "type": "string",
+      "title": "Sync Conflict History (JSON)",
+      "description": "Append-only JSON array of {webhook_event_id, event_type, field, previous_value, new_value, synced_at}. Records local values overwritten by ServiceTitan updates."
+    },
+    "technician_mapping_status": {
+      "type": "string",
+      "enum": [
+        "matched",
+        "unmatched",
+        "unassigned"
+      ],
+      "title": "Technician Mapping Status",
+      "description": "Result of mapping the ServiceTitan technician to EmployeeRegistry. matched = EmployeeRegistry found; unmatched = ServiceTitan supplied a technician but no EmployeeRegistry match exists; unassigned = ServiceTitan supplied no technician or explicitly removed it."
+    },
+    "technician_mapping_warning": {
+      "type": "string",
+      "title": "Technician Mapping Warning",
+      "description": "Warning message from the last technician mapping attempt (e.g. name-only fallback)."
+    },
+    "servicetitan_appointment_number": {
+      "type": "string",
+      "title": "ServiceTitan Appointment Number",
+      "description": "Human-readable appointment number from ServiceTitan."
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version",
+      "description": "Incremented on each successful ServiceTitan sync operation."
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status",
+      "description": "synced = last sync succeeded; pending = awaiting sync; conflict = local/st conflict recorded; deleted = soft-deleted by ServiceTitan."
+    },
+    "servicetitan_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Created On",
+      "description": "createdOn timestamp from the ServiceTitan API. Used for watermark eligibility and stale-event detection."
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On",
+      "description": "modifiedOn timestamp from the ServiceTitan API. Used for stale-event detection \u2014 an older modifiedOn never overwrites a newer one."
+    },
+    "servicetitan_raw_status": {
+      "type": "string",
+      "title": "ServiceTitan Raw Status",
+      "description": "The original ServiceTitan appointment status string. Preserved for audit and debugging."
+    },
+    "servicetitan_last_webhook_event_id": {
+      "type": "string",
+      "title": "ServiceTitan Last Webhook Event ID",
+      "description": "The ServiceTitanWebhookEvent entity ID of the last webhook that updated this appointment."
+    },
+    "servicetitan_location_id": {
+      "type": "string",
+      "title": "ServiceTitan Location ID"
+    },
+    "servicetitan_location_name": {
+      "type": "string",
+      "title": "ServiceTitan Location Name"
+    },
+    "servicetitan_priority": {
+      "type": "string",
+      "title": "ServiceTitan Priority"
+    },
+    "servicetitan_hold_status": {
+      "type": "boolean",
+      "default": false,
+      "title": "ServiceTitan Hold Status",
+      "description": "True when the appointment is on hold in ServiceTitan."
+    },
+    "servicetitan_cancellation_reason": {
+      "type": "string",
+      "title": "ServiceTitan Cancellation Reason"
+    },
+    "servicetitan_confirmed": {
+      "type": "boolean",
+      "default": false,
+      "title": "ServiceTitan Confirmed",
+      "description": "True when the appointment is confirmed in ServiceTitan."
+    },
+    "servicetitan_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "ServiceTitan Active",
+      "description": "True when the appointment is active in ServiceTitan."
+    },
+    "servicetitan_unused": {
+      "type": "boolean",
+      "default": false,
+      "title": "ServiceTitan Unused",
+      "description": "True when the appointment is marked as unused in ServiceTitan."
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual"
+      ],
+      "title": "Import Source",
+      "description": "How this appointment was first imported locally."
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At",
+      "description": "When this appointment was first imported locally."
+    }
+  },
+  "required": []
+}

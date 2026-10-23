@@ -1,0 +1,135 @@
+{
+  "name": "ServiceTitanSyncCursor",
+  "type": "object",
+  "properties": {
+    "integration_name": {
+      "type": "string",
+      "title": "Integration Name",
+      "description": "e.g. servicetitan_customer_export"
+    },
+    "domain": {
+      "type": "string",
+      "title": "Domain",
+      "description": "e.g. customer, job, appointment"
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant ID"
+    },
+    "environment": {
+      "type": "string",
+      "enum": [
+        "production",
+        "integration"
+      ],
+      "default": "production",
+      "title": "Environment"
+    },
+    "continuation_token": {
+      "type": "string",
+      "title": "Continuation Token",
+      "description": "Token for the next page of export results. Only advances after all records in the current batch are processed."
+    },
+    "last_successful_sync_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Successful Sync At"
+    },
+    "last_attempt_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Attempt At"
+    },
+    "last_completed_page_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Completed Page At"
+    },
+    "records_processed": {
+      "type": "number",
+      "default": 0,
+      "title": "Records Processed",
+      "description": "Total records processed across all sync cycles"
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "consecutive_failures": {
+      "type": "number",
+      "default": 0,
+      "title": "Consecutive Failures"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "running",
+        "failed",
+        "backfilling"
+      ],
+      "default": "idle",
+      "title": "Status"
+    },
+    "lock_id": {
+      "type": "string",
+      "title": "Lock ID",
+      "description": "Unique lock holder identifier. Prevents concurrent workers."
+    },
+    "lock_expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Lock Expires At",
+      "description": "When the current lock expires. Stale locks are automatically recovered."
+    },
+    "last_batch_id": {
+      "type": "string",
+      "title": "Last Batch ID"
+    },
+    "total_records_synced": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Records Synced"
+    },
+    "last_sync_summary_json": {
+      "type": "string",
+      "title": "Last Sync Summary (JSON)",
+      "description": "JSON object with counts: created, updated, unchanged, ignored_stale, merged, deactivated, restored"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "incremental",
+        "initial_backfill"
+      ],
+      "default": "incremental",
+      "title": "Mode"
+    },
+    "backfill_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Backfill Started At"
+    },
+    "backfill_completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Backfill Completed At"
+    },
+    "backfill_confirmed_by": {
+      "type": "string",
+      "title": "Backfill Confirmed By",
+      "description": "Email of admin who confirmed the initial backfill"
+    },
+    "contacts_last_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Contacts Last Synced At"
+    }
+  },
+  "required": [
+    "integration_name",
+    "domain",
+    "tenant_id",
+    "environment"
+  ]
+}

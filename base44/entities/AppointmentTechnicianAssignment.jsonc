@@ -1,0 +1,144 @@
+{
+  "name": "AppointmentTechnicianAssignment",
+  "type": "object",
+  "properties": {
+    "assignment_key": {
+      "type": "string",
+      "title": "Assignment Key",
+      "description": "Deterministic unique key: appointment_id:external_identifier. Prevents duplicate active assignments. external_identifier = 'tech:{stTechnicianId}' or 'emp:{stEmployeeId}'."
+    },
+    "appointment_id": {
+      "type": "string",
+      "title": "Local Appointment ID",
+      "description": "Base44 Appointment entity ID this assignment belongs to."
+    },
+    "servicetitan_appointment_id": {
+      "type": "string",
+      "title": "ServiceTitan Appointment ID",
+      "description": "Snapshot of the parent appointment's ST ID for display without joining."
+    },
+    "servicetitan_technician_id": {
+      "type": "string",
+      "title": "ServiceTitan Technician ID",
+      "description": "Raw ServiceTitan technician ID. Primary external identifier for this assignment."
+    },
+    "servicetitan_employee_id": {
+      "type": "string",
+      "title": "ServiceTitan Employee ID",
+      "description": "Raw ServiceTitan employee ID when supplied instead of or alongside the technician ID."
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name",
+      "description": "Raw ServiceTitan technician display name."
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email",
+      "description": "Raw ServiceTitan technician email."
+    },
+    "employee_registry_id": {
+      "type": "string",
+      "title": "Employee Registry ID",
+      "description": "Linked EmployeeRegistry entity ID when resolved via verified ST identifier. Empty when unresolved."
+    },
+    "mapping_status": {
+      "type": "string",
+      "enum": [
+        "matched",
+        "unmatched",
+        "unassigned"
+      ],
+      "default": "unassigned",
+      "title": "Mapping Status",
+      "description": "matched = EmployeeRegistry resolved via verified ST identifier; unmatched = ST supplied a technician but no verified EmployeeRegistry match; unassigned = no technician supplied."
+    },
+    "mapping_warning": {
+      "type": "string",
+      "title": "Mapping Warning",
+      "description": "Warning message from the last mapping attempt (e.g. unverified email candidate)."
+    },
+    "assignment_role": {
+      "type": "string",
+      "enum": [
+        "lead",
+        "apprentice",
+        "helper",
+        "unspecified"
+      ],
+      "default": "lead",
+      "title": "Assignment Role",
+      "description": "Role of this technician on the appointment. lead = primary ST-assigned technician; apprentice/helper = LVC-local support crew; unspecified = role not supplied."
+    },
+    "is_lead": {
+      "type": "boolean",
+      "default": true,
+      "title": "Is Lead",
+      "description": "True when this is the lead technician for the appointment. Only one active lead per appointment."
+    },
+    "assignment_source": {
+      "type": "string",
+      "enum": [
+        "servicetitan",
+        "lvc_os"
+      ],
+      "default": "servicetitan",
+      "title": "Assignment Source",
+      "description": "servicetitan = assigned via ServiceTitan webhook; lvc_os = assigned locally (apprentice/helper crew)."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "removed"
+      ],
+      "default": "active",
+      "title": "Status",
+      "description": "active = currently assigned to this appointment; removed = unassigned by a later event (preserved for history)."
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At",
+      "description": "Timestamp of the most recent ServiceTitan event that updated this assignment. Used for stale-event protection."
+    },
+    "servicetitan_last_event_type": {
+      "type": "string",
+      "title": "ServiceTitan Last Event Type"
+    },
+    "servicetitan_last_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Synced At"
+    },
+    "servicetitan_tenant_id": {
+      "type": "string",
+      "title": "ServiceTitan Tenant ID"
+    },
+    "removed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Removed At",
+      "description": "When this assignment was marked removed."
+    },
+    "removed_by_event_id": {
+      "type": "string",
+      "title": "Removed By Event ID",
+      "description": "The webhook event ID that removed this assignment."
+    },
+    "servicetitan_last_webhook_event_id": {
+      "type": "string",
+      "title": "ServiceTitan Last Webhook Event ID"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "assignment_key",
+    "appointment_id",
+    "servicetitan_appointment_id",
+    "status"
+  ]
+}

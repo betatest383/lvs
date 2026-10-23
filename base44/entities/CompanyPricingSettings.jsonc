@@ -1,0 +1,141 @@
+{
+  "name": "CompanyPricingSettings",
+  "type": "object",
+  "properties": {
+    "target_gross_margin_percentage": {
+      "type": "number",
+      "default": 45,
+      "title": "Target Gross Margin (%)"
+    },
+    "minimum_gross_margin_percentage": {
+      "type": "number",
+      "default": 35,
+      "title": "Minimum Gross Margin (%)"
+    },
+    "target_net_margin_percentage": {
+      "type": "number",
+      "default": 20,
+      "title": "Target Net Margin (%)"
+    },
+    "target_revenue_per_production_day": {
+      "type": "number",
+      "default": 5000,
+      "title": "Target Revenue Per Production Day ($)"
+    },
+    "target_gross_profit_per_production_day": {
+      "type": "number",
+      "default": 2250,
+      "title": "Target Gross Profit Per Production Day ($)"
+    },
+    "target_revenue_per_labor_hour": {
+      "type": "number",
+      "default": 250,
+      "title": "Target Revenue Per Labor Hour ($)"
+    },
+    "default_overhead_allocation_method": {
+      "type": "string",
+      "enum": [
+        "percentage",
+        "flat_rate",
+        "per_labor_hour"
+      ],
+      "default": "percentage",
+      "title": "Default Overhead Allocation Method"
+    },
+    "overhead_percentage": {
+      "type": "number",
+      "default": 12,
+      "title": "Overhead Percentage (%)"
+    },
+    "default_commission_method": {
+      "type": "string",
+      "enum": [
+        "percentage_of_revenue",
+        "percentage_of_gross_profit",
+        "flat_service_commission",
+        "tiered_gross_margin",
+        "profit_per_day_threshold"
+      ],
+      "default": "percentage_of_revenue",
+      "title": "Default Commission Method"
+    },
+    "require_manager_approval_below_margin": {
+      "type": "boolean",
+      "default": true,
+      "title": "Require Manager Approval Below Margin"
+    },
+    "allow_technician_price_override": {
+      "type": "boolean",
+      "default": false,
+      "title": "Allow Technician Price Override"
+    },
+    "maximum_technician_discount_percentage": {
+      "type": "number",
+      "default": 10,
+      "title": "Maximum Technician Discount (%)"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    }
+  },
+  "required": [],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

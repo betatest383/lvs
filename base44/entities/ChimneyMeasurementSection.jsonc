@@ -1,0 +1,117 @@
+{
+  "name": "ChimneyMeasurementSection",
+  "type": "object",
+  "properties": {
+    "report_id": {
+      "type": "string",
+      "title": "Report ID",
+      "description": "Links to ChimneyMeasurementReport record"
+    },
+    "section_label": {
+      "type": "string",
+      "title": "Section Label",
+      "description": "A, B, C, etc."
+    },
+    "width": {
+      "type": "number",
+      "default": 0,
+      "title": "Width"
+    },
+    "height": {
+      "type": "number",
+      "default": 0,
+      "title": "Height"
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "inches",
+        "feet"
+      ],
+      "default": "inches",
+      "title": "Unit"
+    },
+    "quantity": {
+      "type": "number",
+      "default": 1,
+      "title": "Quantity"
+    },
+    "area_sqft": {
+      "type": "number",
+      "default": 0,
+      "title": "Area (sq ft)"
+    },
+    "surface_type": {
+      "type": "string",
+      "enum": [
+        "Stucco",
+        "Brick",
+        "Stone",
+        "Chase",
+        "Other"
+      ],
+      "default": "Stucco",
+      "title": "Surface Type"
+    },
+    "location_zone": {
+      "type": "string",
+      "enum": [
+        "Above Roof",
+        "Below Roof",
+        "Roofline",
+        "Top",
+        "Shoulder"
+      ],
+      "default": "Above Roof",
+      "title": "Location Zone"
+    },
+    "include_in_total": {
+      "type": "boolean",
+      "default": true,
+      "title": "Include in Total"
+    },
+    "photo_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Photo Required"
+    },
+    "photo_url": {
+      "type": "string",
+      "title": "Photo URL"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "complete",
+        "flagged"
+      ],
+      "default": "not_started",
+      "title": "Status"
+    },
+    "warning_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Warning Flag"
+    },
+    "warning_messages": {
+      "type": "string",
+      "title": "Warning Messages (JSON)"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    }
+  },
+  "required": [
+    "report_id",
+    "section_label",
+    "status"
+  ]
+}

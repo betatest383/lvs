@@ -1,0 +1,57 @@
+{
+  "name": "Finding",
+  "type": "object",
+  "properties": {
+    "inspection_id": {
+      "type": "string",
+      "title": "Inspection ID"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "finding_type": {
+      "type": "string",
+      "title": "Finding Type"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "minor",
+        "moderate",
+        "major",
+        "critical"
+      ],
+      "title": "Severity"
+    },
+    "narrative_output": {
+      "type": "string",
+      "title": "Narrative for Report"
+    },
+    "photo_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Photos"
+    },
+    "triggered_by_rule": {
+      "type": "string",
+      "title": "Rule ID that triggered this"
+    }
+  },
+  "required": [
+    "inspection_id",
+    "finding_type",
+    "severity"
+  ]
+}

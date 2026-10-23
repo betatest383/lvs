@@ -1,0 +1,131 @@
+{
+  "name": "MaterialReconciliation",
+  "type": "object",
+  "properties": {
+    "reconciliation_number": {
+      "type": "string",
+      "title": "Reconciliation Number",
+      "description": "e.g. MR-000001"
+    },
+    "sales_order_id": {
+      "type": "string",
+      "title": "Sales Order ID",
+      "description": "Links to SalesOrder record"
+    },
+    "so_number": {
+      "type": "string",
+      "title": "Sales Order Number"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "invoice_id": {
+      "type": "string",
+      "title": "Invoice ID",
+      "description": "Links to Invoice record \u2014 quantities may be updated during reconciliation"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "submitted",
+        "manager_review",
+        "approved",
+        "closed"
+      ],
+      "default": "pending",
+      "title": "Status"
+    },
+    "line_items": {
+      "type": "string",
+      "title": "Line Items (JSON)",
+      "description": "JSON array of {inventory_master_id, sku, item_name, quantity_estimated, quantity_reserved, quantity_transferred, quantity_installed, quantity_returned_warehouse, quantity_returned_truck, quantity_waste, quantity_damaged, quantity_lost, quantity_variance, unit_cost, cost_variance, chargeable, final_disposition}"
+    },
+    "total_estimated_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Estimated Cost"
+    },
+    "total_actual_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Actual Cost"
+    },
+    "total_cost_variance": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Cost Variance"
+    },
+    "total_variance_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Variance Percentage"
+    },
+    "variance_threshold_exceeded": {
+      "type": "boolean",
+      "default": false,
+      "title": "Variance Threshold Exceeded",
+      "description": "True when cost variance exceeds the manager approval threshold"
+    },
+    "manager_approval_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Manager Approval Required"
+    },
+    "manager_approved_by": {
+      "type": "string",
+      "title": "Manager Approved By"
+    },
+    "manager_approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Manager Approved At"
+    },
+    "manager_notes": {
+      "type": "string",
+      "title": "Manager Notes"
+    },
+    "invoice_updated": {
+      "type": "boolean",
+      "default": false,
+      "title": "Invoice Updated",
+      "description": "True when invoice quantities were adjusted based on reconciliation"
+    },
+    "submitted_by": {
+      "type": "string",
+      "title": "Submitted By"
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Submitted At"
+    },
+    "closed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Closed At"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "job_id",
+    "status"
+  ]
+}

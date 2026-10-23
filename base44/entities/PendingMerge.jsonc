@@ -1,0 +1,123 @@
+{
+  "name": "PendingMerge",
+  "type": "object",
+  "properties": {
+    "merge_key": {
+      "type": "string",
+      "title": "Merge Key",
+      "description": "Deterministic idempotency key: source_st_id:target_st_id. Prevents duplicate pending merge records."
+    },
+    "source_st_customer_id": {
+      "type": "string",
+      "title": "Source ServiceTitan Customer ID",
+      "description": "The ST customer that was merged into the target."
+    },
+    "target_st_customer_id": {
+      "type": "string",
+      "title": "Target ServiceTitan Customer ID",
+      "description": "The surviving ST customer that the source was merged into."
+    },
+    "source_local_customer_id": {
+      "type": "string",
+      "title": "Source Local Customer ID",
+      "description": "Base44 Customer entity ID of the source, when available. Null if source wasn't synced locally."
+    },
+    "target_local_customer_id": {
+      "type": "string",
+      "title": "Target Local Customer ID",
+      "description": "Base44 Customer entity ID of the target, populated once the target is synced."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "completed",
+        "failed"
+      ],
+      "default": "pending",
+      "title": "Status",
+      "description": "pending = target not yet synced; in_progress = relinking underway; completed = merge fully done; failed = relinking error, needs retry"
+    },
+    "first_detected_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "First Detected At",
+      "description": "When the merge was first detected during a sync cycle."
+    },
+    "last_attempted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Attempted At"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "attempt_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Attempt Count"
+    },
+    "max_attempts": {
+      "type": "number",
+      "default": 10,
+      "title": "Max Attempts"
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "relink_result_json": {
+      "type": "string",
+      "title": "Relink Result (JSON)",
+      "description": "JSON object with counts of records relinked per entity type."
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "api_export",
+        "webhook"
+      ],
+      "default": "api_export",
+      "title": "Source"
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant ID"
+    },
+    "batch_id": {
+      "type": "string",
+      "title": "Batch ID",
+      "description": "Sync batch that first detected this merge."
+    },
+    "requires_admin_review": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Admin Review",
+      "description": "True when attempts are exhausted or a cycle/chain was detected that needs manual resolution."
+    },
+    "admin_review_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "pending",
+        "reviewed",
+        "resolved"
+      ],
+      "default": "none",
+      "title": "Admin Review Status"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "merge_key",
+    "source_st_customer_id",
+    "target_st_customer_id",
+    "first_detected_at"
+  ]
+}

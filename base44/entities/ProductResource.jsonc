@@ -1,0 +1,293 @@
+{
+  "name": "ProductResource",
+  "type": "object",
+  "properties": {
+    "resource_number": {
+      "type": "string",
+      "title": "Resource Number",
+      "description": "Server-generated: RES-000001"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "resource_type": {
+      "type": "string",
+      "enum": [
+        "Manual",
+        "Brochure",
+        "Image",
+        "Parts Diagram",
+        "Video",
+        "Spec Sheet",
+        "Warranty Document",
+        "Installation Guide",
+        "Service Guide",
+        "Other"
+      ],
+      "default": "Manual",
+      "title": "Resource Type"
+    },
+    "file_url": {
+      "type": "string",
+      "title": "File URL"
+    },
+    "file_name": {
+      "type": "string",
+      "title": "File Name"
+    },
+    "file_type": {
+      "type": "string",
+      "title": "File Type",
+      "description": "File extension or MIME type"
+    },
+    "file_size": {
+      "type": "number",
+      "title": "File Size (bytes)"
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "title": "Thumbnail URL"
+    },
+    "manufacturer": {
+      "type": "string",
+      "title": "Manufacturer"
+    },
+    "manufacturer_id": {
+      "type": "string",
+      "title": "Manufacturer ID",
+      "description": "Links to Manufacturer entity"
+    },
+    "product_line": {
+      "type": "string",
+      "title": "Product Line"
+    },
+    "product_model": {
+      "type": "string",
+      "title": "Product Model"
+    },
+    "appliance_type": {
+      "type": "string",
+      "title": "Appliance Type",
+      "description": "e.g. Fireplace, Stove, Insert, Liner, Chimney Cap, Chimney System, Boiler, Furnace, Water Heater"
+    },
+    "fuel_type": {
+      "type": "string",
+      "enum": [
+        "",
+        "Gas",
+        "Wood",
+        "Pellet",
+        "Coal",
+        "Oil",
+        "Electric",
+        "Multi-Fuel"
+      ],
+      "default": "",
+      "title": "Fuel Type"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags"
+    },
+    "source_provider": {
+      "type": "string",
+      "enum": [
+        "manual_upload",
+        "hda",
+        "manufacturer_api",
+        "distributor_api",
+        "ftp",
+        "servicetitan",
+        "csv",
+        "xml",
+        "ai_crawler"
+      ],
+      "default": "manual_upload",
+      "title": "Source Provider",
+      "description": "Provider-agnostic upload source. The rest of the workflow (classification, validation, approval, linking, publishing) is identical regardless of source."
+    },
+    "source_metadata": {
+      "type": "string",
+      "title": "Source Metadata (JSON)",
+      "description": "Provider-specific metadata: crawl URL, API response ID, FTP path, etc."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Pending Classification",
+        "Pending Review",
+        "Approved",
+        "Published",
+        "Rejected",
+        "Archived"
+      ],
+      "default": "Draft",
+      "title": "Status"
+    },
+    "classification_data": {
+      "type": "string",
+      "title": "Classification Data (JSON)",
+      "description": "AI or manual classification results: {resource_type, manufacturer, appliance_type, fuel_type, tags, confidence, notes}"
+    },
+    "classification_confidence": {
+      "type": "number",
+      "title": "Classification Confidence (0-100)"
+    },
+    "classified_by": {
+      "type": "string",
+      "title": "Classified By"
+    },
+    "classified_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Classified At"
+    },
+    "submitted_by": {
+      "type": "string",
+      "title": "Submitted By"
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Submitted At"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "title": "Reviewed By"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Reviewed At"
+    },
+    "review_notes": {
+      "type": "string",
+      "title": "Review Notes"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At"
+    },
+    "published_by": {
+      "type": "string",
+      "title": "Published By"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Published At"
+    },
+    "rejected_by": {
+      "type": "string",
+      "title": "Rejected By"
+    },
+    "rejected_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Rejected At"
+    },
+    "rejection_reason": {
+      "type": "string",
+      "title": "Rejection Reason"
+    },
+    "archived_by": {
+      "type": "string",
+      "title": "Archived By"
+    },
+    "archived_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Archived At"
+    },
+    "archived_reason": {
+      "type": "string",
+      "title": "Archive Reason"
+    },
+    "linked_manufacturer_id": {
+      "type": "string",
+      "title": "Linked Manufacturer ID"
+    },
+    "linked_service_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Linked Service Catalog IDs"
+    },
+    "linked_inventory_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Linked Inventory Master IDs"
+    },
+    "linked_repair_template_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Linked Repair Template IDs"
+    },
+    "linked_training_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Linked Training Registry IDs"
+    },
+    "linked_sop_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Linked SOP IDs"
+    },
+    "linked_inspection_question_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Linked Inspection Question IDs"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "title": "Version"
+    },
+    "audit_history": {
+      "type": "string",
+      "title": "Audit History (JSON)",
+      "description": "Append-only JSON array of {action, user, timestamp, details}"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "title"
+  ]
+}

@@ -1,0 +1,199 @@
+{
+  "name": "RecommendationReviewItem",
+  "type": "object",
+  "properties": {
+    "recommendation_review_id": {
+      "type": "string",
+      "title": "Recommendation Review ID"
+    },
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID"
+    },
+    "inspection_id": {
+      "type": "string",
+      "title": "Inspection ID"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "finding_id": {
+      "type": "string",
+      "title": "Finding ID",
+      "description": "Links to InspectionFinding or legacy Finding record"
+    },
+    "finding_type": {
+      "type": "string",
+      "enum": [
+        "InspectionFinding",
+        "Finding"
+      ],
+      "default": "InspectionFinding",
+      "title": "Finding Type"
+    },
+    "deficiency_type": {
+      "type": "string",
+      "title": "Deficiency Type"
+    },
+    "interior_exterior": {
+      "type": "string",
+      "enum": [
+        "interior",
+        "exterior",
+        "both"
+      ],
+      "title": "Interior / Exterior"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "minor",
+        "moderate",
+        "major",
+        "critical"
+      ],
+      "default": "moderate",
+      "title": "Severity"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title",
+      "description": "Finding location or deficiency description"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "description": "Customer-facing explanation or recommended repair from the finding"
+    },
+    "photo_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Photos"
+    },
+    "source_title": {
+      "type": "string",
+      "title": "Source Title",
+      "description": "Snapshot of the finding location/title from the inspection"
+    },
+    "source_section": {
+      "type": "string",
+      "title": "Source Section",
+      "description": "Snapshot of the inspection section (interior/exterior/both)"
+    },
+    "source_failed_question": {
+      "type": "string",
+      "title": "Source Failed Question",
+      "description": "Snapshot of the failed inspection question text that triggered this finding"
+    },
+    "source_description": {
+      "type": "string",
+      "title": "Source Description",
+      "description": "Snapshot of the finding's customer-facing explanation"
+    },
+    "source_notes": {
+      "type": "string",
+      "title": "Source Notes",
+      "description": "Snapshot of the finding's internal notes"
+    },
+    "source_photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Photos",
+      "description": "Snapshot of photo URLs from the finding"
+    },
+    "source_deficiency_type": {
+      "type": "string",
+      "title": "Source Deficiency Type",
+      "description": "Snapshot of the deficiency type from the finding"
+    },
+    "source_finding_id": {
+      "type": "string",
+      "title": "Source Finding ID",
+      "description": "Snapshot of the finding record ID"
+    },
+    "source_inspection_item_id": {
+      "type": "string",
+      "title": "Source Inspection Item ID",
+      "description": "Snapshot of the inspection question/item ID that produced this finding"
+    },
+    "technician_notes": {
+      "type": "string",
+      "title": "Technician Notes"
+    },
+    "customer_summary": {
+      "type": "string",
+      "title": "Customer Summary",
+      "description": "Customer-facing explanation of this deficiency and its impact"
+    },
+    "disposition": {
+      "type": "string",
+      "enum": [
+        "",
+        "repair_recommended",
+        "safety_concern",
+        "code_violation",
+        "monitor",
+        "maintenance_only",
+        "no_action_required"
+      ],
+      "default": "",
+      "title": "Disposition"
+    },
+    "estimate_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Estimate Required"
+    },
+    "recommended_solution": {
+      "type": "string",
+      "title": "Recommended Solution",
+      "description": "Required when estimate is required"
+    },
+    "pricebook_item_id": {
+      "type": "string",
+      "title": "Pricebook Item ID"
+    },
+    "pricebook_item_name": {
+      "type": "string",
+      "title": "Pricebook Item Name"
+    },
+    "materials": {
+      "type": "string",
+      "title": "Materials (JSON)",
+      "description": "JSON array of materials selected for this recommendation"
+    },
+    "labor_hours": {
+      "type": "number",
+      "title": "Labor Hours"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "reviewed"
+      ],
+      "default": "pending",
+      "title": "Status"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Reviewed At"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "title": "Reviewed By"
+    }
+  },
+  "required": [
+    "recommendation_review_id",
+    "job_id",
+    "title"
+  ]
+}

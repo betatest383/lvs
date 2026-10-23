@@ -1,0 +1,46 @@
+{
+  "name": "Resource",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "resource_type": {
+      "type": "string",
+      "enum": [
+        "product_resource",
+        "hr_document",
+        "training",
+        "policy",
+        "manual"
+      ],
+      "title": "Resource Type"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "file_url": {
+      "type": "string",
+      "title": "File URL"
+    },
+    "content": {
+      "type": "string",
+      "title": "Content (HTML/Text)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    }
+  },
+  "required": [
+    "title",
+    "resource_type"
+  ]
+}

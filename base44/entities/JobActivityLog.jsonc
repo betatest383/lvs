@@ -1,0 +1,92 @@
+{
+  "name": "JobActivityLog",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "title": "Job ID",
+      "description": "Links to Job record"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "status_change",
+        "activity_started",
+        "activity_completed",
+        "note_added",
+        "photo_uploaded",
+        "video_uploaded",
+        "voice_note_added",
+        "document_uploaded",
+        "estimate_created",
+        "signature_captured",
+        "material_transfer",
+        "consumable_used",
+        "equipment_used",
+        "equipment_returned",
+        "communication",
+        "job_completed",
+        "package_stale",
+        "package_recalculated",
+        "package_revised",
+        "scope_replaced",
+        "proposal_regenerated",
+        "job_deleted",
+        "job_restored",
+        "inspection_answer_cleared",
+        "inspection_responses_reset",
+        "appointment_merged_record_repaired"
+      ],
+      "title": "Event Type"
+    },
+    "event_label": {
+      "type": "string",
+      "title": "Event Label",
+      "description": "Human-readable description of the event"
+    },
+    "event_details": {
+      "type": "string",
+      "title": "Event Details (JSON)",
+      "description": "Optional JSON object with additional context. For job_deleted/job_restored, carries servicetitan_job_id, acting user, reason, and prior deletion metadata. For inspection_answer_cleared, carries inspection_submission_id, inspection_type, question_id, question_text, cleared_by, cleared_at, and dependent_cleared list. For inspection_responses_reset, carries inspection_submission_id, inspection_type, reset_by, and reset_at. For appointment_merged_record_repaired, carries servicetitan_job_id, merged_appointment_id, created_appointment_ids, rolled_service_date, job_type, and acted_by."
+    },
+    "hub_status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "en_route",
+        "on_site",
+        "working",
+        "awaiting_signature",
+        "completed"
+      ],
+      "title": "Hub Status",
+      "description": "Current appointment status (set on status_change events)"
+    },
+    "performed_by": {
+      "type": "string",
+      "title": "Performed By"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Timestamp"
+    }
+  },
+  "required": [
+    "job_id",
+    "event_type",
+    "event_label"
+  ]
+}

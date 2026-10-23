@@ -1,0 +1,179 @@
+{
+  "name": "MaterialTransferSheet",
+  "type": "object",
+  "properties": {
+    "transfer_id": {
+      "type": "string",
+      "title": "Transfer ID",
+      "description": "e.g. MTS-000001"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Date"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID",
+      "description": "Links to Job record"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "job_address": {
+      "type": "string",
+      "title": "Job Address"
+    },
+    "city": {
+      "type": "string",
+      "title": "City"
+    },
+    "state": {
+      "type": "string",
+      "title": "State"
+    },
+    "zip": {
+      "type": "string",
+      "title": "Zip"
+    },
+    "technician": {
+      "type": "string",
+      "title": "Technician"
+    },
+    "technician_id": {
+      "type": "string",
+      "title": "Technician Registry ID",
+      "description": "Links to EmployeeRegistry record"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "truck_id": {
+      "type": "string",
+      "title": "Truck ID"
+    },
+    "line_items": {
+      "type": "string",
+      "title": "Line Items (JSON)",
+      "description": "JSON array of {inventory_master_id, sku, item_name, quantity_requested, quantity_loaded, quantity_returned, verified, warehouse_location, bin_location, unit_cost}"
+    },
+    "materials_taken": {
+      "type": "string",
+      "title": "Materials Taken (Legacy)"
+    },
+    "quantity_taken": {
+      "type": "string",
+      "title": "Quantity Taken (Legacy)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Requested",
+        "Staged",
+        "Ready for Pickup",
+        "Loaded",
+        "Picked Up",
+        "Completed",
+        "Cancelled",
+        "Returned",
+        "Draft",
+        "Submitted",
+        "Issued",
+        "Closed"
+      ],
+      "default": "Requested",
+      "title": "Status"
+    },
+    "loaded_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Loaded Date (Verified by Technician)"
+    },
+    "requested_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Requested Date"
+    },
+    "staged_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Staged Date"
+    },
+    "ready_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Ready for Pickup Date"
+    },
+    "picked_up_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Picked Up Date"
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed Date"
+    },
+    "cancelled_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Cancelled Date"
+    },
+    "returned_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Returned Date"
+    },
+    "submitted_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Submitted Time (Legacy)"
+    },
+    "issued_by": {
+      "type": "string",
+      "title": "Issued By"
+    },
+    "technician_signature": {
+      "type": "string",
+      "title": "Technician Signature"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "related_sop_id": {
+      "type": "string",
+      "title": "Related SOP ID"
+    },
+    "trainual_link": {
+      "type": "string",
+      "title": "Trainual Link"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "cancellation_reason": {
+      "type": "string",
+      "title": "Cancellation Reason"
+    }
+  },
+  "required": [
+    "date",
+    "technician"
+  ]
+}

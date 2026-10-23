@@ -1,0 +1,61 @@
+{
+  "name": "MasterClassification",
+  "type": "object",
+  "properties": {
+    "classification_type": {
+      "type": "string",
+      "enum": [
+        "inspection_category",
+        "inspection_section",
+        "inspection_form",
+        "deficiency_type",
+        "appliance_system_type",
+        "chimney_system_type",
+        "severity_level",
+        "homeowner_risk",
+        "finding_category",
+        "repair_category",
+        "cap_style",
+        "cap_base_material",
+        "cap_finish",
+        "cap_finish_color",
+        "cap_mounting_method",
+        "cap_coverage_type"
+      ],
+      "title": "Classification Type"
+    },
+    "value": {
+      "type": "string",
+      "title": "Value",
+      "description": "The canonical value stored in entity fields (e.g. 'Exterior Chimney', 'masonry')"
+    },
+    "label": {
+      "type": "string",
+      "title": "Display Label",
+      "description": "Human-readable label shown in dropdowns"
+    },
+    "parent_value": {
+      "type": "string",
+      "title": "Parent Value",
+      "description": "For hierarchical classifications. e.g. inspection_section 'Firebox' has parent_value 'Level 2' (inspection_form). When set, sections are filtered by the selected form."
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    }
+  },
+  "required": [
+    "classification_type",
+    "value"
+  ]
+}

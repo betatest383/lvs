@@ -1,0 +1,152 @@
+{
+  "name": "ZapierJobSnapshotEvent",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "title": "Event ID",
+      "description": "Human-readable diagnostic identifier, e.g. ZJS-<uuid>. Distinct from the platform record id."
+    },
+    "source_system": {
+      "type": "string",
+      "default": "zapier",
+      "title": "Source System"
+    },
+    "source_environment": {
+      "type": "string",
+      "title": "Source Environment",
+      "description": "diagnostic or production. Production ingestion is not yet authorized."
+    },
+    "event_type": {
+      "type": "string",
+      "title": "Event Type",
+      "description": "Envelope event_type. Currently servicetitan.job_snapshot."
+    },
+    "servicetitan_job_id": {
+      "type": "string",
+      "title": "ServiceTitan Job ID",
+      "description": "Envelope job_id. The ServiceTitan job the snapshot describes."
+    },
+    "schema_version": {
+      "type": "string",
+      "title": "Schema Version",
+      "description": "Envelope schema_version. Currently 1.0."
+    },
+    "raw_envelope": {
+      "type": "string",
+      "title": "Raw Envelope (JSON)",
+      "description": "Complete original request body as received, preserved unmodified for diagnostic review."
+    },
+    "snapshot_json": {
+      "type": "string",
+      "title": "Snapshot JSON",
+      "description": "Original snapshot_json string from the envelope, preserved unmodified."
+    },
+    "parsed_payload": {
+      "type": "string",
+      "title": "Parsed Payload (JSON)",
+      "description": "JSON-stringified parsed snapshot object, preserved for diagnostic review."
+    },
+    "payload_hash": {
+      "type": "string",
+      "title": "Payload Hash",
+      "description": "Deterministic SHA-256 hash of the raw request body. Used for idempotency conflict detection."
+    },
+    "idempotency_key": {
+      "type": "string",
+      "title": "Idempotency Key",
+      "description": "Idempotency-Key header value supplied by the caller. Deduplication key."
+    },
+    "correlation_id": {
+      "type": "string",
+      "title": "Correlation ID",
+      "description": "Envelope correlation_id when supplied, otherwise server-generated. Cross-request tracing."
+    },
+    "received_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Received At",
+      "description": "Server timestamp when the snapshot was received."
+    },
+    "validation_result": {
+      "type": "string",
+      "enum": [
+        "valid",
+        "invalid_envelope",
+        "invalid_snapshot",
+        "job_id_mismatch",
+        "malformed_json",
+        "missing_idempotency_key",
+        "unauthorized",
+        "rejected"
+      ],
+      "default": "valid",
+      "title": "Validation Result",
+      "description": "Outcome of envelope/snapshot validation. Only 'valid' records are stored; rejected requests are not persisted."
+    },
+    "processing_state": {
+      "type": "string",
+      "enum": [
+        "diagnostic_received",
+        "rejected"
+      ],
+      "default": "diagnostic_received",
+      "title": "Processing State",
+      "description": "diagnostic_received = staged for diagnostic review only. No canonical LVC OS operational processing occurs. Production ingestion is not authorized."
+    },
+    "error_info": {
+      "type": "string",
+      "title": "Error Information",
+      "description": "Sanitized error detail. Never contains secrets or the raw payload."
+    },
+    "retry_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Retry Count"
+    },
+    "request_metadata": {
+      "type": "string",
+      "title": "Request Metadata (JSON)",
+      "description": "Sanitized request metadata (method, content-type, user-agent, host). Never contains credentials or secret header values."
+    },
+    "is_test_data": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Test Data",
+      "description": "True when created via admin-authenticated test mode. Marks synthetic diagnostic records."
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "source_system",
+    "event_type",
+    "idempotency_key",
+    "payload_hash",
+    "processing_state"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

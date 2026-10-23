@@ -1,0 +1,240 @@
+{
+  "name": "MaterialReturn",
+  "type": "object",
+  "properties": {
+    "return_id": {
+      "type": "string",
+      "title": "Return ID",
+      "description": "Auto-generated: MR-000001"
+    },
+    "workflow_id": {
+      "type": "string",
+      "default": "WH-201",
+      "title": "Workflow ID"
+    },
+    "related_sop_id": {
+      "type": "string",
+      "default": "WH-201",
+      "title": "Related SOP ID"
+    },
+    "related_business_process": {
+      "type": "string",
+      "default": "BP-102",
+      "title": "Related Business Process"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending Return",
+        "Returned",
+        "Warehouse Reviewing",
+        "Verified",
+        "Adjusted",
+        "Closed"
+      ],
+      "default": "Pending Return",
+      "title": "Status"
+    },
+    "truck_id": {
+      "type": "string",
+      "title": "Truck ID"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "technician": {
+      "type": "string",
+      "title": "Technician"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "transfer_sheet_id": {
+      "type": "string",
+      "title": "Transfer Sheet Record ID"
+    },
+    "transfer_sheet_number": {
+      "type": "string",
+      "title": "Transfer Sheet Number"
+    },
+    "st_transfer_sheet_id": {
+      "type": "string",
+      "title": "ServiceTitan Transfer Sheet ID"
+    },
+    "returned_items": {
+      "type": "string",
+      "title": "Returned Materials (JSON)",
+      "description": "JSON array of {item_name, sku, quantity_transferred, returned_quantity, damaged_quantity, disposed_quantity, comments, photo_url, unit_cost, warehouse_status, warehouse_notes}"
+    },
+    "returned_equipment": {
+      "type": "string",
+      "title": "Returned Equipment (JSON)",
+      "description": "JSON array of {item_name, quantity, status, comments, photo_url, warehouse_status, warehouse_notes}"
+    },
+    "rental_returns": {
+      "type": "string",
+      "title": "Rental Returns (JSON)",
+      "description": "JSON array of {item_name, vendor, condition, comments, photo_url, warehouse_status, warehouse_notes}"
+    },
+    "technician_signature": {
+      "type": "string",
+      "title": "Technician Signature"
+    },
+    "warehouse_associate": {
+      "type": "string",
+      "title": "Warehouse Associate"
+    },
+    "warehouse_associate_email": {
+      "type": "string",
+      "title": "Warehouse Associate Email"
+    },
+    "warehouse_verification": {
+      "type": "string",
+      "enum": [
+        "Accepted",
+        "Partial Return",
+        "Rejected",
+        "Requires Manager Review"
+      ],
+      "title": "Warehouse Verification"
+    },
+    "warehouse_notes": {
+      "type": "string",
+      "title": "Warehouse Notes"
+    },
+    "warehouse_signature": {
+      "type": "string",
+      "title": "Warehouse Signature"
+    },
+    "warehouse_verified_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Warehouse Verified At"
+    },
+    "manager_review_status": {
+      "type": "string",
+      "enum": [
+        "None",
+        "Pending",
+        "Approved Adjustment",
+        "Investigation Requested",
+        "Inventory Adjustment Created",
+        "Coaching Task Created",
+        "Equipment Repair Ticket Created",
+        "Replacement Request Created",
+        "Investigation Opened"
+      ],
+      "default": "None",
+      "title": "Manager Review Status"
+    },
+    "manager_name": {
+      "type": "string",
+      "title": "Manager Name"
+    },
+    "manager_notes": {
+      "type": "string",
+      "title": "Manager Notes"
+    },
+    "manager_reviewed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Manager Reviewed At"
+    },
+    "manager_override_applied": {
+      "type": "boolean",
+      "default": false,
+      "title": "Manager Override Applied",
+      "description": "Allows truck to reach 100% readiness despite outstanding returns"
+    },
+    "manager_override_by": {
+      "type": "string",
+      "title": "Manager Override By"
+    },
+    "manager_override_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Manager Override At"
+    },
+    "discrepancies": {
+      "type": "string",
+      "title": "Discrepancies (JSON)",
+      "description": "JSON array of {type, description}"
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Submitted At"
+    },
+    "returned_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Returned At"
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Verified At"
+    },
+    "adjusted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Adjusted At"
+    },
+    "closed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Closed At"
+    },
+    "processing_time_minutes": {
+      "type": "number",
+      "title": "Processing Time (minutes)"
+    },
+    "total_items_returned": {
+      "type": "number",
+      "title": "Total Materials Returned"
+    },
+    "total_damaged": {
+      "type": "number",
+      "title": "Total Damaged Materials"
+    },
+    "total_disposed": {
+      "type": "number",
+      "title": "Total Disposed"
+    },
+    "inventory_value_returned": {
+      "type": "number",
+      "title": "Inventory Value Returned"
+    },
+    "total_equipment_returned": {
+      "type": "number",
+      "title": "Total Equipment Returned"
+    },
+    "total_equipment_damaged": {
+      "type": "number",
+      "title": "Total Equipment Damaged"
+    },
+    "total_equipment_missing": {
+      "type": "number",
+      "title": "Total Equipment Missing"
+    },
+    "total_rental_returned": {
+      "type": "number",
+      "title": "Total Rental Returned"
+    }
+  },
+  "required": [
+    "return_id",
+    "truck_number",
+    "technician"
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "name": "DeferredCustomer",
+  "type": "object",
+  "properties": {
+    "deferred_key": {
+      "type": "string",
+      "title": "Deferred Key",
+      "description": "Deterministic idempotency key: st_customer_id:deferred. Prevents duplicate deferred records."
+    },
+    "servicetitan_customer_id": {
+      "type": "string",
+      "title": "ServiceTitan Customer ID"
+    },
+    "deferred_reason": {
+      "type": "string",
+      "enum": [
+        "missing_created_on",
+        "watermark_error",
+        "hydration_failed",
+        "missing_name",
+        "api_not_found",
+        "insufficient_data"
+      ],
+      "title": "Deferred Reason"
+    },
+    "deferred_source": {
+      "type": "string",
+      "enum": [
+        "webhook_created",
+        "webhook_updated",
+        "recovery_scan",
+        "on_demand_hydration",
+        "dependent_sync"
+      ],
+      "title": "Deferred Source"
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant ID"
+    },
+    "environment": {
+      "type": "string",
+      "title": "Environment"
+    },
+    "webhook_event_id": {
+      "type": "string",
+      "title": "Webhook Event ID"
+    },
+    "payload_snapshot_json": {
+      "type": "string",
+      "title": "Payload Snapshot (JSON)",
+      "description": "JSON snapshot of the original webhook payload or API record for retry."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "resolved",
+        "failed"
+      ],
+      "default": "pending",
+      "title": "Status"
+    },
+    "attempt_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Attempt Count"
+    },
+    "max_attempts": {
+      "type": "number",
+      "default": 10,
+      "title": "Max Attempts"
+    },
+    "last_attempted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Attempted At"
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Resolved At"
+    },
+    "resolved_customer_id": {
+      "type": "string",
+      "title": "Resolved Customer ID",
+      "description": "Local Customer entity ID once the deferred customer is successfully imported."
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "first_detected_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "First Detected At"
+    },
+    "requires_admin_review": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Admin Review"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "deferred_key",
+    "servicetitan_customer_id",
+    "deferred_reason",
+    "first_detected_at"
+  ]
+}

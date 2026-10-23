@@ -1,0 +1,14 @@
+{
+  "name": "stage1-deployment",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Stage 1 isolated PostgreSQL sync-queue deployment package. Non-writing worker + acceptance harness. No production access.",
+  "type": "module",
+  "scripts": {
+    "worker": "node stage1_worker.js",
+    "test:stage1": "node stage1_test_harness.js"
+  },
+  "dependencies": {
+    "pg": "^8.0.0"
+  }
+}

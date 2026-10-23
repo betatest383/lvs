@@ -1,0 +1,102 @@
+{
+  "name": "IntegrationAdapterRegistry",
+  "type": "object",
+  "properties": {
+    "adapter_id": {
+      "type": "string",
+      "title": "Adapter ID",
+      "description": "Server-generated sequence: IAR-000001."
+    },
+    "external_system": {
+      "type": "string",
+      "title": "External System",
+      "description": "Integration partner this adapter serves (e.g. 'servicetitan')."
+    },
+    "adapter_name": {
+      "type": "string",
+      "title": "Adapter Name",
+      "description": "Human-readable adapter name (e.g. 'ServiceTitan Integration Adapter')."
+    },
+    "adapter_version": {
+      "type": "string",
+      "default": "1.0.0",
+      "title": "Adapter Version"
+    },
+    "adapter_type": {
+      "type": "string",
+      "enum": [
+        "inbound",
+        "outbound",
+        "bidirectional"
+      ],
+      "title": "Adapter Type"
+    },
+    "handler_reference": {
+      "type": "string",
+      "title": "Handler Reference",
+      "description": "Module or function path implementing this adapter (e.g. 'base44/shared/stEventRouter')."
+    },
+    "auth_strategy": {
+      "type": "string",
+      "enum": [
+        "oauth_client_credentials",
+        "api_key",
+        "webhook_secret",
+        "none"
+      ],
+      "default": "oauth_client_credentials",
+      "title": "Auth Strategy",
+      "description": "Authentication mechanism. Credentials remain in the secret store, never in this registry."
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Is Active"
+    },
+    "supported_api_version": {
+      "type": "string",
+      "title": "Supported API Version",
+      "description": "External API version the adapter targets (e.g. 'crm/v2, jpm/v2')."
+    },
+    "health_status": {
+      "type": "string",
+      "enum": [
+        "healthy",
+        "degraded",
+        "down",
+        "unknown"
+      ],
+      "default": "unknown",
+      "title": "Health Status"
+    },
+    "health_checked_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Health Checked At"
+    },
+    "activation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activation Date"
+    },
+    "deactivation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Deactivation Date"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "adapter_id",
+    "external_system",
+    "adapter_name",
+    "adapter_type"
+  ]
+}

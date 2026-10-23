@@ -1,0 +1,41 @@
+{
+  "name": "InventoryCategory",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Category Name"
+    },
+    "inventory_type": {
+      "type": "string",
+      "enum": [
+        "Consumable",
+        "Material",
+        "Equipment",
+        "Tool",
+        "Fleet Part",
+        "Safety Supply",
+        "Office Supply"
+      ],
+      "title": "Inventory Type"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    }
+  },
+  "required": [
+    "name",
+    "inventory_type"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "name": "VehicleAssignment",
+  "type": "object",
+  "properties": {
+    "assignment_id": {
+      "type": "string",
+      "title": "Assignment ID",
+      "description": "e.g. VA-000001"
+    },
+    "truck_id": {
+      "type": "string",
+      "title": "Truck ID"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "vehicle_name": {
+      "type": "string",
+      "title": "Vehicle Name"
+    },
+    "assigned_to": {
+      "type": "string",
+      "title": "Assigned To"
+    },
+    "assigned_to_email": {
+      "type": "string",
+      "title": "Assigned To Email"
+    },
+    "role": {
+      "type": "string",
+      "title": "Role"
+    },
+    "assignment_type": {
+      "type": "string",
+      "enum": [
+        "Permanent",
+        "Temporary",
+        "Shared Vehicle Checkout"
+      ],
+      "default": "Temporary",
+      "title": "Assignment Type"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "start_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Start Date/Time"
+    },
+    "expected_return_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Expected Return Date/Time"
+    },
+    "actual_return_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Actual Return Date/Time"
+    },
+    "checkout_condition": {
+      "type": "string",
+      "title": "Checkout Condition Notes"
+    },
+    "return_condition": {
+      "type": "string",
+      "title": "Return Condition Notes"
+    },
+    "checkout_photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Checkout Photos"
+    },
+    "return_photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Return Photos"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Returned",
+        "Overdue",
+        "Cancelled"
+      ],
+      "default": "Active",
+      "title": "Status"
+    },
+    "checkout_by": {
+      "type": "string",
+      "title": "Checked Out By"
+    },
+    "return_received_by": {
+      "type": "string",
+      "title": "Return Received By"
+    }
+  },
+  "required": [
+    "truck_id",
+    "truck_number",
+    "assigned_to"
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "name": "WarehouseLocation",
+  "type": "object",
+  "properties": {
+    "location_code": {
+      "type": "string",
+      "title": "Location Code",
+      "description": "e.g. WH-MAIN, WH-OVERFLOW, TRUCK-001, VND-001"
+    },
+    "name": {
+      "type": "string",
+      "title": "Location Name"
+    },
+    "location_type": {
+      "type": "string",
+      "enum": [
+        "warehouse",
+        "overflow_warehouse",
+        "truck",
+        "vendor",
+        "job_site",
+        "damaged_inventory",
+        "warranty_returns",
+        "returned_goods",
+        "in_transit"
+      ],
+      "default": "warehouse",
+      "title": "Location Type",
+      "description": "Classifies what kind of physical or logical location this is"
+    },
+    "parent_location_id": {
+      "type": "string",
+      "title": "Parent Location ID",
+      "description": "Links to parent WarehouseLocation (e.g. overflow warehouse's parent is the main warehouse)"
+    },
+    "parent_location_name": {
+      "type": "string",
+      "title": "Parent Location Name"
+    },
+    "linked_truck_id": {
+      "type": "string",
+      "title": "Linked Truck ID",
+      "description": "When location_type='truck', links to TruckProfile record"
+    },
+    "linked_truck_number": {
+      "type": "string",
+      "title": "Linked Truck Number"
+    },
+    "linked_vendor_id": {
+      "type": "string",
+      "title": "Linked Vendor ID",
+      "description": "When location_type='vendor', links to Vendor record"
+    },
+    "linked_job_id": {
+      "type": "string",
+      "title": "Linked Job ID",
+      "description": "When location_type='job_site', links to Job record"
+    },
+    "address": {
+      "type": "string",
+      "title": "Address"
+    },
+    "city": {
+      "type": "string",
+      "title": "City"
+    },
+    "state": {
+      "type": "string",
+      "title": "State"
+    },
+    "zip_code": {
+      "type": "string",
+      "title": "Zip Code"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "is_physical_location": {
+      "type": "boolean",
+      "default": true,
+      "title": "Is Physical Location",
+      "description": "False for logical locations (in_transit, returned_goods)"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "servicetitan_warehouse_id": {
+      "type": "string",
+      "title": "ServiceTitan Warehouse ID",
+      "description": "Permanent external identity. Stored as string for int64 safety. The canonical sync key \u2014 Purchase Orders, Receipts, Transfers, and Adjustments are matched ONLY by this field, never by location name. Once assigned, not changed through normal UI edits."
+    },
+    "servicetitan_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "ServiceTitan Active Status",
+      "description": "ServiceTitan-owned. Reflects the ST active flag. When false the location is preserved and marked inactive \u2014 not deleted."
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deferred",
+        "failed",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status"
+    },
+    "servicetitan_last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync"
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On"
+    },
+    "servicetitan_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Created On"
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version"
+    },
+    "servicetitan_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "manual",
+        "api"
+      ],
+      "title": "ServiceTitan Source"
+    },
+    "servicetitan_raw_data": {
+      "type": "string",
+      "title": "ServiceTitan Raw Data (JSON)",
+      "description": "Preserved unknown/external fields from the ServiceTitan warehouse/truck payload. ServiceTitan-owned."
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual",
+        "api_export"
+      ],
+      "title": "Import Source"
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At"
+    }
+  },
+  "required": [
+    "name",
+    "location_type"
+  ]
+}

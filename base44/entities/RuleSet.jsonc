@@ -1,0 +1,79 @@
+{
+  "name": "RuleSet",
+  "type": "object",
+  "properties": {
+    "set_code": {
+      "type": "string",
+      "title": "Set Code",
+      "description": "e.g. RS-WOOD-FIREPLACE"
+    },
+    "name": {
+      "type": "string",
+      "title": "Rule Set Name",
+      "description": "e.g. Wood Fireplace Inspection, Gas Fireplace Inspection, Masonry Repair"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "appliance_type": {
+      "type": "string",
+      "title": "Appliance Type",
+      "description": "Optional: wood_stove, gas, pellet, oil, electric, other"
+    },
+    "inspection_category": {
+      "type": "string",
+      "title": "Inspection Category",
+      "description": "Optional: links to an inspection category this set covers"
+    },
+    "rule_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Rule IDs",
+      "description": "Array of LogicRule IDs belonging to this set"
+    },
+    "rule_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Rule Count",
+      "description": "Denormalized count of rules in this set"
+    },
+    "is_enabled": {
+      "type": "boolean",
+      "default": true,
+      "title": "Enabled",
+      "description": "When false, all rules in this set are disabled regardless of their individual is_active flag"
+    },
+    "priority_override": {
+      "type": "boolean",
+      "default": false,
+      "title": "Priority Override",
+      "description": "When true, rules in this set use the set's base_priority as a floor"
+    },
+    "base_priority": {
+      "type": "number",
+      "default": 0,
+      "title": "Base Priority",
+      "description": "Minimum priority floor for rules in this set when priority_override is true"
+    },
+    "color": {
+      "type": "string",
+      "title": "Color",
+      "description": "Tailwind color class for visual identification"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

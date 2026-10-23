@@ -1,0 +1,122 @@
+{
+  "name": "BillReceiptLink",
+  "type": "object",
+  "properties": {
+    "relationship_key": {
+      "type": "string",
+      "title": "Relationship Key",
+      "description": "Deterministic: servicetitan_bill_id + servicetitan_receipt_id. Prevents duplicate link rows. Immutable composite identity."
+    },
+    "bill_id": {
+      "type": "string",
+      "title": "Bill ID",
+      "description": "Links to local Bill record. Resolved via servicetitan_bill_id."
+    },
+    "servicetitan_bill_id": {
+      "type": "string",
+      "title": "ServiceTitan Bill ID",
+      "description": "Immutable ServiceTitan Bill ID. Int64-safe string. Snapshot for immutable linkage."
+    },
+    "receipt_id": {
+      "type": "string",
+      "title": "Receipt ID",
+      "description": "Links to local Receipt record. Resolved via servicetitan_receipt_id."
+    },
+    "servicetitan_receipt_id": {
+      "type": "string",
+      "title": "ServiceTitan Receipt ID",
+      "description": "Immutable ServiceTitan Receipt ID. Int64-safe string. Snapshot for immutable linkage."
+    },
+    "allocated_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Allocated Amount ($)",
+      "description": "ServiceTitan-owned. Amount of the bill allocated to this receipt. Overwritten by inbound sync."
+    },
+    "allocated_quantity": {
+      "type": "number",
+      "default": 0,
+      "title": "Allocated Quantity",
+      "description": "ServiceTitan-owned. Quantity of items from this receipt allocated to this bill. Overwritten by inbound sync."
+    },
+    "servicetitan_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Created On"
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On"
+    },
+    "servicetitan_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "ServiceTitan Active Status"
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deferred",
+        "failed",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status"
+    },
+    "servicetitan_last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync"
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At"
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version"
+    },
+    "servicetitan_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "manual",
+        "api"
+      ],
+      "title": "ServiceTitan Source"
+    },
+    "servicetitan_raw_data": {
+      "type": "string",
+      "title": "ServiceTitan Raw Data (JSON)"
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual",
+        "api_export"
+      ],
+      "title": "Import Source"
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At"
+    }
+  },
+  "required": [
+    "relationship_key",
+    "bill_id",
+    "servicetitan_bill_id",
+    "receipt_id",
+    "servicetitan_receipt_id"
+  ]
+}

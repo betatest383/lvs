@@ -1,0 +1,137 @@
+{
+  "name": "ResumeObligation",
+  "type": "object",
+  "properties": {
+    "obligation_key": {
+      "type": "string",
+      "title": "Obligation Key",
+      "description": "Deterministic idempotency key: interrupting_task_id:interrupted_task_id. Prevents duplicate obligations from repeated calls."
+    },
+    "obligation_type": {
+      "type": "string",
+      "enum": [
+        "resume_after_completion"
+      ],
+      "default": "resume_after_completion",
+      "title": "Obligation Type"
+    },
+    "operation_state": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "notified",
+        "completed",
+        "failed",
+        "no_longer_applicable"
+      ],
+      "default": "pending",
+      "title": "Operation State",
+      "description": "pending = created but notification not yet sent; notified = resume notification delivered to employee; completed = employee resumed work or obligation resolved; failed = processing error, needs retry; no_longer_applicable = interrupted task cancelled/reassigned/resumed elsewhere"
+    },
+    "interrupting_task_id": {
+      "type": "string",
+      "title": "Interrupting Task ID"
+    },
+    "interrupting_task_number": {
+      "type": "string",
+      "title": "Interrupting Task Number"
+    },
+    "interrupted_task_id": {
+      "type": "string",
+      "title": "Interrupted Task ID"
+    },
+    "interrupted_task_number": {
+      "type": "string",
+      "title": "Interrupted Task Number"
+    },
+    "interrupted_work_session_id": {
+      "type": "string",
+      "title": "Interrupted Work Session ID"
+    },
+    "checkpoint_id": {
+      "type": "string",
+      "title": "Checkpoint ID"
+    },
+    "resume_notification_id": {
+      "type": "string",
+      "title": "Resume Notification ID"
+    },
+    "orchestration_decision_id": {
+      "type": "string",
+      "title": "Orchestration Decision ID"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee Registry ID"
+    },
+    "terminal_status": {
+      "type": "string",
+      "title": "Terminal Status",
+      "description": "The status that triggered the resume obligation (Completed, Cancelled)"
+    },
+    "retry_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Retry Count"
+    },
+    "max_retries": {
+      "type": "number",
+      "default": 5,
+      "title": "Max Retries"
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "last_retry_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Retry At"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+    },
+    "notified_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Notified At"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "requires_admin_review": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Admin Review",
+      "description": "True when the obligation failed and exhausted retries, or when manual intervention is needed."
+    },
+    "admin_review_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "pending",
+        "reviewed",
+        "resolved"
+      ],
+      "default": "none",
+      "title": "Admin Review Status"
+    },
+    "triggered_by": {
+      "type": "string",
+      "title": "Triggered By",
+      "description": "Function that created this obligation (manageTask, orchestrateWork, manageNotification)"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "obligation_key",
+    "operation_state"
+  ]
+}

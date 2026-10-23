@@ -1,0 +1,30 @@
+{
+  "name": "InspectionWorkflowConfig",
+  "type": "object",
+  "properties": {
+    "config_name": {
+      "type": "string",
+      "title": "Config Name",
+      "description": "e.g. Default Inspection Workflow Config"
+    },
+    "require_signature_clean_inspection": {
+      "type": "boolean",
+      "default": true,
+      "title": "Require Customer Signature for Clean Inspection",
+      "description": "When true, a customer acknowledgment signature is required to complete an appointment with no repair recommendations. When false, appointments can be completed without a signature on clean inspections."
+    },
+    "require_signature_with_recommendations": {
+      "type": "boolean",
+      "default": true,
+      "title": "Require Customer Signature for Estimates/Recommendations",
+      "description": "When true, a customer signature is required during customer presentation when repair recommendations exist."
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "config_name"
+  ]
+}

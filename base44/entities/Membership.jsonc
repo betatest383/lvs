@@ -1,0 +1,60 @@
+{
+  "name": "Membership",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "customer_email": {
+      "type": "string",
+      "title": "Customer Email"
+    },
+    "membership_type": {
+      "type": "string",
+      "enum": [
+        "basic",
+        "premium",
+        "gold"
+      ],
+      "title": "Membership Type"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Start Date"
+    },
+    "renewal_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Renewal Date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "expired",
+        "cancelled",
+        "pending"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "annual_fee": {
+      "type": "number",
+      "title": "Annual Fee ($)"
+    },
+    "benefits": {
+      "type": "string",
+      "title": "Benefits Description"
+    }
+  },
+  "required": [
+    "customer_id",
+    "membership_type"
+  ]
+}

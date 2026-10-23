@@ -1,0 +1,111 @@
+{
+  "name": "ChimneyMeasurementReport",
+  "type": "object",
+  "properties": {
+    "report_number": {
+      "type": "string",
+      "title": "Report Number",
+      "description": "e.g. STUCCO-000001"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "technician_id": {
+      "type": "string",
+      "title": "Technician ID"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "selected_template": {
+      "type": "string",
+      "enum": [
+        "figure_1a",
+        "figure_1b",
+        "figure_1c",
+        "figure_1d",
+        "figure_1e"
+      ],
+      "title": "Selected Template"
+    },
+    "total_sqft": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Square Footage"
+    },
+    "above_roof_sqft": {
+      "type": "number",
+      "default": 0,
+      "title": "Above Roof Square Footage"
+    },
+    "below_roof_sqft": {
+      "type": "number",
+      "default": 0,
+      "title": "Below Roof Square Footage"
+    },
+    "roofline_sqft": {
+      "type": "number",
+      "default": 0,
+      "title": "Roofline/Shoulder Square Footage"
+    },
+    "completion_percent": {
+      "type": "number",
+      "default": 0,
+      "title": "Completion Percent"
+    },
+    "sections_complete": {
+      "type": "number",
+      "default": 0,
+      "title": "Sections Complete"
+    },
+    "sections_total": {
+      "type": "number",
+      "default": 0,
+      "title": "Sections Total"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "in_progress",
+        "submitted",
+        "archived"
+      ],
+      "default": "draft",
+      "title": "Status"
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Submitted At"
+    },
+    "warnings": {
+      "type": "string",
+      "title": "Warnings (JSON)",
+      "description": "JSON array of warning messages"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "job_id",
+    "selected_template",
+    "status"
+  ]
+}

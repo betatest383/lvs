@@ -1,0 +1,128 @@
+{
+  "name": "TaskAcknowledgment",
+  "type": "object",
+  "properties": {
+    "acknowledgment_number": {
+      "type": "string",
+      "title": "Acknowledgment Number",
+      "description": "Server-generated: ACK-000001"
+    },
+    "task_id": {
+      "type": "string",
+      "title": "Task ID",
+      "description": "EnterpriseTask ID"
+    },
+    "task_number": {
+      "type": "string",
+      "title": "Task Number"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee Registry ID"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "notification_id": {
+      "type": "string",
+      "title": "Notification ID",
+      "description": "EnterpriseNotification ID that delivered the acknowledgment request"
+    },
+    "assignment_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Assignment Version",
+      "description": "The task assignment version this acknowledgment applies to. A new assignment increments the version, requiring a new acknowledgment."
+    },
+    "idempotency_key": {
+      "type": "string",
+      "title": "Idempotency Key",
+      "description": "Deterministic key: taskId:assignmentVersion:employeeId:response. Prevents duplicate acknowledgment records from repeated clicks, retries, or multi-device submissions."
+    },
+    "delivered_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Delivered At",
+      "description": "When the acknowledgment request was delivered to the employee"
+    },
+    "displayed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Displayed At",
+      "description": "When the acknowledgment prompt was displayed on screen"
+    },
+    "acknowledged_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Acknowledged At",
+      "description": "When the employee provided their response"
+    },
+    "response": {
+      "type": "string",
+      "enum": [
+        "acknowledged",
+        "start_now",
+        "request_clarification",
+        "unable_to_start",
+        "manager_assistance_requested"
+      ],
+      "title": "Response"
+    },
+    "response_reason": {
+      "type": "string",
+      "title": "Response Reason",
+      "description": "Required for unable_to_start and manager_assistance_requested responses. Also stores the employee's clarification message for request_clarification."
+    },
+    "response_category": {
+      "type": "string",
+      "title": "Response Category",
+      "description": "Reason/help category for unable_to_start and manager_assistance_requested responses (e.g. Safety concern, Need decision)"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At",
+      "description": "If response is start_now, when work was started"
+    },
+    "device_id": {
+      "type": "string",
+      "title": "Device ID"
+    },
+    "was_overdue": {
+      "type": "boolean",
+      "default": false,
+      "title": "Was Overdue",
+      "description": "True when acknowledgment was submitted after the deadline"
+    },
+    "escalated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Escalated At",
+      "description": "When the acknowledgment was escalated due to no response"
+    },
+    "escalation_level": {
+      "type": "number",
+      "default": 0,
+      "title": "Escalation Level"
+    },
+    "acknowledgment_deadline_minutes": {
+      "type": "number",
+      "title": "Acknowledgment Deadline (Minutes)",
+      "description": "Deadline for acknowledgment, copied from the task at delivery time"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "acknowledgment_number",
+    "task_id",
+    "employee_id"
+  ]
+}

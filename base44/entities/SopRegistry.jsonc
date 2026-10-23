@@ -1,0 +1,236 @@
+{
+  "name": "SopRegistry",
+  "type": "object",
+  "properties": {
+    "sop_id": {
+      "type": "string",
+      "title": "SOP ID"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "subject": {
+      "type": "string",
+      "title": "Subject"
+    },
+    "document": {
+      "type": "string",
+      "title": "Document"
+    },
+    "page": {
+      "type": "string",
+      "title": "Page"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Process",
+        "Policy",
+        "Company",
+        "Form",
+        "Checklist"
+      ],
+      "title": "Type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "Draft",
+        "In Review",
+        "Approved",
+        "Archived"
+      ],
+      "default": "Planned",
+      "title": "Status"
+    },
+    "lifecycle_stage": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "Draft",
+        "Review",
+        "Approved",
+        "Base44 Build",
+        "Testing",
+        "Live",
+        "Continuous Improvement"
+      ],
+      "default": "Planned",
+      "title": "Lifecycle Stage"
+    },
+    "current_version": {
+      "type": "string",
+      "title": "Current Version"
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date",
+      "title": "Last Reviewed"
+    },
+    "next_review_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Next Review Date"
+    },
+    "process_owner": {
+      "type": "string",
+      "title": "Process Owner"
+    },
+    "reviewer": {
+      "type": "string",
+      "title": "Reviewer"
+    },
+    "approver": {
+      "type": "string",
+      "title": "Approver"
+    },
+    "trainual_url": {
+      "type": "string",
+      "title": "Trainual URL"
+    },
+    "training_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Training Required"
+    },
+    "quiz_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiz Required"
+    },
+    "base44_module": {
+      "type": "string",
+      "title": "Base44 Module"
+    },
+    "workflow_name": {
+      "type": "string",
+      "title": "Workflow Name"
+    },
+    "workflow_status": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "In Development",
+        "Testing",
+        "Live"
+      ],
+      "title": "Workflow Status"
+    },
+    "automation_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automation Required"
+    },
+    "automation_status": {
+      "type": "string",
+      "title": "Automation Status"
+    },
+    "automation_description": {
+      "type": "string",
+      "title": "Automation Description"
+    },
+    "related_forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Forms"
+    },
+    "related_workflows": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Workflows"
+    },
+    "related_dashboard": {
+      "type": "string",
+      "title": "Related Dashboard"
+    },
+    "kpi_name": {
+      "type": "string",
+      "title": "KPI Name"
+    },
+    "applies_to": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Warehouse Associate",
+          "Warehouse Manager",
+          "Lead Technician",
+          "Apprentice",
+          "CSR",
+          "Dispatcher",
+          "Sales Technician",
+          "Operations Manager",
+          "Office Manager",
+          "Owner",
+          "Customer"
+        ]
+      },
+      "title": "Applies To"
+    },
+    "related_sops": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related SOPs"
+    },
+    "related_policies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Policies"
+    },
+    "photos_complete": {
+      "type": "boolean",
+      "default": false,
+      "title": "Photos Complete"
+    },
+    "videos_complete": {
+      "type": "boolean",
+      "default": false,
+      "title": "Videos Complete"
+    },
+    "attachments_complete": {
+      "type": "boolean",
+      "default": false,
+      "title": "Attachments Complete"
+    },
+    "improvement_ideas": {
+      "type": "string",
+      "title": "Improvement Ideas"
+    },
+    "revision_notes": {
+      "type": "string",
+      "title": "Revision Notes"
+    },
+    "business_impact": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "title": "Business Impact"
+    }
+  },
+  "required": [
+    "sop_id",
+    "title"
+  ]
+}

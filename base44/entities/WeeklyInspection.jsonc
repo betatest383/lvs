@@ -1,0 +1,206 @@
+{
+  "name": "WeeklyInspection",
+  "type": "object",
+  "properties": {
+    "inspection_id": {
+      "type": "string",
+      "title": "Inspection ID",
+      "description": "e.g. WI-20260707-TRK003"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Inspection Date"
+    },
+    "week_of": {
+      "type": "string",
+      "format": "date",
+      "title": "Week Of (Monday)",
+      "description": "The Monday of the inspection week"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "truck_id": {
+      "type": "string",
+      "title": "Truck ID"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "brakes_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Brakes Status"
+    },
+    "tires_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Tires Status"
+    },
+    "fluids_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Fluids Status"
+    },
+    "ladder_racks_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Ladder Racks Status"
+    },
+    "backup_camera_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Backup Camera Status"
+    },
+    "safety_equipment_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Safety Equipment Status"
+    },
+    "equipment_inventory_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Equipment Inventory Status"
+    },
+    "preventive_maintenance_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Preventive Maintenance Status"
+    },
+    "workflow_checks": {
+      "type": "string",
+      "title": "Workflow Checks (JSON)",
+      "description": "JSON object of sub-check states"
+    },
+    "overall_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "blocked",
+        "overdue"
+      ],
+      "default": "waiting",
+      "title": "Overall Status"
+    },
+    "readiness_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "Readiness Percentage"
+    },
+    "completed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Completed"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "completed_by": {
+      "type": "string",
+      "title": "Completed By"
+    },
+    "defects_found": {
+      "type": "boolean",
+      "default": false,
+      "title": "Defects Found"
+    },
+    "defects_detail": {
+      "type": "string",
+      "title": "Defects Detail (JSON)",
+      "description": "JSON array of {step_id, label, detail}"
+    },
+    "signature_data_url": {
+      "type": "string",
+      "title": "Digital Signature"
+    },
+    "next_inspection_due_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Next Inspection Due Date"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "inspection_id",
+    "date",
+    "truck_number"
+  ]
+}

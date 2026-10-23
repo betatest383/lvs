@@ -1,0 +1,26 @@
+# Stage 2E.7 Phase A — Detached SHA-256 Artifact Manifest
+
+**Final contract version:** `2E7-AC-v0.2-PHASE-A-BINDING-FINAL`
+
+## Covered artifact
+
+| Field | Value |
+|---|---|
+| Repository path | `base44/shared/stSync/STAGE_2E_7_PHASE_A_ACCEPTANCE_CONTRACT_v0.2.md` |
+| Filename | `STAGE_2E_7_PHASE_A_ACCEPTANCE_CONTRACT_v0.2.md` |
+| Final contract version | `2E7-AC-v0.2-PHASE-A-BINDING-FINAL` |
+| Exact byte size | 41651 bytes |
+| Complete SHA-256 | `53afc3cd119d99f3198e41fdc5b3414ad19f68db734d01b11400385ebb68ada4` |
+
+## Serialization rule
+
+The covered artifact's SHA-256 is computed over raw bytes of the file as stored:
+- Encoding: UTF-8
+- Line endings: LF (no CRLF)
+- No leading/trailing whitespace beyond the document's own final newline
+- No BOM
+- SHA-256 over the complete raw byte content
+
+## Manifest self-exclusion
+
+This detached manifest intentionally excludes its own checksum from its contents. A file cannot durably contain its own final SHA-256 (inlining a self-referential checksum changes the content it hashes, producing unbounded drift). The authoritative checksum for this manifest is reported externally, not within this file. Any edit to the covered artifact invalidates this manifest entry and requires a new manifest to be generated under a separately authorized step.

@@ -1,0 +1,128 @@
+{
+  "name": "MaterialVendor",
+  "type": "object",
+  "properties": {
+    "relationship_key": {
+      "type": "string",
+      "title": "Relationship Key",
+      "description": "Deterministic: inventory_master_id:servicetitan_vendor_id. Prevents duplicate active relationships."
+    },
+    "inventory_master_id": {
+      "type": "string",
+      "title": "Inventory Master ID",
+      "description": "Base44 InventoryMaster entity ID this relationship belongs to."
+    },
+    "servicetitan_material_id": {
+      "type": "string",
+      "title": "ServiceTitan Material ID",
+      "description": "ServiceTitan Item ID (int64-safe string). Snapshot for display without joining."
+    },
+    "vendor_id": {
+      "type": "string",
+      "title": "Local Vendor ID",
+      "description": "Base44 Vendor entity ID linked via servicetitan_vendor_id. Empty when unresolved."
+    },
+    "servicetitan_vendor_id": {
+      "type": "string",
+      "title": "ServiceTitan Vendor ID",
+      "description": "Immutable ServiceTitan Vendor ID. The canonical link key \u2014 matched ONLY by this field, never by vendor name."
+    },
+    "vendor_name_snapshot": {
+      "type": "string",
+      "title": "Vendor Name Snapshot",
+      "description": "ServiceTitan-owned vendor display name for display without joining."
+    },
+    "vendor_part_number": {
+      "type": "string",
+      "title": "Vendor Part Number",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "vendor_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Vendor Cost ($)",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "is_preferred_vendor": {
+      "type": "boolean",
+      "default": false,
+      "title": "Preferred Vendor",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "vendor_memo": {
+      "type": "string",
+      "title": "Vendor Memo",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active",
+      "description": "ServiceTitan-owned (Item-Vendor relationship active flag). Overwritten by inbound sync."
+    },
+    "mapping_status": {
+      "type": "string",
+      "enum": [
+        "matched",
+        "unmatched",
+        "orphan"
+      ],
+      "default": "matched",
+      "title": "Mapping Status",
+      "description": "matched = local Vendor found by servicetitan_vendor_id; unmatched = ST vendor ID supplied but no local Vendor; orphan = relationship references a vendor not in local registry."
+    },
+    "mapping_warning": {
+      "type": "string",
+      "title": "Mapping Warning"
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On"
+    },
+    "servicetitan_last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync"
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status"
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version"
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual",
+        "api_export"
+      ],
+      "title": "Import Source"
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At"
+    }
+  },
+  "required": [
+    "relationship_key",
+    "inventory_master_id",
+    "servicetitan_material_id",
+    "servicetitan_vendor_id",
+    "is_active"
+  ]
+}

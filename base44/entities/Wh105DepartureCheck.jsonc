@@ -1,0 +1,285 @@
+{
+  "name": "Wh105DepartureCheck",
+  "type": "object",
+  "properties": {
+    "departure_id": {
+      "type": "string",
+      "title": "Departure ID",
+      "description": "e.g. DEP-20260705-3"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Date"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "truck_id": {
+      "type": "string",
+      "title": "Truck ID"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Today's Primary Job Number"
+    },
+    "consumables_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Consumables Status"
+    },
+    "material_transfer_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Material Transfer Status"
+    },
+    "previous_returns_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Previous Returns Status"
+    },
+    "truck_cleaned_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Truck Cleaned Status"
+    },
+    "truck_organized_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Truck Organized Status"
+    },
+    "daily_equipment_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Daily Equipment Status"
+    },
+    "todays_job_equipment_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Today's Job Equipment Status"
+    },
+    "materials_loaded_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Materials Loaded Status"
+    },
+    "forklift_loading_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Forklift Loading Status"
+    },
+    "blocking_issues_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Blocking Issues Status"
+    },
+    "manager_holds_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Manager Holds Status"
+    },
+    "truck_inspection_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Truck Inspection Status"
+    },
+    "dashboard_review_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Dashboard Review Status"
+    },
+    "workflow_checks": {
+      "type": "string",
+      "title": "Workflow Checks (JSON)",
+      "description": "JSON object of sub-check states: { check_id: { status, completed_at, completed_by } }"
+    },
+    "blocking_issues_detail": {
+      "type": "string",
+      "title": "Blocking Issues Detail (JSON)",
+      "description": "JSON array of {check_id, label, detail}"
+    },
+    "manager_overrides": {
+      "type": "string",
+      "title": "Manager Overrides (JSON)",
+      "description": "JSON array of {check_id, check_label, reason, signature_data_url, override_by, override_at}"
+    },
+    "overall_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "ready",
+        "blocked",
+        "departed"
+      ],
+      "default": "waiting",
+      "title": "Overall Status"
+    },
+    "readiness_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "Readiness Percentage"
+    },
+    "departed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Departed"
+    },
+    "departure_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Departure Timestamp"
+    },
+    "help_requested": {
+      "type": "boolean",
+      "default": false,
+      "title": "Help Requested"
+    },
+    "help_requested_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Help Requested At"
+    },
+    "help_request_reason": {
+      "type": "string",
+      "title": "Help Request Reason"
+    },
+    "issue_reported": {
+      "type": "boolean",
+      "default": false,
+      "title": "Issue Reported"
+    },
+    "issue_reported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Issue Reported At"
+    },
+    "issue_reported_detail": {
+      "type": "string",
+      "title": "Issue Reported Detail"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "departure_id",
+    "date",
+    "technician_email",
+    "truck_number"
+  ]
+}

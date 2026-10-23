@@ -1,0 +1,285 @@
+{
+  "name": "TechEquipment",
+  "type": "object",
+  "properties": {
+    "equipment_id": {
+      "type": "string",
+      "title": "Equipment ID",
+      "description": "e.g. EQ-000001"
+    },
+    "equipment_master_id": {
+      "type": "string",
+      "title": "Equipment Master ID",
+      "description": "Links to EquipmentMaster catalog item"
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Item Name"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "category": {
+      "type": "string",
+      "title": "Equipment Category"
+    },
+    "unit": {
+      "type": "string",
+      "title": "Unit",
+      "default": "ea"
+    },
+    "manufacturer": {
+      "type": "string",
+      "title": "Manufacturer"
+    },
+    "model": {
+      "type": "string",
+      "title": "Model"
+    },
+    "serial_number": {
+      "type": "string",
+      "title": "Serial Number"
+    },
+    "sku": {
+      "type": "string",
+      "title": "SKU / Part Number"
+    },
+    "barcode_qr": {
+      "type": "string",
+      "title": "Barcode / QR Code",
+      "description": "Scanned or manually entered barcode/QR identifier"
+    },
+    "photo_url": {
+      "type": "string",
+      "title": "Photo URL"
+    },
+    "quantity": {
+      "type": "number",
+      "default": 1,
+      "title": "Quantity"
+    },
+    "purchase_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Purchase Date"
+    },
+    "purchase_cost": {
+      "type": "number",
+      "title": "Purchase Cost ($)"
+    },
+    "replacement_cost": {
+      "type": "number",
+      "title": "Replacement Cost Per Unit ($)"
+    },
+    "current_value": {
+      "type": "number",
+      "title": "Total Value ($)"
+    },
+    "condition": {
+      "type": "string",
+      "enum": [
+        "new",
+        "good",
+        "fair",
+        "poor",
+        "damaged",
+        "missing",
+        "out_for_repair"
+      ],
+      "default": "good",
+      "title": "Condition"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "missing",
+        "damaged",
+        "out_for_repair",
+        "retired",
+        "warehouse_stock"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "assignment_type": {
+      "type": "string",
+      "enum": [
+        "permanent",
+        "temporary",
+        "warehouse_stock",
+        "repair",
+        "retired"
+      ],
+      "default": "warehouse_stock",
+      "title": "Assignment Type"
+    },
+    "assigned_employee_registry_id": {
+      "type": "string",
+      "title": "Assigned Employee Registry ID",
+      "description": "Links to EmployeeRegistry record \u2014 the single source of truth for equipment assignment"
+    },
+    "assigned_employee": {
+      "type": "string",
+      "title": "Assigned Employee (Responsible Party)",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "assigned_employee_email": {
+      "type": "string",
+      "title": "Assigned Employee Email"
+    },
+    "assigned_by": {
+      "type": "string",
+      "title": "Assigned By"
+    },
+    "assignment_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Assignment Date"
+    },
+    "assigned_truck": {
+      "type": "string",
+      "title": "Assigned Truck (Storage Location)"
+    },
+    "assigned_truck_number": {
+      "type": "string",
+      "title": "Assigned Truck Number"
+    },
+    "equipment_package_id": {
+      "type": "string",
+      "title": "Equipment Package ID",
+      "description": "Links to EquipmentPackage record when assigned via package"
+    },
+    "shared_vehicle": {
+      "type": "boolean",
+      "default": false,
+      "title": "Shared Vehicle",
+      "description": "True when equipment is assigned to a shared vehicle without a specific technician"
+    },
+    "override_reason": {
+      "type": "string",
+      "title": "Override Reason",
+      "description": "Reason provided when manager overrides auto-resolved technician assignment"
+    },
+    "assigned_crew": {
+      "type": "string",
+      "title": "Assigned Crew"
+    },
+    "storage_location": {
+      "type": "string",
+      "title": "Storage Location",
+      "description": "e.g. Truck 3, Warehouse, Job Site"
+    },
+    "bin": {
+      "type": "string",
+      "title": "Bin (optional)"
+    },
+    "assigned_job": {
+      "type": "string",
+      "title": "Assigned Job Number (temporary only)"
+    },
+    "expected_return_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Expected Return Date/Time (temporary only)"
+    },
+    "actual_return_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Actual Return Date/Time"
+    },
+    "return_condition": {
+      "type": "string",
+      "enum": [
+        "new",
+        "good",
+        "fair",
+        "poor",
+        "damaged",
+        "missing",
+        "out_for_repair"
+      ],
+      "title": "Return Condition",
+      "description": "Condition recorded at time of return"
+    },
+    "return_reason": {
+      "type": "string",
+      "title": "Return Reason",
+      "description": "e.g. returned_to_warehouse, offboarding, truck_reassignment, repair_needed, damaged, retired, replacement, end_of_temporary, lost_missing, other"
+    },
+    "quantity_returned": {
+      "type": "number",
+      "title": "Quantity Returned",
+      "description": "Quantity returned at time of unassignment"
+    },
+    "returned_by": {
+      "type": "string",
+      "title": "Returned By",
+      "description": "User who processed the return"
+    },
+    "return_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Return Required (temporary only)"
+    },
+    "required_daily_operations": {
+      "type": "boolean",
+      "default": false,
+      "title": "Required for Daily Operations"
+    },
+    "required_todays_job": {
+      "type": "boolean",
+      "default": false,
+      "title": "Required for Today's Job"
+    },
+    "forklift_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Forklift Required for Loading"
+    },
+    "acknowledgment_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Digital Acknowledgment Required"
+    },
+    "acknowledgment_signed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Acknowledgment Signed"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "last_audit_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Last Audit Date"
+    },
+    "next_audit_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Next Audit Date"
+    },
+    "warranty_expiry": {
+      "type": "string",
+      "format": "date",
+      "title": "Warranty Expiry"
+    },
+    "supplier": {
+      "type": "string",
+      "title": "Supplier"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active",
+      "description": "When false, the assignment has ended (returned). Record is preserved for audit history."
+    }
+  },
+  "required": [
+    "item_name",
+    "assignment_type"
+  ]
+}

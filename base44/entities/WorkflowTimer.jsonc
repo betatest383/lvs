@@ -1,0 +1,68 @@
+{
+  "name": "WorkflowTimer",
+  "type": "object",
+  "properties": {
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Timer Date"
+    },
+    "timer_type": {
+      "type": "string",
+      "enum": [
+        "morning_workflow",
+        "job_workflow",
+        "travel",
+        "lunch"
+      ],
+      "default": "morning_workflow",
+      "title": "Timer Type"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+    },
+    "ended_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Ended At"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "default": 0,
+      "title": "Duration (Minutes)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "stopped",
+        "paused"
+      ],
+      "default": "running",
+      "title": "Timer Status"
+    },
+    "linked_job_id": {
+      "type": "string",
+      "title": "Linked Job ID"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "technician_email",
+    "date",
+    "timer_type"
+  ]
+}

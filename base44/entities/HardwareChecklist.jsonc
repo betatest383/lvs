@@ -1,0 +1,59 @@
+{
+  "name": "HardwareChecklist",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Date"
+    },
+    "technician": {
+      "type": "string",
+      "title": "Technician"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "items_requested": {
+      "type": "string",
+      "title": "Items Requested"
+    },
+    "submitted_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Submitted Time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Submitted",
+        "In Progress",
+        "Completed"
+      ],
+      "default": "Submitted",
+      "title": "Status"
+    },
+    "pulled_by": {
+      "type": "string",
+      "title": "Pulled By"
+    },
+    "completed_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed Time"
+    },
+    "related_sop_id": {
+      "type": "string",
+      "title": "Related SOP ID"
+    },
+    "trainual_link": {
+      "type": "string",
+      "title": "Trainual Link"
+    }
+  },
+  "required": [
+    "date",
+    "technician"
+  ]
+}

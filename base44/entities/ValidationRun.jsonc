@@ -1,0 +1,87 @@
+{
+  "name": "ValidationRun",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "title": "Run ID",
+      "description": "Unique validation run identifier (e.g. VR-xxxx). Generated server-side."
+    },
+    "run_token": {
+      "type": "string",
+      "title": "Run Token",
+      "description": "Unguessable server-generated token (cryptographic random). Required for test-flag authorization."
+    },
+    "test_prefix": {
+      "type": "string",
+      "title": "Test Prefix",
+      "description": "Unique prefix used by this validation run to namespace test-owned records."
+    },
+    "stage": {
+      "type": "string",
+      "title": "Stage",
+      "description": "Validation stage (e.g. 'Stage 2A', 'Stage 2B-A', 'Stage 2C', 'Stage 2B Cross-Entity')."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "completed",
+        "failed",
+        "expired"
+      ],
+      "default": "active",
+      "title": "Status",
+      "description": "active = authorization valid; completed/failed/expired = authorization invalidated."
+    },
+    "actor": {
+      "type": "string",
+      "title": "Actor",
+      "description": "Admin user who initiated the validation run."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Expires At",
+      "description": "When this run's authorization expires. Test flags are rejected after this time."
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "unrelated_deliveries_selected": {
+      "type": "number",
+      "default": 0,
+      "title": "Unrelated Deliveries Selected",
+      "description": "Count of deliveries not belonging to this run that were selected during processing. Must be 0."
+    },
+    "unrelated_deliveries_mutated": {
+      "type": "number",
+      "default": 0,
+      "title": "Unrelated Deliveries Mutated",
+      "description": "Count of deliveries not belonging to this run that were mutated during processing. Must be 0."
+    },
+    "persistence_verification_failures": {
+      "type": "number",
+      "default": 0,
+      "title": "Persistence Verification Failures",
+      "description": "Count of delivery updates where committed-state verification failed."
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "run_id",
+    "run_token",
+    "test_prefix",
+    "status"
+  ]
+}

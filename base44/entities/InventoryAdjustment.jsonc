@@ -1,0 +1,304 @@
+{
+  "name": "InventoryAdjustment",
+  "type": "object",
+  "properties": {
+    "adjustment_number": {
+      "type": "string",
+      "title": "Adjustment Number",
+      "description": "LVC-owned internal number (e.g. ADJ-000001). Never overwritten by ServiceTitan."
+    },
+    "adjustment_type": {
+      "type": "string",
+      "enum": [
+        "cycle_count",
+        "physical_count",
+        "damage",
+        "loss",
+        "shrinkage",
+        "correction",
+        "warranty_replacement",
+        "vendor_return",
+        "disposal"
+      ],
+      "title": "Adjustment Type",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "inventory_master_id": {
+      "type": "string",
+      "title": "Inventory Master ID",
+      "description": "Links to InventoryMaster. Resolved via servicetitan_material_id."
+    },
+    "servicetitan_material_id": {
+      "type": "string",
+      "title": "ServiceTitan Material ID",
+      "description": "Snapshot of the material's ST ID for immutable linkage."
+    },
+    "sku": {
+      "type": "string",
+      "title": "SKU",
+      "description": "ServiceTitan-owned. Denormalized from ST. Overwritten by inbound sync."
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Item Name",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "warehouse_location_id": {
+      "type": "string",
+      "title": "Warehouse Location ID",
+      "description": "Links to WarehouseLocation. Resolved via servicetitan_warehouse_id."
+    },
+    "servicetitan_warehouse_id": {
+      "type": "string",
+      "title": "ServiceTitan Warehouse ID",
+      "description": "Snapshot of the warehouse's ST ID."
+    },
+    "warehouse_location_name": {
+      "type": "string",
+      "title": "Warehouse Location Name",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "bin_location": {
+      "type": "string",
+      "title": "Bin Location",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "quantity_before": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Before (Calculated)",
+      "description": "ServiceTitan-owned. Snapshot from ST. Overwritten by inbound sync."
+    },
+    "quantity_counted": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Counted",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "quantity_adjustment": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Adjustment",
+      "description": "ServiceTitan-owned. quantity_counted - quantity_before. Overwritten by inbound sync."
+    },
+    "unit_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Unit Cost",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "cost_impact": {
+      "type": "number",
+      "default": 0,
+      "title": "Cost Impact",
+      "description": "ServiceTitan-owned. quantity_adjustment \u00d7 unit_cost. Overwritten by inbound sync."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        "posted"
+      ],
+      "default": "pending",
+      "title": "Status",
+      "description": "ServiceTitan-owned sync status. Overwritten by inbound sync. NOTE: Read-only sync does NOT post LVC inventory ledger entries. LVC posts its own adjustments via local workflow."
+    },
+    "reconciliation_id": {
+      "type": "string",
+      "title": "Material Reconciliation ID",
+      "description": "LVC-owned. Links to MaterialReconciliation. Never overwritten by ServiceTitan."
+    },
+    "ledger_transaction_id": {
+      "type": "string",
+      "title": "Ledger Transaction ID",
+      "description": "LVC-owned. Links to the InventoryTransaction ledger entry created when LVC posts its own adjustment. Never overwritten by ServiceTitan."
+    },
+    "ledger_posted": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ledger Posted",
+      "description": "LVC-owned. True when LVC has posted its own adjustment to the ledger. Never overwritten by ServiceTitan. ServiceTitan adjustments are read-only and do NOT auto-post."
+    },
+    "investigation_status": {
+      "type": "string",
+      "enum": [
+        "not_investigated",
+        "under_review",
+        "resolved",
+        "escalated"
+      ],
+      "default": "not_investigated",
+      "title": "Investigation Status",
+      "description": "LVC-owned. Audit/investigation tracking for synced ST adjustments. Never overwritten by ServiceTitan."
+    },
+    "investigation_notes": {
+      "type": "string",
+      "title": "Investigation Notes",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "investigated_by": {
+      "type": "string",
+      "title": "Investigated By",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "investigated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Investigated At",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "barcode_scanned": {
+      "type": "boolean",
+      "default": false,
+      "title": "Barcode Scanned",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "photo_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Supporting Photos",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "reason": {
+      "type": "string",
+      "title": "Reason",
+      "description": "ServiceTitan-owned. Reason from ST. Overwritten by inbound sync."
+    },
+    "servicetitan_reason_code": {
+      "type": "string",
+      "title": "ServiceTitan Reason Code",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "requested_by": {
+      "type": "string",
+      "title": "Requested By",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Requested At",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "posted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Posted At",
+      "description": "ServiceTitan-owned. When ST posted the adjustment. Overwritten by inbound sync."
+    },
+    "rejected_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Rejected At",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "rejection_reason": {
+      "type": "string",
+      "title": "Rejection Reason",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "servicetitan_adjustment_id": {
+      "type": "string",
+      "title": "ServiceTitan Adjustment ID",
+      "description": "Permanent external identity. Stored as string for int64 safety. The canonical sync key \u2014 matched ONLY by this field."
+    },
+    "servicetitan_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "ServiceTitan Active Status"
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deferred",
+        "failed",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status"
+    },
+    "servicetitan_last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync"
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At"
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On"
+    },
+    "servicetitan_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Created On"
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version"
+    },
+    "servicetitan_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "manual",
+        "api"
+      ],
+      "title": "ServiceTitan Source"
+    },
+    "servicetitan_raw_data": {
+      "type": "string",
+      "title": "ServiceTitan Raw Data (JSON)"
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual",
+        "api_export"
+      ],
+      "title": "Import Source"
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes",
+      "description": "LVC-owned internal notes. Never overwritten by ServiceTitan."
+    }
+  },
+  "required": [
+    "adjustment_type",
+    "servicetitan_adjustment_id",
+    "quantity_adjustment",
+    "status"
+  ]
+}

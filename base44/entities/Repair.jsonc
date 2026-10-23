@@ -1,0 +1,58 @@
+{
+  "name": "Repair",
+  "type": "object",
+  "properties": {
+    "repair_name": {
+      "type": "string",
+      "title": "Repair Name"
+    },
+    "repair_description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category (Legacy)",
+      "description": "Legacy free-text category. Prefer repair_category_id + repair_category_name for new and edited records."
+    },
+    "repair_category_id": {
+      "type": "string",
+      "title": "Repair Category ID",
+      "description": "Links to MasterClassification record with classification_type 'repair_category'. Use for relationships."
+    },
+    "repair_category_name": {
+      "type": "string",
+      "title": "Repair Category Name",
+      "description": "Display snapshot of the repair category name. Use for display."
+    },
+    "pricing_description": {
+      "type": "string",
+      "title": "Pricing Description",
+      "description": "Optional. Free-text note describing how this repair is priced."
+    },
+    "estimate_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimate Price ($)",
+      "description": "Optional. May be null, blank, or 0."
+    },
+    "invoice_price": {
+      "type": "number",
+      "title": "Invoice Price ($)"
+    },
+    "labor_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimated Labor Hours"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    }
+  },
+  "required": [
+    "repair_name",
+    "labor_hours"
+  ]
+}

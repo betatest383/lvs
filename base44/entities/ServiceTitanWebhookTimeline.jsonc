@@ -1,0 +1,69 @@
+{
+  "name": "ServiceTitanWebhookTimeline",
+  "type": "object",
+  "properties": {
+    "webhook_event_id": {
+      "type": "string",
+      "title": "Webhook Event ID",
+      "description": "ServiceTitanWebhookEvent entity ID this timeline entry belongs to"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Timestamp"
+    },
+    "stage": {
+      "type": "string",
+      "enum": [
+        "received",
+        "validated",
+        "stored",
+        "queued",
+        "processing",
+        "routing",
+        "handler_started",
+        "handler_finished",
+        "completed",
+        "ignored",
+        "retry_scheduled",
+        "replay_started",
+        "replay_finished",
+        "failed",
+        "dead_letter",
+        "requeued",
+        "deleted"
+      ],
+      "title": "Stage",
+      "description": "Lifecycle stage of this timeline entry"
+    },
+    "message": {
+      "type": "string",
+      "title": "Message"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "info",
+        "success",
+        "warning",
+        "error"
+      ],
+      "default": "info",
+      "title": "Status"
+    },
+    "duration_ms": {
+      "type": "number",
+      "title": "Duration (ms)"
+    },
+    "metadata_json": {
+      "type": "string",
+      "title": "Metadata (JSON)",
+      "description": "JSON object with additional context for this timeline entry"
+    }
+  },
+  "required": [
+    "webhook_event_id",
+    "timestamp",
+    "stage"
+  ]
+}

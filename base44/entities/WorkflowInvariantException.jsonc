@@ -1,0 +1,108 @@
+{
+  "name": "WorkflowInvariantException",
+  "type": "object",
+  "properties": {
+    "exception_key": {
+      "type": "string",
+      "title": "Deduplication Key"
+    },
+    "workflow_id": {
+      "type": "string",
+      "title": "Workflow ID"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "mutation_request_id": {
+      "type": "string",
+      "title": "Workflow Mutation Request"
+    },
+    "workflow_revision_version": {
+      "type": "number",
+      "title": "Workflow Revision Version"
+    },
+    "lock_generation": {
+      "type": "number",
+      "title": "Lock Generation"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "block",
+        "warn"
+      ],
+      "default": "block",
+      "title": "Severity"
+    },
+    "invariant_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Invariant Codes"
+    },
+    "evidence_json": {
+      "type": "string",
+      "title": "Immutable Evidence JSON"
+    },
+    "detected_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Detected At"
+    },
+    "detecting_function": {
+      "type": "string",
+      "title": "Detecting Function"
+    },
+    "manager_notification_status": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "sent",
+        "failed"
+      ],
+      "default": "queued",
+      "title": "Manager Notification Status"
+    }
+  },
+  "required": [
+    "exception_key",
+    "workflow_id",
+    "job_id",
+    "severity",
+    "invariant_codes",
+    "evidence_json",
+    "detected_at",
+    "detecting_function"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "operations_manager"
+          }
+        }
+      ]
+    },
+    "create": false,
+    "update": false,
+    "delete": false
+  }
+}

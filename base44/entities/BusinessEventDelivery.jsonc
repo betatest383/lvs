@@ -1,0 +1,138 @@
+{
+  "name": "BusinessEventDelivery",
+  "type": "object",
+  "properties": {
+    "delivery_id": {
+      "type": "string",
+      "title": "Delivery ID",
+      "description": "Deterministic idempotency key: business_event_id:subscriber_id. Prevents duplicate delivery records."
+    },
+    "business_event_id": {
+      "type": "string",
+      "title": "Business Event ID",
+      "description": "BusinessEvent entity ID this delivery belongs to."
+    },
+    "subscriber_id": {
+      "type": "string",
+      "title": "Subscriber ID",
+      "description": "EventSubscriber entity ID that should receive this delivery."
+    },
+    "subscriber_name": {
+      "type": "string",
+      "title": "Subscriber Name",
+      "description": "Snapshot for display without joining."
+    },
+    "event_type": {
+      "type": "string",
+      "title": "Event Type",
+      "description": "Snapshot of the event type for display and filtering."
+    },
+    "delivery_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "delivered",
+        "completed",
+        "failed",
+        "dead_letter",
+        "skipped"
+      ],
+      "default": "pending",
+      "title": "Delivery Status",
+      "description": "pending=queued; processing=in flight; delivered=handler returned success (async finalization pending); completed=terminal success; failed=retryable error; dead_letter=max attempts exhausted; skipped=non-retryable skip."
+    },
+    "processing_mode": {
+      "type": "string",
+      "enum": [
+        "synchronous",
+        "asynchronous"
+      ],
+      "default": "asynchronous",
+      "title": "Processing Mode",
+      "description": "Snapshot of the subscriber's processing mode at delivery creation."
+    },
+    "processing_attempts": {
+      "type": "number",
+      "default": 0,
+      "title": "Processing Attempts"
+    },
+    "first_attempt_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "First Attempt At"
+    },
+    "last_attempt_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Attempt At"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "next_retry_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Next Retry At"
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "dead_lettered_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Dead Lettered At"
+    },
+    "output_metadata": {
+      "type": "string",
+      "title": "Output Metadata (JSON)",
+      "description": "JSON object returned by the handler on success/failure."
+    },
+    "processing_claim_id": {
+      "type": "string",
+      "title": "Processing Claim ID",
+      "description": "Unique identifier for the current processing claim. Prevents concurrent duplicate processing."
+    },
+    "processing_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Processing Started At"
+    },
+    "processing_claimed_by": {
+      "type": "string",
+      "title": "Processing Claimed By"
+    },
+    "processing_recovered_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Processing Recovered At"
+    },
+    "replay_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Replay Count"
+    },
+    "last_replayed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Replayed At"
+    },
+    "last_replayed_by": {
+      "type": "string",
+      "title": "Last Replayed By"
+    },
+    "last_replay_result": {
+      "type": "string",
+      "title": "Last Replay Result"
+    }
+  },
+  "required": [
+    "delivery_id",
+    "business_event_id",
+    "subscriber_id",
+    "delivery_status"
+  ]
+}

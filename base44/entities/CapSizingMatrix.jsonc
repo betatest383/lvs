@@ -1,0 +1,260 @@
+{
+  "name": "CapSizingMatrix",
+  "type": "object",
+  "properties": {
+    "matrix_name": {
+      "type": "string",
+      "title": "Matrix Entry Name",
+      "description": "e.g. HY-C Bolt-On 13in Stainless, Gelco Crown-Mounted 36in Copper"
+    },
+    "mount_type": {
+      "type": "string",
+      "enum": [
+        "slip_in",
+        "bolt_on_exterior",
+        "bolt_on",
+        "crown_mounted"
+      ],
+      "title": "Mount Type",
+      "description": "slip_in = sized by interior flue measurements; bolt_on_exterior = sized by exterior flue tile measurements; crown_mounted = sized by crown measurements"
+    },
+    "cap_style": {
+      "type": "string",
+      "title": "Cap Style",
+      "description": "Classification value from MasterClassification (cap_style type). e.g. standard, wind_directional, draft_inducing"
+    },
+    "base_material": {
+      "type": "string",
+      "title": "Base Material",
+      "description": "Classification value from MasterClassification (cap_base_material type). e.g. stainless_steel, copper, steel"
+    },
+    "finish": {
+      "type": "string",
+      "title": "Finish",
+      "description": "Classification value from MasterClassification (cap_finish type). e.g. natural, powder_coated"
+    },
+    "finish_color": {
+      "type": "string",
+      "title": "Finish Color",
+      "description": "Classification value from MasterClassification (cap_finish_color type). Used when finish is powder_coated. e.g. black, bronze, clay"
+    },
+    "coverage_type": {
+      "type": "string",
+      "enum": [
+        "single_flue",
+        "multi_flue",
+        "full_crown"
+      ],
+      "default": "single_flue",
+      "title": "Coverage Type",
+      "description": "single_flue = covers one flue; multi_flue = covers multiple flues; full_crown = covers entire crown"
+    },
+    "manufacturer": {
+      "type": "string",
+      "title": "Manufacturer"
+    },
+    "model": {
+      "type": "string",
+      "title": "Model"
+    },
+    "material_id": {
+      "type": "string",
+      "title": "Inventory Material ID",
+      "description": "Links to InventoryMaster record"
+    },
+    "material_sku": {
+      "type": "string",
+      "title": "Material SKU",
+      "description": "Copied from InventoryMaster for reporting"
+    },
+    "service_id": {
+      "type": "string",
+      "title": "Service ID",
+      "description": "Links to ServiceCatalog record for installation service"
+    },
+    "finish_material_id": {
+      "type": "string",
+      "title": "Finish Material ID",
+      "description": "Links to InventoryMaster record for the powder-coat finish material. Used when finish is powder_coated \u2014 the base cap material/SKU is retained and this finish material is added as a separate line item."
+    },
+    "finish_service_id": {
+      "type": "string",
+      "title": "Finish Service ID",
+      "description": "Links to ServiceCatalog record for the powder-coat application service. Used when finish is powder_coated."
+    },
+    "nominal_length": {
+      "type": "number",
+      "title": "Nominal Length (in)",
+      "description": "The advertised product size. Used for rectangular/square products."
+    },
+    "nominal_width": {
+      "type": "number",
+      "title": "Nominal Width (in)",
+      "description": "The advertised product size. Used for rectangular/square products."
+    },
+    "nominal_height": {
+      "type": "number",
+      "title": "Nominal Height (in)",
+      "description": "The advertised product height (e.g. 8, 10, 12 inches). Used for flue tile cut-down resolution: the engine determines required cap height based on flue tile projection, then filters products by matching nominal_height."
+    },
+    "nominal_diameter": {
+      "type": "number",
+      "title": "Nominal Round Diameter (in)",
+      "description": "The advertised product diameter for round caps. Required when compatible_shape is round. Used for diameter-based fitting: the resolver matches the measured flue tile diameter against min_fitting_diameter / max_fitting_diameter."
+    },
+    "min_fitting_diameter": {
+      "type": "number",
+      "title": "Minimum Fitting Diameter (in)",
+      "description": "Smallest round flue tile diameter this product can fit over. Required when compatible_shape is round."
+    },
+    "max_fitting_diameter": {
+      "type": "number",
+      "title": "Maximum Fitting Diameter (in)",
+      "description": "Largest round flue tile diameter this product can fit over. Required when compatible_shape is round."
+    },
+    "min_fitting_length": {
+      "type": "number",
+      "title": "Minimum Fitting Length (in)",
+      "description": "Smallest flue/crown length this product can fit over"
+    },
+    "min_fitting_width": {
+      "type": "number",
+      "title": "Minimum Fitting Width (in)",
+      "description": "Smallest flue/crown width this product can fit over"
+    },
+    "max_fitting_length": {
+      "type": "number",
+      "title": "Maximum Fitting Length (in)",
+      "description": "Largest flue/crown length this product can fit over"
+    },
+    "max_fitting_width": {
+      "type": "number",
+      "title": "Maximum Fitting Width (in)",
+      "description": "Largest flue/crown width this product can fit over"
+    },
+    "compatible_shape": {
+      "type": "string",
+      "enum": [
+        "round",
+        "square",
+        "rectangular",
+        "oval",
+        "any"
+      ],
+      "default": "any",
+      "title": "Compatible Flue Shape"
+    },
+    "allows_rotated_match": {
+      "type": "boolean",
+      "default": false,
+      "title": "Allows Rotated Match",
+      "description": "When true, the product can be rotated 90 degrees to fit a flue whose length/width are swapped. Irrelevant for round products \u2014 rotation has no effect on a circle."
+    },
+    "min_tile_projection": {
+      "type": "number",
+      "title": "Minimum Tile Projection (in)",
+      "description": "Minimum flue tile height above crown required for bolt-on caps. When applicable."
+    },
+    "max_tile_projection": {
+      "type": "number",
+      "title": "Maximum Tile Projection (in)",
+      "description": "Maximum flue tile height this product can accommodate"
+    },
+    "flues_supported": {
+      "type": "number",
+      "default": 1,
+      "title": "Number of Flues Supported",
+      "description": "For crown-mounted caps: how many flues this cap can cover"
+    },
+    "manufacturer_clearance": {
+      "type": "number",
+      "default": 0,
+      "title": "Manufacturer Required Clearance (in)",
+      "description": "Edge clearance required between crown edge and cap edge for crown-mounted caps"
+    },
+    "priority": {
+      "type": "number",
+      "default": 0,
+      "title": "Priority",
+      "description": "Higher = preferred first in resolution results"
+    },
+    "is_preferred": {
+      "type": "boolean",
+      "default": false,
+      "title": "Preferred"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "variant_source": {
+      "type": "string",
+      "enum": [
+        "",
+        "copied_from_stainless"
+      ],
+      "default": "",
+      "title": "Variant Source"
+    },
+    "source_matrix_record_id": {
+      "type": "string",
+      "title": "Source Matrix Record ID"
+    },
+    "variant_status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "draft",
+        "ready_to_activate"
+      ],
+      "default": "active",
+      "title": "Variant Status"
+    },
+    "stainless_source_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Stainless Source Price ($)"
+    },
+    "copper_price_multiplier": {
+      "type": "number",
+      "default": 3,
+      "title": "Copper Price Multiplier"
+    },
+    "suggested_copper_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Suggested Copper Price ($)"
+    },
+    "final_approved_copper_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Final Approved Copper Price ($)"
+    },
+    "copper_price_approved_by": {
+      "type": "string",
+      "title": "Copper Price Approved By"
+    },
+    "copper_price_approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Copper Price Approved At"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    }
+  },
+  "required": [
+    "matrix_name",
+    "mount_type"
+  ]
+}

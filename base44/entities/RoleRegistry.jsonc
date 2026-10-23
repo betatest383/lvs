@@ -1,0 +1,228 @@
+{
+  "name": "RoleRegistry",
+  "type": "object",
+  "properties": {
+    "role_id": {
+      "type": "string",
+      "title": "Role ID",
+      "description": "e.g. ROLE-001"
+    },
+    "role_name": {
+      "type": "string",
+      "title": "Role Name"
+    },
+    "role_key": {
+      "type": "string",
+      "title": "Role Key",
+      "description": "Normalized key matching ROLE_CONFIG keys (e.g. director_of_operations, lead_technician)"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "reports_to": {
+      "type": "string",
+      "title": "Reports To",
+      "description": "Role ID or name of the supervisor role"
+    },
+    "supervises": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Supervises",
+      "description": "Role IDs or names of roles this position manages"
+    },
+    "role_description": {
+      "type": "string",
+      "title": "Role Description"
+    },
+    "dashboard": {
+      "type": "string",
+      "title": "Dashboard",
+      "description": "Primary dashboard module for this role"
+    },
+    "home_screen": {
+      "type": "string",
+      "title": "Home Screen",
+      "description": "Default landing page / portal for this role"
+    },
+    "default_portal": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "tech",
+        "warehouse",
+        "customer",
+        "fleet",
+        "operations"
+      ],
+      "default": "admin",
+      "title": "Default Portal"
+    },
+    "portal_type": {
+      "type": "string",
+      "title": "Portal Type",
+      "description": "Display label for the portal type (e.g. Operations Leadership, Field Operations)"
+    },
+    "portal_access_mode": {
+      "type": "string",
+      "enum": [
+        "inherited",
+        "explicit_allowlist"
+      ],
+      "default": "inherited",
+      "title": "Portal Access Mode",
+      "description": "inherited = all routes visible unless explicitly disabled. explicit_allowlist = deny by default, only explicitly published routes accessible."
+    },
+    "trainual_document": {
+      "type": "string",
+      "title": "Trainual Document URL"
+    },
+    "business_processes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Business Processes"
+    },
+    "required_sops": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required SOPs"
+    },
+    "required_workflows": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Workflows"
+    },
+    "required_forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Forms"
+    },
+    "required_policies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Policies"
+    },
+    "required_kpis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required KPIs"
+    },
+    "required_audits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Audits"
+    },
+    "required_equipment_package": {
+      "type": "string",
+      "title": "Required Equipment Package"
+    },
+    "required_certifications": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Certifications"
+    },
+    "required_software": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Software"
+    },
+    "permission_level": {
+      "type": "string",
+      "enum": [
+        "view_only",
+        "standard",
+        "elevated",
+        "manager",
+        "executive",
+        "admin"
+      ],
+      "default": "standard",
+      "title": "Permission Level"
+    },
+    "manager_approval_authority": {
+      "type": "boolean",
+      "default": false,
+      "title": "Manager Approval Authority"
+    },
+    "can_override_readiness": {
+      "type": "boolean",
+      "default": false,
+      "title": "Can Override Readiness"
+    },
+    "can_approve_inventory": {
+      "type": "boolean",
+      "default": false,
+      "title": "Can Approve Inventory"
+    },
+    "can_approve_equipment_assignments": {
+      "type": "boolean",
+      "default": false,
+      "title": "Can Approve Equipment Assignments"
+    },
+    "can_manage_employees": {
+      "type": "boolean",
+      "default": false,
+      "title": "Can Manage Employees"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Draft",
+        "Planned",
+        "Retired"
+      ],
+      "default": "Active",
+      "title": "Status"
+    },
+    "career_path_from": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Promoted From (Career Path)",
+      "description": "Role IDs that typically progress into this role"
+    },
+    "career_path_to": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Promotes To (Career Path)",
+      "description": "Role IDs this position typically advances to"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "role_id",
+    "role_name"
+  ]
+}

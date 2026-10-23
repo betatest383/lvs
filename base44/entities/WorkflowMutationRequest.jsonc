@@ -1,0 +1,214 @@
+{
+  "name": "WorkflowMutationRequest",
+  "type": "object",
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "title": "Request ID",
+      "description": "e.g. WMR-<uuid>. Human-readable diagnostic identifier."
+    },
+    "idempotency_key": {
+      "type": "string",
+      "title": "Idempotency Key",
+      "description": "Unique per-operation key. Repeated requests with the same key and payload hash return the original result. Same key with different payload = controlled conflict."
+    },
+    "workflow_id": {
+      "type": "string",
+      "title": "Workflow ID",
+      "description": "The immutable AppointmentWorkflow record ID this mutation targets."
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "mutation_action": {
+      "type": "string",
+      "title": "Mutation Action",
+      "description": "Allowlisted backend mutation action. The function, not this field, enforces the valid action set."
+    },
+    "stage_key": {
+      "type": "string",
+      "title": "Stage Key"
+    },
+    "expected_workflow_revision_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Expected Workflow Revision Version",
+      "description": "The workflow_revision_version the caller observed. Must match the current persisted value for the mutation to proceed."
+    },
+    "payload_hash": {
+      "type": "string",
+      "title": "Payload Hash",
+      "description": "SHA-256 hash of the normalized request payload (excluding idempotency_key). Used to detect same-key-different-payload conflicts."
+    },
+    "requested_by": {
+      "type": "string",
+      "title": "Requested By"
+    },
+    "requested_by_name": {
+      "type": "string",
+      "title": "Requested By Name"
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Requested At"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "completed",
+        "failed",
+        "retryable",
+        "stale_version",
+        "validation_failed",
+        "conflict",
+        "denied",
+        "superseded"
+      ],
+      "default": "pending",
+      "title": "Status",
+      "description": "pending = queued; processing = lease acquired; retryable = transient contention safe to retry with the same key; stale_version = observed version is obsolete; validation_failed = permanent controlled validation outcome; completed = mutation and post-commit work finished; failed = other non-retryable failure."
+    },
+    "processing_lease_owner": {
+      "type": "string",
+      "title": "Processing Lease Owner",
+      "description": "Identifier of the function instance that acquired the processing lease."
+    },
+    "processing_lease_id": {
+      "type": "string",
+      "title": "Processing Lease ID",
+      "description": "Unique lease ID for the current processing attempt."
+    },
+    "lease_expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Lease Expires At",
+      "description": "When the processing lease expires. Stale leases are recovered by the next request."
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "resulting_workflow_revision_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Resulting Workflow Revision Version",
+      "description": "The new workflow_revision_version after the mutation was applied. Populated on completed status."
+    },
+    "result_json": {
+      "type": "string",
+      "title": "Result JSON",
+      "description": "JSON-stringified result returned to the caller. Repeated requests with the same idempotency key return this stored result."
+    },
+    "error_code": {
+      "type": "string",
+      "title": "Error Code",
+      "description": "Machine-readable error code for failed/conflict/denied requests."
+    },
+    "error_message": {
+      "type": "string",
+      "title": "Error Message",
+      "description": "Human-readable error message."
+    },
+    "created_revision_id": {
+      "type": "string",
+      "title": "Created Revision ID",
+      "description": "ID of the WorkflowRevision audit record created by this mutation, if any."
+    },
+    "commit_confirmed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Commit Confirmed",
+      "description": "True only after the request-specific AppointmentWorkflow commit marker has been verified."
+    },
+    "committed_workflow_revision_version": {
+      "type": "number",
+      "title": "Committed Workflow Revision Version",
+      "description": "Version written by this request's fenced workflow commit."
+    },
+    "commit_marker_verified_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Commit Marker Verified At"
+    },
+    "post_commit_status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "completed",
+        "blocked",
+        "failed"
+      ],
+      "default": "not_started",
+      "title": "Post-Commit Status"
+    },
+    "post_commit_steps_json": {
+      "type": "string",
+      "title": "Post-Commit Step Status"
+    },
+    "final_result_json": {
+      "type": "string",
+      "title": "Final Result"
+    },
+    "outcome_class": {
+      "type": "string",
+      "title": "Outcome Class",
+      "description": "Distinguishes transient contention, stale version, payload conflict, committed recovery, partial completion, and permanent validation."
+    },
+    "revision_id": {
+      "type": "string",
+      "title": "Revision ID",
+      "description": "For approve/deny actions: the WorkflowRevision ID being approved or denied."
+    }
+  },
+  "required": [
+    "idempotency_key",
+    "workflow_id",
+    "job_id",
+    "mutation_action",
+    "expected_workflow_revision_version",
+    "payload_hash",
+    "requested_by",
+    "requested_at",
+    "status"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "operations_manager"
+          }
+        }
+      ]
+    },
+    "create": false,
+    "update": false,
+    "delete": false
+  }
+}

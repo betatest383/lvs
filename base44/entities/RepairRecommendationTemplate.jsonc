@@ -1,0 +1,331 @@
+{
+  "name": "RepairRecommendationTemplate",
+  "type": "object",
+  "properties": {
+    "template_name": {
+      "type": "string",
+      "title": "Template Name",
+      "description": "e.g. Cracked Crown \u2192 Crown Seal / Replace"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "template_status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "testing",
+        "active",
+        "archived",
+        "inactive",
+        "needs_review"
+      ],
+      "default": "draft",
+      "title": "Template Status",
+      "description": "Draft \u2192 Testing \u2192 Active \u2192 Archived. Priority is managed in the Rules Engine, not here."
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "medium",
+      "title": "Priority (Rules Engine)",
+      "description": "Managed by the Rules Engine. Retained on template for backward compatibility but not edited here."
+    },
+    "inspection_category": {
+      "type": "string",
+      "title": "Inspection Category",
+      "description": "Controlled value from Master Classification Registry (inspection_category type)"
+    },
+    "inspection_section": {
+      "type": "string",
+      "title": "Inspection Section",
+      "description": "Controlled value from Master Classification Registry (inspection_section type). Auto-filtered by selected inspection form."
+    },
+    "inspection_form_type": {
+      "type": "string",
+      "title": "Inspection Form (Legacy)",
+      "description": "Legacy single-value field. Prefer inspection_forms array for multi-select."
+    },
+    "inspection_forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Inspection Forms",
+      "description": "Multi-select from Master Classification Registry (inspection_form type). A template may apply to multiple forms."
+    },
+    "deficiency_type": {
+      "type": "string",
+      "title": "Deficiency Type",
+      "description": "Controlled value from Master Classification Registry (deficiency_type type). Must match InspectionFinding.deficiency_type."
+    },
+    "finding_keywords": {
+      "type": "string",
+      "title": "Finding Keywords",
+      "description": "Comma-separated keywords matched against finding title/location/description"
+    },
+    "failed_question_keywords": {
+      "type": "string",
+      "title": "Failed Question Keywords",
+      "description": "Comma-separated keywords matched against the failed inspection question text"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "",
+        "info",
+        "minor",
+        "moderate",
+        "major",
+        "critical"
+      ],
+      "default": "",
+      "title": "Severity Filter",
+      "description": "Empty = all severities. When set, only matches findings with this severity."
+    },
+    "appliance_type": {
+      "type": "string",
+      "title": "Appliance / System Type",
+      "description": "Controlled value from Master Classification Registry (appliance_type type)"
+    },
+    "chimney_system_type": {
+      "type": "string",
+      "title": "Chimney System Type",
+      "description": "Controlled value from Master Classification Registry (chimney_system_type type)"
+    },
+    "homeowner_risk": {
+      "type": "string",
+      "enum": [
+        "",
+        "low",
+        "moderate",
+        "high",
+        "immediate_safety"
+      ],
+      "default": "",
+      "title": "Homeowner Risk",
+      "description": "Risk level communicated to the homeowner. low, moderate, high, immediate_safety."
+    },
+    "disposition_default": {
+      "type": "string",
+      "title": "Default Disposition",
+      "description": "Default disposition assigned during recommendation review"
+    },
+    "customer_facing_recommendation": {
+      "type": "string",
+      "title": "Customer-Facing Recommendation",
+      "description": "Pre-written recommendation text shown to the customer"
+    },
+    "customer_summary": {
+      "type": "string",
+      "title": "Customer Summary",
+      "description": "Customer-facing explanation prefilled into Recommendation Review"
+    },
+    "recommended_solution": {
+      "type": "string",
+      "title": "Recommended Solution",
+      "description": "Description of the recommended repair or solution"
+    },
+    "internal_notes": {
+      "type": "string",
+      "title": "Internal Notes"
+    },
+    "safety_notes": {
+      "type": "string",
+      "title": "Safety Notes"
+    },
+    "code_reference_notes": {
+      "type": "string",
+      "title": "Code Reference Notes",
+      "description": "e.g. NFPA 211 \u00a713.1, IRC R1003"
+    },
+    "ai_sales_talking_points": {
+      "type": "string",
+      "title": "AI Sales Talking Points",
+      "description": "Pre-written sales talking points for this repair. Used by AI coaching and presentation tools."
+    },
+    "default_estimate_required": {
+      "type": "boolean",
+      "default": true,
+      "title": "Default Estimate Required"
+    },
+    "service_catalog_id": {
+      "type": "string",
+      "title": "Linked ServiceCatalog ID",
+      "description": "When set, service fields auto-populate from the linked ServiceCatalog item"
+    },
+    "service_name": {
+      "type": "string",
+      "title": "Service Name"
+    },
+    "service_code": {
+      "type": "string",
+      "title": "Service Code"
+    },
+    "service_category": {
+      "type": "string",
+      "title": "Service Category"
+    },
+    "service_description": {
+      "type": "string",
+      "title": "Service Description"
+    },
+    "customer_description": {
+      "type": "string",
+      "title": "Customer Description"
+    },
+    "material_resolution_mode": {
+      "type": "string",
+      "enum": [
+        "fixed_list",
+        "measurement_lookup"
+      ],
+      "default": "fixed_list",
+      "title": "Material Resolution Mode",
+      "description": "fixed_list = uses default_materials JSON field; measurement_lookup = uses a measurement-driven engine (e.g. Cap Sizing Matrix) instead of a fixed material list. Templates with measurement_lookup are excluded from Missing Material Lists warnings."
+    },
+    "material_calculation_type": {
+      "type": "string",
+      "enum": [
+        "none",
+        "crown_concrete_replacement"
+      ],
+      "default": "none",
+      "title": "Material Calculation Type",
+      "description": "When set, the system uses a measurement-driven calculation engine instead of fixed material quantities. crown_concrete_replacement = Crown Calculation engine."
+    },
+    "pricing_mode": {
+      "type": "string",
+      "enum": [
+        "service_catalog_price",
+        "template_override_price",
+        "manual_review_required"
+      ],
+      "default": "service_catalog_price",
+      "title": "Pricing Mode"
+    },
+    "estimate_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimate Price ($)"
+    },
+    "default_selling_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Default Selling Price ($)"
+    },
+    "estimated_time_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimated Time (Hours)"
+    },
+    "estimated_time_minutes": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimated Time (Minutes)"
+    },
+    "service_commission_type": {
+      "type": "string",
+      "enum": [
+        "percentage",
+        "flat_dollar",
+        "none"
+      ],
+      "default": "none",
+      "title": "Service Commission Type"
+    },
+    "service_commission_value": {
+      "type": "number",
+      "default": 0,
+      "title": "Service Commission Value"
+    },
+    "default_materials": {
+      "type": "string",
+      "title": "Default Materials (JSON)",
+      "description": "JSON array of required chargeable materials: {material_id, material_name, quantity, unit, unit_price, chargeable_to_customer, customer_visible, preferred_vendor, waste_pct, commission_type, commission_value}"
+    },
+    "optional_materials": {
+      "type": "string",
+      "title": "Optional Materials (JSON)",
+      "description": "JSON array of optional materials available for the technician to add during estimate review"
+    },
+    "internal_materials": {
+      "type": "string",
+      "title": "Internal Materials (JSON)",
+      "description": "JSON array of non-chargeable materials tracked internally only (chargeable_to_customer=false)"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    },
+    "warranty_notes": {
+      "type": "string",
+      "title": "Warranty Notes",
+      "description": "Warranty information for this repair type. Used by AI coaching and customer presentation."
+    },
+    "ai_inspection_best_practices": {
+      "type": "string",
+      "title": "Inspection Best Practices",
+      "description": "AI Knowledge Object \u2014 best practices for inspecting this deficiency."
+    },
+    "ai_technical_notes": {
+      "type": "string",
+      "title": "Technical Notes",
+      "description": "AI Knowledge Object \u2014 technical repair notes and methodology."
+    },
+    "ai_objection_handling": {
+      "type": "string",
+      "title": "Objection Handling",
+      "description": "AI Knowledge Object \u2014 common customer objections and recommended responses."
+    },
+    "ai_upsell_opportunities": {
+      "type": "string",
+      "title": "Upsell Opportunities",
+      "description": "AI Knowledge Object \u2014 related services that can be upsold with this repair."
+    },
+    "ai_cross_sell_opportunities": {
+      "type": "string",
+      "title": "Cross-Sell Opportunities",
+      "description": "AI Knowledge Object \u2014 complementary services for cross-selling."
+    },
+    "training_video_urls": {
+      "type": "string",
+      "title": "Training Videos (JSON)",
+      "description": "AI Knowledge Object \u2014 JSON array of {title, url} for training videos."
+    },
+    "reference_documents": {
+      "type": "string",
+      "title": "Reference Documents (JSON)",
+      "description": "AI Knowledge Object \u2014 JSON array of {title, url} for reference documents."
+    },
+    "code_references": {
+      "type": "string",
+      "title": "Code References (JSON)",
+      "description": "AI Knowledge Object \u2014 JSON array of {code, section, description} for code references."
+    },
+    "manufacturer_references": {
+      "type": "string",
+      "title": "Manufacturer References (JSON)",
+      "description": "AI Knowledge Object \u2014 JSON array of {manufacturer, product, url} for manufacturer references."
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    }
+  },
+  "required": [
+    "template_name"
+  ]
+}

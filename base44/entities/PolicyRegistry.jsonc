@@ -1,0 +1,158 @@
+{
+  "name": "PolicyRegistry",
+  "type": "object",
+  "properties": {
+    "policy_id": {
+      "type": "string",
+      "title": "Policy ID",
+      "description": "e.g. WP-001"
+    },
+    "policy_name": {
+      "type": "string",
+      "title": "Policy Name"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "policy_type": {
+      "type": "string",
+      "enum": [
+        "Company",
+        "HR",
+        "Safety",
+        "Warehouse",
+        "Field Operations",
+        "Customer Service",
+        "Sales",
+        "Accounting",
+        "Equipment",
+        "Vehicle",
+        "Technology"
+      ],
+      "title": "Policy Type"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "policy_owner": {
+      "type": "string",
+      "title": "Policy Owner"
+    },
+    "effective_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Effective Date"
+    },
+    "review_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Review Date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Active",
+        "Under Review",
+        "Retired"
+      ],
+      "default": "Draft",
+      "title": "Status"
+    },
+    "version": {
+      "type": "string",
+      "title": "Version"
+    },
+    "trainual_link": {
+      "type": "string",
+      "title": "Trainual Link"
+    },
+    "related_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Roles"
+    },
+    "related_business_processes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Business Processes"
+    },
+    "related_sops": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related SOPs"
+    },
+    "related_workflows": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Workflows"
+    },
+    "related_forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Forms"
+    },
+    "related_kpis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related KPIs"
+    },
+    "related_audits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Audits"
+    },
+    "enforcement_level": {
+      "type": "string",
+      "enum": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "default": "Medium",
+      "title": "Enforcement Level"
+    },
+    "requires_acknowledgment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Employee Acknowledgment"
+    },
+    "acknowledgment_frequency": {
+      "type": "string",
+      "enum": [
+        "Once",
+        "Annual",
+        "Semi-Annual",
+        "Quarterly",
+        "On Hire",
+        "On Update"
+      ],
+      "title": "Acknowledgment Frequency"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "policy_id",
+    "policy_name"
+  ]
+}

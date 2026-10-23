@@ -1,0 +1,62 @@
+{
+  "name": "PricingModifierCategory",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Category Name"
+    },
+    "code": {
+      "type": "string",
+      "title": "Category Code",
+      "description": "Short identifier e.g. ROOF_COND, BUILDING_HEIGHT"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "icon": {
+      "type": "string",
+      "title": "Icon",
+      "description": "Lucide icon name for display"
+    },
+    "display_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Display Order"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "archived"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "allow_multiple_modifiers": {
+      "type": "boolean",
+      "default": true,
+      "title": "Allow Multiple Modifiers",
+      "description": "When true, multiple modifiers from this category can apply simultaneously"
+    },
+    "mutually_exclusive": {
+      "type": "boolean",
+      "default": false,
+      "title": "Mutually Exclusive",
+      "description": "When true, only one modifier from this category can apply at a time"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

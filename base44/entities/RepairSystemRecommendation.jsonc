@@ -1,0 +1,200 @@
+{
+  "name": "RepairSystemRecommendation",
+  "type": "object",
+  "properties": {
+    "recommendation_id": {
+      "type": "string",
+      "title": "Recommendation ID",
+      "description": "e.g. RSR-000001"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "inspection_id": {
+      "type": "string",
+      "title": "Inspection ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "repair_system_type": {
+      "type": "string",
+      "enum": [
+        "crown",
+        "masonry",
+        "liner",
+        "smoke_chamber",
+        "cap_chase",
+        "other"
+      ],
+      "title": "Repair System Type"
+    },
+    "recommendation_title": {
+      "type": "string",
+      "title": "Recommendation Title"
+    },
+    "recommendation_summary": {
+      "type": "string",
+      "title": "Recommendation Summary"
+    },
+    "related_findings": {
+      "type": "string",
+      "title": "Related Findings (JSON)",
+      "description": "JSON array of InspectionFinding IDs that support this repair system"
+    },
+    "related_findings_detail": {
+      "type": "string",
+      "title": "Related Findings Detail (JSON)",
+      "description": "JSON array of {id, deficiency_type, severity, location, explanation} for display"
+    },
+    "related_photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Photos"
+    },
+    "related_measurements": {
+      "type": "string",
+      "title": "Related Measurements (JSON)",
+      "description": "JSON object of aggregated measurements from supporting findings"
+    },
+    "code_nfpa_references": {
+      "type": "string",
+      "title": "Code / NFPA References"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "minor",
+        "moderate",
+        "major",
+        "critical"
+      ],
+      "default": "moderate",
+      "title": "Severity"
+    },
+    "safety_concern": {
+      "type": "boolean",
+      "default": false,
+      "title": "Safety Concern"
+    },
+    "confidence_score": {
+      "type": "number",
+      "default": 0,
+      "title": "Confidence Score (0-100)"
+    },
+    "confidence_reason": {
+      "type": "string",
+      "title": "Confidence Reason"
+    },
+    "customer_facing_explanation": {
+      "type": "string",
+      "title": "Customer-Facing Explanation"
+    },
+    "internal_technician_notes": {
+      "type": "string",
+      "title": "Internal Technician Notes"
+    },
+    "suggested_pricebook_items": {
+      "type": "string",
+      "title": "Suggested Pricebook Items (JSON)",
+      "description": "JSON array of all pricebook items suggested by mappings for this repair system"
+    },
+    "good_better_best_options": {
+      "type": "string",
+      "title": "Good / Better / Best Options (JSON)",
+      "description": "JSON array of {tier, label, pricebook_item_name, pricebook_item_id, unit_price, quantity, unit, line_total, customer_description, material_calculation, selected}"
+    },
+    "selected_option_tier": {
+      "type": "string",
+      "enum": [
+        "good",
+        "better",
+        "best",
+        "standalone",
+        "none"
+      ],
+      "default": "none",
+      "title": "Selected Option Tier",
+      "description": "Which option the technician selected for the estimate"
+    },
+    "material_calculation_inputs": {
+      "type": "string",
+      "title": "Material Calculation Inputs (JSON)"
+    },
+    "estimate_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "removed",
+        "customer_declined",
+        "estimate_created"
+      ],
+      "default": "pending",
+      "title": "Estimate Status"
+    },
+    "estimate_id": {
+      "type": "string",
+      "title": "Estimate ID",
+      "description": "Linked Estimate record once estimate is created"
+    },
+    "requires_review": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Technician Review",
+      "description": "True when confidence is below 50%"
+    },
+    "cap_sizing_snapshot": {
+      "type": "string",
+      "title": "Cap Sizing Snapshot (JSON)",
+      "description": "Immutable snapshot of the technician's confirmed cap selection. Contains: finding/recommendation IDs, repair-template ID, mounting method, cap style, original inspection measurements, matched matrix-product ID, base-cap material ID/SKU/description/price, rotated-match status, finish type, finish color ID/name/code, finish material ID, finish service ID, base finish charge, color-premium charge, total finish upcharge, flue cut-down prerequisite data, selection timestamp, and technician ID."
+    },
+    "cap_configuration_status": {
+      "type": "string",
+      "enum": [
+        "unresolved",
+        "resolved",
+        "confirmed",
+        "outdated"
+      ],
+      "default": "unresolved",
+      "title": "Cap Configuration Status",
+      "description": "unresolved = no cap selected yet; resolved = cap selected but not confirmed; confirmed = technician confirmed the selection; outdated = measurements, matrix product, finish pricing, or color changed after confirmation \u2014 reconfirmation required."
+    },
+    "cap_configuration_confirmed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Cap Configuration Confirmed At"
+    },
+    "cap_configuration_confirmed_by": {
+      "type": "string",
+      "title": "Cap Configuration Confirmed By",
+      "description": "Technician email or ID who confirmed the cap configuration"
+    },
+    "cap_configuration_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Cap Configuration Version",
+      "description": "Incremented each time the technician re-confirms after an outdated state."
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "job_id",
+    "repair_system_type",
+    "recommendation_title",
+    "estimate_status"
+  ]
+}

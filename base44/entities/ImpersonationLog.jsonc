@@ -1,0 +1,152 @@
+{
+  "name": "ImpersonationLog",
+  "type": "object",
+  "properties": {
+    "log_id": {
+      "type": "string",
+      "title": "Log ID",
+      "description": "e.g. IMP-000001"
+    },
+    "admin_user_id": {
+      "type": "string",
+      "title": "Admin User ID"
+    },
+    "admin_name": {
+      "type": "string",
+      "title": "Admin Name"
+    },
+    "admin_email": {
+      "type": "string",
+      "title": "Admin Email"
+    },
+    "impersonated_employee_id": {
+      "type": "string",
+      "title": "Impersonated Employee ID"
+    },
+    "impersonated_employee_name": {
+      "type": "string",
+      "title": "Impersonated Employee Name"
+    },
+    "impersonated_employee_email": {
+      "type": "string",
+      "title": "Impersonated Employee Email"
+    },
+    "impersonated_role": {
+      "type": "string",
+      "title": "Impersonated Role"
+    },
+    "impersonated_department": {
+      "type": "string",
+      "title": "Impersonated Department"
+    },
+    "start_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Start Time"
+    },
+    "end_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "End Time"
+    },
+    "duration_minutes": {
+      "type": "number",
+      "title": "Duration (minutes)"
+    },
+    "reason": {
+      "type": "string",
+      "title": "Reason",
+      "description": "Required reason for impersonation"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "ended",
+        "terminated"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "ip_address": {
+      "type": "string",
+      "title": "IP Address"
+    },
+    "session_id": {
+      "type": "string",
+      "title": "Browser/Session ID"
+    },
+    "actions_performed": {
+      "type": "string",
+      "title": "Actions Performed (JSON)",
+      "description": "JSON array of {action, timestamp, module}"
+    },
+    "write_actions_allowed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Write Actions Allowed"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "log_id",
+    "admin_user_id",
+    "admin_name",
+    "impersonated_employee_id",
+    "impersonated_employee_name",
+    "start_time",
+    "reason"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "owner"
+      }
+    }
+  }
+}

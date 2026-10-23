@@ -1,0 +1,96 @@
+{
+  "name": "BusinessProcess",
+  "type": "object",
+  "properties": {
+    "process_id": {
+      "type": "string",
+      "title": "Process ID",
+      "description": "e.g. BP-001"
+    },
+    "title": {
+      "type": "string",
+      "title": "Business Process"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "owner": {
+      "type": "string",
+      "title": "Owner"
+    },
+    "frequency": {
+      "type": "string",
+      "title": "Frequency",
+      "description": "How often this process runs (e.g. Daily, Weekly, As-needed)"
+    },
+    "trigger": {
+      "type": "string",
+      "title": "Trigger",
+      "description": "What starts this process"
+    },
+    "participants": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Participants",
+      "description": "Roles involved in this process"
+    },
+    "related_sop_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related SOP IDs"
+    },
+    "related_workflow_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Workflow IDs"
+    },
+    "related_form_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Form IDs"
+    },
+    "related_kpi_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related KPI IDs"
+    },
+    "base44_module": {
+      "type": "string",
+      "title": "Base44 Module"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "Active",
+        "Under Review",
+        "Retired"
+      ],
+      "default": "Planned",
+      "title": "Status"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "process_id",
+    "title"
+  ]
+}

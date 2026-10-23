@@ -1,0 +1,150 @@
+{
+  "name": "WorkCheckpoint",
+  "type": "object",
+  "properties": {
+    "checkpoint_number": {
+      "type": "string",
+      "title": "Checkpoint Number",
+      "description": "Server-generated: CP-000001"
+    },
+    "work_session_id": {
+      "type": "string",
+      "title": "Work Session ID",
+      "description": "Links to WorkSession record"
+    },
+    "task_id": {
+      "type": "string",
+      "title": "Task ID",
+      "description": "EnterpriseTask ID"
+    },
+    "task_number": {
+      "type": "string",
+      "title": "Task Number"
+    },
+    "workflow_session_id": {
+      "type": "string",
+      "title": "Workflow Session ID"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee Registry ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "route": {
+      "type": "string",
+      "title": "Frontend Route",
+      "description": "The exact frontend route to return the user to"
+    },
+    "workflow_step": {
+      "type": "number",
+      "title": "Workflow Step",
+      "description": "Step index within the workflow (0-based)"
+    },
+    "workflow_step_name": {
+      "type": "string",
+      "title": "Workflow Step Name"
+    },
+    "record_id": {
+      "type": "string",
+      "title": "Record ID",
+      "description": "The primary record being worked on (e.g. InventoryCountSession ID)"
+    },
+    "warehouse_location_id": {
+      "type": "string",
+      "title": "Warehouse Location ID"
+    },
+    "bin_location_id": {
+      "type": "string",
+      "title": "Bin Location ID"
+    },
+    "inventory_item_id": {
+      "type": "string",
+      "title": "Inventory Item ID"
+    },
+    "form_state_json": {
+      "type": "string",
+      "title": "Form State (JSON)",
+      "description": "JSON object preserving form input state for resume. Never store passwords, tokens, or sensitive browser data."
+    },
+    "completed_item_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Completed Item IDs",
+      "description": "IDs of items already completed in this workflow, to avoid repeating work"
+    },
+    "remaining_item_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Remaining Item IDs"
+    },
+    "uploaded_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Uploaded Evidence IDs"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes",
+      "description": "Context notes for resuming the work"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "title": "Idempotency Key",
+      "description": "Client-supplied key to prevent duplicate checkpoints. If provided, repeated save with the same key returns the existing checkpoint without creating a new one."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "resume_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "resumed",
+        "superseded",
+        "expired"
+      ],
+      "default": "pending",
+      "title": "Resume Status",
+      "description": "pending = available for resume; resumed = successfully resumed; superseded = replaced by newer checkpoint; expired = no longer applicable"
+    },
+    "resumed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Resumed At"
+    },
+    "resumed_by": {
+      "type": "string",
+      "title": "Resumed By"
+    },
+    "interrupting_task_id": {
+      "type": "string",
+      "title": "Interrupting Task ID",
+      "description": "Task that caused the checkpoint to be created"
+    },
+    "interrupting_task_number": {
+      "type": "string",
+      "title": "Interrupting Task Number"
+    }
+  },
+  "required": [
+    "checkpoint_number",
+    "work_session_id",
+    "task_id",
+    "employee_id"
+  ]
+}

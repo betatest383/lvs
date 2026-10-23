@@ -1,0 +1,185 @@
+{
+  "name": "PricingPolicy",
+  "type": "object",
+  "properties": {
+    "policy_id": {
+      "type": "string",
+      "title": "Policy ID",
+      "description": "Authoritative immutable identity. Generated with a random unique suffix (e.g. PP-A1B2C3). The platform record id is the secondary identity."
+    },
+    "version_number": {
+      "type": "number",
+      "default": 1,
+      "title": "Version Number",
+      "description": "NON-AUTHORITATIVE display value (best-effort max+1). Base44 does not provide atomic sequence allocation, so concurrent creates may produce duplicate display numbers; policy_id is the unique identity."
+    },
+    "policy_name": {
+      "type": "string",
+      "title": "Policy Name",
+      "description": "e.g. Standard Pricing Policy, Winter Pricing Policy, Growth Pricing Policy"
+    },
+    "pricing_target_model": {
+      "type": "string",
+      "enum": [
+        "daily",
+        "hourly_capped"
+      ],
+      "default": "daily",
+      "title": "Pricing Target Model",
+      "description": "daily = legacy flat gross-profit-per-production-day target. hourly_capped = gross-profit target per scheduled crew hour, capped at maximum_target_hours_per_day (8) per production day. Legacy policies without this field are treated as 'daily'."
+    },
+    "gross_profit_target_per_crew_hour": {
+      "type": "number",
+      "title": "Gross Profit Target per Crew Hour ($)",
+      "description": "Company required gross-profit target per scheduled crew hour. Only used when pricing_target_model = 'hourly_capped'. required_gross_profit = total_target_hours \u00d7 this value, where each day's target hours = min(actual_daily_crew_hours, maximum_target_hours_per_day)."
+    },
+    "maximum_target_hours_per_day": {
+      "type": "number",
+      "default": 8,
+      "title": "Maximum Target Hours per Production Day",
+      "description": "Fixed company policy. The daily cap on target hours. Always 8 \u2014 never editable, never overridable. Hours above eight in one day do not increase the GP target."
+    },
+    "gross_profit_per_production_day": {
+      "type": "number",
+      "default": 4000,
+      "title": "Required Gross Profit per Production Day ($)",
+      "description": "Currency. Legacy 'daily' model target. For hourly_capped policies this field stores the DERIVED maximum per full day (gross_profit_target_per_crew_hour \u00d7 maximum_target_hours_per_day) for display/back-compat only; the authoritative target is gross_profit_target_per_crew_hour."
+    },
+    "minimum_gross_margin_percentage": {
+      "type": "number",
+      "default": 65,
+      "title": "Minimum Gross Margin (%)",
+      "description": "Must be greater than 0 and less than 100. Accepts decimals such as 62.5. Independently editable from the GP target."
+    },
+    "minimum_net_contribution_per_production_day": {
+      "type": "number",
+      "default": 3600,
+      "title": "Minimum Net Contribution per Production Day ($)",
+      "description": "Applied to a full production day after direct costs and overhead."
+    },
+    "minimum_net_contribution_per_crew_hour": {
+      "type": "number",
+      "default": 450,
+      "title": "Minimum Net Contribution per Crew Hour ($)",
+      "description": "Applied to scopes shorter than the partial-day threshold."
+    },
+    "partial_day_net_contribution_threshold_hours": {
+      "type": "number",
+      "default": 8,
+      "title": "Partial-Day Net Contribution Threshold (Hours)",
+      "description": "Scopes below this number of production hours use the hourly net contribution floor."
+    },
+    "effective_date_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Effective Date and Time",
+      "description": "When this policy becomes active. Interpreted in the America/New_York business timezone. A scheduled policy is promoted to active automatically by the promote_due_policies automation once this time arrives."
+    },
+    "effective_immediately": {
+      "type": "boolean",
+      "default": false,
+      "title": "Effective Immediately"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "scheduled",
+        "active",
+        "superseded",
+        "canceled"
+      ],
+      "default": "draft",
+      "title": "Status",
+      "description": "draft = not yet scheduled; scheduled = future effective date (auto-activated when due); active = currently in force; superseded = replaced by a newer active policy; canceled = withdrawn before activation."
+    },
+    "change_reason": {
+      "type": "string",
+      "title": "Change Reason",
+      "description": "Required written reason for every policy change."
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+    },
+    "activated_by": {
+      "type": "string",
+      "title": "Activated By",
+      "description": "Email of the activating admin, or 'system:scheduled-automation' for automatic scheduled activation."
+    },
+    "activated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activated At"
+    },
+    "superseded_policy_id": {
+      "type": "string",
+      "title": "Superseded Policy ID",
+      "description": "The record id of the previously active policy this one replaced."
+    },
+    "source_policy_id": {
+      "type": "string",
+      "title": "Source Policy ID",
+      "description": "When created via 'Create New Version From This Policy', the policy_id this version was derived from."
+    }
+  },
+  "required": [
+    "policy_name",
+    "minimum_gross_margin_percentage",
+    "change_reason"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "__policy_history_immutable__"
+      }
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "name": "WarehouseSetupEvidence",
+  "type": "object",
+  "properties": {
+    "evidence_number": {
+      "type": "string",
+      "title": "Evidence Number",
+      "description": "Server-generated: EVD-000001"
+    },
+    "session_id": {
+      "type": "string",
+      "title": "Session ID",
+      "description": "Links to InventoryCountSession record"
+    },
+    "file_url": {
+      "type": "string",
+      "title": "File URL",
+      "description": "Base44 file URL returned by UploadFile"
+    },
+    "photo_type": {
+      "type": "string",
+      "enum": [
+        "warehouse_overview",
+        "bin_label",
+        "stocked_shelf",
+        "empty_bin",
+        "damaged_material",
+        "discrepancy_evidence",
+        "count_verification",
+        "other"
+      ],
+      "default": "other",
+      "title": "Photo Type"
+    },
+    "warehouse_location_id": {
+      "type": "string",
+      "title": "Warehouse Location ID",
+      "description": "Server-verified from session, not submitted by client"
+    },
+    "warehouse_location_name": {
+      "type": "string",
+      "title": "Warehouse Location Name"
+    },
+    "bin_location_id": {
+      "type": "string",
+      "title": "Bin Location ID",
+      "description": "Links to BinLocation record. Server-loaded and verified against session warehouse."
+    },
+    "bin_code": {
+      "type": "string",
+      "title": "Bin Code",
+      "description": "Server-loaded from BinLocation record, not submitted by client"
+    },
+    "item_id": {
+      "type": "string",
+      "title": "Inventory Master ID",
+      "description": "Optional. Server-verified to belong to the current session."
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Item Name"
+    },
+    "step_name": {
+      "type": "string",
+      "title": "Wizard Step Name"
+    },
+    "caption": {
+      "type": "string",
+      "title": "Caption"
+    },
+    "uploaded_by_user_id": {
+      "type": "string",
+      "title": "Uploaded By (User ID)",
+      "description": "Authenticated Base44 user ID"
+    },
+    "uploaded_by_employee_id": {
+      "type": "string",
+      "title": "Uploaded By (Employee Registry ID)",
+      "description": "EmployeeRegistry ID resolved from authenticated user"
+    },
+    "uploaded_by_name": {
+      "type": "string",
+      "title": "Uploaded By (Full Name)",
+      "description": "Full employee name from EmployeeRegistry"
+    },
+    "uploaded_by_email": {
+      "type": "string",
+      "title": "Uploaded By (Email)"
+    },
+    "uploaded_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Uploaded At"
+    },
+    "post_submission": {
+      "type": "boolean",
+      "default": false,
+      "title": "Post Submission",
+      "description": "True when evidence was uploaded after session submission (awaiting_review status)"
+    },
+    "session_status_at_upload": {
+      "type": "string",
+      "title": "Session Status at Upload"
+    },
+    "cross_warehouse_rejected": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cross Warehouse Rejected",
+      "description": "True when an evidence attempt was rejected because the bin belongs to a different warehouse than the session."
+    },
+    "rejection_reason": {
+      "type": "string",
+      "title": "Rejection Reason"
+    }
+  },
+  "required": [
+    "session_id",
+    "file_url"
+  ]
+}

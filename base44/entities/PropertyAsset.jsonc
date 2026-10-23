@@ -1,0 +1,138 @@
+{
+  "name": "PropertyAsset",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "property_id": {
+      "type": "string",
+      "title": "Property ID",
+      "description": "Links to PropertyProfile or Location record"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "asset_name": {
+      "type": "string",
+      "title": "Asset Name",
+      "description": "e.g. Chimney 1 \u2014 Front Exterior, Living Room Fireplace, Basement Boiler Vent"
+    },
+    "asset_code": {
+      "type": "string",
+      "title": "Asset Code",
+      "description": "Short identifier e.g. CHIM-1-EXT, FP-LR-1"
+    },
+    "asset_type": {
+      "type": "string",
+      "enum": [
+        "chimney",
+        "fireplace",
+        "wood_stove",
+        "pellet_stove",
+        "gas_fireplace",
+        "insert",
+        "furnace_vent",
+        "boiler_vent",
+        "dryer_vent",
+        "other"
+      ],
+      "title": "Asset Type"
+    },
+    "asset_subtype": {
+      "type": "string",
+      "title": "Asset Subtype",
+      "description": "e.g. masonry, prefabricated, direct_vent, etc."
+    },
+    "asset_number": {
+      "type": "number",
+      "default": 1,
+      "title": "Asset Number",
+      "description": "Sequential number for this asset type at the property (1, 2, 3...)"
+    },
+    "location_description": {
+      "type": "string",
+      "title": "Location Description",
+      "description": "e.g. Front exterior, Rear addition, Basement, Family room"
+    },
+    "interior_or_exterior": {
+      "type": "string",
+      "enum": [
+        "interior",
+        "exterior",
+        "both"
+      ],
+      "default": "both",
+      "title": "Interior / Exterior"
+    },
+    "fuel_type": {
+      "type": "string",
+      "enum": [
+        "wood",
+        "gas",
+        "pellet",
+        "oil",
+        "electric",
+        "coal",
+        "other"
+      ],
+      "title": "Fuel Type"
+    },
+    "appliance_type": {
+      "type": "string",
+      "title": "Appliance Type",
+      "description": "Free-text or controlled value from MasterClassification (appliance_system_type)"
+    },
+    "chimney_system_type": {
+      "type": "string",
+      "title": "Chimney System Type",
+      "description": "Controlled value from MasterClassification (chimney_system_type)"
+    },
+    "inspection_form_id": {
+      "type": "string",
+      "title": "Inspection Form ID",
+      "description": "The inspection form/module used to inspect this asset"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "archived"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "display_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Display Order"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Photos"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    }
+  },
+  "required": [
+    "job_id",
+    "asset_name",
+    "asset_type"
+  ]
+}

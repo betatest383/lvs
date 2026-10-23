@@ -1,0 +1,104 @@
+{
+  "name": "IntegrationEvent",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "title": "Event ID",
+      "description": "Auto-generated: EVT-000001"
+    },
+    "source_system": {
+      "type": "string",
+      "default": "ServiceTitan",
+      "title": "Source System"
+    },
+    "event_type": {
+      "type": "string",
+      "title": "Event Type"
+    },
+    "external_id": {
+      "type": "string",
+      "title": "External ID"
+    },
+    "received_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Received At"
+    },
+    "processed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Processed At"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Received",
+        "Processing",
+        "Processed",
+        "Failed",
+        "Ignored"
+      ],
+      "default": "Received",
+      "title": "Status"
+    },
+    "raw_payload": {
+      "type": "string",
+      "title": "Raw Payload (JSON)"
+    },
+    "parsed_summary": {
+      "type": "string",
+      "title": "Parsed Summary"
+    },
+    "related_customer_id": {
+      "type": "string",
+      "title": "Related Customer ID"
+    },
+    "related_job_id": {
+      "type": "string",
+      "title": "Related Job ID"
+    },
+    "related_truck_id": {
+      "type": "string",
+      "title": "Related Truck ID"
+    },
+    "related_technician_id": {
+      "type": "string",
+      "title": "Related Technician ID"
+    },
+    "related_transfer_sheet_id": {
+      "type": "string",
+      "title": "Related Transfer Sheet ID"
+    },
+    "related_po_id": {
+      "type": "string",
+      "title": "Related PO ID"
+    },
+    "related_invoice_id": {
+      "type": "string",
+      "title": "Related Invoice ID"
+    },
+    "related_estimate_id": {
+      "type": "string",
+      "title": "Related Estimate ID"
+    },
+    "error_message": {
+      "type": "string",
+      "title": "Error Message"
+    },
+    "retry_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Retry Count"
+    },
+    "last_retry_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Retry At"
+    }
+  },
+  "required": [
+    "event_type",
+    "external_id"
+  ]
+}

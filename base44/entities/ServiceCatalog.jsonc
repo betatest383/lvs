@@ -1,0 +1,248 @@
+{
+  "name": "ServiceCatalog",
+  "type": "object",
+  "properties": {
+    "service_name": {
+      "type": "string",
+      "title": "Service Name"
+    },
+    "service_code": {
+      "type": "string",
+      "title": "Service Code",
+      "description": "e.g. SVC-INSPECT, SVC-CROWN-REPAIR"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category",
+      "description": "e.g. Inspection, Repair, Maintenance, Installation, Membership"
+    },
+    "service_image": {
+      "type": "string",
+      "title": "Image",
+      "description": "Image URL for the service thumbnail (stored as a plain URL string for export/import compatibility)"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "description": "Internal description of the service"
+    },
+    "customer_description": {
+      "type": "string",
+      "title": "Customer Description",
+      "description": "Customer-facing description shown on estimates and during presentation"
+    },
+    "internal_notes": {
+      "type": "string",
+      "title": "Internal Notes"
+    },
+    "estimated_time_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimated Time (Hours)"
+    },
+    "estimated_time_minutes": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimated Time (Minutes)"
+    },
+    "estimate_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimate Price ($)",
+      "description": "Optional. May be null, blank, or 0. Only used when pricing is fixed at the service level; otherwise pricing is resolved dynamically or from the linked pricebook."
+    },
+    "pricing_description": {
+      "type": "string",
+      "title": "Pricing Description",
+      "description": "Optional. Free-text note describing how this service is priced."
+    },
+    "default_selling_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Default Selling Price ($)"
+    },
+    "internal_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Internal Cost ($)",
+      "description": "Internal cost used for gross profit calculation. Single source of truth for cost."
+    },
+    "membership_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Membership Price ($)",
+      "description": "Special pricing for membership customers"
+    },
+    "default_discount_percent": {
+      "type": "number",
+      "default": 0,
+      "title": "Default Discount (%)"
+    },
+    "pricing_type": {
+      "type": "string",
+      "enum": [
+        "fixed_price",
+        "dynamic_price",
+        "manual_price",
+        "pricebook_linked"
+      ],
+      "default": "fixed_price",
+      "title": "Pricing Type"
+    },
+    "pricebook_item_id": {
+      "type": "string",
+      "title": "Pricebook Item ID",
+      "description": "Linked pricebook item when pricing_type is pricebook_linked"
+    },
+    "pricebook_item_name": {
+      "type": "string",
+      "title": "Pricebook Item Name"
+    },
+    "materials_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Materials Required"
+    },
+    "default_material_packages": {
+      "type": "string",
+      "title": "Default Material Packages (JSON)",
+      "description": "JSON array of {package_id, package_name} pre-linked to this service"
+    },
+    "default_materials": {
+      "type": "string",
+      "title": "Default Materials (JSON)",
+      "description": "JSON array of {material_id, material_name, quantity, unit, unit_price, chargeable_to_customer, customer_visible, commission_type, commission_value} pre-linked to this service"
+    },
+    "default_labor_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Default Labor Hours"
+    },
+    "allow_labor_adjustment": {
+      "type": "boolean",
+      "default": true,
+      "title": "Allow Labor Adjustment"
+    },
+    "minimum_labor_hours": {
+      "type": "number",
+      "title": "Minimum Labor Hours"
+    },
+    "maximum_labor_hours": {
+      "type": "number",
+      "title": "Maximum Labor Hours"
+    },
+    "crew_size_required": {
+      "type": "number",
+      "default": 1,
+      "title": "Crew Size Required",
+      "description": "Minimum crew size needed for this service"
+    },
+    "labor_phases": {
+      "type": "string",
+      "title": "Labor Phases (JSON)",
+      "description": "JSON array of {phase_name, estimated_hours, tasks[]} defining the labor breakdown for this service"
+    },
+    "required_equipment": {
+      "type": "string",
+      "title": "Required Equipment (JSON)",
+      "description": "JSON array of {equipment_master_id, item_name, quantity, notes} for equipment needed"
+    },
+    "optional_equipment": {
+      "type": "string",
+      "title": "Optional Equipment (JSON)",
+      "description": "JSON array of equipment that may be needed depending on conditions"
+    },
+    "truck_requirements": {
+      "type": "string",
+      "title": "Truck Requirements",
+      "description": "Truck class or type required for this service"
+    },
+    "scope_of_work_template": {
+      "type": "string",
+      "title": "Scope of Work Template (JSON)",
+      "description": "JSON object: {work_phases: [{phase_name, estimated_hours, tasks[], materials[], equipment[]}], safety_notes: [], cleanup_tasks: [], internal_notes: ''}"
+    },
+    "proposal_tier": {
+      "type": "string",
+      "enum": [
+        "good",
+        "better",
+        "best",
+        "standalone"
+      ],
+      "default": "standalone",
+      "title": "Proposal Tier",
+      "description": "Default good/better/best placement for this service in proposals"
+    },
+    "proposal_customer_benefits": {
+      "type": "string",
+      "title": "Proposal Customer Benefits",
+      "description": "Customer-facing benefits text used in proposal packages"
+    },
+    "proposal_warranty_messaging": {
+      "type": "string",
+      "title": "Proposal Warranty Messaging",
+      "description": "Warranty information shown to customer in proposals"
+    },
+    "proposal_estimated_duration": {
+      "type": "string",
+      "title": "Proposal Estimated Duration",
+      "description": "Customer-facing duration estimate (e.g. 'Half day', '1-2 days')"
+    },
+    "proposal_financing_available": {
+      "type": "boolean",
+      "default": false,
+      "title": "Financing Available"
+    },
+    "service_commission_type": {
+      "type": "string",
+      "enum": [
+        "percentage",
+        "flat_dollar",
+        "none"
+      ],
+      "default": "none",
+      "title": "Service Commission Type"
+    },
+    "service_commission_value": {
+      "type": "number",
+      "default": 0,
+      "title": "Service Commission Value",
+      "description": "Percentage (0-100) or flat dollar amount depending on commission type"
+    },
+    "material_commission_type": {
+      "type": "string",
+      "enum": [
+        "percentage",
+        "flat_dollar",
+        "none"
+      ],
+      "default": "none",
+      "title": "Default Material Commission Type",
+      "description": "Default commission applied to materials attached to this service. Can be overridden per-material."
+    },
+    "material_commission_value": {
+      "type": "number",
+      "default": 0,
+      "title": "Default Material Commission Value"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "service_name",
+    "estimated_time_hours"
+  ]
+}

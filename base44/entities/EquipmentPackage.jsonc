@@ -1,0 +1,85 @@
+{
+  "name": "EquipmentPackage",
+  "type": "object",
+  "properties": {
+    "package_id": {
+      "type": "string",
+      "title": "Package ID",
+      "description": "e.g. PKG-LT-001"
+    },
+    "package_name": {
+      "type": "string",
+      "title": "Package Name"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "role_type": {
+      "type": "string",
+      "enum": [
+        "lead_technician",
+        "apprentice",
+        "custom"
+      ],
+      "default": "lead_technician",
+      "title": "Role Type"
+    },
+    "items": {
+      "type": "string",
+      "title": "Items (JSON)",
+      "description": "JSON array of {equipment_master_id, item_name, category, unit, quantity_required, required_daily_operations, notes, replacement_cost_per_unit}"
+    },
+    "total_package_value": {
+      "type": "number",
+      "title": "Total Package Value ($)"
+    },
+    "assigned_truck_id": {
+      "type": "string",
+      "title": "Assigned Truck ID",
+      "description": "Links to TruckProfile record \u2014 bidirectional sync target. TruckProfile is the single source of truth."
+    },
+    "assigned_truck_number": {
+      "type": "string",
+      "title": "Assigned Truck Number",
+      "description": "Auto-populated from TruckProfile"
+    },
+    "assigned_truck_name": {
+      "type": "string",
+      "title": "Assigned Truck Name",
+      "description": "Auto-populated from TruckProfile"
+    },
+    "assignment_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Assignment Timestamp"
+    },
+    "assigned_by": {
+      "type": "string",
+      "title": "Assigned By",
+      "description": "User who made the assignment"
+    },
+    "is_shared_package": {
+      "type": "boolean",
+      "default": false,
+      "title": "Shared Package",
+      "description": "When true, this package can be assigned to multiple trucks simultaneously"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "package_name"
+  ]
+}

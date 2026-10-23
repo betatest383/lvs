@@ -1,0 +1,75 @@
+{
+  "name": "MorningWorkflowRun",
+  "type": "object",
+  "properties": {
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Workflow Date"
+    },
+    "linked_job_id": {
+      "type": "string",
+      "title": "Linked Job ID",
+      "description": "Optional \u2014 the job this morning workflow is associated with"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "complete",
+        "manager_override"
+      ],
+      "default": "not_started",
+      "title": "Workflow Status"
+    },
+    "checklist_results": {
+      "type": "string",
+      "title": "Checklist Results (JSON)",
+      "description": "JSON object: { step_id: { status: 'not_started'|'in_progress'|'complete'|'not_required'|'manager_override', completed_at } }"
+    },
+    "manager_override_used": {
+      "type": "boolean",
+      "default": false,
+      "title": "Manager Override Used"
+    },
+    "override_reason": {
+      "type": "string",
+      "title": "Override Reason"
+    },
+    "override_signature": {
+      "type": "string",
+      "title": "Override Signature (Data URL)"
+    },
+    "override_by": {
+      "type": "string",
+      "title": "Override Approved By"
+    }
+  },
+  "required": [
+    "technician_email",
+    "date"
+  ]
+}

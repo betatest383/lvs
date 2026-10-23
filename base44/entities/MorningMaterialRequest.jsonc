@@ -1,0 +1,125 @@
+{
+  "name": "MorningMaterialRequest",
+  "type": "object",
+  "properties": {
+    "workflow_id": {
+      "type": "string",
+      "title": "Workflow ID",
+      "description": "e.g. WF-WH-001-001"
+    },
+    "technician": {
+      "type": "string",
+      "title": "Technician"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Date"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "hardware_checklist_id": {
+      "type": "string",
+      "title": "Linked Hardware Checklist ID"
+    },
+    "material_transfer_sheet_id": {
+      "type": "string",
+      "title": "Linked Material Transfer Sheet ID"
+    },
+    "warehouse_associate": {
+      "type": "string",
+      "title": "Warehouse Associate"
+    },
+    "forklift_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Forklift Required"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Hardware Checklist Submitted",
+        "Transfer Sheet Submitted",
+        "Hardware Pulling Started",
+        "Inventory Pulling Started",
+        "Materials Staged",
+        "Forklift Load Required",
+        "Forklift Load Not Required",
+        "Truck Loaded",
+        "Technician Confirmed Receipt",
+        "Truck Released"
+      ],
+      "default": "Hardware Checklist Submitted",
+      "title": "Status"
+    },
+    "current_stage_index": {
+      "type": "number",
+      "default": 0,
+      "title": "Current Stage Index"
+    },
+    "ts_hardware_checklist_submitted": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Hardware Checklist Submitted At"
+    },
+    "ts_transfer_sheet_submitted": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Transfer Sheet Submitted At"
+    },
+    "ts_pulling_started": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Pulling Started At"
+    },
+    "ts_materials_staged": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Materials Staged At"
+    },
+    "ts_truck_loaded": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Truck Loaded At"
+    },
+    "ts_technician_confirmed": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Technician Confirmed Receipt At"
+    },
+    "ts_truck_released": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Truck Released At"
+    },
+    "total_loading_time_minutes": {
+      "type": "number",
+      "title": "Total Loading Time (minutes)"
+    },
+    "related_sop_id": {
+      "type": "string",
+      "default": "WH-101",
+      "title": "Related SOP ID"
+    },
+    "trainual_url": {
+      "type": "string",
+      "title": "Trainual URL"
+    }
+  },
+  "required": [
+    "technician",
+    "truck_number",
+    "date",
+    "job_number"
+  ]
+}

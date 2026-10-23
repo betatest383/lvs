@@ -1,0 +1,57 @@
+{
+  "name": "Technician",
+  "type": "object",
+  "properties": {
+    "full_name": {
+      "type": "string",
+      "title": "Full Name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone Number"
+    },
+    "technician_id": {
+      "type": "string",
+      "title": "Technician ID"
+    },
+    "user_id": {
+      "type": "string",
+      "title": "Linked User ID"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "lead_technician",
+        "apprentice"
+      ],
+      "default": "lead_technician",
+      "title": "Role"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "default_truck_number": {
+      "type": "string",
+      "title": "Default Truck Number"
+    },
+    "assigned_package_id": {
+      "type": "string",
+      "title": "Assigned Equipment Package ID"
+    }
+  },
+  "required": [
+    "full_name",
+    "email"
+  ]
+}

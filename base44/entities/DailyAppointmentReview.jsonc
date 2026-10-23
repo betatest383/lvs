@@ -1,0 +1,236 @@
+{
+  "name": "DailyAppointmentReview",
+  "type": "object",
+  "properties": {
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID",
+      "description": "Links to the Appointment record this review belongs to"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "day_number": {
+      "type": "number",
+      "title": "Day Number",
+      "description": "Which day of the multi-day job"
+    },
+    "review_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Review Date"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "planned_work": {
+      "type": "string",
+      "title": "Planned Work",
+      "description": "What was planned for this day (from execution plan)"
+    },
+    "actual_work_completed": {
+      "type": "string",
+      "title": "Actual Work Completed"
+    },
+    "percent_complete": {
+      "type": "number",
+      "default": 0,
+      "title": "Percent Complete",
+      "description": "Overall job percent complete as of end of this day (0-100)"
+    },
+    "remaining_work": {
+      "type": "string",
+      "title": "Remaining Work",
+      "description": "What work remains for the overall job"
+    },
+    "additional_work_discovered": {
+      "type": "string",
+      "title": "Additional Work Discovered",
+      "description": "New findings or work discovered during this day"
+    },
+    "materials_used": {
+      "type": "string",
+      "title": "Materials Used (JSON)",
+      "description": "JSON array of {item_name, quantity, unit} used today"
+    },
+    "materials_remaining": {
+      "type": "string",
+      "title": "Materials Remaining",
+      "description": "Materials still on site or available"
+    },
+    "warehouse_restock_needed": {
+      "type": "string",
+      "title": "Warehouse Restock Needed",
+      "description": "Items that need to be restocked from warehouse"
+    },
+    "equipment_issues": {
+      "type": "string",
+      "title": "Equipment Issues"
+    },
+    "weather_delay": {
+      "type": "string",
+      "title": "Weather Delay / Impact"
+    },
+    "customer_questions": {
+      "type": "string",
+      "title": "Customer Questions"
+    },
+    "customer_requests": {
+      "type": "string",
+      "title": "Customer Requests"
+    },
+    "additional_approvals": {
+      "type": "string",
+      "title": "Additional Approvals",
+      "description": "Approvals obtained from customer during this day"
+    },
+    "customer_concerns": {
+      "type": "string",
+      "title": "Customer Concerns"
+    },
+    "daily_customer_summary": {
+      "type": "string",
+      "title": "Daily Customer Summary",
+      "description": "Summary of the day communicated to the customer"
+    },
+    "safety_issues": {
+      "type": "string",
+      "title": "Safety Issues"
+    },
+    "technician_notes": {
+      "type": "string",
+      "title": "Technician Notes"
+    },
+    "supervisor_notes": {
+      "type": "string",
+      "title": "Supervisor Notes"
+    },
+    "planned_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Planned Hours"
+    },
+    "actual_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Actual Hours"
+    },
+    "planned_scope": {
+      "type": "string",
+      "title": "Planned Scope"
+    },
+    "completed_scope": {
+      "type": "string",
+      "title": "Completed Scope"
+    },
+    "production_goal": {
+      "type": "string",
+      "title": "Production Goal"
+    },
+    "actual_production": {
+      "type": "string",
+      "title": "Actual Production"
+    },
+    "variance_reason": {
+      "type": "string",
+      "enum": [
+        "none",
+        "weather",
+        "hidden_damage",
+        "material_delay",
+        "customer_request",
+        "equipment_failure",
+        "safety_concern",
+        "other"
+      ],
+      "default": "none",
+      "title": "Variance Reason",
+      "description": "Required when behind schedule (actual_hours > planned_hours or production not met)"
+    },
+    "variance_notes": {
+      "type": "string",
+      "title": "Variance Notes"
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Photos",
+      "description": "Photo URLs captured during this day's review"
+    },
+    "crew_composition": {
+      "type": "string",
+      "title": "Crew Composition (JSON)",
+      "description": "JSON array of {name, role, hours_worked}"
+    },
+    "square_footage_completed": {
+      "type": "number",
+      "title": "Square Footage Completed"
+    },
+    "travel_time_minutes": {
+      "type": "number",
+      "default": 0,
+      "title": "Travel Time (minutes)"
+    },
+    "idle_time_minutes": {
+      "type": "number",
+      "default": 0,
+      "title": "Idle Time (minutes)"
+    },
+    "labor_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Labor Hours",
+      "description": "Total labor hours for this day (all crew combined)"
+    },
+    "change_orders": {
+      "type": "string",
+      "title": "Change Orders (JSON)",
+      "description": "JSON array of {description, photos[], finding_id, status} for additional work discovered"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "submitted",
+        "reviewed"
+      ],
+      "default": "draft",
+      "title": "Review Status"
+    },
+    "submitted_by": {
+      "type": "string",
+      "title": "Submitted By"
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Submitted At"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "title": "Reviewed By"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Reviewed At"
+    }
+  },
+  "required": [
+    "appointment_id",
+    "job_id",
+    "day_number"
+  ]
+}

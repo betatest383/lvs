@@ -1,0 +1,60 @@
+{
+  "name": "MappingRule",
+  "type": "object",
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "title": "Rule ID",
+      "description": "Auto-generated: MAP-000001"
+    },
+    "mapping_type": {
+      "type": "string",
+      "enum": [
+        "truck",
+        "technician",
+        "business_unit",
+        "job_type"
+      ],
+      "title": "Mapping Type"
+    },
+    "source_system": {
+      "type": "string",
+      "default": "ServiceTitan",
+      "title": "Source System"
+    },
+    "external_id": {
+      "type": "string",
+      "title": "External ID"
+    },
+    "external_name": {
+      "type": "string",
+      "title": "External Name"
+    },
+    "lvc_os_entity": {
+      "type": "string",
+      "title": "LVC OS Entity"
+    },
+    "lvc_os_id": {
+      "type": "string",
+      "title": "LVC OS ID"
+    },
+    "lvc_os_name": {
+      "type": "string",
+      "title": "LVC OS Name"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "mapping_type",
+    "external_id",
+    "lvc_os_entity"
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "name": "Customer",
+  "type": "object",
+  "properties": {
+    "customer_number": {
+      "type": "string",
+      "title": "Customer Number"
+    },
+    "name": {
+      "type": "string",
+      "title": "Full Name"
+    },
+    "company": {
+      "type": "string",
+      "title": "Company Name",
+      "description": "Company name for commercial customers. ServiceTitan-controlled."
+    },
+    "customer_type": {
+      "type": "string",
+      "enum": [
+        "",
+        "residential",
+        "commercial"
+      ],
+      "default": "",
+      "title": "Customer Type",
+      "description": "Residential or commercial. ServiceTitan-controlled."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Primary Email"
+    },
+    "alt_email": {
+      "type": "string",
+      "title": "Alternate Email",
+      "description": "Secondary email. ServiceTitan-controlled."
+    },
+    "phone": {
+      "type": "string",
+      "title": "Primary Phone"
+    },
+    "alt_phone": {
+      "type": "string",
+      "title": "Alternate Phone",
+      "description": "Secondary phone. ServiceTitan-controlled."
+    },
+    "address": {
+      "type": "string",
+      "title": "Service Address"
+    },
+    "city": {
+      "type": "string",
+      "title": "Service City"
+    },
+    "state": {
+      "type": "string",
+      "title": "Service State"
+    },
+    "zip": {
+      "type": "string",
+      "title": "Service Zip Code"
+    },
+    "billing_address": {
+      "type": "string",
+      "title": "Billing Address",
+      "description": "Billing address if different from service address. ServiceTitan-controlled."
+    },
+    "billing_city": {
+      "type": "string",
+      "title": "Billing City"
+    },
+    "billing_state": {
+      "type": "string",
+      "title": "Billing State"
+    },
+    "billing_zip": {
+      "type": "string",
+      "title": "Billing Zip Code"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes",
+      "description": "LVC-owned internal notes. Never overwritten by ServiceTitan."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "portal_user_email": {
+      "type": "string",
+      "title": "Portal Login Email",
+      "description": "LVC-owned portal login email. Never overwritten by ServiceTitan."
+    },
+    "servicetitan_customer_id": {
+      "type": "string",
+      "title": "ServiceTitan Customer ID",
+      "description": "Primary synchronization key for ServiceTitan customer webhooks. Never matched by name, email, or phone alone."
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "merged",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status",
+      "description": "synced = last sync succeeded; pending = awaiting sync; conflict = local/st conflict recorded; merged = this customer was merged into another; deleted = soft-deleted by ServiceTitan."
+    },
+    "servicetitan_last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync",
+      "description": "Timestamp of the most recent ServiceTitan webhook that updated this customer."
+    },
+    "servicetitan_last_event_type": {
+      "type": "string",
+      "title": "ServiceTitan Last Event Type"
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At",
+      "description": "Timestamp when the most recent ServiceTitan event occurred (from the payload event_timestamp). Used for event ordering protection \u2014 an older event never overwrites a newer customer state."
+    },
+    "servicetitan_deleted": {
+      "type": "boolean",
+      "default": false,
+      "title": "ServiceTitan Deleted",
+      "description": "True when the customer was soft-deleted by ServiceTitan. The record is preserved for history."
+    },
+    "servicetitan_deleted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Deleted At"
+    },
+    "servicetitan_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "manual",
+        "api"
+      ],
+      "title": "ServiceTitan Source",
+      "description": "How this customer was last synced from ServiceTitan."
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version",
+      "description": "Incremented on each successful ServiceTitan sync operation."
+    },
+    "servicetitan_tenant_id": {
+      "type": "string",
+      "title": "ServiceTitan Tenant ID"
+    },
+    "servicetitan_merged_into": {
+      "type": "string",
+      "title": "ServiceTitan Merged Into",
+      "description": "The servicetitan_customer_id of the surviving customer this customer was merged into."
+    },
+    "servicetitan_merged_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Merged At"
+    },
+    "servicetitan_merge_history_json": {
+      "type": "string",
+      "title": "ServiceTitan Merge History (JSON)",
+      "description": "Append-only JSON array of {webhook_event_id, event_type, source_customer_id, target_customer_id, merged_at, relinked_counts}."
+    },
+    "sync_conflict_history_json": {
+      "type": "string",
+      "title": "Sync Conflict History (JSON)",
+      "description": "Append-only JSON array of {webhook_event_id, event_type, field, previous_value, new_value, synced_at}. Records local values overwritten by ServiceTitan updates."
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual",
+        "api_export"
+      ],
+      "title": "Import Source",
+      "description": "How this customer was first imported locally. webhook = created via ServiceTitan webhook; api_recovery = created via incremental recovery scan; on_demand_hydration = fetched by ID when referenced by a job/appointment; manual = created manually; api_export = created via export API."
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At",
+      "description": "When this customer was first imported locally. Separate from servicetitan_last_sync which tracks the last sync operation."
+    },
+    "contact_sync_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "complete",
+        "partial",
+        "failed"
+      ],
+      "default": "pending",
+      "title": "Contact Sync Status",
+      "description": "pending = contacts not yet synced; complete = all contacts synced successfully; partial = some contacts synced, some failed; failed = contact sync failed entirely. A customer with failed/partial status has a durable ContactSyncRetry record and is not counted as fully synchronized."
+    },
+    "contact_sync_attempt_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Contact Sync Attempt Count",
+      "description": "Number of times contact synchronization has been attempted for this customer."
+    },
+    "contact_last_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Contact Last Synced At",
+      "description": "When contact data was last successfully synchronized for this customer."
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

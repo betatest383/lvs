@@ -1,0 +1,202 @@
+{
+  "name": "CommissionEarning",
+  "type": "object",
+  "properties": {
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "invoice_id": {
+      "type": "string",
+      "title": "Invoice ID"
+    },
+    "estimate_id": {
+      "type": "string",
+      "title": "Estimate ID"
+    },
+    "pricing_snapshot_id": {
+      "type": "string",
+      "title": "Pricing Snapshot ID"
+    },
+    "compensation_plan_id": {
+      "type": "string",
+      "title": "Compensation Plan ID"
+    },
+    "compensation_plan_name": {
+      "type": "string",
+      "title": "Compensation Plan Name"
+    },
+    "role": {
+      "type": "string",
+      "title": "Role"
+    },
+    "compensation_method": {
+      "type": "string",
+      "enum": [
+        "hourly",
+        "commission",
+        "salary",
+        "hourly_plus_commission"
+      ],
+      "title": "Compensation Method"
+    },
+    "commission_basis": {
+      "type": "string",
+      "enum": [
+        "job_subtotal",
+        "completed_revenue",
+        "collected_revenue",
+        "service_revenue",
+        "gross_profit",
+        "custom"
+      ],
+      "title": "Commission Basis"
+    },
+    "commissionable_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Commissionable Amount ($)"
+    },
+    "commission_rate": {
+      "type": "number",
+      "default": 0,
+      "title": "Commission Rate (%)"
+    },
+    "calculated_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Calculated Amount ($)"
+    },
+    "earned_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Earned Date"
+    },
+    "payable_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Payable Date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "estimated",
+        "pending_completion",
+        "earned",
+        "payable",
+        "paid",
+        "reversed",
+        "disputed"
+      ],
+      "default": "estimated",
+      "title": "Status"
+    },
+    "adjustment_reason": {
+      "type": "string",
+      "title": "Adjustment Reason"
+    },
+    "adjustment_parent_id": {
+      "type": "string",
+      "title": "Adjustment Parent ID",
+      "description": "Links to the original earning being adjusted or reversed"
+    },
+    "is_adjustment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Adjustment",
+      "description": "True when this record is an adjustment/reversal of another earning"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "employee_id",
+    "job_id",
+    "status"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

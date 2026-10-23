@@ -1,0 +1,313 @@
+{
+  "name": "PricingModifier",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Modifier Name"
+    },
+    "code": {
+      "type": "string",
+      "title": "Modifier Code"
+    },
+    "category_id": {
+      "type": "string",
+      "title": "Category ID",
+      "description": "Links to PricingModifierCategory record"
+    },
+    "category_name": {
+      "type": "string",
+      "title": "Category Name",
+      "description": "Display snapshot of the category name"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "internal_notes": {
+      "type": "string",
+      "title": "Internal Notes"
+    },
+    "display_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Display Order"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "testing",
+        "active",
+        "archived"
+      ],
+      "default": "draft",
+      "title": "Status"
+    },
+    "source_module": {
+      "type": "string",
+      "title": "Source Module",
+      "description": "Module that provides the trigger field (e.g. scope, estimate)"
+    },
+    "source_field": {
+      "type": "string",
+      "title": "Source Field",
+      "description": "Scope field path e.g. scope.roof_pitch, scope.estimated_hours"
+    },
+    "operator": {
+      "type": "string",
+      "enum": [
+        "equals",
+        "does_not_equal",
+        "greater_than",
+        "greater_than_or_equal",
+        "less_than",
+        "less_than_or_equal",
+        "between",
+        "contains",
+        "selected",
+        "quantity_greater_than",
+        "always"
+      ],
+      "title": "Operator"
+    },
+    "trigger_value": {
+      "type": "string",
+      "title": "Trigger Value"
+    },
+    "secondary_trigger_value": {
+      "type": "string",
+      "title": "Secondary Trigger Value",
+      "description": "Used with 'between' operator"
+    },
+    "applies_automatically": {
+      "type": "boolean",
+      "default": true,
+      "title": "Applies Automatically"
+    },
+    "technician_can_override": {
+      "type": "boolean",
+      "default": false,
+      "title": "Technician Can Override"
+    },
+    "manager_override_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Manager Override Required"
+    },
+    "override_reason_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Override Reason Required"
+    },
+    "calculation_method": {
+      "type": "string",
+      "enum": [
+        "fixed_amount",
+        "percentage",
+        "multiplier",
+        "hourly",
+        "daily",
+        "per_unit",
+        "cost_plus_markup",
+        "replace_price",
+        "minimum_charge",
+        "maximum_charge"
+      ],
+      "title": "Calculation Method"
+    },
+    "modifier_value": {
+      "type": "number",
+      "default": 0,
+      "title": "Modifier Value ($)"
+    },
+    "percentage_value": {
+      "type": "number",
+      "default": 0,
+      "title": "Percentage Value (%)"
+    },
+    "multiplier_value": {
+      "type": "number",
+      "default": 1,
+      "title": "Multiplier Value"
+    },
+    "hourly_rate": {
+      "type": "number",
+      "default": 0,
+      "title": "Hourly Rate ($)"
+    },
+    "daily_rate": {
+      "type": "number",
+      "default": 0,
+      "title": "Daily Rate ($)"
+    },
+    "unit_rate": {
+      "type": "number",
+      "default": 0,
+      "title": "Unit Rate ($)"
+    },
+    "minimum_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Minimum Amount ($)"
+    },
+    "maximum_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Maximum Amount ($)"
+    },
+    "markup_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "Markup Percentage (%)"
+    },
+    "applies_to": {
+      "type": "string",
+      "enum": [
+        "labor_price",
+        "material_price",
+        "equipment_price",
+        "subcontractor_price",
+        "total_selling_price",
+        "estimated_hours",
+        "labor_cost",
+        "equipment_cost",
+        "total_job_cost",
+        "commissionable_revenue",
+        "specific_service",
+        "service_category",
+        "entire_estimate"
+      ],
+      "title": "Applies To"
+    },
+    "service_catalog_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Service Catalog IDs"
+    },
+    "service_category_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Service Category IDs"
+    },
+    "repair_template_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Repair Template IDs"
+    },
+    "exclude_service_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Exclude Service IDs"
+    },
+    "affects_customer_price": {
+      "type": "boolean",
+      "default": true,
+      "title": "Affects Customer Price"
+    },
+    "affects_internal_cost": {
+      "type": "boolean",
+      "default": false,
+      "title": "Affects Internal Cost"
+    },
+    "affects_estimated_hours": {
+      "type": "boolean",
+      "default": false,
+      "title": "Affects Estimated Hours"
+    },
+    "affects_schedule_duration": {
+      "type": "boolean",
+      "default": false,
+      "title": "Affects Schedule Duration"
+    },
+    "affects_commission": {
+      "type": "boolean",
+      "default": false,
+      "title": "Affects Commission"
+    },
+    "taxable": {
+      "type": "boolean",
+      "default": false,
+      "title": "Taxable"
+    },
+    "customer_visible": {
+      "type": "boolean",
+      "default": false,
+      "title": "Customer Visible"
+    },
+    "customer_display_name": {
+      "type": "string",
+      "title": "Customer Display Name"
+    },
+    "customer_description": {
+      "type": "string",
+      "title": "Customer Description"
+    },
+    "stacking_method": {
+      "type": "string",
+      "enum": [
+        "additive",
+        "compound",
+        "highest_only",
+        "lowest_only",
+        "mutually_exclusive",
+        "replace_existing",
+        "first_match_only"
+      ],
+      "default": "additive",
+      "title": "Stacking Method"
+    },
+    "stacking_group": {
+      "type": "string",
+      "title": "Stacking Group"
+    },
+    "priority": {
+      "type": "number",
+      "default": 0,
+      "title": "Priority"
+    },
+    "maximum_combined_percentage": {
+      "type": "number",
+      "title": "Maximum Combined (%)"
+    },
+    "maximum_combined_amount": {
+      "type": "number",
+      "title": "Maximum Combined ($)"
+    },
+    "effective_start_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Effective Start Date"
+    },
+    "effective_end_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Effective End Date"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    },
+    "last_tested_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Tested At"
+    }
+  },
+  "required": [
+    "name",
+    "category_id"
+  ]
+}

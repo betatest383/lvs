@@ -1,0 +1,348 @@
+{
+  "name": "Bill",
+  "type": "object",
+  "properties": {
+    "bill_number": {
+      "type": "string",
+      "title": "Bill Number",
+      "description": "LVC-owned internal bill number (e.g. BILL-000001). Never overwritten by ServiceTitan."
+    },
+    "vendor_invoice_number": {
+      "type": "string",
+      "title": "Vendor Invoice Number",
+      "description": "ServiceTitan-owned. The vendor's invoice number. Overwritten by inbound sync."
+    },
+    "purchase_order_id": {
+      "type": "string",
+      "title": "Purchase Order ID",
+      "description": "Links to local PurchaseOrder. Resolved via servicetitan_purchase_order_id. May be null for non-PO bills."
+    },
+    "servicetitan_purchase_order_id": {
+      "type": "string",
+      "title": "ServiceTitan Purchase Order ID",
+      "description": "Snapshot of the parent PO's ST ID."
+    },
+    "po_number": {
+      "type": "string",
+      "title": "PO Number",
+      "description": "Denormalized for reporting."
+    },
+    "receipt_id": {
+      "type": "string",
+      "title": "Receipt ID",
+      "description": "Primary receipt snapshot. Links to local Receipt. Resolved via servicetitan_receipt_id. May be null if bill has no receipt. Full multi-receipt relationships are in BillReceiptLink records."
+    },
+    "servicetitan_receipt_id": {
+      "type": "string",
+      "title": "ServiceTitan Receipt ID",
+      "description": "Snapshot of the primary linked receipt's ST ID. Full multi-receipt links are in BillReceiptLink."
+    },
+    "vendor_id": {
+      "type": "string",
+      "title": "Vendor ID",
+      "description": "Links to local Vendor. Resolved via servicetitan_vendor_id."
+    },
+    "servicetitan_vendor_id": {
+      "type": "string",
+      "title": "ServiceTitan Vendor ID",
+      "description": "Snapshot of the vendor's ST ID."
+    },
+    "vendor_name": {
+      "type": "string",
+      "title": "Vendor Name"
+    },
+    "bill_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Bill Date",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Due Date",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "terms": {
+      "type": "string",
+      "title": "Payment Terms",
+      "description": "ServiceTitan-owned (e.g. Net 30, Net 60). Overwritten by inbound sync."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "pending_approval",
+        "approved",
+        "partially_paid",
+        "paid",
+        "voided",
+        "disputed"
+      ],
+      "default": "draft",
+      "title": "Status",
+      "description": "ServiceTitan-owned source lifecycle status. Overwritten by inbound sync. NOTE: 'pending_approval' is PROVISIONAL \u2014 API verification must confirm whether ServiceTitan actually uses this value. Do not remove until verified."
+    },
+    "lvc_workflow_status": {
+      "type": "string",
+      "enum": [
+        "awaiting_receipt_verification",
+        "ready_for_three_way_match",
+        "match_passed",
+        "match_exception",
+        "awaiting_approval",
+        "approved_for_payment",
+        "payment_scheduled",
+        "paid",
+        "disputed",
+        "voided"
+      ],
+      "default": "awaiting_receipt_verification",
+      "title": "LVC Workflow Status",
+      "description": "LVC-owned AP workflow status. NEVER overwritten by ServiceTitan synchronization. Controls three-way-match, approval, and payment lifecycle."
+    },
+    "subtotal": {
+      "type": "number",
+      "default": 0,
+      "title": "Subtotal",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "tax_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Tax Amount",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "shipping_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Shipping Amount",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "discount_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Discount Amount",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "total": {
+      "type": "number",
+      "default": 0,
+      "title": "Total",
+      "description": "ServiceTitan-owned AP obligation total. Overwritten by inbound sync."
+    },
+    "amount_paid": {
+      "type": "number",
+      "default": 0,
+      "title": "Amount Paid",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "balance_due": {
+      "type": "number",
+      "default": 0,
+      "title": "Balance Due",
+      "description": "ServiceTitan-owned. total - amount_paid. Overwritten by inbound sync."
+    },
+    "line_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Line Count",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "lines_sync_status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "pending",
+        "partial",
+        "complete",
+        "failed"
+      ],
+      "default": "not_started",
+      "title": "Lines Sync Status",
+      "description": "LVC-owned. Tracks the completeness of line-level synchronization for this header. A header may be created before all lines are synced."
+    },
+    "lines_expected_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Lines Expected Count",
+      "description": "LVC-owned. Number of lines expected from the source system. Updated during sync."
+    },
+    "lines_synced_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Lines Synced Count",
+      "description": "LVC-owned. Number of lines successfully synchronized."
+    },
+    "lines_last_sync_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Lines Last Sync At",
+      "description": "LVC-owned. Timestamp of the last line synchronization attempt."
+    },
+    "approval_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        "requires_review"
+      ],
+      "default": "pending",
+      "title": "Approval Status",
+      "description": "LVC-owned. Internal AP approval decision. Never overwritten by ServiceTitan."
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "unpaid",
+        "scheduled",
+        "partially_paid",
+        "paid",
+        "overpaid"
+      ],
+      "default": "unpaid",
+      "title": "Payment Status",
+      "description": "LVC-owned. Internal payment tracking. Never overwritten by ServiceTitan."
+    },
+    "payment_method": {
+      "type": "string",
+      "title": "Payment Method",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "payment_reference": {
+      "type": "string",
+      "title": "Payment Reference",
+      "description": "LVC-owned. Check/transaction number. Never overwritten by ServiceTitan."
+    },
+    "paid_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Paid At",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "dispute_reason": {
+      "type": "string",
+      "title": "Dispute Reason",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "dispute_resolution": {
+      "type": "string",
+      "title": "Dispute Resolution",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "gl_posting_status": {
+      "type": "string",
+      "enum": [
+        "not_posted",
+        "posted",
+        "reversed"
+      ],
+      "default": "not_posted",
+      "title": "GL Posting Status",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "gl_account_reference": {
+      "type": "string",
+      "title": "GL Account Reference",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "servicetitan_bill_id": {
+      "type": "string",
+      "title": "ServiceTitan Bill ID",
+      "description": "Permanent external identity. Stored as string for int64 safety. The canonical sync key \u2014 matched ONLY by this field. Never by bill number or vendor invoice number."
+    },
+    "servicetitan_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "ServiceTitan Active Status"
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deferred",
+        "failed",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status"
+    },
+    "servicetitan_last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync"
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At"
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On"
+    },
+    "servicetitan_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Created On"
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version"
+    },
+    "servicetitan_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "manual",
+        "api"
+      ],
+      "title": "ServiceTitan Source"
+    },
+    "servicetitan_raw_data": {
+      "type": "string",
+      "title": "ServiceTitan Raw Data (JSON)"
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual",
+        "api_export"
+      ],
+      "title": "Import Source"
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes",
+      "description": "LVC-owned internal notes. Never overwritten by ServiceTitan."
+    }
+  },
+  "required": [
+    "servicetitan_bill_id",
+    "status"
+  ]
+}

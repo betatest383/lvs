@@ -1,0 +1,187 @@
+{
+  "name": "LogicRule",
+  "type": "object",
+  "properties": {
+    "rule_name": {
+      "type": "string",
+      "title": "Rule Name"
+    },
+    "rule_type": {
+      "type": "string",
+      "enum": [
+        "finding",
+        "repair",
+        "estimate_item",
+        "invoice_item",
+        "material",
+        "report_narrative",
+        "visibility",
+        "automation"
+      ],
+      "default": "automation",
+      "title": "Rule Type"
+    },
+    "source_module": {
+      "type": "string",
+      "title": "Source Module",
+      "description": "Module key from the Module Event Registry (e.g. wh105, enterprise_tasks)"
+    },
+    "source_module_name": {
+      "type": "string",
+      "title": "Source Module Name",
+      "description": "Display name of the source module"
+    },
+    "trigger_event": {
+      "type": "string",
+      "title": "Trigger Event",
+      "description": "Event key from the Module Event Registry (e.g. wh105.blocked)"
+    },
+    "trigger_event_name": {
+      "type": "string",
+      "title": "Trigger Event Name",
+      "description": "Display name of the trigger event"
+    },
+    "event_fields_json": {
+      "type": "string",
+      "title": "Event Fields (JSON)",
+      "description": "JSON array of fields exposed by the selected event"
+    },
+    "conditions_json": {
+      "type": "string",
+      "title": "Conditions JSON (array of {field, operator, value})"
+    },
+    "actions_json": {
+      "type": "string",
+      "title": "Actions JSON (array of {action_key, field_mappings})",
+      "description": "JSON array of actions to execute when the rule triggers"
+    },
+    "inspection_type": {
+      "type": "string",
+      "enum": [
+        "interior",
+        "exterior",
+        "both"
+      ],
+      "default": "both",
+      "title": "Inspection Type"
+    },
+    "inspection_question_id": {
+      "type": "string",
+      "title": "Inspection Question ID",
+      "description": "Required when trigger_event is a question-based event (question_answered, question_changed, question_failed, question_passed). Stores the stable question ID for rule execution."
+    },
+    "inspection_question_text": {
+      "type": "string",
+      "title": "Inspection Question Text",
+      "description": "Snapshot of the question text at the time the rule was configured."
+    },
+    "inspection_form_id": {
+      "type": "string",
+      "title": "Inspection Form ID",
+      "description": "The inspection module/form the selected question belongs to."
+    },
+    "inspection_section_id": {
+      "type": "string",
+      "title": "Inspection Section ID",
+      "description": "The section/category the selected question belongs to."
+    },
+    "category": {
+      "type": "string",
+      "title": "Category"
+    },
+    "output_finding_type": {
+      "type": "string",
+      "title": "Output: Finding Type"
+    },
+    "output_severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "minor",
+        "moderate",
+        "major",
+        "critical"
+      ],
+      "title": "Output: Severity"
+    },
+    "output_repair_id": {
+      "type": "string",
+      "title": "Output: Repair ID"
+    },
+    "repair_template_id": {
+      "type": "string",
+      "title": "Repair Template ID",
+      "description": "Links to RepairRecommendationTemplate \u2014 the single source of truth. When set, all output fields (deficiency type, severity, narrative, category, priority) are inherited from the template automatically."
+    },
+    "output_narrative": {
+      "type": "string",
+      "title": "Output: Report Narrative Template"
+    },
+    "output_estimate_price": {
+      "type": "number",
+      "title": "Output: Estimate Price Override"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "priority": {
+      "type": "number",
+      "default": 0,
+      "title": "Priority (higher runs first)",
+      "description": "100=Safety, 90=Code, 80=Compliance, 70=Recommendation, 60=Estimate, 50=Scope, 40=Inventory, 30=Presentation, 20=Analytics"
+    },
+    "rule_sets": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Rule Sets",
+      "description": "IDs of RuleSet records this rule belongs to. A rule can belong to multiple sets."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "description": "Free-form tags for filtering and grouping (e.g. safety, nfpa, water_intrusion)"
+    },
+    "simulation_status": {
+      "type": "string",
+      "enum": [
+        "never",
+        "passed",
+        "failed",
+        "warning",
+        "stale"
+      ],
+      "default": "never",
+      "title": "Simulation Status",
+      "description": "Result of the last simulation run. stale = rule modified since last simulation."
+    },
+    "last_simulated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Simulated At"
+    },
+    "last_simulated_by": {
+      "type": "string",
+      "title": "Last Simulated By"
+    },
+    "last_simulation_result_json": {
+      "type": "string",
+      "title": "Last Simulation Result (JSON)",
+      "description": "Summary JSON from the last simulation: {triggered, skipped, conditions_passed, actions_executed, warnings, errors, duration_ms}"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    }
+  },
+  "required": [
+    "rule_name",
+    "rule_type"
+  ]
+}

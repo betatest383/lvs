@@ -1,0 +1,95 @@
+{
+  "name": "SyncFieldAuthority",
+  "type": "object",
+  "properties": {
+    "authority_id": {
+      "type": "string",
+      "title": "Authority ID",
+      "description": "Server-generated sequence: SFA-000001."
+    },
+    "authority_key": {
+      "type": "string",
+      "title": "Authority Key",
+      "description": "Deterministic unique key: entity_type:field_name:external_system. Prevents duplicate active rules."
+    },
+    "policy_id": {
+      "type": "string",
+      "title": "Policy ID",
+      "description": "SyncPolicy this rule belongs to. Empty means global default for the entity/field."
+    },
+    "entity_type": {
+      "type": "string",
+      "title": "Entity Type"
+    },
+    "field_name": {
+      "type": "string",
+      "title": "Field Name",
+      "description": "The business entity field this rule governs (e.g. 'billing_address', 'internal_notes')."
+    },
+    "write_authority": {
+      "type": "string",
+      "enum": [
+        "LVC_OS",
+        "EXTERNAL_SYSTEM",
+        "MOST_RECENT",
+        "MANUAL_REVIEW"
+      ],
+      "default": "LVC_OS",
+      "title": "Write Authority",
+      "description": "Which system may automatically write this field during synchronization."
+    },
+    "external_system": {
+      "type": "string",
+      "title": "External System",
+      "description": "Integration partner this authority applies to (e.g. 'servicetitan')."
+    },
+    "conflict_strategy_override": {
+      "type": "string",
+      "enum": [
+        "",
+        "LVC_WINS",
+        "EXTERNAL_WINS",
+        "MOST_RECENT_CHANGE_WINS",
+        "MANUAL_REVIEW"
+      ],
+      "default": "",
+      "title": "Conflict Strategy Override",
+      "description": "Overrides the SyncPolicy conflict strategy for this specific field. Empty means inherit policy strategy."
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Is Active"
+    },
+    "effective_from": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Effective From"
+    },
+    "effective_to": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Effective To"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "title": "Version"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "authority_id",
+    "authority_key",
+    "entity_type",
+    "field_name",
+    "write_authority"
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "name": "AppointmentSyncWatermark",
+  "type": "object",
+  "properties": {
+    "watermark_key": {
+      "type": "string",
+      "title": "Watermark Key",
+      "description": "Unique key identifying this watermark (e.g. 'appointment_go_live'). One per (tenant, environment) pair."
+    },
+    "sync_strategy": {
+      "type": "string",
+      "enum": [
+        "new_and_active_appointments_only",
+        "full_historical_backfill"
+      ],
+      "default": "new_and_active_appointments_only",
+      "title": "Synchronization Strategy"
+    },
+    "activation_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activation Timestamp"
+    },
+    "environment": {
+      "type": "string",
+      "title": "Environment"
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant ID"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "disabled"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "last_created_scan_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Created Scan At",
+      "description": "High-water mark for the createdOnOrAfter cursor. Only advanced after a full recovery window completes successfully."
+    },
+    "last_modified_scan_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Modified Scan At",
+      "description": "High-water mark for the modifiedOnOrAfter cursor. Only advanced after a full recovery window completes successfully."
+    },
+    "recovery_window_start": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Recovery Window Start"
+    },
+    "recovery_window_end": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Recovery Window End"
+    },
+    "recovery_window_status": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "in_progress",
+        "completed",
+        "failed"
+      ],
+      "default": "idle",
+      "title": "Recovery Window Status"
+    },
+    "recovery_window_errors": {
+      "type": "number",
+      "default": 0,
+      "title": "Recovery Window Errors"
+    },
+    "recovery_overlap_minutes": {
+      "type": "number",
+      "default": 5,
+      "title": "Recovery Overlap Minutes"
+    },
+    "appointments_imported_since_activation": {
+      "type": "number",
+      "default": 0,
+      "title": "Appointments Imported Since Activation"
+    },
+    "appointments_imported_on_demand": {
+      "type": "number",
+      "default": 0,
+      "title": "Appointments Imported On Demand"
+    },
+    "webhook_creates_completed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Creates Completed"
+    },
+    "webhook_updates_completed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Updates Completed"
+    },
+    "webhook_events_skipped_pre_activation": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Skipped (Pre-Activation)"
+    },
+    "webhook_events_deferred": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Deferred"
+    },
+    "webhook_events_failed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Failed"
+    },
+    "webhook_duplicate_events_ignored": {
+      "type": "number",
+      "default": 0,
+      "title": "Duplicate Webhook Events Ignored"
+    },
+    "webhook_events_processed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Processed (Total)"
+    },
+    "webhook_stale_events_ignored": {
+      "type": "number",
+      "default": 0,
+      "title": "Stale Webhook Events Ignored"
+    },
+    "appointments_canceled": {
+      "type": "number",
+      "default": 0,
+      "title": "Appointments Canceled"
+    },
+    "appointments_completed": {
+      "type": "number",
+      "default": 0,
+      "title": "Appointments Completed"
+    },
+    "appointments_deferred": {
+      "type": "number",
+      "default": 0,
+      "title": "Appointments Deferred"
+    },
+    "deferred_appointments_retried": {
+      "type": "number",
+      "default": 0,
+      "title": "Deferred Appointments Retried"
+    },
+    "deferred_appointments_completed": {
+      "type": "number",
+      "default": 0,
+      "title": "Deferred Appointments Completed"
+    },
+    "customer_hydrations_attempted": {
+      "type": "number",
+      "default": 0,
+      "title": "Customer Hydrations Attempted"
+    },
+    "customer_hydrations_completed": {
+      "type": "number",
+      "default": 0,
+      "title": "Customer Hydrations Completed"
+    },
+    "customer_hydrations_failed": {
+      "type": "number",
+      "default": 0,
+      "title": "Customer Hydrations Failed"
+    },
+    "unresolved_technician_assignments": {
+      "type": "number",
+      "default": 0,
+      "title": "Unresolved Technician Assignments"
+    },
+    "recovery_events_processed": {
+      "type": "number",
+      "default": 0,
+      "title": "Recovery Events Processed"
+    },
+    "last_successful_sync_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Successful Sync At"
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "backfill_status": {
+      "type": "string",
+      "enum": [
+        "never_started",
+        "disabled",
+        "confirmed",
+        "in_progress",
+        "completed"
+      ],
+      "default": "never_started",
+      "title": "Backfill Status"
+    },
+    "backfill_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Backfill Started At"
+    },
+    "backfill_confirmed_by": {
+      "type": "string",
+      "title": "Backfill Confirmed By"
+    },
+    "backfill_scope_estimate": {
+      "type": "number",
+      "title": "Backfill Scope Estimate"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "watermark_key",
+    "sync_strategy",
+    "environment",
+    "tenant_id"
+  ]
+}

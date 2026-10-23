@@ -1,0 +1,108 @@
+{
+  "name": "PropertyProfile",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "address": {
+      "type": "string",
+      "title": "Property Address"
+    },
+    "city": {
+      "type": "string",
+      "title": "City"
+    },
+    "state": {
+      "type": "string",
+      "title": "State"
+    },
+    "zip": {
+      "type": "string",
+      "title": "Zip"
+    },
+    "front_photo": {
+      "type": "string",
+      "title": "Front of House Photo"
+    },
+    "left_photo": {
+      "type": "string",
+      "title": "Left Side Photo"
+    },
+    "right_photo": {
+      "type": "string",
+      "title": "Right Side Photo"
+    },
+    "rear_photo": {
+      "type": "string",
+      "title": "Rear of House Photo"
+    },
+    "roof_photo": {
+      "type": "string",
+      "title": "Roof Overview Photo"
+    },
+    "building_type": {
+      "type": "string",
+      "enum": [
+        "Single Family",
+        "Townhouse",
+        "Multi-Family",
+        "Condo",
+        "Commercial",
+        "Other"
+      ],
+      "title": "Building Type"
+    },
+    "stories": {
+      "type": "number",
+      "title": "Stories"
+    },
+    "roof_type": {
+      "type": "string",
+      "enum": [
+        "Gable",
+        "Hip",
+        "Flat",
+        "Shed",
+        "Gambrel",
+        "Mansard",
+        "Other"
+      ],
+      "title": "Roof Type"
+    },
+    "construction_type": {
+      "type": "string",
+      "enum": [
+        "Wood Frame",
+        "Brick Veneer",
+        "Solid Masonry",
+        "Steel Frame",
+        "Concrete",
+        "Other"
+      ],
+      "title": "Construction Type"
+    },
+    "chimney_locations": {
+      "type": "string",
+      "title": "Chimney Locations",
+      "description": "e.g. Front, Rear, East side"
+    },
+    "general_notes": {
+      "type": "string",
+      "title": "General Notes"
+    },
+    "last_inspection_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Last Inspection Date"
+    }
+  },
+  "required": [
+    "address"
+  ]
+}

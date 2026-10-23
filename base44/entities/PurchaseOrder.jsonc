@@ -1,0 +1,390 @@
+{
+  "name": "PurchaseOrder",
+  "type": "object",
+  "properties": {
+    "po_number": {
+      "type": "string",
+      "title": "PO Number",
+      "description": "e.g. PO-000001"
+    },
+    "vendor_id": {
+      "type": "string",
+      "title": "Vendor ID",
+      "description": "Links to Vendor record. Resolved via servicetitan_vendor_id."
+    },
+    "vendor_name": {
+      "type": "string",
+      "title": "Vendor Name",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "servicetitan_vendor_id": {
+      "type": "string",
+      "title": "ServiceTitan Vendor ID",
+      "description": "Snapshot of the vendor's ST ID for immutable linkage. The canonical link key \u2014 matched ONLY by this field, never by vendor name."
+    },
+    "warehouse_location_id": {
+      "type": "string",
+      "title": "Ship-To Warehouse Location ID",
+      "description": "Links to WarehouseLocation record where items will be received"
+    },
+    "warehouse_name": {
+      "type": "string",
+      "title": "Ship-To Warehouse Name",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "servicetitan_warehouse_id": {
+      "type": "string",
+      "title": "ServiceTitan Warehouse ID",
+      "description": "Snapshot of the warehouse's ST ID for immutable linkage. Maps to the API inventoryLocationId field which may reference any inventory location type (warehouse, truck, etc.) modeled by WarehouseLocation.location_type."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "approved",
+        "sent",
+        "vendor_confirmed",
+        "partially_received",
+        "received",
+        "closed",
+        "cancelled"
+      ],
+      "default": "draft",
+      "title": "Status",
+      "description": "ServiceTitan-owned source lifecycle status. Overwritten by inbound sync. Contains ONLY source lifecycle values \u2014 no LVC workflow states. Adapter normalizes API TitleCase values to lowercase (Pending\u2192draft, Sent\u2192sent, Received\u2192received, Canceled\u2192cancelled, Partially Received\u2192partially_received). Unknown values are logged and classified as conflict, never silently mapped."
+    },
+    "lvc_workflow_status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "awaiting_manager_approval",
+        "approved_for_send",
+        "sent_to_vendor",
+        "awaiting_delivery",
+        "partially_received",
+        "fully_received",
+        "awaiting_close",
+        "exception_review",
+        "completed",
+        "cancelled"
+      ],
+      "default": "draft",
+      "title": "LVC Workflow Status",
+      "description": "LVC-owned internal procurement workflow status. NEVER overwritten by ServiceTitan synchronization. Separate from the ST-owned status field."
+    },
+    "order_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Order Date",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "expected_delivery_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Expected Delivery Date",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "actual_delivery_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Actual Delivery Date",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "subtotal": {
+      "type": "number",
+      "default": 0,
+      "title": "Subtotal",
+      "description": "ServiceTitan-owned. Derived (total - tax_amount - shipping_amount). Overwritten by inbound sync."
+    },
+    "tax_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Tax Amount",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "shipping_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Shipping Amount",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "total": {
+      "type": "number",
+      "default": 0,
+      "title": "Total",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "replenishment_origin": {
+      "type": "boolean",
+      "default": false,
+      "title": "Created from Replenishment",
+      "description": "LVC-owned. True when auto-generated from the Replenishment Engine. Never overwritten by ServiceTitan."
+    },
+    "replenishment_ids": {
+      "type": "string",
+      "title": "Replenishment IDs (JSON)",
+      "description": "LVC-owned. JSON array of replenishment request IDs. Never overwritten by ServiceTitan."
+    },
+    "parent_po_id": {
+      "type": "string",
+      "title": "Parent PO ID",
+      "description": "LVC-owned. When auto-created from a partial receipt. Never overwritten by ServiceTitan."
+    },
+    "parent_po_number": {
+      "type": "string",
+      "title": "Parent PO Number",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "partial_receipt_origin": {
+      "type": "boolean",
+      "default": false,
+      "title": "Created from Partial Receipt",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "line_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Line Count",
+      "description": "ServiceTitan-owned. Derived from items.length. Overwritten by inbound sync."
+    },
+    "total_quantity_ordered": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Quantity Ordered",
+      "description": "ServiceTitan-owned. Derived from sum of items[].quantity. Overwritten by inbound sync."
+    },
+    "total_quantity_received": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Quantity Received",
+      "description": "ServiceTitan-owned. Derived from sum of items[].quantityReceived. Overwritten by inbound sync."
+    },
+    "received_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "Received Percentage",
+      "description": "ServiceTitan-owned. Derived. Overwritten by inbound sync."
+    },
+    "lines_sync_status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "pending",
+        "partial",
+        "complete",
+        "failed"
+      ],
+      "default": "not_started",
+      "title": "Lines Sync Status",
+      "description": "LVC-owned. Tracks the completeness of line-level material dependency resolution for this header. Because PO lines are embedded in the header response, this field tracks material dependency resolution \u2014 not separate-endpoint pagination. A header may be created before all line material dependencies resolve."
+    },
+    "lines_expected_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Lines Expected Count",
+      "description": "LVC-owned. Number of lines expected from the source system (items.length). Updated during sync."
+    },
+    "lines_synced_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Lines Synced Count",
+      "description": "LVC-owned. Number of lines successfully synchronized (material dependency resolved)."
+    },
+    "lines_last_sync_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Lines Last Sync At",
+      "description": "LVC-owned. Timestamp of the last line synchronization attempt."
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By",
+      "description": "LVC-owned. Internal approval workflow. Never overwritten by ServiceTitan."
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "sent_by": {
+      "type": "string",
+      "title": "Sent By",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "sent_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Sent At",
+      "description": "LVC-owned. When LVC initiated a send action. Distinct from the ST-owned servicetitan_sent_on field. Never overwritten by ServiceTitan."
+    },
+    "vendor_confirmed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Vendor Confirmed At",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "closed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Closed At",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "cancelled_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Cancelled At",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "cancellation_reason": {
+      "type": "string",
+      "title": "Cancellation Reason",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "approval_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected",
+        "requires_review"
+      ],
+      "default": "pending",
+      "title": "Approval Status",
+      "description": "LVC-owned. Narrower approval decision field, separate from the full lvc_workflow_status lifecycle. Never overwritten by ServiceTitan."
+    },
+    "approval_history_json": {
+      "type": "string",
+      "title": "Approval History (JSON)",
+      "description": "LVC-owned. Append-only JSON of approval events. Never overwritten by ServiceTitan."
+    },
+    "servicetitan_project_id": {
+      "type": "string",
+      "title": "ServiceTitan Project ID",
+      "description": "ServiceTitan-owned. Int64-safe string snapshot of the ST Project ID. Display and audit only. Does NOT create a Project dependency. Does NOT block sync if unresolved. Overwritten by inbound sync."
+    },
+    "servicetitan_job_id": {
+      "type": "string",
+      "title": "ServiceTitan Job ID",
+      "description": "ServiceTitan-owned. Int64-safe string snapshot of the ST Job ID. Optional. Drives Job Hub procurement visibility, job costing, and procurement history. Does NOT create a blocking dependency \u2014 POs without a job (stock/replenishment) are allowed. Overwritten by inbound sync. Promoted per Stage 2E.2A Schema Promotion Rule (operational workflow)."
+    },
+    "servicetitan_sent_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Sent On",
+      "description": "ServiceTitan-owned lifecycle snapshot. When ServiceTitan recorded the PO as sent to the vendor. Distinct from the LVC-owned sent_at field. Drives vendor lead-time calculation, procurement aging, overdue purchasing, and vendor KPI reporting. Optional. Overwritten by inbound sync. Promoted per Stage 2E.2A Schema Promotion Rule (operational workflow + reporting)."
+    },
+    "servicetitan_purchase_order_type_id": {
+      "type": "string",
+      "title": "ServiceTitan Purchase Order Type ID",
+      "description": "ServiceTitan-owned snapshot. Int64-safe string. Optional. PO Type categorization (e.g. Warranty, Stock, Job). Not a blocking dependency \u2014 POs are never deferred if the type name is unresolved. Overwritten by inbound sync. Promoted per Stage 2E.2A Schema Promotion Rule (owner-approved display requirement)."
+    },
+    "servicetitan_purchase_order_type_name": {
+      "type": "string",
+      "title": "ServiceTitan Purchase Order Type Name",
+      "description": "ServiceTitan-owned snapshot. Denormalized PO Type name resolved from the PO Types endpoint. Display and filtering only \u2014 no behavioral flags. Left null if the type name cannot be resolved (non-blocking). Overwritten by inbound sync. Promoted per Stage 2E.2A Schema Promotion Rule (owner-approved display requirement)."
+    },
+    "servicetitan_purchase_order_id": {
+      "type": "string",
+      "title": "ServiceTitan Purchase Order ID",
+      "description": "Permanent external identity. Stored as string for int64 safety. The canonical sync key \u2014 matched ONLY by this field, never by PO number or vendor name. Once assigned, not changed through normal UI edits."
+    },
+    "servicetitan_po_number": {
+      "type": "string",
+      "title": "ServiceTitan PO Number",
+      "description": "ServiceTitan-owned. Human-readable PO number from ST. Overwritten by inbound sync."
+    },
+    "servicetitan_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "ServiceTitan Active Status",
+      "description": "ServiceTitan-owned. When false the PO is preserved and marked cancelled \u2014 not deleted."
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deferred",
+        "failed",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status",
+      "description": "synced = last sync succeeded; pending = awaiting sync; conflict = local/st conflict; deferred = dependency not resolved; failed = non-retriable failure; deleted = soft-deleted by ST."
+    },
+    "servicetitan_last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync"
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At",
+      "description": "Used for event ordering protection."
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On",
+      "description": "Used for stale-event detection."
+    },
+    "servicetitan_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Created On"
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version"
+    },
+    "servicetitan_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "manual",
+        "api"
+      ],
+      "title": "ServiceTitan Source"
+    },
+    "servicetitan_raw_data": {
+      "type": "string",
+      "title": "ServiceTitan Raw Data (JSON)",
+      "description": "Preserved unknown external fields (summary, createdById, invoiceId, batchId, budgetCodeId, businessUnitId, technicianId, shipTo, vendorDocumentNumber, customFields, and all line-level raw fields). ServiceTitan-owned. Overwritten by inbound sync. Per Stage 2E.2A Schema Promotion Rule, these fields remain in raw data \u2014 no LVC operational workflow queries them."
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual",
+        "api_export"
+      ],
+      "title": "Import Source"
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes",
+      "description": "LVC-owned internal notes. Never overwritten by ServiceTitan."
+    }
+  },
+  "required": [
+    "vendor_id",
+    "warehouse_location_id",
+    "status"
+  ]
+}

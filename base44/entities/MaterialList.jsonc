@@ -1,0 +1,44 @@
+{
+  "name": "MaterialList",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "estimate_id": {
+      "type": "string",
+      "title": "Estimate ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "items_json": {
+      "type": "string",
+      "title": "Material Items JSON"
+    },
+    "total_cost": {
+      "type": "number",
+      "title": "Total Material Cost"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "ordered",
+        "received",
+        "partial"
+      ],
+      "default": "pending",
+      "title": "Status"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "job_id"
+  ]
+}

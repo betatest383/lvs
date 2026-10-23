@@ -1,0 +1,91 @@
+{
+  "name": "CorrectiveAction",
+  "type": "object",
+  "properties": {
+    "audit_number": {
+      "type": "string",
+      "title": "Audit Number"
+    },
+    "audit_id": {
+      "type": "string",
+      "title": "Audit Entity ID"
+    },
+    "description": {
+      "type": "string",
+      "title": "Corrective Action Description"
+    },
+    "checklist_item": {
+      "type": "string",
+      "title": "Checklist Item"
+    },
+    "section": {
+      "type": "string",
+      "title": "Section"
+    },
+    "assigned_employee_registry_id": {
+      "type": "string",
+      "title": "Assigned Employee Registry ID",
+      "description": "Links to EmployeeRegistry record \u2014 the single source of truth for corrective action assignment"
+    },
+    "assigned_employee": {
+      "type": "string",
+      "title": "Assigned Employee",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "assigned_employee_email": {
+      "type": "string",
+      "title": "Assigned Employee Email",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Due Date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Open",
+        "In Progress",
+        "Completed",
+        "Overdue",
+        "Verified"
+      ],
+      "default": "Open",
+      "title": "Status"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "default": "Medium",
+      "title": "Priority"
+    },
+    "verified_by": {
+      "type": "string",
+      "title": "Verified By"
+    },
+    "completion_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Completion Date"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    }
+  },
+  "required": [
+    "description",
+    "assigned_employee",
+    "due_date"
+  ]
+}

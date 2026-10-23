@@ -1,0 +1,46 @@
+{
+  "name": "IdStandard",
+  "type": "object",
+  "properties": {
+    "prefix": {
+      "type": "string",
+      "title": "Prefix",
+      "description": "2-letter department code used in all LVC OS IDs (e.g. WH, FO, CS)"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department",
+      "description": "Full department name this prefix maps to"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "description": "What this department owns within LVC OS"
+    },
+    "id_pattern": {
+      "type": "string",
+      "title": "ID Pattern",
+      "description": "Example pattern (e.g. WH-101, WH-102...)"
+    },
+    "sequence_start": {
+      "type": "number",
+      "default": 1,
+      "title": "Sequence Start"
+    },
+    "next_sequence": {
+      "type": "number",
+      "default": 1,
+      "title": "Next Sequence Number",
+      "description": "Tracks the next available number for new IDs under this prefix"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    }
+  },
+  "required": [
+    "prefix",
+    "department"
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "name": "EmployeeOnboarding",
+  "type": "object",
+  "properties": {
+    "onboarding_id": {
+      "type": "string",
+      "title": "Onboarding ID",
+      "description": "e.g. ONB-0001"
+    },
+    "employee_registry_id": {
+      "type": "string",
+      "title": "Employee Registry ID",
+      "description": "Links to EmployeeRegistry record \u2014 the single source of truth for onboarding"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID",
+      "description": "Links to EmployeeRegistry"
+    },
+    "primary_role": {
+      "type": "string",
+      "title": "Primary Role"
+    },
+    "role_id": {
+      "type": "string",
+      "title": "Role ID",
+      "description": "Links to RoleRegistry"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "supervisor": {
+      "type": "string",
+      "title": "Supervisor"
+    },
+    "supervisor_id": {
+      "type": "string",
+      "title": "Supervisor Employee ID"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Start Date"
+    },
+    "target_completion_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Target Completion Date"
+    },
+    "current_phase": {
+      "type": "number",
+      "default": 1,
+      "title": "Current Phase"
+    },
+    "overall_completion_pct": {
+      "type": "number",
+      "default": 0,
+      "title": "Overall Completion %"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "In Progress",
+        "Waiting",
+        "Completed",
+        "On Hold",
+        "Cancelled"
+      ],
+      "default": "Planned",
+      "title": "Status"
+    },
+    "phase1_pre_hire": {
+      "type": "string",
+      "title": "Phase 1: Pre-Hire (JSON)"
+    },
+    "phase2_system_setup": {
+      "type": "string",
+      "title": "Phase 2: System Setup (JSON)"
+    },
+    "phase3_training": {
+      "type": "string",
+      "title": "Phase 3: Training (JSON)"
+    },
+    "phase4_policies": {
+      "type": "string",
+      "title": "Phase 4: Policies (JSON)"
+    },
+    "phase5_certifications": {
+      "type": "string",
+      "title": "Phase 5: Certifications (JSON)"
+    },
+    "phase6_equipment": {
+      "type": "string",
+      "title": "Phase 6: Equipment (JSON)"
+    },
+    "phase7_fleet": {
+      "type": "string",
+      "title": "Phase 7: Fleet (JSON)"
+    },
+    "phase8_dept_training": {
+      "type": "string",
+      "title": "Phase 8: Department Training (JSON)"
+    },
+    "phase9_reviews": {
+      "type": "string",
+      "title": "Phase 9: Manager Reviews (JSON)"
+    },
+    "tasks": {
+      "type": "string",
+      "title": "Tasks (JSON)"
+    },
+    "assigned_equipment_package": {
+      "type": "string",
+      "title": "Assigned Equipment Package"
+    },
+    "assigned_truck": {
+      "type": "string",
+      "title": "Assigned Truck"
+    },
+    "assigned_software": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Assigned Software"
+    },
+    "role_change_review": {
+      "type": "string",
+      "title": "Role Change Review (JSON)"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "onboarding_id",
+    "employee_name"
+  ]
+}

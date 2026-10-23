@@ -1,0 +1,134 @@
+{
+  "name": "EstimatePackageItem",
+  "type": "object",
+  "properties": {
+    "estimate_package_id": {
+      "type": "string",
+      "title": "Estimate Package ID",
+      "description": "Links to EstimatePackage header record"
+    },
+    "package_number": {
+      "type": "string",
+      "title": "Package Number",
+      "description": "Denormalized for reporting"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID",
+      "description": "Denormalized for filtering"
+    },
+    "estimate_item_id": {
+      "type": "string",
+      "title": "Estimate Item ID",
+      "description": "Authoritative link to DraftEstimateItem record \u2014 the primary relationship. This is what the package is built from."
+    },
+    "repair_recommendation_id": {
+      "type": "string",
+      "title": "Repair Recommendation ID",
+      "description": "Traceability only \u2014 denormalized from the Estimate Item. Not the authoritative relationship."
+    },
+    "recommendation_title": {
+      "type": "string",
+      "title": "Recommendation Title",
+      "description": "Denormalized snapshot for display traceability"
+    },
+    "service_catalog_id": {
+      "type": "string",
+      "title": "Service Catalog ID",
+      "description": "Denormalized from the Estimate Item for reporting"
+    },
+    "service_name": {
+      "type": "string",
+      "title": "Service Name",
+      "description": "Denormalized from ServiceCatalog via Estimate Item"
+    },
+    "service_code": {
+      "type": "string",
+      "title": "Service Code"
+    },
+    "quantity": {
+      "type": "number",
+      "default": 1,
+      "title": "Quantity"
+    },
+    "material_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Material Cost"
+    },
+    "labor_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Labor Cost"
+    },
+    "selling_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Selling Price"
+    },
+    "customer_description": {
+      "type": "string",
+      "title": "Customer Description",
+      "description": "Customer-facing description for this line item"
+    },
+    "internal_description": {
+      "type": "string",
+      "title": "Internal Description",
+      "description": "Internal notes not shown to customer"
+    },
+    "is_shared_mobilization": {
+      "type": "boolean",
+      "default": false,
+      "title": "Shared Mobilization",
+      "description": "True when this item shares mobilization with another item in the same package"
+    },
+    "commission_type": {
+      "type": "string",
+      "enum": [
+        "percentage",
+        "flat_dollar",
+        "none"
+      ],
+      "default": "none",
+      "title": "Commission Type"
+    },
+    "commission_value": {
+      "type": "number",
+      "default": 0,
+      "title": "Commission Value"
+    },
+    "commission_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Commission Amount"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    },
+    "workflow_version": {
+      "type": "string",
+      "enum": [
+        "legacy",
+        "v2_package"
+      ],
+      "default": "v2_package",
+      "title": "Workflow Version"
+    },
+    "is_legacy": {
+      "type": "boolean",
+      "default": false,
+      "title": "Legacy"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "estimate_package_id",
+    "estimate_item_id",
+    "quantity"
+  ]
+}

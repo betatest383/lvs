@@ -1,0 +1,105 @@
+{
+  "name": "ProcurementOrder",
+  "properties": {
+    "approval_notes": {
+      "title": "Approval Notes",
+      "type": "string"
+    },
+    "approved_at": {
+      "format": "date-time",
+      "title": "Approved At",
+      "type": "string"
+    },
+    "approved_by": {
+      "title": "Approved By",
+      "type": "string"
+    },
+    "email_error": {
+      "title": "Email Error",
+      "type": "string"
+    },
+    "estimate_id": {
+      "title": "Sold Estimate ID",
+      "type": "string"
+    },
+    "estimate_package_id": {
+      "title": "Sold Estimate Package ID",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "job_id": {
+      "title": "Job ID",
+      "type": "string"
+    },
+    "line_items": {
+      "description": "JSON array of shortage items: inventory_master_id, item_name, sku, vendor_sku, quantity_ordered, unit_cost, line_total",
+      "title": "Line Items (JSON)",
+      "type": "string"
+    },
+    "notes": {
+      "title": "Notes",
+      "type": "string"
+    },
+    "procurement_order_number": {
+      "title": "Purchase Order Number",
+      "type": "string"
+    },
+    "sent_at": {
+      "format": "date-time",
+      "title": "Sent At",
+      "type": "string"
+    },
+    "sent_by": {
+      "title": "Sent By",
+      "type": "string"
+    },
+    "source": {
+      "default": "sold_estimate_shortage",
+      "title": "Source",
+      "type": "string"
+    },
+    "status": {
+      "default": "needs_review",
+      "enum": [
+        "needs_review",
+        "approved",
+        "sent_to_vendor",
+        "vendor_confirmed",
+        "received",
+        "cancelled",
+        "exception"
+      ],
+      "title": "Procurement Status",
+      "type": "string"
+    },
+    "subtotal": {
+      "default": 0,
+      "title": "Subtotal",
+      "type": "number"
+    },
+    "vendor_email": {
+      "format": "email",
+      "title": "Vendor Email",
+      "type": "string"
+    },
+    "vendor_id": {
+      "title": "Vendor ID",
+      "type": "string"
+    },
+    "vendor_name": {
+      "title": "Vendor Name",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "job_id",
+    "estimate_id",
+    "line_items",
+    "idempotency_key"
+  ],
+  "type": "object"
+}

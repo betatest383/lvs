@@ -1,0 +1,89 @@
+{
+  "name": "TechnicianDailySession",
+  "type": "object",
+  "properties": {
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Session Date"
+    },
+    "clock_in_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Clock-In Time"
+    },
+    "first_dispatch_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "First Dispatch Time"
+    },
+    "morning_workflow_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Morning Workflow Started At"
+    },
+    "morning_workflow_ended_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Morning Workflow Ended At"
+    },
+    "morning_workflow_duration_minutes": {
+      "type": "number",
+      "default": 0,
+      "title": "Morning Workflow Duration (Minutes)"
+    },
+    "first_job": {
+      "type": "string",
+      "title": "First Job (JSON)",
+      "description": "JSON object: { job_id, customer_name, address, service_date, job_type, arrival_window }"
+    },
+    "has_scheduled_job": {
+      "type": "boolean",
+      "default": false,
+      "title": "Has Scheduled Job Today"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "clocked_in",
+        "morning_workflow_active",
+        "ready_for_dispatch",
+        "dispatched",
+        "no_job_warehouse_tasks",
+        "completed"
+      ],
+      "default": "not_started",
+      "title": "Session Status"
+    },
+    "manager_override_used": {
+      "type": "boolean",
+      "default": false,
+      "title": "Manager Override Used"
+    },
+    "override_reason": {
+      "type": "string",
+      "title": "Override Reason"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "technician_email",
+    "date"
+  ]
+}

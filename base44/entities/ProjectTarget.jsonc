@@ -1,0 +1,37 @@
+{
+  "name": "ProjectTarget",
+  "type": "object",
+  "properties": {
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "prefix": {
+      "type": "string",
+      "title": "ID Prefix"
+    },
+    "target_sops": {
+      "type": "number",
+      "default": 0,
+      "title": "Target SOPs"
+    },
+    "target_workflows": {
+      "type": "number",
+      "default": 0,
+      "title": "Target Workflows"
+    },
+    "target_automations": {
+      "type": "number",
+      "default": 0,
+      "title": "Target Automations"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    }
+  },
+  "required": [
+    "department"
+  ]
+}

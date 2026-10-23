@@ -1,0 +1,500 @@
+{
+  "name": "InspectionQuestion",
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string",
+      "enum": [
+        "general_info",
+        "exterior",
+        "interior",
+        "firebox",
+        "damper",
+        "flue",
+        "chimney_cap",
+        "crown",
+        "flashing",
+        "smoke_chamber",
+        "liner",
+        "hearth",
+        "clearances",
+        "carbon_monoxide",
+        "water_damage",
+        "structural",
+        "other"
+      ],
+      "title": "Section"
+    },
+    "subsection": {
+      "type": "string",
+      "title": "Subsection"
+    },
+    "question_text": {
+      "type": "string",
+      "title": "Question Text"
+    },
+    "question_type": {
+      "type": "string",
+      "enum": [
+        "yes_no",
+        "select",
+        "multi_select",
+        "text",
+        "number",
+        "photo",
+        "rating"
+      ],
+      "title": "Question Type"
+    },
+    "question_role": {
+      "type": "string",
+      "enum": [
+        "observation",
+        "measurement",
+        "photo",
+        "calculation_input",
+        "derived_result",
+        "customer_information",
+        "administrative",
+        "verification"
+      ],
+      "default": "observation",
+      "title": "Question Role",
+      "description": "Classifies the purpose of this question. Roles determine which gap validations apply."
+    },
+    "question_purpose": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "safety",
+          "nfpa_code_compliance",
+          "documentation",
+          "customer_education",
+          "estimate_generation",
+          "material_calculation",
+          "repair_recommendation",
+          "before_after_gallery",
+          "before_gallery",
+          "after_gallery",
+          "customer_presentation",
+          "internal_technician_notes",
+          "sales_opportunity",
+          "warranty",
+          "membership",
+          "scheduling",
+          "warehouse_planning",
+          "fleet_planning",
+          "analytics",
+          "administrative"
+        ]
+      },
+      "title": "Question Purpose",
+      "description": "Multi-select. Classifies why this question exists. When set explicitly, the matrix will NOT infer."
+    },
+    "question_category": {
+      "type": "string",
+      "enum": [
+        "Clearance to Combustibles",
+        "Chimney Crown",
+        "Chimney Cap",
+        "Chase Cover",
+        "Flashing",
+        "Brick / Masonry",
+        "Mortar Joints",
+        "Chimney Liner",
+        "Smoke Chamber",
+        "Firebox",
+        "Damper",
+        "Hearth Extension",
+        "Appliance Venting",
+        "Wood Stove",
+        "Gas Appliance",
+        "Pellet Appliance",
+        "Boiler / Furnace Venting",
+        "Water Intrusion",
+        "Animal Entry",
+        "Structural Stability",
+        "Roof Access",
+        "Safety Equipment",
+        "Customer Concern",
+        "Measurements",
+        "Photos",
+        "Administrative"
+      ],
+      "title": "Question Category",
+      "description": "Groups related questions together regardless of form placement. When set explicitly, the matrix will NOT infer."
+    },
+    "inspection_type": {
+      "type": "string",
+      "enum": [
+        "interior",
+        "exterior",
+        "both"
+      ],
+      "default": "interior",
+      "title": "Interior / Exterior / Both"
+    },
+    "inspection_module": {
+      "type": "string",
+      "enum": [
+        "inspection_setup",
+        "interior",
+        "exterior",
+        "attic",
+        "roof",
+        "crawl_space",
+        "appliance",
+        "masonry",
+        "commercial",
+        "other"
+      ],
+      "default": "interior",
+      "title": "Inspection Module",
+      "description": "Single module ownership. Every question belongs to ONE module only. Shared questions (property info, customer concerns, authorization, inspection level) belong to inspection_setup."
+    },
+    "show_on_report": {
+      "type": "boolean",
+      "default": true,
+      "title": "Show on Customer Report"
+    },
+    "show_on_material_list": {
+      "type": "boolean",
+      "default": false,
+      "title": "Show on Material List Report"
+    },
+    "answer_options": {
+      "type": "string",
+      "title": "Answer Options (comma separated)"
+    },
+    "sort_order": {
+      "type": "number",
+      "title": "Sort Order",
+      "description": "Orders sibling questions within the same anchor group. When a question uses Fixed or After Last Visible Triggering Dependency placement, sort_order only breaks ties among siblings; it no longer controls absolute form position."
+    },
+    "display_after_question_id": {
+      "type": "string",
+      "title": "Display After (Anchor Question)",
+      "description": "Explicit anchor for a conditional follow-up. Used only when placement_mode is 'fixed_after_selected'. When set to another InspectionQuestion id present on the same form, this question renders directly below its anchor (and any nested follow-ups of this question render directly below it) whenever its own visibility condition is met \u2014 regardless of its sort_order. Setting or clearing this field never moves the question in the database during form completion."
+    },
+    "placement_mode": {
+      "type": "string",
+      "enum": [
+        "standard_sort",
+        "fixed_after_selected",
+        "after_last_visible_trigger"
+      ],
+      "default": "standard_sort",
+      "title": "Placement Mode",
+      "description": "Controls how this question is positioned on the rendered form, chosen explicitly per question. standard_sort = positioned by Sort Order (base/root). fixed_after_selected = pinned directly below the display_after_question_id anchor (optional override for a single fixed parent). after_last_visible_trigger = rendered immediately after the last visible referenced dependency whose condition is currently met (dynamic placement for follow-ups with multiple possible triggers). When after_last_visible_trigger is set, the fixed Display After anchor is ignored and Sort Order is informational only. When unset, the form infers the mode from display_after_question_id and the visibility_rule (backward compatible)."
+    },
+    "required_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Required"
+    },
+    "visibility_rule": {
+      "type": "string",
+      "title": "Visibility Rule JSON"
+    },
+    "help_text": {
+      "type": "string",
+      "title": "Help Text"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "sub_fields": {
+      "type": "string",
+      "title": "Sub Fields (JSON)"
+    },
+    "nfpa_trigger": {
+      "type": "boolean",
+      "default": false,
+      "title": "NFPA Trigger",
+      "description": "When true, marks this as an NFPA 211 code question. Overrides inference."
+    },
+    "safety_trigger": {
+      "type": "boolean",
+      "default": false,
+      "title": "Safety Trigger",
+      "description": "When true, marks this as a safety concern. Overrides inference."
+    },
+    "critical_failure": {
+      "type": "boolean",
+      "default": false,
+      "title": "Critical Failure",
+      "description": "When true, a failing answer triggers a critical severity finding."
+    },
+    "derived_result_produced": {
+      "type": "string",
+      "title": "Derived Result Produced",
+      "description": "Description of the auto-calculated result this question produces."
+    },
+    "photo_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Photo Required",
+      "description": "Legacy boolean flag. Prefer the photo_requirement enum field for configurable photo requirements."
+    },
+    "photo_requirement": {
+      "type": "string",
+      "enum": [
+        "not_required",
+        "optional",
+        "required_on_pass",
+        "required_on_fail",
+        "always_required",
+        "specific_answers"
+      ],
+      "default": "not_required",
+      "title": "Photo Requirement",
+      "description": "Configurable independently of question type. not_required = no photo enforcement; optional = photos allowed but not enforced; required_on_pass = photos required only when answer is Pass/Yes; required_on_fail = photos required only when answer is Fail/No/Deficient; always_required = photos required regardless of answer; specific_answers = photos required only when the answer matches one of the values in photo_required_answer_values."
+    },
+    "photo_required_answer_values": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Photo Required Answer Values",
+      "description": "When photo_requirement is 'specific_answers', photos are required only when the technician's answer matches one of these values. Values are compared case-insensitively against the stored answer."
+    },
+    "minimum_photos": {
+      "type": "number",
+      "default": 0,
+      "title": "Minimum Photos",
+      "description": "Minimum number of photos required when the photo requirement is active. Default 0."
+    },
+    "maximum_photos": {
+      "type": "number",
+      "title": "Maximum Photos",
+      "description": "Optional. When set, caps the number of photos a technician can attach."
+    },
+    "require_caption": {
+      "type": "boolean",
+      "default": false,
+      "title": "Require Caption",
+      "description": "When true, each attached photo must include a text caption."
+    },
+    "require_annotation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Require Annotation",
+      "description": "When true, each attached photo must be annotated."
+    },
+    "require_measurement_photo": {
+      "type": "boolean",
+      "default": false,
+      "title": "Require Measurement Photo",
+      "description": "When true, at least one photo must be a measurement photo."
+    },
+    "allow_photo_override": {
+      "type": "boolean",
+      "default": true,
+      "title": "Allow Manager Override",
+      "description": "When false, the photo requirement cannot be bypassed by a manager override \u2014 the technician must satisfy the minimum photo count."
+    },
+    "photo_override_reason_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Override Reason Required",
+      "description": "When true, a manager override must include a written reason before the requirement can be bypassed."
+    },
+    "allow_annotation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Allow Annotation"
+    },
+    "photo_labels_config": {
+      "type": "string",
+      "title": "Photo Labels"
+    },
+    "photo_customer_visible": {
+      "type": "boolean",
+      "default": true,
+      "title": "Customer Visible"
+    },
+    "photo_internal_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Internal Only"
+    },
+    "photo_before_gallery": {
+      "type": "boolean",
+      "default": false,
+      "title": "Before Gallery"
+    },
+    "photo_after_gallery": {
+      "type": "boolean",
+      "default": false,
+      "title": "After Gallery"
+    },
+    "photo_customer_presentation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Customer Presentation"
+    },
+    "photo_description_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Photo Description Required"
+    },
+    "output_customer_pdf": {
+      "type": "boolean",
+      "title": "Customer PDF",
+      "description": "When set, overrides show_on_report for PDF routing."
+    },
+    "output_internal_pdf": {
+      "type": "boolean",
+      "title": "Internal PDF"
+    },
+    "output_inspection_summary": {
+      "type": "boolean",
+      "title": "Inspection Summary"
+    },
+    "output_customer_summary": {
+      "type": "boolean",
+      "title": "Customer Summary"
+    },
+    "output_material_list": {
+      "type": "boolean",
+      "title": "Material List",
+      "description": "When set, overrides show_on_material_list for material list routing."
+    },
+    "output_before_gallery": {
+      "type": "boolean",
+      "title": "Before Gallery"
+    },
+    "output_after_gallery": {
+      "type": "boolean",
+      "title": "After Gallery"
+    },
+    "output_internal_gallery": {
+      "type": "boolean",
+      "title": "Internal Gallery"
+    },
+    "output_customer_presentation": {
+      "type": "boolean",
+      "title": "Customer Presentation"
+    },
+    "output_repair_engine": {
+      "type": "boolean",
+      "title": "Repair Engine"
+    },
+    "output_estimate_engine": {
+      "type": "boolean",
+      "title": "Estimate Engine"
+    },
+    "output_material_calculator": {
+      "type": "boolean",
+      "title": "Material Calculator"
+    },
+    "output_scope_of_work": {
+      "type": "boolean",
+      "title": "Scope of Work"
+    },
+    "output_scheduling": {
+      "type": "boolean",
+      "title": "Scheduling"
+    },
+    "output_warehouse": {
+      "type": "boolean",
+      "title": "Warehouse"
+    },
+    "output_fleet": {
+      "type": "boolean",
+      "title": "Fleet"
+    },
+    "output_job_hub": {
+      "type": "boolean",
+      "title": "Job Hub"
+    },
+    "output_analytics": {
+      "type": "boolean",
+      "title": "Analytics"
+    },
+    "output_timeline": {
+      "type": "boolean",
+      "title": "Timeline"
+    },
+    "creates_finding": {
+      "type": "boolean",
+      "default": false,
+      "title": "Creates Finding"
+    },
+    "finding_type_config": {
+      "type": "string",
+      "title": "Finding Type",
+      "description": "The deficiency type this question produces when it triggers a finding."
+    },
+    "severity_config": {
+      "type": "string",
+      "enum": [
+        "info",
+        "minor",
+        "moderate",
+        "major",
+        "critical"
+      ],
+      "title": "Severity"
+    },
+    "repair_system_config": {
+      "type": "string",
+      "enum": [
+        "crown",
+        "masonry",
+        "liner",
+        "smoke_chamber",
+        "cap_chase",
+        "other",
+        "none"
+      ],
+      "default": "none",
+      "title": "Repair System"
+    },
+    "confidence_weight": {
+      "type": "number",
+      "default": 0,
+      "title": "Confidence Weight"
+    },
+    "suggested_pricebook_item": {
+      "type": "string",
+      "title": "Suggested Pricebook Item"
+    },
+    "good_option": {
+      "type": "string",
+      "title": "Good Option"
+    },
+    "better_option": {
+      "type": "string",
+      "title": "Better Option"
+    },
+    "best_option": {
+      "type": "string",
+      "title": "Best Option"
+    },
+    "customer_explanation": {
+      "type": "string",
+      "title": "Customer Explanation"
+    },
+    "internal_repair_notes": {
+      "type": "string",
+      "title": "Internal Notes"
+    },
+    "linked_standard_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Linked Inspection Standards",
+      "description": "References to InspectionStandard records. Questions inherit pass/fail criteria, authority references, customer explanations, and repair guidance from linked standards without duplicating information."
+    }
+  },
+  "required": [
+    "category",
+    "question_text",
+    "question_type"
+  ]
+}

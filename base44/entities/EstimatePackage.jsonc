@@ -1,0 +1,272 @@
+{
+  "name": "EstimatePackage",
+  "type": "object",
+  "properties": {
+    "package_number": {
+      "type": "string",
+      "title": "Package Number",
+      "description": "e.g. PKG-000001"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "estimate_id": {
+      "type": "string",
+      "title": "Estimate ID",
+      "description": "Links to parent Estimate record (legacy compatibility)"
+    },
+    "name": {
+      "type": "string",
+      "title": "Package Name",
+      "description": "e.g. 'Good \u2014 Essential Repairs', 'Better \u2014 Comprehensive', 'Best \u2014 Complete Restoration'"
+    },
+    "option_type": {
+      "type": "string",
+      "enum": [
+        "good",
+        "better",
+        "best",
+        "standalone",
+        "combined"
+      ],
+      "default": "standalone",
+      "title": "Option Type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "configured",
+        "priced",
+        "presented",
+        "accepted",
+        "declined",
+        "archived"
+      ],
+      "default": "draft",
+      "title": "Status"
+    },
+    "estimate_item_ids": {
+      "type": "string",
+      "title": "Estimate Item IDs (JSON)",
+      "description": "JSON array of DraftEstimateItem IDs included in this package \u2014 the authoritative relationship. Estimate Items reference Repair Recommendations and Service Catalog entries."
+    },
+    "included_service_ids": {
+      "type": "string",
+      "title": "Included Service IDs (JSON)",
+      "description": "Denormalized JSON array of ServiceCatalog IDs derived from the Estimate Items"
+    },
+    "traceable_recommendation_ids": {
+      "type": "string",
+      "title": "Traceable Recommendation IDs (JSON)",
+      "description": "Denormalized JSON array of RepairSystemRecommendation IDs \u2014 derived from Estimate Items for traceability only, not the authoritative relationship"
+    },
+    "included_materials": {
+      "type": "string",
+      "title": "Included Materials (JSON)",
+      "description": "JSON array of {material_id, material_name, quantity, unit, unit_price, chargeable_to_customer, customer_visible} aggregated from Estimate Items"
+    },
+    "scope_of_work_id": {
+      "type": "string",
+      "title": "Scope of Work ID",
+      "description": "Links to the authoritative ScopeOfWork record for this package"
+    },
+    "pricing_status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "pending",
+        "calculated",
+        "approved",
+        "locked",
+        "stale"
+      ],
+      "default": "not_started",
+      "title": "Pricing Status",
+      "description": "stale = pricing is out of date due to item changes; requires recalculation before proposal or execution"
+    },
+    "stale_reason": {
+      "type": "string",
+      "title": "Stale Reason",
+      "description": "Why pricing became stale: estimate_item_changed, item_removed, item_added, scope_regenerated, weekend_work_changed, membership_changed, manual"
+    },
+    "stale_item_id": {
+      "type": "string",
+      "title": "Stale Item ID",
+      "description": "The estimate_item_id that triggered the stale state"
+    },
+    "stale_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Stale At"
+    },
+    "weekend_work_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Weekend Work Required",
+      "description": "Option-specific flag. When true, the Weekend Work pricing modifier is eligible for THIS proposal option only. Never inferred from the appointment date. Editing this flag on one option (Good/Better/Best) never changes another option. Changing it after a pricing snapshot exists marks that snapshot stale and requires recalculation."
+    },
+    "proposal_stale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Proposal Stale",
+      "description": "True when proposal options referencing this package need regeneration"
+    },
+    "proposal_stale_reason": {
+      "type": "string",
+      "title": "Proposal Stale Reason"
+    },
+    "subtotal": {
+      "type": "number",
+      "default": 0,
+      "title": "Subtotal",
+      "description": "Sum of material costs + labor costs before margin"
+    },
+    "selling_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Selling Price"
+    },
+    "gross_profit": {
+      "type": "number",
+      "default": 0,
+      "title": "Gross Profit"
+    },
+    "gross_margin": {
+      "type": "number",
+      "default": 0,
+      "title": "Gross Margin (%)"
+    },
+    "gross_profit_per_day": {
+      "type": "number",
+      "default": 0,
+      "title": "Gross Profit Per Day"
+    },
+    "estimated_days": {
+      "type": "number",
+      "default": 1,
+      "title": "Estimated Days"
+    },
+    "estimated_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimated Hours"
+    },
+    "crew_requirements": {
+      "type": "string",
+      "title": "Crew Requirements (JSON)",
+      "description": "JSON array of {role, count, hours} defining crew composition"
+    },
+    "equipment_requirements": {
+      "type": "string",
+      "title": "Equipment Requirements (JSON)",
+      "description": "JSON array of {equipment_master_id, item_name, quantity, notes}"
+    },
+    "shared_mobilization_savings": {
+      "type": "number",
+      "default": 0,
+      "title": "Shared Mobilization Savings",
+      "description": "Dollar amount saved from shared mobilization across services in this package"
+    },
+    "commission_total": {
+      "type": "number",
+      "default": 0,
+      "title": "Commission Total"
+    },
+    "profitability_target_met": {
+      "type": "boolean",
+      "default": false,
+      "title": "Profitability Target Met"
+    },
+    "is_customer_facing": {
+      "type": "boolean",
+      "default": true,
+      "title": "Customer Facing"
+    },
+    "is_selected": {
+      "type": "boolean",
+      "default": false,
+      "title": "Selected",
+      "description": "True when this is the accepted package chosen by the customer"
+    },
+    "selected_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Selected At"
+    },
+    "selected_by": {
+      "type": "string",
+      "title": "Selected By"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    },
+    "workflow_version": {
+      "type": "string",
+      "enum": [
+        "legacy",
+        "v2_package"
+      ],
+      "default": "v2_package",
+      "title": "Workflow Version",
+      "description": "Identifies which workflow generated this record"
+    },
+    "package_version": {
+      "type": "number",
+      "default": 1,
+      "title": "Package Version",
+      "description": "Incremented when package is revised after pricing"
+    },
+    "is_legacy": {
+      "type": "boolean",
+      "default": false,
+      "title": "Legacy",
+      "description": "True when this package was migrated from a legacy estimate structure"
+    },
+    "is_authoritative": {
+      "type": "boolean",
+      "default": true,
+      "title": "Authoritative",
+      "description": "True when this is the current authoritative version (not superseded)"
+    },
+    "superseded_by_id": {
+      "type": "string",
+      "title": "Superseded By ID",
+      "description": "ID of the package that replaced this one, if superseded"
+    },
+    "solution_group_id": {
+      "type": "string",
+      "title": "Solution Group ID",
+      "description": "FUTURE: Links to a SolutionGroup record (reusable collection of Estimate Items). Not implemented in current phase \u2014 reserved for Version 2."
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "job_id",
+    "name",
+    "option_type",
+    "status"
+  ]
+}

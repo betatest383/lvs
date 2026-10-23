@@ -1,0 +1,94 @@
+{
+  "name": "EquipmentAcknowledgement",
+  "type": "object",
+  "properties": {
+    "acknowledgement_id": {
+      "type": "string",
+      "title": "Acknowledgement ID",
+      "description": "e.g. ACK-000001"
+    },
+    "equipment_id": {
+      "type": "string",
+      "title": "Equipment ID"
+    },
+    "equipment_name": {
+      "type": "string",
+      "title": "Equipment Name"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "manager_name": {
+      "type": "string",
+      "title": "Manager Name"
+    },
+    "action_type": {
+      "type": "string",
+      "enum": [
+        "assignment",
+        "reassignment",
+        "checkout",
+        "permanent_transfer",
+        "package_assignment"
+      ],
+      "default": "assignment",
+      "title": "Action Type"
+    },
+    "condition": {
+      "type": "string",
+      "enum": [
+        "new",
+        "good",
+        "fair",
+        "poor",
+        "damaged"
+      ],
+      "default": "good",
+      "title": "Condition at Handover"
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Photos (optional)"
+    },
+    "signature_data_url": {
+      "type": "string",
+      "title": "Electronic Signature"
+    },
+    "acknowledgement_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Acknowledgement Date"
+    },
+    "acknowledgement_statement": {
+      "type": "string",
+      "default": "I acknowledge receipt of the listed company assets. I understand I am responsible for maintaining, safeguarding, and returning company property in accordance with company policy.",
+      "title": "Acknowledgement Statement"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "assigned_by": {
+      "type": "string",
+      "title": "Assigned By"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "equipment_name",
+    "employee_name",
+    "signature_data_url",
+    "acknowledgement_date"
+  ]
+}

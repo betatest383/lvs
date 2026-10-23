@@ -1,0 +1,495 @@
+{
+  "name": "Job",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_number": {
+      "type": "string",
+      "title": "Customer Number"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "location_id": {
+      "type": "string",
+      "title": "Location ID"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Primary Technician Email"
+    },
+    "technician_emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Assigned Technician Emails"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name(s)"
+    },
+    "lead_technician_email": {
+      "type": "string",
+      "title": "Lead Technician Email"
+    },
+    "lead_technician_name": {
+      "type": "string",
+      "title": "Lead Technician Name"
+    },
+    "apprentice_email": {
+      "type": "string",
+      "title": "Apprentice / Helper Email"
+    },
+    "apprentice_name": {
+      "type": "string",
+      "title": "Apprentice / Helper Name"
+    },
+    "assigned_truck_id": {
+      "type": "string",
+      "title": "Assigned Truck ID"
+    },
+    "assigned_truck_number": {
+      "type": "string",
+      "title": "Assigned Truck Number"
+    },
+    "auto_assigned_truck": {
+      "type": "string",
+      "title": "Auto-Assigned Truck",
+      "description": "Truck number automatically resolved from the lead technician's active assignment"
+    },
+    "truck_assignment_source": {
+      "type": "string",
+      "title": "Truck Assignment Source",
+      "description": "vehicle_assignment, technician_profile, employee_registry, none"
+    },
+    "truck_assignment_status": {
+      "type": "string",
+      "enum": [
+        "Auto Assigned",
+        "Truck Assignment Needed",
+        "Manually Overridden",
+        "Not Required"
+      ],
+      "default": "Not Required",
+      "title": "Truck Assignment Status"
+    },
+    "truck_override_used": {
+      "type": "boolean",
+      "default": false,
+      "title": "Truck Override Used"
+    },
+    "truck_override_reason": {
+      "type": "string",
+      "title": "Truck Override Reason"
+    },
+    "truck_override_by": {
+      "type": "string",
+      "title": "Truck Override By"
+    },
+    "truck_override_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Truck Override At"
+    },
+    "appointment_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Appointment Date"
+    },
+    "arrival_window_start": {
+      "type": "string",
+      "title": "Arrival Window Start",
+      "description": "Time format HH:mm"
+    },
+    "arrival_window_end": {
+      "type": "string",
+      "title": "Arrival Window End",
+      "description": "Time format HH:mm"
+    },
+    "dispatch_status": {
+      "type": "string",
+      "enum": [
+        "unassigned",
+        "assigned",
+        "dispatched",
+        "started",
+        "completed",
+        "cancelled"
+      ],
+      "default": "unassigned",
+      "title": "Dispatch Status"
+    },
+    "service_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Service Date"
+    },
+    "address": {
+      "type": "string",
+      "title": "Service Address"
+    },
+    "city": {
+      "type": "string",
+      "title": "City"
+    },
+    "state": {
+      "type": "string",
+      "title": "State"
+    },
+    "zip": {
+      "type": "string",
+      "title": "Zip"
+    },
+    "job_type": {
+      "type": "string",
+      "enum": [
+        "inspection",
+        "repair",
+        "cleaning",
+        "installation",
+        "follow_up"
+      ],
+      "title": "Job Type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "assigned",
+        "in_progress",
+        "inspection_complete",
+        "estimate_sent",
+        "approved",
+        "invoiced",
+        "completed",
+        "cancelled"
+      ],
+      "default": "scheduled",
+      "title": "Status"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "normal",
+        "high",
+        "urgent"
+      ],
+      "default": "normal",
+      "title": "Priority"
+    },
+    "crm_job_number": {
+      "type": "string",
+      "title": "CRM Job Number",
+      "description": "Legacy alias for servicetitan_job_number. Kept in sync for backward compatibility."
+    },
+    "workflow_version": {
+      "type": "string",
+      "enum": [
+        "legacy",
+        "v2_package"
+      ],
+      "default": "v2_package",
+      "title": "Workflow Version",
+      "description": "Identifies which workflow this job uses. New jobs default to v2_package."
+    },
+    "is_canceled": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Canceled",
+      "description": "True when the job was canceled by ServiceTitan. The record is preserved for history."
+    },
+    "canceled_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Canceled At"
+    },
+    "canceled_source": {
+      "type": "string",
+      "title": "Canceled Source",
+      "description": "Source of the cancellation (e.g. servicetitan, manual)"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At",
+      "description": "When the job was marked completed via ServiceTitan sync."
+    },
+    "completed_source": {
+      "type": "string",
+      "title": "Completed Source",
+      "description": "Source of the completion (e.g. servicetitan, manual)"
+    },
+    "reopened_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Reopened At",
+      "description": "When the job was reopened by ServiceTitan. Prior completion history is preserved."
+    },
+    "reopened_history_json": {
+      "type": "string",
+      "title": "Reopened History (JSON)",
+      "description": "Append-only JSON array of {webhook_event_id, event_type, reopened_at, prior_completed_at, prior_status}."
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Deleted (LVC)",
+      "description": "LVC-owned soft-delete flag. True when an Owner/Admin deleted the job in LVC OS. Distinct from ServiceTitan-owned servicetitan_deleted. Hides the job from active views; related records are preserved. Only an Owner/Admin may clear this via restore."
+    },
+    "deleted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Deleted At (LVC)",
+      "description": "When the job was soft-deleted in LVC OS."
+    },
+    "deleted_by": {
+      "type": "string",
+      "title": "Deleted By (LVC)",
+      "description": "Base44 user ID of the Owner/Admin who deleted the job."
+    },
+    "deleted_by_name": {
+      "type": "string",
+      "title": "Deleted By Name (LVC)",
+      "description": "Display name of the user who deleted the job."
+    },
+    "deletion_reason": {
+      "type": "string",
+      "title": "Deletion Reason (LVC)",
+      "description": "Optional reason supplied when the job was soft-deleted in LVC OS."
+    },
+    "servicetitan_job_id": {
+      "type": "string",
+      "title": "ServiceTitan Job ID",
+      "description": "Primary synchronization key for ServiceTitan job webhooks. Never matched by job number, customer name, or address alone."
+    },
+    "servicetitan_job_number": {
+      "type": "string",
+      "title": "ServiceTitan Job Number"
+    },
+    "servicetitan_customer_id": {
+      "type": "string",
+      "title": "ServiceTitan Customer ID"
+    },
+    "servicetitan_location_id": {
+      "type": "string",
+      "title": "ServiceTitan Location ID"
+    },
+    "servicetitan_location_name": {
+      "type": "string",
+      "title": "ServiceTitan Location Name"
+    },
+    "servicetitan_business_unit": {
+      "type": "string",
+      "title": "ServiceTitan Business Unit"
+    },
+    "servicetitan_business_unit_id": {
+      "type": "string",
+      "title": "ServiceTitan Business Unit ID"
+    },
+    "servicetitan_job_type": {
+      "type": "string",
+      "title": "ServiceTitan Job Type",
+      "description": "Raw ServiceTitan job type string. The LVC job_type field is mapped from this."
+    },
+    "servicetitan_job_type_id": {
+      "type": "string",
+      "title": "ServiceTitan Job Type ID"
+    },
+    "servicetitan_campaign_id": {
+      "type": "string",
+      "title": "ServiceTitan Campaign ID"
+    },
+    "servicetitan_project_id": {
+      "type": "string",
+      "title": "ServiceTitan Project ID"
+    },
+    "servicetitan_tenant_id": {
+      "type": "string",
+      "title": "ServiceTitan Tenant ID"
+    },
+    "servicetitan_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Created On",
+      "description": "createdOn timestamp from the ServiceTitan JPM v2 Jobs API. Used for watermark eligibility and stale-event detection."
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On",
+      "description": "modifiedOn timestamp from the ServiceTitan JPM v2 Jobs API. Used for stale-event detection \u2014 an older modifiedOn never overwrites a newer one."
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At",
+      "description": "Timestamp when the most recent ServiceTitan event occurred (from the payload event_timestamp). Used for event ordering protection \u2014 an older event never overwrites a newer job state."
+    },
+    "servicetitan_last_event_type": {
+      "type": "string",
+      "title": "ServiceTitan Last Event Type"
+    },
+    "servicetitan_last_sync_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync At",
+      "description": "Timestamp of the most recent ServiceTitan webhook that updated this job."
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status",
+      "description": "synced = last sync succeeded; pending = awaiting customer resolution; conflict = local/st conflict recorded; deleted = soft-deleted by ServiceTitan."
+    },
+    "servicetitan_deleted": {
+      "type": "boolean",
+      "default": false,
+      "title": "ServiceTitan Deleted",
+      "description": "True when the job was soft-deleted by ServiceTitan. The record is preserved for history."
+    },
+    "servicetitan_deleted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Deleted At"
+    },
+    "servicetitan_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "manual",
+        "api"
+      ],
+      "title": "ServiceTitan Source",
+      "description": "How this job was last synced from ServiceTitan."
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version",
+      "description": "Incremented on each successful ServiceTitan sync operation."
+    },
+    "servicetitan_raw_status": {
+      "type": "string",
+      "title": "ServiceTitan Raw Status",
+      "description": "The original ServiceTitan job status string. Preserved for audit and debugging."
+    },
+    "servicetitan_latitude": {
+      "type": "number",
+      "title": "ServiceTitan Latitude"
+    },
+    "servicetitan_longitude": {
+      "type": "number",
+      "title": "ServiceTitan Longitude"
+    },
+    "servicetitan_arrival_window_start": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Arrival Window Start"
+    },
+    "servicetitan_arrival_window_end": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Arrival Window End"
+    },
+    "servicetitan_summary": {
+      "type": "string",
+      "title": "ServiceTitan Summary",
+      "description": "Summary or description supplied by ServiceTitan. The LVC 'notes' field is never overwritten."
+    },
+    "servicetitan_technician_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "ServiceTitan Technician IDs",
+      "description": "Raw ServiceTitan technician IDs for all assigned technicians. Preserves multi-technician assignments."
+    },
+    "servicetitan_technician_names": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "ServiceTitan Technician Names"
+    },
+    "servicetitan_appointment_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "ServiceTitan Appointment IDs",
+      "description": "ServiceTitan appointment IDs linked to this job, resolved from synchronized Appointment records."
+    },
+    "sync_conflict_history_json": {
+      "type": "string",
+      "title": "Sync Conflict History (JSON)",
+      "description": "Append-only JSON array of {webhook_event_id, event_type, field, previous_value, new_value, synced_at}. Records local values overwritten by ServiceTitan updates."
+    },
+    "customer_mapping_status": {
+      "type": "string",
+      "enum": [
+        "matched",
+        "pending",
+        "unmatched"
+      ],
+      "title": "Customer Mapping Status",
+      "description": "matched = local Customer found by servicetitan_customer_id; pending = customer not yet synced, raw ID preserved; unmatched = customer data insufficient or customer deleted."
+    },
+    "customer_mapping_warning": {
+      "type": "string",
+      "title": "Customer Mapping Warning"
+    },
+    "technician_mapping_status": {
+      "type": "string",
+      "enum": [
+        "matched",
+        "unmatched",
+        "unassigned"
+      ],
+      "title": "Technician Mapping Status",
+      "description": "matched = at least one technician mapped to EmployeeRegistry; unmatched = ST supplied technicians but no EmployeeRegistry match; unassigned = no technicians supplied."
+    },
+    "technician_mapping_warning": {
+      "type": "string",
+      "title": "Technician Mapping Warning"
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual"
+      ],
+      "title": "Import Source",
+      "description": "How this job was first imported locally."
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At",
+      "description": "When this job was first imported locally."
+    }
+  },
+  "required": [
+    "customer_id",
+    "customer_name",
+    "service_date",
+    "address"
+  ]
+}

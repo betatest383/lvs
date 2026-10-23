@@ -1,0 +1,468 @@
+{
+  "name": "InventoryMaster",
+  "type": "object",
+  "properties": {
+    "inventory_id": {
+      "type": "string",
+      "title": "Inventory ID",
+      "description": "e.g. INV-000001"
+    },
+    "sku": {
+      "type": "string",
+      "title": "SKU",
+      "description": "Unique stock keeping unit. ServiceTitan-owned (Item.Code). Overwritten by inbound sync."
+    },
+    "barcode": {
+      "type": "string",
+      "title": "Barcode",
+      "description": "Primary barcode value for scanning"
+    },
+    "qr_code": {
+      "type": "string",
+      "title": "QR Code",
+      "description": "Optional QR code value for mobile lookup"
+    },
+    "vendor_sku": {
+      "type": "string",
+      "title": "Vendor SKU",
+      "description": "Vendor-specific part number, may differ from internal SKU. LVC-owned. Managed via MaterialVendor relationships."
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Item Name",
+      "description": "ServiceTitan-owned (Item.Name). Overwritten by inbound sync."
+    },
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "description": "ServiceTitan-owned (Item.Description). Overwritten by inbound sync."
+    },
+    "inventory_type": {
+      "type": "string",
+      "enum": [
+        "Consumable",
+        "Material",
+        "Equipment",
+        "Tool",
+        "Fleet Part",
+        "Safety Supply",
+        "Office Supply"
+      ],
+      "default": "Consumable",
+      "title": "Inventory Type"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category",
+      "description": "ServiceTitan-owned (Item.Category). Overwritten by inbound sync."
+    },
+    "category_id": {
+      "type": "string",
+      "title": "Category ID",
+      "description": "Links to InventoryCategory record"
+    },
+    "subcategory": {
+      "type": "string",
+      "title": "Subcategory"
+    },
+    "unit": {
+      "type": "string",
+      "title": "Unit of Measure",
+      "default": "ea",
+      "description": "ServiceTitan-owned (Item.Unit). Overwritten by inbound sync."
+    },
+    "stocked_item": {
+      "type": "boolean",
+      "default": true,
+      "title": "Stocked Item",
+      "description": "False for non-stock items (special order only)"
+    },
+    "is_stocked_inventory_item": {
+      "type": "boolean",
+      "default": false,
+      "title": "Stocked Inventory Item",
+      "description": "True when this material is physically stocked in the warehouse and should be assigned to a bin and included in inventory counts. LVC-owned. Never automatically set by ServiceTitan sync."
+    },
+    "inventory_status": {
+      "type": "string",
+      "enum": [
+        "not_stocked",
+        "stocked_unassigned",
+        "stocked_assigned",
+        "inactive"
+      ],
+      "default": "not_stocked",
+      "title": "Inventory Status",
+      "description": "Auto-computed: not_stocked = is_stocked_inventory_item is false; stocked_unassigned = stocked but no bin; stocked_assigned = stocked with bin; inactive = status is Inactive/Discontinued."
+    },
+    "default_inventory_location_id": {
+      "type": "string",
+      "title": "Default Inventory Location ID",
+      "description": "Links to WarehouseLocation record for default stocking location."
+    },
+    "default_bin_location_id": {
+      "type": "string",
+      "title": "Default Bin Location ID",
+      "description": "Links to BinLocation record for default bin assignment."
+    },
+    "inventory_tracking_method": {
+      "type": "string",
+      "enum": [
+        "quantity",
+        "serialized",
+        "lot",
+        "not_tracked"
+      ],
+      "default": "quantity",
+      "title": "Inventory Tracking Method"
+    },
+    "chargeable_material": {
+      "type": "boolean",
+      "default": false,
+      "title": "Chargeable Material",
+      "description": "True when material is billed to customer"
+    },
+    "serialized": {
+      "type": "boolean",
+      "default": false,
+      "title": "Serialized",
+      "description": "True when each unit has a unique serial number. ServiceTitan-owned (Item.Serialized). Overwritten by inbound sync."
+    },
+    "lot_tracking": {
+      "type": "boolean",
+      "default": false,
+      "title": "Lot Tracking",
+      "description": "Future: track items by lot/batch number. ServiceTitan-owned (Item.LotTracking). Overwritten by inbound sync."
+    },
+    "quantity_owned": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Owned"
+    },
+    "quantity_available": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Available",
+      "description": "Derived from ledger: On Hand - Reserved"
+    },
+    "quantity_assigned": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Assigned"
+    },
+    "quantity_reserved": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Reserved",
+      "description": "Reserved for Sales Orders, not yet picked"
+    },
+    "quantity_on_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity On Order",
+      "description": "On open Purchase Orders, not yet received"
+    },
+    "quantity_in_transit": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity In Transit",
+      "description": "On open Warehouse Transfers, not yet received"
+    },
+    "quantity_damaged": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Damaged"
+    },
+    "quantity_retired": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Retired"
+    },
+    "minimum_stock": {
+      "type": "number",
+      "default": 0,
+      "title": "Minimum Stock"
+    },
+    "maximum_stock": {
+      "type": "number",
+      "default": 0,
+      "title": "Maximum Stock"
+    },
+    "reorder_point": {
+      "type": "number",
+      "default": 0,
+      "title": "Reorder Point",
+      "description": "When On Hand drops to this level, replenishment is suggested"
+    },
+    "reorder_quantity": {
+      "type": "number",
+      "default": 0,
+      "title": "Reorder Quantity",
+      "description": "Default quantity to order when reorder point is hit"
+    },
+    "warehouse_location": {
+      "type": "string",
+      "title": "Primary Warehouse Location"
+    },
+    "warehouse_location_id": {
+      "type": "string",
+      "title": "Primary Warehouse Location ID",
+      "description": "Links to WarehouseLocation record"
+    },
+    "bin_location": {
+      "type": "string",
+      "title": "Bin Location"
+    },
+    "bin_location_id": {
+      "type": "string",
+      "title": "Bin Location ID",
+      "description": "Links to BinLocation record"
+    },
+    "vendor": {
+      "type": "string",
+      "title": "Primary Vendor"
+    },
+    "vendor_id": {
+      "type": "string",
+      "title": "Primary Vendor ID",
+      "description": "Links to Vendor record"
+    },
+    "alternate_vendor_ids": {
+      "type": "string",
+      "title": "Alternate Vendor IDs (JSON)",
+      "description": "JSON array of {vendor_id, vendor_name, vendor_sku}"
+    },
+    "manufacturer": {
+      "type": "string",
+      "title": "Manufacturer",
+      "description": "ServiceTitan-owned (Item.Manufacturer). Overwritten by inbound sync."
+    },
+    "manufacturer_id": {
+      "type": "string",
+      "title": "Manufacturer ID",
+      "description": "Links to Manufacturer record"
+    },
+    "lead_time_days": {
+      "type": "number",
+      "default": 0,
+      "title": "Lead Time (Days)",
+      "description": "Expected days from PO sent to receipt"
+    },
+    "preferred_order_quantity": {
+      "type": "number",
+      "default": 0,
+      "title": "Preferred Order Quantity"
+    },
+    "unit_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Unit Cost ($)",
+      "description": "Current purchase cost"
+    },
+    "purchase_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Purchase Cost ($)",
+      "description": "Last purchase price from vendor"
+    },
+    "average_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Average Cost ($)",
+      "description": "Weighted average cost computed from ledger history"
+    },
+    "standard_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Standard Cost ($)",
+      "description": "Fixed standard cost for variance analysis. ServiceTitan-owned (Item.Cost). Overwritten by inbound sync."
+    },
+    "selling_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Selling Price ($)",
+      "description": "Default customer-facing price for chargeable materials. ServiceTitan-owned (Item.Price). Overwritten by inbound sync."
+    },
+    "msrp": {
+      "type": "number",
+      "default": 0,
+      "title": "MSRP ($)",
+      "description": "Manufacturer's suggested retail price"
+    },
+    "image_url": {
+      "type": "string",
+      "title": "Image URL",
+      "description": "Product image URL"
+    },
+    "job_cost_category": {
+      "type": "string",
+      "enum": [
+        "materials",
+        "equipment",
+        "consumable",
+        "tool",
+        "fleet_part",
+        "safety_supply",
+        "warranty",
+        "waste",
+        "overhead"
+      ],
+      "default": "materials",
+      "title": "Job Cost Category"
+    },
+    "inventory_value": {
+      "type": "number",
+      "default": 0,
+      "title": "Inventory Value ($)",
+      "description": "Auto-computed: Quantity Owned \u00d7 Average Cost"
+    },
+    "last_movement_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Movement Date",
+      "description": "Timestamp of the most recent ledger transaction"
+    },
+    "last_receipt_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Receipt Date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Discontinued"
+      ],
+      "default": "Active",
+      "title": "Status"
+    },
+    "is_balanced": {
+      "type": "boolean",
+      "default": true,
+      "title": "Balanced",
+      "description": "True when Quantity Owned equals Available + Assigned + Reserved + On Order + In Transit + Damaged + Retired"
+    },
+    "legacy_id": {
+      "type": "string",
+      "title": "Legacy ID",
+      "description": "Original record ID from migrated entity"
+    },
+    "legacy_entity": {
+      "type": "string",
+      "title": "Legacy Entity",
+      "description": "Source entity name (ConsumableCatalog, EquipmentMaster, etc.)"
+    },
+    "assignment_history_json": {
+      "type": "string",
+      "title": "Assignment History (JSON)",
+      "description": "Append-only JSON array of {action, previous_warehouse, previous_bin, new_warehouse, new_bin, session_id, user, timestamp}"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "servicetitan_material_id": {
+      "type": "string",
+      "title": "ServiceTitan Material ID",
+      "description": "Permanent external identity (Item.Id). Stored as a string to safely support ServiceTitan int64 IDs. The canonical sync key \u2014 records are matched ONLY by this field, never by name, SKU, or vendor part number. Once assigned, this field is not changed through normal UI edits."
+    },
+    "servicetitan_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "ServiceTitan Active Status",
+      "description": "ServiceTitan-owned (Item.Active). Reflects the ST active flag. When false the material is preserved and marked inactive \u2014 not deleted."
+    },
+    "servicetitan_is_inventory": {
+      "type": "boolean",
+      "default": false,
+      "title": "ServiceTitan Is Inventory",
+      "description": "ServiceTitan-owned (Item.isInventory). Reflects whether ServiceTitan considers this a stocked inventory item. Preserved on sync but does NOT control LVC's is_stocked_inventory_item field. LVC's is_stocked_inventory_item remains a deliberate local stocking decision, never automatically set by sync."
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status",
+      "description": "synced = last sync succeeded; pending = awaiting sync; conflict = local/st conflict recorded; deleted = soft-deleted by ServiceTitan."
+    },
+    "servicetitan_last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync",
+      "description": "Timestamp of the most recent ServiceTitan sync that updated this material."
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At",
+      "description": "Timestamp when the most recent ServiceTitan event occurred (from modifiedOn). Used for event ordering protection \u2014 an older event never overwrites a newer material state."
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On",
+      "description": "modifiedOn timestamp from the ServiceTitan Items API. Used for stale-event detection \u2014 an older modifiedOn never overwrites a newer one."
+    },
+    "servicetitan_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Created On",
+      "description": "createdOn timestamp from the ServiceTitan Items API."
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version",
+      "description": "Incremented on each successful ServiceTitan sync operation."
+    },
+    "servicetitan_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "manual",
+        "api"
+      ],
+      "title": "ServiceTitan Source",
+      "description": "How this material was last synced from ServiceTitan."
+    },
+    "servicetitan_raw_data": {
+      "type": "string",
+      "title": "ServiceTitan Raw Data (JSON)",
+      "description": "Preserved unknown/external fields from the ServiceTitan Item payload (tax category, accounting references, custom fields, external data) for future expansion. ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual",
+        "api_export"
+      ],
+      "title": "Import Source",
+      "description": "How this material was first imported locally. api_recovery = incremental sync; api_export = full backfill."
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At",
+      "description": "When this material was first imported locally."
+    }
+  },
+  "required": [
+    "item_name",
+    "inventory_type",
+    "unit"
+  ]
+}

@@ -1,0 +1,259 @@
+{
+  "name": "SyncMigrationState",
+  "type": "object",
+  "properties": {
+    "migration_key": {
+      "type": "string",
+      "title": "Migration Key",
+      "description": "Deterministic: entity_type:external_system. Prevents duplicate migration states."
+    },
+    "entity_type": {
+      "type": "string",
+      "title": "Entity Type",
+      "description": "Business entity being migrated (e.g. 'Customer', 'Job')."
+    },
+    "external_system": {
+      "type": "string",
+      "title": "External System",
+      "description": "Integration partner (e.g. 'servicetitan')."
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "shadow",
+        "cut_over",
+        "rolled_back"
+      ],
+      "default": "shadow",
+      "title": "Mode",
+      "description": "shadow = direct sync + event publish (parallel); cut_over = publish only, subscriber does sync; rolled_back = reverted to shadow."
+    },
+    "shadow_clean_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow Clean Count",
+      "description": "Consecutive successful shadow subscriber runs. Resets to 0 on error."
+    },
+    "shadow_error_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow Error Count",
+      "description": "Total shadow subscriber errors."
+    },
+    "shadow_threshold": {
+      "type": "number",
+      "default": 50,
+      "title": "Shadow Threshold",
+      "description": "Historical: consecutive clean runs required before auto-cut. Auto-cut is REMOVED in Stage 2B-A. This field is retained for reporting only and no longer triggers any automatic transition."
+    },
+    "auto_cut_enabled": {
+      "type": "boolean",
+      "default": false,
+      "title": "Auto Cut Enabled",
+      "description": "Always false in Stage 2B-A/2C. Automatic cut-over has been removed. Only manual manageCustomerSync/manageJobSync mode='cut_over' may transition to cut-over mode."
+    },
+    "activated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activated At"
+    },
+    "cut_over_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Cut Over At"
+    },
+    "rolled_back_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Rolled Back At"
+    },
+    "last_shadow_event_id": {
+      "type": "string",
+      "title": "Last Shadow Event ID"
+    },
+    "last_shadow_result": {
+      "type": "string",
+      "title": "Last Shadow Result (JSON)",
+      "description": "JSON snapshot of the last shadow subscriber result."
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "total_events": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Events",
+      "description": "Total shadow subscriber events processed (including duplicates and idempotent no-ops)."
+    },
+    "successful_events": {
+      "type": "number",
+      "default": 0,
+      "title": "Successful Events",
+      "description": "Shadow subscriber events that completed successfully (located, created, updated, or idempotent no-op)."
+    },
+    "failed_events": {
+      "type": "number",
+      "default": 0,
+      "title": "Failed Events",
+      "description": "Shadow subscriber events that failed (mapping failure, validation failure, or thrown error)."
+    },
+    "duplicate_events": {
+      "type": "number",
+      "default": 0,
+      "title": "Duplicate Events",
+      "description": "Events that were deduplicated by the Business Event Engine idempotency key (never reached the subscriber)."
+    },
+    "replay_events": {
+      "type": "number",
+      "default": 0,
+      "title": "Replay Events",
+      "description": "Events that were replayed (dead-letter delivery reset for reprocessing)."
+    },
+    "idempotent_events": {
+      "type": "number",
+      "default": 0,
+      "title": "Idempotent Events",
+      "description": "Events processed by the subscriber that resulted in no data change (entity already up to date)."
+    },
+    "validation_failures": {
+      "type": "number",
+      "default": 0,
+      "title": "Validation Failures",
+      "description": "Events that failed due to payload validation errors (missing required fields, invalid JSON, etc.)."
+    },
+    "last_success": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Success At",
+      "description": "Timestamp of the last successful shadow subscriber event."
+    },
+    "last_failure": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Failure At",
+      "description": "Timestamp of the last failed shadow subscriber event."
+    },
+    "last_processed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Processed At",
+      "description": "Timestamp of the last shadow subscriber event processed (success or failure)."
+    },
+    "ready_for_cutover": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ready For Cut-Over",
+      "description": "Computed health indicator. True when shadow metrics indicate stable processing (clean_count >= threshold, no recent failures, validation_failures == 0). NEVER triggers automatic transition \u2014 only manual mode='cut_over' may transition."
+    },
+    "shadow_customer_located": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Customer Located",
+      "description": "Shadow subscriber found an existing local Customer by servicetitan_customer_id."
+    },
+    "shadow_customer_created": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Customer Created",
+      "description": "Shadow subscriber created a new local Customer record."
+    },
+    "shadow_customer_updated": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Customer Updated",
+      "description": "Shadow subscriber updated an existing local Customer record with changed fields."
+    },
+    "shadow_job_located": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Job Located",
+      "description": "Shadow subscriber found an existing local Job by servicetitan_job_id."
+    },
+    "shadow_job_created": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Job Created",
+      "description": "Shadow subscriber created a new local Job record."
+    },
+    "shadow_job_updated": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Job Updated",
+      "description": "Shadow subscriber updated an existing local Job record with changed fields."
+    },
+    "shadow_job_deleted": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Job Deleted",
+      "description": "Shadow subscriber soft-deleted a local Job record."
+    },
+    "shadow_job_restored": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Job Restored",
+      "description": "Shadow subscriber restored a previously deleted local Job record."
+    },
+    "shadow_duplicate_ignored": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Duplicate Ignored",
+      "description": "Shadow subscriber detected a duplicate webhook event and skipped processing."
+    },
+    "shadow_replay_ignored": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Replay Ignored",
+      "description": "Shadow subscriber detected a replayed event that was already applied and skipped (stale event protection)."
+    },
+    "shadow_mapping_failure": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Mapping Failure",
+      "description": "Shadow subscriber failed to map the ST payload to local fields (missing required fields)."
+    },
+    "shadow_validation_failure": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Validation Failure",
+      "description": "Shadow subscriber failed due to payload validation errors (invalid JSON, schema mismatch)."
+    },
+    "shadow_idempotent_noop": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Idempotent No-Op",
+      "description": "Shadow subscriber processed the event but no data changed (entity already up to date)."
+    },
+    "shadow_total_duration_ms": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Total Processing Duration (ms)",
+      "description": "Cumulative processing time across all shadow subscriber events."
+    },
+    "shadow_processing_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Shadow: Processing Count",
+      "description": "Number of shadow subscriber events timed for average duration calculation."
+    },
+    "recent_activity_json": {
+      "type": "string",
+      "title": "Recent Activity (JSON)",
+      "description": "JSON array of the last 20 shadow subscriber results: {event_id, action, outcome, duration_ms, timestamp}."
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "migration_key",
+    "entity_type",
+    "external_system",
+    "mode"
+  ]
+}

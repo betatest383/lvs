@@ -1,0 +1,215 @@
+{
+  "name": "NightBeforePrep",
+  "type": "object",
+  "properties": {
+    "prep_id": {
+      "type": "string",
+      "title": "Prep ID",
+      "description": "e.g. NBP-20260707-TRK003"
+    },
+    "prep_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Prep Date (Night Of)"
+    },
+    "service_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Service Date (Tomorrow)"
+    },
+    "truck_id": {
+      "type": "string",
+      "title": "Truck ID"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Primary Job Number"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "schedule_review_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Schedule Review Status"
+    },
+    "material_transfers_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Material Transfers Status"
+    },
+    "consumable_replenishment_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Consumable Replenishment Status"
+    },
+    "equipment_verification_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Equipment Verification Status"
+    },
+    "fleet_review_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Fleet Review Status"
+    },
+    "staging_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Staging Status"
+    },
+    "warehouse_signoff_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "complete",
+        "not_required",
+        "blocked",
+        "manager_override"
+      ],
+      "default": "waiting",
+      "title": "Warehouse Sign-Off Status"
+    },
+    "workflow_checks": {
+      "type": "string",
+      "title": "Workflow Checks (JSON)",
+      "description": "JSON object of sub-check states: { check_id: { status, completed_at, completed_by } }"
+    },
+    "signed_off": {
+      "type": "boolean",
+      "default": false,
+      "title": "Warehouse Sign-Off Complete"
+    },
+    "signed_off_by": {
+      "type": "string",
+      "title": "Signed Off By"
+    },
+    "signed_off_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Sign-Off Timestamp"
+    },
+    "signature_data_url": {
+      "type": "string",
+      "title": "Digital Signature"
+    },
+    "signoff_comments": {
+      "type": "string",
+      "title": "Sign-Off Comments"
+    },
+    "staged": {
+      "type": "boolean",
+      "default": false,
+      "title": "Staged for Morning Pickup"
+    },
+    "staged_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Staged At"
+    },
+    "overall_status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "ready",
+        "blocked",
+        "complete"
+      ],
+      "default": "waiting",
+      "title": "Overall Status"
+    },
+    "readiness_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "Readiness Percentage"
+    },
+    "missing_inventory": {
+      "type": "boolean",
+      "default": false,
+      "title": "Missing Inventory Flag"
+    },
+    "missing_equipment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Missing Equipment Flag"
+    },
+    "scheduling_conflict": {
+      "type": "boolean",
+      "default": false,
+      "title": "Scheduling Conflict Flag"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "prep_id",
+    "prep_date",
+    "service_date",
+    "truck_number"
+  ]
+}

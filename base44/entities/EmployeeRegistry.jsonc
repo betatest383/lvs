@@ -1,0 +1,267 @@
+{
+  "name": "EmployeeRegistry",
+  "type": "object",
+  "properties": {
+    "employee_id": {
+      "type": "string",
+      "title": "Employee ID",
+      "description": "e.g. EMP-001"
+    },
+    "first_name": {
+      "type": "string",
+      "title": "First Name"
+    },
+    "last_name": {
+      "type": "string",
+      "title": "Last Name"
+    },
+    "preferred_name": {
+      "type": "string",
+      "title": "Preferred Name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "primary_role": {
+      "type": "string",
+      "title": "Primary Role",
+      "description": "Role ID or name from RoleRegistry"
+    },
+    "secondary_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Secondary Roles"
+    },
+    "supervisor": {
+      "type": "string",
+      "title": "Supervisor",
+      "description": "Employee ID or name of direct supervisor"
+    },
+    "employment_status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "On Leave",
+        "Terminated"
+      ],
+      "default": "Active",
+      "title": "Employment Status"
+    },
+    "employment_type": {
+      "type": "string",
+      "enum": [
+        "Full Time",
+        "Part Time",
+        "Seasonal",
+        "Contractor"
+      ],
+      "default": "Full Time",
+      "title": "Employment Type"
+    },
+    "hire_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Hire Date"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Start Date"
+    },
+    "termination_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Termination Date"
+    },
+    "assigned_truck": {
+      "type": "string",
+      "title": "Assigned Truck",
+      "description": "Truck number or Truck ID"
+    },
+    "assigned_equipment_package": {
+      "type": "string",
+      "title": "Assigned Equipment Package"
+    },
+    "base44_user_role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "user"
+      ],
+      "default": "user",
+      "title": "Base44 User Role"
+    },
+    "trainual_user_link": {
+      "type": "string",
+      "title": "Trainual User Link"
+    },
+    "servicetitan_employee_id": {
+      "type": "string",
+      "title": "ServiceTitan Employee ID"
+    },
+    "servicetitan_technician_id": {
+      "type": "string",
+      "title": "ServiceTitan Technician ID",
+      "description": "ServiceTitan technician ID used as the primary mapping key for appointment technician assignment."
+    },
+    "paychex_employee_id": {
+      "type": "string",
+      "title": "Paychex Employee ID"
+    },
+    "ringcentral_extension": {
+      "type": "string",
+      "title": "RingCentral Extension"
+    },
+    "emergency_contact_name": {
+      "type": "string",
+      "title": "Emergency Contact Name"
+    },
+    "emergency_contact_phone": {
+      "type": "string",
+      "title": "Emergency Contact Phone"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "linked_user_id": {
+      "type": "string",
+      "title": "Linked User ID",
+      "description": "The Base44 authenticated user ID permanently linked to this employee"
+    },
+    "login_email": {
+      "type": "string",
+      "format": "email",
+      "title": "Login Email",
+      "description": "The authentication login email for this employee"
+    },
+    "auth_provider": {
+      "type": "string",
+      "enum": [
+        "base44",
+        "google",
+        "microsoft"
+      ],
+      "default": "base44",
+      "title": "Authentication Provider"
+    },
+    "user_linked": {
+      "type": "boolean",
+      "default": false,
+      "title": "User Linked"
+    },
+    "link_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Link Date"
+    },
+    "last_login": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Login"
+    },
+    "last_activity": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Activity"
+    },
+    "account_status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Disabled",
+        "Pending",
+        "Suspended"
+      ],
+      "default": "Pending",
+      "title": "Account Status"
+    },
+    "invitation_status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Sent",
+        "Accepted",
+        "Expired",
+        "Linked"
+      ],
+      "default": "Pending",
+      "title": "Invitation Status"
+    },
+    "last_invitation_sent": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Invitation Sent"
+    },
+    "default_dashboard": {
+      "type": "string",
+      "title": "Default Dashboard",
+      "description": "Primary dashboard module for this employee"
+    },
+    "default_landing_page": {
+      "type": "string",
+      "title": "Default Landing Page",
+      "description": "Route path for the default landing page (e.g. /tech/dashboard, /operations)"
+    },
+    "canonical_employee_id": {
+      "type": "string",
+      "title": "Canonical Employee ID",
+      "description": "When this record is a duplicate/alias, points to the canonical EmployeeRegistry employee_id. Set only after admin identity review confirmation."
+    },
+    "identity_alias_of": {
+      "type": "string",
+      "title": "Identity Alias Of",
+      "description": "Entity record ID of the canonical EmployeeRegistry record this is an alias of. Set only after admin identity review confirmation."
+    },
+    "is_legacy_identity": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Legacy Identity",
+      "description": "True when this record has been confirmed as a legacy/duplicate identity and should not receive new assignments. Set only after admin identity review confirmation."
+    },
+    "identity_review_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "pending_review",
+        "confirmed_same_person",
+        "confirmed_different_person",
+        "rejected"
+      ],
+      "default": "none",
+      "title": "Identity Review Status",
+      "description": "Tracks the identity deduplication review state for this employee record."
+    },
+    "identity_reviewed_by": {
+      "type": "string",
+      "title": "Identity Reviewed By"
+    },
+    "identity_reviewed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Identity Reviewed At"
+    },
+    "identity_review_notes": {
+      "type": "string",
+      "title": "Identity Review Notes"
+    }
+  },
+  "required": [
+    "employee_id",
+    "first_name",
+    "last_name"
+  ]
+}

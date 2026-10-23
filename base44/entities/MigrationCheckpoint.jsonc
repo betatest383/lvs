@@ -1,0 +1,67 @@
+{
+  "name": "MigrationCheckpoint",
+  "type": "object",
+  "properties": {
+    "checkpoint_id": {
+      "type": "string",
+      "title": "Checkpoint ID",
+      "description": "Server-generated sequence: CKP-000001."
+    },
+    "checkpoint_name": {
+      "type": "string",
+      "title": "Checkpoint Name",
+      "description": "Human-readable checkpoint name."
+    },
+    "stage": {
+      "type": "string",
+      "title": "Stage",
+      "description": "Validation stage this checkpoint closes (e.g. 'Stage 2C')."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "superseded",
+        "rolled_back",
+        "invalidated"
+      ],
+      "default": "approved",
+      "title": "Status",
+      "description": "approved = current checkpoint; superseded = replaced by a newer checkpoint; rolled_back = reverted from; invalidated = created contrary to governance rules, retained for audit but not authorized as a rollback baseline."
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By"
+    },
+    "validation_record_json": {
+      "type": "string",
+      "title": "Validation Record (JSON)",
+      "description": "JSON object containing all validation run IDs, pass counts, production policy values, migration-state values, and security metrics."
+    },
+    "rollback_info_json": {
+      "type": "string",
+      "title": "Rollback Information (JSON)",
+      "description": "JSON object containing checkpoint identifier, files included, schema changes, required registrations, current policy values, and rerun instructions."
+    },
+    "stage_2d_readiness_json": {
+      "type": "string",
+      "title": "Stage 2D Readiness (JSON)",
+      "description": "JSON object containing the read-only Stage 2D readiness findings."
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "checkpoint_id",
+    "checkpoint_name",
+    "stage",
+    "status"
+  ]
+}

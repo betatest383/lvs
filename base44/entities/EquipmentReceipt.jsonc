@@ -1,0 +1,67 @@
+{
+  "name": "EquipmentReceipt",
+  "type": "object",
+  "properties": {
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Item Name"
+    },
+    "quantity": {
+      "type": "number",
+      "default": 1,
+      "title": "Quantity"
+    },
+    "receipt_type": {
+      "type": "string",
+      "enum": [
+        "new_tool",
+        "replacement"
+      ],
+      "title": "Receipt Type"
+    },
+    "request_id": {
+      "type": "string",
+      "title": "Equipment Request ID"
+    },
+    "equipment_id": {
+      "type": "string",
+      "title": "Equipment Assignment ID"
+    },
+    "signature_data_url": {
+      "type": "string",
+      "title": "Signature (Data URL)"
+    },
+    "signed_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Date Signed"
+    },
+    "statement": {
+      "type": "string",
+      "title": "Acknowledgment Statement"
+    },
+    "is_archived": {
+      "type": "boolean",
+      "default": false,
+      "title": "Archived"
+    },
+    "archive_reason": {
+      "type": "string",
+      "title": "Archive Reason"
+    }
+  },
+  "required": [
+    "technician_email",
+    "item_name",
+    "signature_data_url",
+    "signed_date"
+  ]
+}

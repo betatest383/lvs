@@ -1,0 +1,183 @@
+{
+  "name": "CustomerSyncWatermark",
+  "type": "object",
+  "properties": {
+    "watermark_key": {
+      "type": "string",
+      "title": "Watermark Key",
+      "description": "Unique key identifying this watermark (e.g. 'customer_go_live'). One per (tenant, environment) pair."
+    },
+    "sync_strategy": {
+      "type": "string",
+      "enum": [
+        "new_customers_only",
+        "full_historical_backfill"
+      ],
+      "default": "new_customers_only",
+      "title": "Synchronization Strategy"
+    },
+    "activation_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activation Timestamp"
+    },
+    "environment": {
+      "type": "string",
+      "title": "Environment"
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant ID"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "disabled"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "last_new_customer_scan_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last New Customer Scan At",
+      "description": "High-water mark for the createdOnOrAfter cursor. Only advanced after a full recovery window completes successfully."
+    },
+    "last_update_scan_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Update Scan At",
+      "description": "High-water mark for the modifiedOnOrAfter cursor. Only advanced after a full recovery window completes successfully."
+    },
+    "recovery_window_start": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Recovery Window Start",
+      "description": "Start of the current in-progress recovery window. Null when no scan is in progress."
+    },
+    "recovery_window_end": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Recovery Window End",
+      "description": "End of the current in-progress recovery window. The cursor only advances to this point after the window completes with zero errors."
+    },
+    "recovery_window_status": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "in_progress",
+        "completed",
+        "failed"
+      ],
+      "default": "idle",
+      "title": "Recovery Window Status"
+    },
+    "recovery_window_errors": {
+      "type": "number",
+      "default": 0,
+      "title": "Recovery Window Errors",
+      "description": "Number of failed records in the current recovery window. If >0, the cursor does not advance."
+    },
+    "recovery_overlap_minutes": {
+      "type": "number",
+      "default": 5,
+      "title": "Recovery Overlap Minutes",
+      "description": "Overlap applied to each recovery window to protect against clock drift, delayed writes, and same-timestamp records."
+    },
+    "customers_imported_since_activation": {
+      "type": "number",
+      "default": 0,
+      "title": "Customers Imported Since Activation"
+    },
+    "customers_imported_on_demand": {
+      "type": "number",
+      "default": 0,
+      "title": "Customers Imported On Demand"
+    },
+    "webhook_creates_completed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Creates Completed"
+    },
+    "webhook_updates_completed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Updates Completed"
+    },
+    "webhook_events_skipped_pre_activation": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Skipped (Pre-Activation)"
+    },
+    "webhook_events_deferred": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Deferred"
+    },
+    "webhook_events_failed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Failed"
+    },
+    "webhook_duplicate_events_ignored": {
+      "type": "number",
+      "default": 0,
+      "title": "Duplicate Webhook Events Ignored"
+    },
+    "webhook_events_processed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Processed (Total)"
+    },
+    "recovery_events_processed": {
+      "type": "number",
+      "default": 0,
+      "title": "Recovery Events Processed"
+    },
+    "last_successful_sync_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Successful Sync At"
+    },
+    "backfill_status": {
+      "type": "string",
+      "enum": [
+        "never_started",
+        "disabled",
+        "confirmed",
+        "in_progress",
+        "completed"
+      ],
+      "default": "never_started",
+      "title": "Backfill Status"
+    },
+    "backfill_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Backfill Started At"
+    },
+    "backfill_confirmed_by": {
+      "type": "string",
+      "title": "Backfill Confirmed By"
+    },
+    "backfill_scope_estimate": {
+      "type": "number",
+      "title": "Backfill Scope Estimate"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "watermark_key",
+    "sync_strategy",
+    "environment",
+    "tenant_id"
+  ]
+}

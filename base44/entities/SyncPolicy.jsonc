@@ -1,0 +1,126 @@
+{
+  "name": "SyncPolicy",
+  "type": "object",
+  "properties": {
+    "policy_id": {
+      "type": "string",
+      "title": "Policy ID",
+      "description": "Server-generated sequence: SP-000001."
+    },
+    "policy_key": {
+      "type": "string",
+      "title": "Policy Key",
+      "description": "Deterministic unique key: entity_type:external_system. Prevents duplicate active policies."
+    },
+    "entity_type": {
+      "type": "string",
+      "title": "Entity Type",
+      "description": "Business entity this policy governs (e.g. 'Customer', 'Job', 'Appointment')."
+    },
+    "external_system": {
+      "type": "string",
+      "title": "External System",
+      "description": "Integration partner this policy applies to (e.g. 'servicetitan', 'quickbooks')."
+    },
+    "sync_enabled": {
+      "type": "boolean",
+      "default": true,
+      "title": "Sync Enabled"
+    },
+    "sync_mode": {
+      "type": "string",
+      "enum": [
+        "TWO_WAY",
+        "EXTERNAL_TO_LVC",
+        "LVC_TO_EXTERNAL",
+        "LVC_ONLY"
+      ],
+      "default": "TWO_WAY",
+      "title": "Sync Mode"
+    },
+    "conflict_resolution_strategy": {
+      "type": "string",
+      "enum": [
+        "LVC_WINS",
+        "EXTERNAL_WINS",
+        "MOST_RECENT_CHANGE_WINS",
+        "MANUAL_REVIEW",
+        "FIELD_LEVEL_RULES"
+      ],
+      "default": "FIELD_LEVEL_RULES",
+      "title": "Conflict Resolution Strategy"
+    },
+    "activation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activation Date"
+    },
+    "deactivation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Deactivation Date"
+    },
+    "effective_from": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Effective From",
+      "description": "When this policy version becomes effective."
+    },
+    "effective_to": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Effective To",
+      "description": "When this policy version stops being effective. Null means open-ended."
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "title": "Version",
+      "description": "Incremented on each policy revision. History is preserved via versioned records."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "pending_approval",
+        "active",
+        "inactive",
+        "archived"
+      ],
+      "default": "draft",
+      "title": "Status",
+      "description": "Master Data lifecycle status."
+    },
+    "approval_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ],
+      "default": "pending",
+      "title": "Approval Status"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "policy_id",
+    "policy_key",
+    "entity_type",
+    "external_system",
+    "sync_mode",
+    "version",
+    "status"
+  ]
+}

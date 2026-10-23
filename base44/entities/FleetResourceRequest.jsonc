@@ -1,0 +1,136 @@
+{
+  "name": "FleetResourceRequest",
+  "type": "object",
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "title": "Request ID",
+      "description": "e.g. FRR-000001"
+    },
+    "estimate_id": {
+      "type": "string",
+      "title": "Estimate ID"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "vehicle_class": {
+      "type": "string",
+      "enum": [
+        "Pickup Truck",
+        "Cargo Van",
+        "Dump Truck",
+        "Flatbed",
+        "Trailer",
+        "Box Truck",
+        "Utility Trailer",
+        "Equipment Trailer",
+        "Other"
+      ],
+      "title": "Vehicle Class"
+    },
+    "quantity_needed": {
+      "type": "number",
+      "default": 1,
+      "title": "Quantity Needed"
+    },
+    "required_days": {
+      "type": "string",
+      "title": "Required Days (JSON)",
+      "description": "JSON array of day numbers"
+    },
+    "critical": {
+      "type": "boolean",
+      "default": false,
+      "title": "Critical for Work"
+    },
+    "purpose": {
+      "type": "string",
+      "title": "Purpose"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending Assignment",
+        "Reserved",
+        "Assigned",
+        "Unavailable"
+      ],
+      "default": "Pending Assignment",
+      "title": "Status"
+    },
+    "assigned_truck_id": {
+      "type": "string",
+      "title": "Assigned Truck ID",
+      "description": "Links to TruckProfile record \u2014 assigned by Fleet Manager"
+    },
+    "assigned_truck_number": {
+      "type": "string",
+      "title": "Assigned Truck Number",
+      "description": "Auto-populated from TruckProfile when assigned"
+    },
+    "assigned_by": {
+      "type": "string",
+      "title": "Assigned By"
+    },
+    "assigned_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Assigned At"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "normal",
+        "high",
+        "urgent"
+      ],
+      "default": "normal",
+      "title": "Priority"
+    },
+    "crew_assignment": {
+      "type": "string",
+      "title": "Crew Assignment"
+    },
+    "conflict_type": {
+      "type": "string",
+      "enum": [
+        "none",
+        "fleet_resource_conflict",
+        "equipment_resource_conflict"
+      ],
+      "default": "none",
+      "title": "Conflict Type"
+    },
+    "conflict_notes": {
+      "type": "string",
+      "title": "Conflict Notes"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "vehicle_class",
+    "quantity_needed"
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "name": "InspectionStandard",
+  "type": "object",
+  "properties": {
+    "standard_name": {
+      "type": "string",
+      "title": "Standard Name",
+      "description": "e.g. Clearance to Combustibles \u2014 NFPA 211"
+    },
+    "standard_number": {
+      "type": "string",
+      "title": "Standard Number",
+      "description": "e.g. NFPA-211-13.1.1, IRC-R1003, LVC-BP-001"
+    },
+    "version": {
+      "type": "string",
+      "title": "Version",
+      "default": "1.0"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "in_review",
+        "approved",
+        "retired"
+      ],
+      "default": "draft",
+      "title": "Status"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category"
+    },
+    "applies_to": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Applies To"
+    },
+    "inspection_level": {
+      "type": "string",
+      "enum": [
+        "level_1",
+        "level_2",
+        "level_3"
+      ],
+      "title": "Inspection Level"
+    },
+    "authority_level": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Authority Level"
+    },
+    "authority_details": {
+      "type": "string",
+      "title": "Authority Details (JSON)",
+      "description": "JSON array of { authority_name, section, paragraph, url, reference_notes }"
+    },
+    "pass_criteria": {
+      "type": "string",
+      "title": "Pass Criteria"
+    },
+    "warning_criteria": {
+      "type": "string",
+      "title": "Warning Criteria"
+    },
+    "fail_criteria": {
+      "type": "string",
+      "title": "Fail Criteria"
+    },
+    "critical_failure_criteria": {
+      "type": "string",
+      "title": "Critical Failure Criteria"
+    },
+    "na_criteria": {
+      "type": "string",
+      "title": "N/A Criteria"
+    },
+    "measurement_tolerances": {
+      "type": "string",
+      "title": "Measurement Tolerances"
+    },
+    "photo_requirements": {
+      "type": "string",
+      "title": "Photo Requirements"
+    },
+    "measurement_requirements": {
+      "type": "string",
+      "title": "Measurement Requirements"
+    },
+    "required_supporting_evidence": {
+      "type": "string",
+      "title": "Required Supporting Evidence"
+    },
+    "minimum_value": {
+      "type": "number",
+      "title": "Minimum Value",
+      "description": "Logic rules can reference this value instead of hardcoding thresholds"
+    },
+    "maximum_value": {
+      "type": "number",
+      "title": "Maximum Value"
+    },
+    "target_value": {
+      "type": "number",
+      "title": "Target Value"
+    },
+    "unit_of_measure": {
+      "type": "string",
+      "title": "Unit of Measure"
+    },
+    "inspection_procedure": {
+      "type": "string",
+      "title": "Inspection Procedure"
+    },
+    "how_to_inspect": {
+      "type": "string",
+      "title": "How To Inspect"
+    },
+    "measurement_instructions": {
+      "type": "string",
+      "title": "Measurement Instructions"
+    },
+    "photo_instructions": {
+      "type": "string",
+      "title": "Photo Instructions"
+    },
+    "required_documentation": {
+      "type": "string",
+      "title": "Required Documentation"
+    },
+    "common_defects": {
+      "type": "string",
+      "title": "Common Defects"
+    },
+    "common_causes": {
+      "type": "string",
+      "title": "Common Causes"
+    },
+    "safety_considerations": {
+      "type": "string",
+      "title": "Safety Considerations"
+    },
+    "troubleshooting_tips": {
+      "type": "string",
+      "title": "Troubleshooting Tips"
+    },
+    "technician_notes": {
+      "type": "string",
+      "title": "Technician Notes"
+    },
+    "customer_explanation": {
+      "type": "string",
+      "title": "Customer Explanation"
+    },
+    "why_this_matters": {
+      "type": "string",
+      "title": "Why This Matters"
+    },
+    "potential_risks": {
+      "type": "string",
+      "title": "Potential Risks"
+    },
+    "consequences_if_ignored": {
+      "type": "string",
+      "title": "Consequences If Ignored"
+    },
+    "recommended_maintenance": {
+      "type": "string",
+      "title": "Recommended Maintenance"
+    },
+    "faq": {
+      "type": "string",
+      "title": "Frequently Asked Questions"
+    },
+    "customer_friendly_language": {
+      "type": "string",
+      "title": "Customer-Friendly Language"
+    },
+    "default_repair_system": {
+      "type": "string",
+      "title": "Default Repair System"
+    },
+    "possible_repair_systems": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Possible Repair Systems"
+    },
+    "good_option": {
+      "type": "string",
+      "title": "Good Option"
+    },
+    "better_option": {
+      "type": "string",
+      "title": "Better Option"
+    },
+    "best_option": {
+      "type": "string",
+      "title": "Best Option"
+    },
+    "recommended_pricebook_categories": {
+      "type": "string",
+      "title": "Recommended Pricebook Categories"
+    },
+    "suggested_material_calc_template": {
+      "type": "string",
+      "title": "Suggested Material Calculation Template"
+    },
+    "suggested_scope_of_work_template": {
+      "type": "string",
+      "title": "Suggested Scope of Work Template"
+    },
+    "typical_labor_difficulty": {
+      "type": "string",
+      "title": "Typical Labor Difficulty"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "medium",
+      "title": "Severity"
+    },
+    "safety_concern": {
+      "type": "boolean",
+      "default": false,
+      "title": "Safety Concern"
+    },
+    "code_failure": {
+      "type": "boolean",
+      "default": false,
+      "title": "Code Failure"
+    },
+    "insurance_concern": {
+      "type": "boolean",
+      "default": false,
+      "title": "Insurance Concern"
+    },
+    "warranty_concern": {
+      "type": "boolean",
+      "default": false,
+      "title": "Warranty Concern"
+    },
+    "structural_concern": {
+      "type": "boolean",
+      "default": false,
+      "title": "Structural Concern"
+    },
+    "water_intrusion": {
+      "type": "boolean",
+      "default": false,
+      "title": "Water Intrusion"
+    },
+    "fire_hazard": {
+      "type": "boolean",
+      "default": false,
+      "title": "Fire Hazard"
+    },
+    "carbon_monoxide_hazard": {
+      "type": "boolean",
+      "default": false,
+      "title": "Carbon Monoxide Hazard"
+    },
+    "life_safety_hazard": {
+      "type": "boolean",
+      "default": false,
+      "title": "Life Safety Hazard"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "title": "Reviewed By"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By"
+    },
+    "approval_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Approval Date"
+    },
+    "revision_history": {
+      "type": "string",
+      "title": "Revision History (JSON)",
+      "description": "JSON array of { version, date, author, changes }"
+    }
+  },
+  "required": [
+    "standard_name"
+  ]
+}

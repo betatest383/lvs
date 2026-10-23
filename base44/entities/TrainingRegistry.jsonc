@@ -1,0 +1,254 @@
+{
+  "name": "TrainingRegistry",
+  "type": "object",
+  "properties": {
+    "training_number": {
+      "type": "string",
+      "title": "Training Number",
+      "description": "Server-generated collision-safe sequence: TRN-000001. Never set by the browser."
+    },
+    "training_id": {
+      "type": "string",
+      "title": "Training ID (Legacy)",
+      "description": "Legacy identifier. Synced to training_number for new records."
+    },
+    "title": {
+      "type": "string",
+      "title": "Title",
+      "description": "Short, descriptive title for this training guide."
+    },
+    "training_name": {
+      "type": "string",
+      "title": "Training Name (Legacy)",
+      "description": "Legacy field. Synced to title for new records."
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "training_type": {
+      "type": "string",
+      "enum": [
+        "Company Foundation",
+        "Role Training",
+        "SOP Training",
+        "Safety Training",
+        "Equipment Training",
+        "Software Training",
+        "Customer Service Training",
+        "Management Training"
+      ],
+      "title": "Training Type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Under Review",
+        "Approved",
+        "Published",
+        "Needs Update",
+        "Retired"
+      ],
+      "default": "Draft",
+      "title": "Status",
+      "description": "Draft = authoring; Under Review = submitted for review; Approved = approved by approver; Published = available for employee instruction; Needs Update = published but requires revision; Retired = no longer active."
+    },
+    "applicable_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Applicable Roles",
+      "description": "Role keys this training applies to (e.g. warehouse_manager, lead_technician). Empty = all roles."
+    },
+    "required_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Roles (Legacy)"
+    },
+    "related_module": {
+      "type": "string",
+      "title": "Related Module",
+      "description": "Module key (e.g. sop_registry, inventory_master, business_process_registry)"
+    },
+    "related_route": {
+      "type": "string",
+      "title": "Related Route",
+      "description": "Frontend route to the related module"
+    },
+    "related_task_type": {
+      "type": "string",
+      "title": "Related Task Type",
+      "description": "EnterpriseTask task_type this training is linked to"
+    },
+    "linked_task_number": {
+      "type": "string",
+      "title": "Linked Task Number",
+      "description": "TSK-###### of the linked EnterpriseTask"
+    },
+    "linked_task_id": {
+      "type": "string",
+      "title": "Linked Task ID",
+      "description": "EnterpriseTask ID of the linked task"
+    },
+    "learning_objective": {
+      "type": "string",
+      "title": "Learning Objective",
+      "description": "What the trainee should be able to do after completing this guide."
+    },
+    "prerequisites": {
+      "type": "string",
+      "title": "Prerequisites",
+      "description": "Text description of prerequisites (prior training, equipment, access, etc.)"
+    },
+    "training_steps": {
+      "type": "string",
+      "title": "Training Steps (JSON)",
+      "description": "JSON array of ordered steps: [{step_number, title, instructions, screenshot_url, example, common_mistake, required_evidence}]"
+    },
+    "reviewer_employee_id": {
+      "type": "string",
+      "title": "Reviewer Employee ID",
+      "description": "EmployeeRegistry ID of the designated reviewer"
+    },
+    "approver_employee_id": {
+      "type": "string",
+      "title": "Approver Employee ID",
+      "description": "EmployeeRegistry ID of the designated approver"
+    },
+    "version": {
+      "type": "string",
+      "title": "Version",
+      "default": "1.0"
+    },
+    "effective_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Effective Date"
+    },
+    "review_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Review Date",
+      "description": "Date by which this guide should be reviewed for updates."
+    },
+    "training_owner": {
+      "type": "string",
+      "title": "Training Owner"
+    },
+    "estimated_completion_time": {
+      "type": "string",
+      "title": "Estimated Completion Time",
+      "description": "e.g. 30 min, 2 hours"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Published At"
+    },
+    "published_by": {
+      "type": "string",
+      "title": "Published By"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    },
+    "trainual_link": {
+      "type": "string",
+      "title": "Trainual Link"
+    },
+    "related_policies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Policies"
+    },
+    "related_sops": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related SOPs"
+    },
+    "related_workflows": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Workflows"
+    },
+    "related_forms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Forms"
+    },
+    "related_kpis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related KPIs"
+    },
+    "related_audits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Audits"
+    },
+    "related_certifications": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Certifications"
+    },
+    "quiz_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Quiz Required"
+    },
+    "passing_score": {
+      "type": "number",
+      "title": "Passing Score (%)"
+    },
+    "renewal_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Renewal Required"
+    },
+    "renewal_frequency": {
+      "type": "string",
+      "enum": [
+        "Annual",
+        "Semi-Annual",
+        "Quarterly",
+        "Biennial",
+        "On Update"
+      ],
+      "title": "Renewal Frequency"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "title"
+  ]
+}

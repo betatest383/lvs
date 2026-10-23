@@ -1,0 +1,131 @@
+{
+  "name": "ConsumableCatalog",
+  "type": "object",
+  "properties": {
+    "sku": {
+      "type": "string",
+      "title": "SKU",
+      "description": "Unique stock keeping unit"
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Item Name"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category"
+    },
+    "unit": {
+      "type": "string",
+      "title": "Unit of Measure"
+    },
+    "quantity_on_hand": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity On Hand"
+    },
+    "minimum_stock": {
+      "type": "number",
+      "default": 0,
+      "title": "Minimum Stock"
+    },
+    "maximum_stock": {
+      "type": "number",
+      "default": 0,
+      "title": "Maximum Stock"
+    },
+    "reorder_quantity": {
+      "type": "number",
+      "default": 0,
+      "title": "Reorder Quantity"
+    },
+    "warehouse_location": {
+      "type": "string",
+      "title": "Warehouse Location"
+    },
+    "bin_location": {
+      "type": "string",
+      "title": "Bin Location"
+    },
+    "vendor": {
+      "type": "string",
+      "title": "Vendor"
+    },
+    "manufacturer": {
+      "type": "string",
+      "title": "Manufacturer"
+    },
+    "unit_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Unit Cost ($)"
+    },
+    "inventory_value": {
+      "type": "number",
+      "default": 0,
+      "title": "Inventory Value ($)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "default": "Active",
+      "title": "Status"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "target_truck_quantity": {
+      "type": "number",
+      "title": "Target Truck Quantity"
+    },
+    "minimum_quantity": {
+      "type": "number",
+      "title": "Minimum Truck Quantity"
+    },
+    "maximum_quantity": {
+      "type": "number",
+      "title": "Maximum Truck Quantity"
+    },
+    "current_truck_quantity": {
+      "type": "number",
+      "title": "Current Truck Quantity"
+    },
+    "suggested_replenishment": {
+      "type": "number",
+      "title": "Suggested Replenishment"
+    },
+    "last_received_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Received Date"
+    },
+    "last_count_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Last Count Date"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "item_name",
+    "category",
+    "unit"
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "name": "InspectionSetup",
+  "type": "object",
+  "properties": {
+    "setup_id": {
+      "type": "string",
+      "title": "Setup ID",
+      "description": "e.g. IS-000001"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "property_profile_id": {
+      "type": "string",
+      "title": "Property Profile ID",
+      "description": "Links to PropertyProfile record"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "address": {
+      "type": "string",
+      "title": "Property Address"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "complete"
+      ],
+      "default": "draft",
+      "title": "Status"
+    },
+    "arrival_time": {
+      "type": "string",
+      "title": "Arrival Time"
+    },
+    "weather": {
+      "type": "string",
+      "enum": [
+        "sunny",
+        "cloudy",
+        "overcast",
+        "rain",
+        "snow",
+        "windy",
+        "other"
+      ],
+      "title": "Weather"
+    },
+    "customer_present": {
+      "type": "boolean",
+      "default": true,
+      "title": "Customer Present"
+    },
+    "occupancy": {
+      "type": "string",
+      "enum": [
+        "owner",
+        "tenant",
+        "vacant"
+      ],
+      "title": "Occupancy"
+    },
+    "access_issues": {
+      "type": "string",
+      "title": "Access Issues"
+    },
+    "safety_hazards": {
+      "type": "string",
+      "title": "Safety Hazards"
+    },
+    "customer_concerns": {
+      "type": "string",
+      "title": "Customer Concerns"
+    },
+    "inspection_authorization": {
+      "type": "boolean",
+      "default": false,
+      "title": "Inspection Authorization Confirmed"
+    },
+    "inspection_level": {
+      "type": "string",
+      "enum": [
+        "level_1",
+        "level_2",
+        "level_3"
+      ],
+      "default": "level_1",
+      "title": "Inspection Level"
+    },
+    "front_photo": {
+      "type": "string",
+      "title": "Front of House Photo"
+    },
+    "left_photo": {
+      "type": "string",
+      "title": "Left Side Photo"
+    },
+    "right_photo": {
+      "type": "string",
+      "title": "Right Side Photo"
+    },
+    "rear_photo": {
+      "type": "string",
+      "title": "Rear of House Photo"
+    },
+    "roof_photo": {
+      "type": "string",
+      "title": "Roof Overview Photo"
+    },
+    "building_overview_notes": {
+      "type": "string",
+      "title": "Building Overview Notes"
+    },
+    "selected_modules": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "interior",
+          "exterior",
+          "attic",
+          "roof",
+          "crawl_space",
+          "appliance",
+          "masonry",
+          "commercial",
+          "other"
+        ]
+      },
+      "title": "Selected Inspection Modules"
+    },
+    "module_progress": {
+      "type": "string",
+      "title": "Module Progress (JSON)",
+      "description": "JSON object: { interior: 'pending'|'in_progress'|'complete', exterior: 'pending'|... }"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "date_started": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Date Started"
+    }
+  },
+  "required": [
+    "job_id"
+  ]
+}

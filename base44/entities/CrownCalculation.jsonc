@@ -1,0 +1,241 @@
+{
+  "name": "CrownCalculation",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "customer_address": {
+      "type": "string",
+      "title": "Customer Address"
+    },
+    "technician": {
+      "type": "string",
+      "title": "Technician"
+    },
+    "property_asset_id": {
+      "type": "string",
+      "title": "Property Asset ID"
+    },
+    "property_asset_name": {
+      "type": "string",
+      "title": "Property Asset Name"
+    },
+    "calculation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Calculation Date"
+    },
+    "repair_template_id": {
+      "type": "string",
+      "title": "Repair Template ID"
+    },
+    "repair_template_name": {
+      "type": "string",
+      "title": "Repair Template Name"
+    },
+    "inspection_finding_id": {
+      "type": "string",
+      "title": "Inspection Finding ID"
+    },
+    "inspection_id": {
+      "type": "string",
+      "title": "Inspection ID"
+    },
+    "crown_form_length": {
+      "type": "number",
+      "title": "Crown Form Length (in)"
+    },
+    "crown_form_width": {
+      "type": "number",
+      "title": "Crown Form Width (in)"
+    },
+    "crown_thickness": {
+      "type": "number",
+      "default": 4,
+      "title": "Crown Thickness (in)"
+    },
+    "flues_json": {
+      "type": "string",
+      "title": "Flues (JSON)",
+      "description": "JSON array of {length, width} for each flue tile"
+    },
+    "flue_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Flue Count"
+    },
+    "removing_brick_courses": {
+      "type": "boolean",
+      "default": false,
+      "title": "Removing Brick Courses"
+    },
+    "crown_step_in": {
+      "type": "boolean",
+      "default": false,
+      "title": "Crown Steps In"
+    },
+    "gross_crown_area": {
+      "type": "number",
+      "title": "Gross Crown Area (sq in)"
+    },
+    "total_flue_area": {
+      "type": "number",
+      "title": "Total Flue Area (sq in)"
+    },
+    "net_crown_area": {
+      "type": "number",
+      "title": "Net Crown Area (sq in)"
+    },
+    "concrete_cubic_feet": {
+      "type": "number",
+      "title": "Concrete (cu ft)"
+    },
+    "raw_concrete_bags": {
+      "type": "number",
+      "title": "Raw Concrete Bags"
+    },
+    "concrete_bags_required": {
+      "type": "number",
+      "title": "Concrete Bags Required"
+    },
+    "wire_grid_length": {
+      "type": "number",
+      "title": "Wire Grid Length (in)"
+    },
+    "wire_grid_width": {
+      "type": "number",
+      "title": "Wire Grid Width (in)"
+    },
+    "total_foam_inches": {
+      "type": "number",
+      "title": "Total Foam (in)"
+    },
+    "total_foam_linear_feet": {
+      "type": "number",
+      "title": "Total Foam (linear ft)"
+    },
+    "foam_purchase_quantity": {
+      "type": "number",
+      "title": "Foam Purchase Quantity"
+    },
+    "crown_form_size_length": {
+      "type": "string",
+      "title": "Crown Form Size (Length)"
+    },
+    "crown_form_size_width": {
+      "type": "string",
+      "title": "Crown Form Size (Width)"
+    },
+    "calculation_snapshot_json": {
+      "type": "string",
+      "title": "Calculation Snapshot (JSON)",
+      "description": "Full calculation result at time of confirmation"
+    },
+    "settings_snapshot_json": {
+      "type": "string",
+      "title": "Settings Snapshot (JSON)",
+      "description": "Settings used for this calculation"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "confirmed",
+        "outdated",
+        "locked",
+        "missing_measurements"
+      ],
+      "default": "draft",
+      "title": "Status"
+    },
+    "measurement_source": {
+      "type": "string",
+      "enum": [
+        "inspection",
+        "manual",
+        "hybrid"
+      ],
+      "default": "inspection",
+      "title": "Measurement Source"
+    },
+    "missing_measurements_json": {
+      "type": "string",
+      "title": "Missing Measurements (JSON)",
+      "description": "JSON array of {question_id, label} for missing inspection measurements that block calculation"
+    },
+    "source_question_ids_json": {
+      "type": "string",
+      "title": "Source Question IDs (JSON)",
+      "description": "JSON object mapping measurement fields to inspection question IDs used for extraction"
+    },
+    "estimate_id": {
+      "type": "string",
+      "title": "Estimate ID"
+    },
+    "scope_of_work_id": {
+      "type": "string",
+      "title": "Scope of Work ID"
+    },
+    "proposal_option_id": {
+      "type": "string",
+      "title": "Proposal Option ID"
+    },
+    "pricing_snapshot_id": {
+      "type": "string",
+      "title": "Pricing Snapshot ID"
+    },
+    "materials_pushed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Materials Pushed"
+    },
+    "materials_pushed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Materials Pushed At"
+    },
+    "measurement_hash": {
+      "type": "string",
+      "title": "Measurement Hash",
+      "description": "Deterministic hash of measurement values for outdated detection"
+    },
+    "outdated_reason": {
+      "type": "string",
+      "title": "Outdated Reason"
+    },
+    "outdated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Outdated At"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "job_id"
+  ]
+}

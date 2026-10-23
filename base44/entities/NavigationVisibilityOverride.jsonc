@@ -1,0 +1,104 @@
+{
+  "name": "NavigationVisibilityOverride",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "title": "Role"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published",
+        "scheduled",
+        "archived"
+      ],
+      "default": "draft",
+      "title": "Status"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "title": "Version"
+    },
+    "data_classification": {
+      "type": "string",
+      "enum": [
+        "production",
+        "test",
+        "superseded_test"
+      ],
+      "default": "production",
+      "title": "Data Classification",
+      "description": "production = verified business version; test = accidental/duplicate test version hidden from normal views; superseded_test = test version that was later superseded by another test version. Test versions are hidden from Active/Scheduled/Archived tabs and only visible under All Versions."
+    },
+    "overrides_json": {
+      "type": "string",
+      "title": "Overrides (JSON)",
+      "description": "JSON array of { route, visibility, reason, coming_soon_explanation }. visibility = visible | hidden_from_sidebar | access_disabled | coming_soon"
+    },
+    "landing_page_override": {
+      "type": "string",
+      "title": "Landing Page Override",
+      "description": "Replacement landing page when the role's default landing page is disabled"
+    },
+    "scheduled_publish_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Scheduled Publish At"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Published At"
+    },
+    "published_by": {
+      "type": "string",
+      "title": "Published By"
+    },
+    "internal_reason": {
+      "type": "string",
+      "title": "Internal Reason",
+      "description": "Required reason for the visibility change"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "restored_from_version": {
+      "type": "number",
+      "title": "Restored From Version",
+      "description": "Version number this version was restored from. Set when a restore creates a new active version from a historical one."
+    },
+    "replaced_version": {
+      "type": "number",
+      "title": "Replaced Version",
+      "description": "Version number that was archived when this version became active via restore."
+    },
+    "restored_by": {
+      "type": "string",
+      "title": "Restored By",
+      "description": "User who performed the restore action."
+    },
+    "restored_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Restored At"
+    },
+    "restore_reason": {
+      "type": "string",
+      "title": "Restore Reason",
+      "description": "User-supplied reason for restoring this version."
+    },
+    "restore_request_id": {
+      "type": "string",
+      "title": "Restore Request ID",
+      "description": "Idempotency key to prevent duplicate version creation from a single restore request."
+    }
+  },
+  "required": [
+    "role"
+  ]
+}

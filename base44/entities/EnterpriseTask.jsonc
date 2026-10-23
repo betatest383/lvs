@@ -1,0 +1,1021 @@
+{
+  "name": "EnterpriseTask",
+  "type": "object",
+  "properties": {
+    "task_number": {
+      "type": "string",
+      "title": "Task Number",
+      "description": "Server-generated collision-safe sequence: TSK-000001. Never set by the browser."
+    },
+    "task_id": {
+      "type": "string",
+      "title": "Task ID",
+      "description": "Legacy identifier (synced to task_number for new tasks)"
+    },
+    "assignment_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Assignment Version",
+      "description": "Incremented every time the task is assigned or reassigned. Links notifications and acknowledgments to a specific assignment so a stale acknowledgment cannot suppress a legitimate new assignment alert."
+    },
+    "legacy_task_id": {
+      "type": "string",
+      "title": "Legacy Task ID",
+      "description": "Preserved original task_id from before migration. Used for audit trail and reference integrity."
+    },
+    "data_classification": {
+      "type": "string",
+      "enum": [
+        "production",
+        "test",
+        "demo_seed",
+        "unknown_review",
+        "archived"
+      ],
+      "default": "production",
+      "title": "Data Classification",
+      "description": "production = verified business task; test = test/preview task; demo_seed = seeded demonstration data; unknown_review = quarantined pending Owner review; archived = administratively archived"
+    },
+    "is_test_data": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Test Data"
+    },
+    "is_demo_data": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Demo Data"
+    },
+    "archived_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Archived At"
+    },
+    "archived_by": {
+      "type": "string",
+      "title": "Archived By"
+    },
+    "archive_reason": {
+      "type": "string",
+      "title": "Archive Reason"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description / Instructions"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "task_type": {
+      "type": "string",
+      "enum": [
+        "Data Entry",
+        "Registry Build",
+        "SOP Draft",
+        "Policy Draft",
+        "Process Documentation",
+        "Trainual Upload",
+        "Equipment Setup",
+        "Material Setup",
+        "Automation Request",
+        "Automation Testing",
+        "Review",
+        "Approval",
+        "Corrective Action",
+        "Recurring Operational Task",
+        "Operational",
+        "Warehouse",
+        "Technician",
+        "CSR",
+        "Management",
+        "HR",
+        "Training",
+        "Certification",
+        "Policy Acknowledgment",
+        "Equipment",
+        "Fleet",
+        "Safety",
+        "Audit",
+        "Onboarding",
+        "Continuous Improvement",
+        "Integration Issue",
+        "Customer Issue",
+        "Follow-Up"
+      ],
+      "default": "Operational",
+      "title": "Task Type"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "default": "Medium",
+      "title": "Priority"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Assigned",
+        "In Progress",
+        "Blocked",
+        "On Hold",
+        "Submitted for Review",
+        "Changes Requested",
+        "Awaiting Approval",
+        "Approved",
+        "Completed",
+        "Canceled",
+        "New",
+        "Waiting",
+        "Needs Approval",
+        "Cancelled",
+        "Overdue"
+      ],
+      "default": "Draft",
+      "title": "Status"
+    },
+    "requested_by_employee_id": {
+      "type": "string",
+      "title": "Requested By Employee ID"
+    },
+    "assigned_employee_registry_id": {
+      "type": "string",
+      "title": "Assigned Employee Registry ID"
+    },
+    "assigned_to": {
+      "type": "string",
+      "title": "Assigned To"
+    },
+    "assigned_to_email": {
+      "type": "string",
+      "title": "Assigned To Email"
+    },
+    "assigned_to_linked_user_id": {
+      "type": "string",
+      "title": "Assigned To Linked User ID"
+    },
+    "assigned_role": {
+      "type": "string",
+      "title": "Assigned Role"
+    },
+    "assigned_role_id": {
+      "type": "string",
+      "title": "Assigned Role ID"
+    },
+    "assigned_department": {
+      "type": "string",
+      "title": "Assigned Department"
+    },
+    "required_reviewer_id": {
+      "type": "string",
+      "title": "Required Reviewer ID"
+    },
+    "required_approver_id": {
+      "type": "string",
+      "title": "Required Approver ID"
+    },
+    "related_module": {
+      "type": "string",
+      "title": "Related Module"
+    },
+    "related_record_id": {
+      "type": "string",
+      "title": "Related Record ID"
+    },
+    "related_route": {
+      "type": "string",
+      "title": "Related Route"
+    },
+    "parent_task_id": {
+      "type": "string",
+      "title": "Parent Task ID"
+    },
+    "dependency_task_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Dependency Task IDs"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Due Date"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Start Date"
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Completed Date"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Reviewed At"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At"
+    },
+    "recurrence_config": {
+      "type": "string",
+      "title": "Recurrence Configuration (JSON)"
+    },
+    "blocked_reason": {
+      "type": "string",
+      "title": "Blocked Reason"
+    },
+    "on_hold_reason": {
+      "type": "string",
+      "title": "On Hold Reason"
+    },
+    "cancel_reason": {
+      "type": "string",
+      "title": "Cancel Reason"
+    },
+    "completion_summary": {
+      "type": "string",
+      "title": "Completion Summary"
+    },
+    "completion_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Completion Evidence"
+    },
+    "require_completion_evidence": {
+      "type": "boolean",
+      "default": false,
+      "title": "Require Completion Evidence"
+    },
+    "related_employee": {
+      "type": "string",
+      "title": "Related Employee"
+    },
+    "related_customer": {
+      "type": "string",
+      "title": "Related Customer"
+    },
+    "related_job": {
+      "type": "string",
+      "title": "Related Job"
+    },
+    "related_truck": {
+      "type": "string",
+      "title": "Related Truck"
+    },
+    "related_equipment": {
+      "type": "string",
+      "title": "Related Equipment"
+    },
+    "related_sop": {
+      "type": "string",
+      "title": "Related SOP"
+    },
+    "related_workflow": {
+      "type": "string",
+      "title": "Related Workflow"
+    },
+    "related_business_process": {
+      "type": "string",
+      "title": "Related Business Process"
+    },
+    "related_policy": {
+      "type": "string",
+      "title": "Related Policy"
+    },
+    "related_training": {
+      "type": "string",
+      "title": "Related Training"
+    },
+    "related_certification": {
+      "type": "string",
+      "title": "Related Certification"
+    },
+    "related_audit": {
+      "type": "string",
+      "title": "Related Audit"
+    },
+    "related_corrective_action": {
+      "type": "string",
+      "title": "Related Corrective Action"
+    },
+    "related_onboarding": {
+      "type": "string",
+      "title": "Related Onboarding"
+    },
+    "related_improvement_request": {
+      "type": "string",
+      "title": "Related Improvement Request"
+    },
+    "source_module": {
+      "type": "string",
+      "title": "Source Module"
+    },
+    "source_record_id": {
+      "type": "string",
+      "title": "Source Record ID"
+    },
+    "requires_approval": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Approval"
+    },
+    "approval_role": {
+      "type": "string",
+      "title": "Approval Role"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By"
+    },
+    "approved_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Approved Date"
+    },
+    "approval_status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Changes Requested"
+      ],
+      "title": "Approval Status"
+    },
+    "approval_notes": {
+      "type": "string",
+      "title": "Approval Notes"
+    },
+    "escalation_level": {
+      "type": "number",
+      "default": 0,
+      "title": "Escalation Level"
+    },
+    "escalation_due_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Escalation Due Date"
+    },
+    "comments": {
+      "type": "string",
+      "title": "Comments (JSON)"
+    },
+    "status_history": {
+      "type": "string",
+      "title": "Status History (JSON)"
+    },
+    "approval_history": {
+      "type": "string",
+      "title": "Approval History (JSON)"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Attachments"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    },
+    "training_guide_id": {
+      "type": "string",
+      "title": "Training Guide ID"
+    },
+    "guided_training_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Guided Training Required"
+    },
+    "training_required_before_start": {
+      "type": "boolean",
+      "default": false,
+      "title": "Training Required Before Start"
+    },
+    "training_session_id": {
+      "type": "string",
+      "title": "Training Session ID"
+    },
+    "current_training_step": {
+      "type": "number",
+      "default": 0,
+      "title": "Current Training Step"
+    },
+    "training_completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Training Completed At"
+    },
+    "knowledge_check_score": {
+      "type": "number",
+      "title": "Knowledge Check Score"
+    },
+    "work_category": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "operational_interruption",
+        "high_priority",
+        "scheduled_primary",
+        "routine",
+        "busy_work"
+      ],
+      "title": "Work Category",
+      "description": "Orchestration classification determining priority and interruptibility"
+    },
+    "priority_level": {
+      "type": "number",
+      "title": "Priority Level"
+    },
+    "priority_score": {
+      "type": "number",
+      "title": "Priority Score",
+      "description": "Server-calculated composite score from the orchestration engine"
+    },
+    "priority_reason": {
+      "type": "string",
+      "title": "Priority Reason"
+    },
+    "business_impact": {
+      "type": "string",
+      "enum": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "severe"
+      ],
+      "default": "none",
+      "title": "Business Impact"
+    },
+    "urgency": {
+      "type": "string",
+      "enum": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "immediate"
+      ],
+      "default": "none",
+      "title": "Urgency"
+    },
+    "due_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Due At (Time-Aware)"
+    },
+    "must_start_by": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Must Start By"
+    },
+    "starts_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Starts At",
+      "description": "Scheduled start time for calendar display. Takes precedence over due_at and due_date for calendar positioning."
+    },
+    "ends_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Ends At",
+      "description": "Scheduled end time. Must be after starts_at for timed tasks."
+    },
+    "is_all_day": {
+      "type": "boolean",
+      "default": false,
+      "title": "All Day",
+      "description": "True when the task is scheduled as an all-day calendar item."
+    },
+    "schedule_timezone": {
+      "type": "string",
+      "default": "America/New_York",
+      "title": "Schedule Timezone",
+      "description": "IANA timezone for the scheduled start/end times."
+    },
+    "schedule_status": {
+      "type": "string",
+      "enum": [
+        "unscheduled",
+        "scheduled",
+        "rescheduled",
+        "cancelled"
+      ],
+      "default": "unscheduled",
+      "title": "Schedule Status"
+    },
+    "scheduled_by_employee_id": {
+      "type": "string",
+      "title": "Scheduled By Employee ID"
+    },
+    "scheduled_by_name": {
+      "type": "string",
+      "title": "Scheduled By Name"
+    },
+    "scheduled_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Scheduled At"
+    },
+    "last_rescheduled_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Rescheduled At"
+    },
+    "last_rescheduled_by": {
+      "type": "string",
+      "title": "Last Rescheduled By"
+    },
+    "reschedule_reason": {
+      "type": "string",
+      "title": "Reschedule Reason"
+    },
+    "estimated_duration_minutes": {
+      "type": "number",
+      "title": "Estimated Duration (Minutes)"
+    },
+    "assigned_employee_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Assigned Employee IDs"
+    },
+    "assigned_department_id": {
+      "type": "string",
+      "title": "Assigned Department ID"
+    },
+    "assigned_role_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Assigned Role IDs"
+    },
+    "required_employee_count": {
+      "type": "number",
+      "default": 1,
+      "title": "Required Employee Count"
+    },
+    "claim_mode": {
+      "type": "string",
+      "enum": [
+        "assigned",
+        "claimable",
+        "multi_claim"
+      ],
+      "default": "assigned",
+      "title": "Claim Mode"
+    },
+    "claimed_by_employee_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Claimed By Employee IDs"
+    },
+    "claimed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Claimed At"
+    },
+    "required_role_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Role IDs"
+    },
+    "required_training_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Training IDs"
+    },
+    "required_certification_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Certification IDs"
+    },
+    "required_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Capabilities"
+    },
+    "required_equipment_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Equipment IDs"
+    },
+    "interruptibility": {
+      "type": "string",
+      "enum": [
+        "freely_interruptible",
+        "interruptible_with_checkpoint",
+        "manager_approval_required",
+        "non_interruptible",
+        "critical_only"
+      ],
+      "default": "freely_interruptible",
+      "title": "Interruptibility"
+    },
+    "may_interrupt_categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "critical",
+          "operational_interruption",
+          "high_priority",
+          "scheduled_primary",
+          "routine",
+          "busy_work"
+        ]
+      },
+      "title": "May Interrupt Categories"
+    },
+    "requires_immediate_acknowledgment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Immediate Acknowledgment"
+    },
+    "acknowledgment_deadline_minutes": {
+      "type": "number",
+      "title": "Acknowledgment Deadline (Minutes)"
+    },
+    "may_be_paused": {
+      "type": "boolean",
+      "default": true,
+      "title": "May Be Paused"
+    },
+    "resume_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Resume Required"
+    },
+    "focus_lock_eligible": {
+      "type": "boolean",
+      "default": false,
+      "title": "Focus Lock Eligible"
+    },
+    "source_event_type": {
+      "type": "string",
+      "title": "Source Event Type"
+    },
+    "source_event_id": {
+      "type": "string",
+      "title": "Source Event ID"
+    },
+    "workflow_type": {
+      "type": "string",
+      "title": "Workflow Type"
+    },
+    "workflow_session_id": {
+      "type": "string",
+      "title": "Workflow Session ID"
+    },
+    "related_task_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Task IDs"
+    },
+    "interrupted_task_id": {
+      "type": "string",
+      "title": "Interrupted Task ID"
+    },
+    "interrupting_task_id": {
+      "type": "string",
+      "title": "Interrupting Task ID"
+    },
+    "resume_task_id": {
+      "type": "string",
+      "title": "Resume Task ID"
+    },
+    "orchestration_status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "queued",
+        "offered",
+        "assigned",
+        "acknowledgment_required",
+        "acknowledged",
+        "in_progress",
+        "paused",
+        "paused_by_higher_priority",
+        "waiting_on_person",
+        "waiting_on_material",
+        "waiting_on_approval",
+        "blocked",
+        "overdue",
+        "focus_required",
+        "completed",
+        "cancelled",
+        "superseded",
+        "archived"
+      ],
+      "title": "Orchestration Status",
+      "description": "Orchestration state machine status (separate from the legacy status field)"
+    },
+    "acknowledgment_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "pending",
+        "acknowledged",
+        "start_now",
+        "request_clarification",
+        "unable_to_start",
+        "manager_assistance_requested",
+        "overdue",
+        "escalated"
+      ],
+      "default": "none",
+      "title": "Acknowledgment Status"
+    },
+    "response_category": {
+      "type": "string",
+      "title": "Response Category",
+      "description": "Snapshot of the latest employee response category (reason/help category)"
+    },
+    "manager_followup_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "pending",
+        "responded",
+        "closed"
+      ],
+      "default": "none",
+      "title": "Manager Follow-Up Status",
+      "description": "Tracks the state of the manager follow-up created when an employee requests clarification, is unable to start, or requests manager help."
+    },
+    "manager_followup_notification_id": {
+      "type": "string",
+      "title": "Manager Follow-Up Notification ID",
+      "description": "EnterpriseNotification ID of the active manager follow-up notification"
+    },
+    "manager_response": {
+      "type": "string",
+      "title": "Manager Response",
+      "description": "Manager's clarification or response message sent back to the employee"
+    },
+    "focus_lock_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "eligible",
+        "active",
+        "override_requested"
+      ],
+      "default": "none",
+      "title": "Focus Lock Status"
+    },
+    "last_priority_evaluated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Priority Evaluated At"
+    },
+    "current_blocker": {
+      "type": "string",
+      "title": "Current Blocker"
+    },
+    "waiting_reason": {
+      "type": "string",
+      "title": "Waiting Reason"
+    },
+    "execution_mode": {
+      "type": "string",
+      "enum": [
+        "simple_action",
+        "checklist",
+        "guided_task",
+        "form",
+        "workflow",
+        "wizard",
+        "automated",
+        "linked_module"
+      ],
+      "title": "Execution Mode",
+      "description": "Direct task field copied from template. Controls how the task is executed and what targets are required."
+    },
+    "assignment_mode": {
+      "type": "string",
+      "enum": [
+        "specific_employee",
+        "multiple_employees",
+        "role_queue",
+        "department_queue",
+        "eligibility_engine",
+        "manager_selects"
+      ],
+      "title": "Assignment Mode",
+      "description": "Direct task field copied from template. Controls how the task is assigned and what relationships are required."
+    },
+    "execution_route": {
+      "type": "string",
+      "title": "Execution Route",
+      "description": "Frontend route to open when task is started"
+    },
+    "linked_module": {
+      "type": "string",
+      "title": "Linked Module"
+    },
+    "linked_checklist_id": {
+      "type": "string",
+      "title": "Linked Checklist ID"
+    },
+    "linked_form_id": {
+      "type": "string",
+      "title": "Linked Form ID"
+    },
+    "linked_workflow_id": {
+      "type": "string",
+      "title": "Linked Workflow ID"
+    },
+    "linked_wizard_key": {
+      "type": "string",
+      "title": "Linked Wizard Key"
+    },
+    "required_evidence_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Evidence Types"
+    },
+    "minimum_photo_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Minimum Photo Count"
+    },
+    "requires_notes": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Notes"
+    },
+    "requires_signature": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Signature"
+    },
+    "requires_record_id": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Record ID"
+    },
+    "requires_manager_verification": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Manager Verification"
+    },
+    "requires_checklist_completion": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Checklist Completion"
+    },
+    "requires_training_completion": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Training Completion"
+    },
+    "requires_linked_workflow_completion": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Linked Workflow Completion"
+    },
+    "self_approval_prohibited": {
+      "type": "boolean",
+      "default": true,
+      "title": "Self Approval Prohibited"
+    },
+    "approval_capability": {
+      "type": "string",
+      "title": "Approval Capability"
+    },
+    "escalation_conditions_json": {
+      "type": "string",
+      "title": "Escalation Conditions (JSON)"
+    },
+    "task_template_id": {
+      "type": "string",
+      "title": "Task Template ID",
+      "description": "Canonical TaskTemplate ID if this task was created from a template"
+    },
+    "task_template_number": {
+      "type": "string",
+      "title": "Task Template Number",
+      "description": "Snapshot of template_number at creation time"
+    },
+    "task_template_version": {
+      "type": "number",
+      "title": "Task Template Version",
+      "description": "Snapshot of template version at creation time"
+    },
+    "template_defaults_snapshot": {
+      "type": "string",
+      "title": "Template Defaults Snapshot (JSON)",
+      "description": "JSON snapshot of all template-derived field values at creation time. Used for audit and to detect overrides."
+    },
+    "template_override_history": {
+      "type": "string",
+      "title": "Template Override History (JSON)",
+      "description": "JSON array of {field, template_value, previous_task_value, new_value, reason, changed_by_employee_id, changed_by_name, changed_at}"
+    },
+    "template_override_reason": {
+      "type": "string",
+      "title": "Template Override Reason",
+      "description": "Reason provided when overriding controlled template-derived fields"
+    },
+    "test_purpose": {
+      "type": "string",
+      "title": "Test Purpose",
+      "description": "Required when creating a test record. Records why the test task was created and who authorized it."
+    }
+  },
+  "required": [
+    "title"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.assigned_to_linked_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "data.assigned_to_linked_user_id": "{{user.id}}"
+        },
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

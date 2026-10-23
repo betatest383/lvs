@@ -1,0 +1,76 @@
+{
+  "name": "DashboardRegistry",
+  "type": "object",
+  "properties": {
+    "dashboard_id": {
+      "type": "string",
+      "title": "Dashboard ID"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "audience": {
+      "type": "string",
+      "title": "Audience"
+    },
+    "data_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Data Sources"
+    },
+    "refresh_frequency": {
+      "type": "string",
+      "title": "Refresh Frequency"
+    },
+    "owner": {
+      "type": "string",
+      "title": "Owner"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "In Development",
+        "Live",
+        "Retired"
+      ],
+      "default": "Planned",
+      "title": "Status"
+    },
+    "base44_module": {
+      "type": "string",
+      "title": "Base44 Module"
+    },
+    "url": {
+      "type": "string",
+      "title": "URL"
+    },
+    "related_sop_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related SOP IDs"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    }
+  },
+  "required": [
+    "dashboard_id",
+    "title"
+  ]
+}

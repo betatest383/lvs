@@ -1,0 +1,173 @@
+{
+  "name": "TruckProfile",
+  "type": "object",
+  "properties": {
+    "truck_id": {
+      "type": "string",
+      "title": "Truck ID",
+      "description": "e.g. TRK-001"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "vehicle_name": {
+      "type": "string",
+      "title": "Vehicle Name"
+    },
+    "vehicle_type": {
+      "type": "string",
+      "enum": [
+        "Lead Technician Vehicle",
+        "Shared Vehicle",
+        "Install Vehicle",
+        "Service Vehicle",
+        "Sales Vehicle",
+        "Utility Vehicle"
+      ],
+      "title": "Vehicle Type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Shared Pool",
+        "Out of Service",
+        "Maintenance",
+        "Retired"
+      ],
+      "default": "Active",
+      "title": "Status"
+    },
+    "assigned_lead_technician_registry_id": {
+      "type": "string",
+      "title": "Assigned Lead Technician Registry ID",
+      "description": "Links to EmployeeRegistry record"
+    },
+    "assigned_lead_technician": {
+      "type": "string",
+      "title": "Assigned Lead Technician",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "assigned_apprentice_registry_id": {
+      "type": "string",
+      "title": "Assigned Apprentice Registry ID",
+      "description": "Links to EmployeeRegistry record"
+    },
+    "assigned_apprentice": {
+      "type": "string",
+      "title": "Assigned Apprentice",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "assigned_equipment_package_id": {
+      "type": "string",
+      "title": "Assigned Equipment Package ID",
+      "description": "Links to EquipmentPackage record \u2014 TruckProfile is the single source of truth for equipment package assignment. Bidirectionally synced with EquipmentPackage.assigned_truck_id."
+    },
+    "assigned_equipment_package_name": {
+      "type": "string",
+      "title": "Assigned Equipment Package Name",
+      "description": "Auto-populated from EquipmentPackage"
+    },
+    "equipment_package_assigned_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Equipment Package Assigned Date"
+    },
+    "equipment_package_assigned_by": {
+      "type": "string",
+      "title": "Equipment Package Assigned By",
+      "description": "User who assigned the equipment package"
+    },
+    "default_crew": {
+      "type": "string",
+      "title": "Default Crew"
+    },
+    "current_driver": {
+      "type": "string",
+      "title": "Current Driver"
+    },
+    "current_job": {
+      "type": "string",
+      "title": "Current Job"
+    },
+    "current_assignment_status": {
+      "type": "string",
+      "enum": [
+        "Assigned",
+        "Available",
+        "Checked Out",
+        "In Use",
+        "Returned"
+      ],
+      "default": "Available",
+      "title": "Current Assignment Status"
+    },
+    "forklift_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Forklift Required"
+    },
+    "license_plate": {
+      "type": "string",
+      "title": "License Plate"
+    },
+    "vin": {
+      "type": "string",
+      "title": "VIN"
+    },
+    "year": {
+      "type": "number",
+      "title": "Year"
+    },
+    "make": {
+      "type": "string",
+      "title": "Make"
+    },
+    "model": {
+      "type": "string",
+      "title": "Model"
+    },
+    "mileage": {
+      "type": "number",
+      "title": "Mileage"
+    },
+    "servicetitan_truck_id": {
+      "type": "string",
+      "title": "ServiceTitan Truck ID"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "last_inspection_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Last Inspection Date"
+    },
+    "next_inspection_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Next Inspection Date"
+    },
+    "last_maintenance_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Last Maintenance Date"
+    },
+    "next_maintenance_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Next Maintenance Date"
+    },
+    "related_sop_id": {
+      "type": "string",
+      "title": "Related SOP ID"
+    }
+  },
+  "required": [
+    "truck_id",
+    "truck_number",
+    "vehicle_type"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "ServiceTitan Customer Incremental Sync",
+  "description": "Runs every 15 minutes to incrementally sync customers from ServiceTitan CRM v2 export API. Replaces webhook-only customer ingestion with production-grade recovery synchronization. Authenticates via scheduler_secret_env (env var reference \u2014 secret value never stored in automation config). Uses existing cursor lock system to prevent overlapping execution. Sync direction: EXTERNAL_TO_LVC only.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "interval",
+      "cron_expression": null,
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": 15,
+      "interval_unit": "minutes",
+      "interval_anchor": "2026-07-21T03:28:22.298000",
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "servicetitan_customer_incremental_sync",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_function": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "runServiceTitanCustomerIncrementalSync",
+            "args": {
+              "mode": "incremental",
+              "scheduler_secret_env": "SERVICETITAN_WEBHOOK_SECRET"
+            }
+          },
+          "then": "end"
+        }
+      }
+    ]
+  },
+  "x-base44-migrated-from-automation": {
+    "legacy_payload_function": "runServiceTitanCustomerIncrementalSync"
+  }
+}

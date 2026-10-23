@@ -1,0 +1,219 @@
+{
+  "name": "BillSyncWatermark",
+  "type": "object",
+  "properties": {
+    "watermark_key": {
+      "type": "string",
+      "title": "Watermark Key",
+      "description": "Unique key (e.g. 'bill_go_live'). One per (tenant, environment) pair."
+    },
+    "sync_strategy": {
+      "type": "string",
+      "enum": [
+        "new_bills_only",
+        "full_historical_backfill"
+      ],
+      "default": "new_bills_only",
+      "title": "Synchronization Strategy"
+    },
+    "activation_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activation Timestamp"
+    },
+    "environment": {
+      "type": "string",
+      "title": "Environment"
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant ID"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "disabled"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "last_modified_scan_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Modified Scan At"
+    },
+    "last_created_scan_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Created Scan At"
+    },
+    "recovery_window_start": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Recovery Window Start"
+    },
+    "recovery_window_end": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Recovery Window End"
+    },
+    "recovery_window_status": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "in_progress",
+        "completed",
+        "failed"
+      ],
+      "default": "idle",
+      "title": "Recovery Window Status"
+    },
+    "recovery_window_errors": {
+      "type": "number",
+      "default": 0,
+      "title": "Recovery Window Errors"
+    },
+    "recovery_overlap_minutes": {
+      "type": "number",
+      "default": 5,
+      "title": "Recovery Overlap Minutes"
+    },
+    "bills_imported_since_activation": {
+      "type": "number",
+      "default": 0,
+      "title": "Bills Imported Since Activation"
+    },
+    "bills_imported_on_demand": {
+      "type": "number",
+      "default": 0,
+      "title": "Bills Imported On Demand"
+    },
+    "bills_updated": {
+      "type": "number",
+      "default": 0,
+      "title": "Bills Updated"
+    },
+    "bill_lines_created": {
+      "type": "number",
+      "default": 0,
+      "title": "Bill Lines Created"
+    },
+    "bill_lines_updated": {
+      "type": "number",
+      "default": 0,
+      "title": "Bill Lines Updated"
+    },
+    "bills_voided": {
+      "type": "number",
+      "default": 0,
+      "title": "Bills Voided"
+    },
+    "bills_paid": {
+      "type": "number",
+      "default": 0,
+      "title": "Bills Paid"
+    },
+    "bills_deferred_missing_po": {
+      "type": "number",
+      "default": 0,
+      "title": "Bills Deferred (Missing PO)"
+    },
+    "bills_deferred_missing_receipt": {
+      "type": "number",
+      "default": 0,
+      "title": "Bills Deferred (Missing Receipt)"
+    },
+    "bills_deferred_missing_vendor": {
+      "type": "number",
+      "default": 0,
+      "title": "Bills Deferred (Missing Vendor)"
+    },
+    "bills_deferred_missing_material": {
+      "type": "number",
+      "default": 0,
+      "title": "Bill Lines Deferred (Missing Material)"
+    },
+    "bill_headers_lines_pending": {
+      "type": "number",
+      "default": 0,
+      "title": "Bill Headers with Lines Pending",
+      "description": "Bill headers created or updated while line-level synchronization is incomplete (lines_sync_status != complete). Headers remain eligible for line retry."
+    },
+    "bill_line_sync_failures": {
+      "type": "number",
+      "default": 0,
+      "title": "Bill Line Sync Failures",
+      "description": "Total non-retriable bill line sync failures (servicetitan_sync_status = failed)."
+    },
+    "bill_receipt_link_deferred": {
+      "type": "number",
+      "default": 0,
+      "title": "Bill-Receipt Links Deferred",
+      "description": "BillReceiptLink records deferred because the referenced ServiceTitan receipt ID has no local Receipt record."
+    },
+    "webhook_events_processed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Processed (Total)"
+    },
+    "webhook_events_failed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Failed"
+    },
+    "recovery_events_processed": {
+      "type": "number",
+      "default": 0,
+      "title": "Recovery Events Processed"
+    },
+    "last_successful_sync_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Successful Sync At"
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "backfill_status": {
+      "type": "string",
+      "enum": [
+        "never_started",
+        "disabled",
+        "confirmed",
+        "in_progress",
+        "completed"
+      ],
+      "default": "never_started",
+      "title": "Backfill Status"
+    },
+    "backfill_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Backfill Started At"
+    },
+    "backfill_confirmed_by": {
+      "type": "string",
+      "title": "Backfill Confirmed By"
+    },
+    "backfill_scope_estimate": {
+      "type": "number",
+      "title": "Backfill Scope Estimate"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "watermark_key",
+    "sync_strategy",
+    "environment",
+    "tenant_id"
+  ]
+}

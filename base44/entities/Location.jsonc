@@ -1,0 +1,74 @@
+{
+  "name": "Location",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "location_id": {
+      "type": "string",
+      "title": "Location ID"
+    },
+    "crm_location_id": {
+      "type": "string",
+      "title": "CRM Location ID"
+    },
+    "location_label": {
+      "type": "string",
+      "title": "Location Label (e.g. Main Office, Warehouse #2)"
+    },
+    "contact_name": {
+      "type": "string",
+      "title": "On-Site Contact Name"
+    },
+    "contact_phone": {
+      "type": "string",
+      "title": "On-Site Contact Phone"
+    },
+    "contact_email": {
+      "type": "string",
+      "format": "email",
+      "title": "On-Site Contact Email"
+    },
+    "address": {
+      "type": "string",
+      "title": "Service Address"
+    },
+    "city": {
+      "type": "string",
+      "title": "City"
+    },
+    "state": {
+      "type": "string",
+      "title": "State"
+    },
+    "zip": {
+      "type": "string",
+      "title": "Zip"
+    },
+    "bill_to_customer": {
+      "type": "boolean",
+      "default": true,
+      "title": "Bill to Customer (use customer billing info, not location info)"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    }
+  },
+  "required": [
+    "customer_id",
+    "location_id",
+    "contact_name"
+  ]
+}

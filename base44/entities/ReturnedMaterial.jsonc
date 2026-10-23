@@ -1,0 +1,67 @@
+{
+  "name": "ReturnedMaterial",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Date"
+    },
+    "technician": {
+      "type": "string",
+      "title": "Technician"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "materials_returned": {
+      "type": "string",
+      "title": "Materials Returned"
+    },
+    "quantity_returned": {
+      "type": "string",
+      "title": "Quantity Returned"
+    },
+    "condition": {
+      "type": "string",
+      "title": "Condition"
+    },
+    "transfer_sheet_attached": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ],
+      "default": "No",
+      "title": "Transfer Sheet Attached"
+    },
+    "verified_by": {
+      "type": "string",
+      "title": "Verified By"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Received",
+        "Needs Correction",
+        "Verified",
+        "Returned to Stock"
+      ],
+      "default": "Received",
+      "title": "Status"
+    },
+    "related_sop_id": {
+      "type": "string",
+      "title": "Related SOP ID"
+    },
+    "trainual_link": {
+      "type": "string",
+      "title": "Trainual Link"
+    }
+  },
+  "required": [
+    "date",
+    "technician"
+  ]
+}

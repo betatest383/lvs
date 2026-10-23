@@ -1,0 +1,128 @@
+{
+  "name": "TrainingProgress",
+  "type": "object",
+  "properties": {
+    "training_id": {
+      "type": "string",
+      "title": "Training Registry ID",
+      "description": "Links to TrainingRegistry record"
+    },
+    "training_number": {
+      "type": "string",
+      "title": "Training Number"
+    },
+    "training_title": {
+      "type": "string",
+      "title": "Training Title"
+    },
+    "employee_registry_id": {
+      "type": "string",
+      "title": "Employee Registry ID",
+      "description": "Links to EmployeeRegistry record"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "linked_user_id": {
+      "type": "string",
+      "title": "Linked User ID"
+    },
+    "task_id": {
+      "type": "string",
+      "title": "Task ID",
+      "description": "EnterpriseTask ID of the linked task (optional — training can be standalone)"
+    },
+    "task_number": {
+      "type": "string",
+      "title": "Task Number"
+    },
+    "current_step": {
+      "type": "number",
+      "default": 0,
+      "title": "Current Step",
+      "description": "0-based index of the step the trainee is currently on."
+    },
+    "total_steps": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Steps"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "completed"
+      ],
+      "default": "not_started",
+      "title": "Status"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "step_progress_json": {
+      "type": "string",
+      "title": "Step Progress (JSON)",
+      "description": "JSON array of {step_number, completed, completed_at}"
+    },
+    "evidence_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence URLs"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "training_id",
+    "employee_registry_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.linked_user_id": "{{user.id}}"
+        },
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

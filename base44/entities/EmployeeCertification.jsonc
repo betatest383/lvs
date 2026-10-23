@@ -1,0 +1,112 @@
+{
+  "name": "EmployeeCertification",
+  "type": "object",
+  "properties": {
+    "employee_registry_id": {
+      "type": "string",
+      "title": "Employee Registry ID",
+      "description": "Links to EmployeeRegistry record — the single source of truth for certification assignment"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "certification_id": {
+      "type": "string",
+      "title": "Certification ID",
+      "description": "Links to CertificationRegistry"
+    },
+    "certification_name": {
+      "type": "string",
+      "title": "Certification Name"
+    },
+    "role": {
+      "type": "string",
+      "title": "Role"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Expired",
+        "Expiring Soon",
+        "Pending",
+        "Suspended",
+        "Not Required"
+      ],
+      "default": "Pending",
+      "title": "Status"
+    },
+    "issue_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Issue Date"
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Expiration Date"
+    },
+    "renewal_due_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Renewal Due Date"
+    },
+    "document_url": {
+      "type": "string",
+      "title": "Document Upload URL"
+    },
+    "verified_by": {
+      "type": "string",
+      "title": "Verified By"
+    },
+    "verified_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Verified Date"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "employee_name",
+    "certification_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.employee_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

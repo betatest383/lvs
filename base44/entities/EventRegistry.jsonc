@@ -1,0 +1,100 @@
+{
+  "name": "EventRegistry",
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "type": "string",
+      "title": "Event Type",
+      "description": "Unique registered event type identifier (e.g. 'customer.created', 'job.completed', 'po.received')."
+    },
+    "display_name": {
+      "type": "string",
+      "title": "Display Name"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "description": "Human-readable explanation of when this event is published."
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "lifecycle",
+        "inventory",
+        "financial",
+        "operational",
+        "workflow",
+        "system",
+        "integration"
+      ],
+      "title": "Category"
+    },
+    "entity_type": {
+      "type": "string",
+      "title": "Entity Type",
+      "description": "The business entity this event type concerns (e.g. 'Customer')."
+    },
+    "current_version": {
+      "type": "number",
+      "default": 1,
+      "title": "Current Version",
+      "description": "Latest schema version. Historical events retain their original version."
+    },
+    "schema_definition": {
+      "type": "string",
+      "title": "Schema Definition (JSON)",
+      "description": "JSON schema used to validate event payloads. Empty string means no strict validation."
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Is Active"
+    },
+    "allows_replay": {
+      "type": "boolean",
+      "default": true,
+      "title": "Allows Replay",
+      "description": "Whether deliveries of this event may be replayed after dead-lettering."
+    },
+    "default_processing_mode": {
+      "type": "string",
+      "enum": [
+        "synchronous",
+        "asynchronous"
+      ],
+      "default": "asynchronous",
+      "title": "Default Processing Mode"
+    },
+    "default_retry_policy": {
+      "type": "string",
+      "enum": [
+        "none",
+        "bounded",
+        "aggressive"
+      ],
+      "default": "bounded",
+      "title": "Default Retry Policy"
+    },
+    "activation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activation Date"
+    },
+    "deactivation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Deactivation Date"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "event_type",
+    "display_name",
+    "category",
+    "entity_type",
+    "current_version"
+  ]
+}

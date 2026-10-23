@@ -1,0 +1,190 @@
+{
+  "name": "InspectionGapReview",
+  "type": "object",
+  "properties": {
+    "gap_id": {
+      "type": "string",
+      "title": "Gap ID",
+      "description": "Composite key: question_id::gap_def_id"
+    },
+    "question_id": {
+      "type": "string",
+      "title": "Question ID"
+    },
+    "question_text": {
+      "type": "string",
+      "title": "Question Text"
+    },
+    "gap_type": {
+      "type": "string",
+      "title": "Gap Type"
+    },
+    "gap_category": {
+      "type": "string",
+      "title": "Gap Category"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low"
+      ],
+      "default": "medium",
+      "title": "Priority"
+    },
+    "confidence_score": {
+      "type": "number",
+      "default": 50,
+      "title": "Confidence Score (0-100)"
+    },
+    "confidence_level": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "default": "medium",
+      "title": "Confidence Level"
+    },
+    "confidence_reason": {
+      "type": "string",
+      "title": "Confidence Reason"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "reviewed",
+        "accepted",
+        "not_applicable",
+        "fixed",
+        "deferred"
+      ],
+      "default": "new",
+      "title": "Status"
+    },
+    "assigned_to": {
+      "type": "string",
+      "title": "Assigned To"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "target_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Target Date"
+    },
+    "priority_override": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low"
+      ],
+      "title": "Priority Override"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "title": "Reviewed By"
+    },
+    "review_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Review Date"
+    },
+    "resolution_notes": {
+      "type": "string",
+      "title": "Resolution Notes"
+    },
+    "systems_affected": {
+      "type": "string",
+      "title": "Systems Affected (JSON)",
+      "description": "JSON array of impacted systems"
+    },
+    "impact_summary": {
+      "type": "string",
+      "title": "Impact Summary (JSON)"
+    },
+    "question_role": {
+      "type": "string",
+      "title": "Question Role"
+    },
+    "question_purpose": {
+      "type": "string",
+      "title": "Question Purpose (JSON)"
+    },
+    "question_category": {
+      "type": "string",
+      "title": "Question Category"
+    },
+    "section": {
+      "type": "string",
+      "title": "Section"
+    },
+    "subsection": {
+      "type": "string",
+      "title": "Subsection"
+    },
+    "inspection_type": {
+      "type": "string",
+      "title": "Inspection Type"
+    },
+    "repair_system": {
+      "type": "string",
+      "title": "Repair System"
+    },
+    "nfpa_211_question": {
+      "type": "boolean",
+      "default": false,
+      "title": "NFPA 211 Question"
+    },
+    "safety_concern": {
+      "type": "boolean",
+      "default": false,
+      "title": "Safety Concern"
+    },
+    "estimate_recommendation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Estimate Recommendation"
+    },
+    "customer_pdf": {
+      "type": "string",
+      "title": "Customer PDF"
+    },
+    "logic_source": {
+      "type": "string",
+      "title": "Logic Source"
+    },
+    "gap_why": {
+      "type": "string",
+      "title": "Why It Matters"
+    },
+    "gap_action": {
+      "type": "string",
+      "title": "Recommended Action"
+    },
+    "matrix_build_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Matrix Build Date"
+    },
+    "last_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Synced At"
+    }
+  },
+  "required": [
+    "gap_id",
+    "question_id",
+    "gap_type",
+    "status"
+  ]
+}

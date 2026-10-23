@@ -1,0 +1,87 @@
+{
+  "name": "EventSubscriber",
+  "type": "object",
+  "properties": {
+    "subscriber_id": {
+      "type": "string",
+      "title": "Subscriber ID",
+      "description": "Server-generated sequence: SUB-000001."
+    },
+    "subscriber_name": {
+      "type": "string",
+      "title": "Subscriber Name",
+      "description": "Human-readable name (e.g. 'Customer Sync Service')."
+    },
+    "event_type": {
+      "type": "string",
+      "title": "Event Type",
+      "description": "Registered event type from EventRegistry this subscriber listens to."
+    },
+    "handler_reference": {
+      "type": "string",
+      "title": "Handler Reference",
+      "description": "Key into the in-code subscriber handler registry (e.g. 'test.echo', 'customer.sync.created')."
+    },
+    "processing_mode": {
+      "type": "string",
+      "enum": [
+        "synchronous",
+        "asynchronous"
+      ],
+      "default": "asynchronous",
+      "title": "Processing Mode",
+      "description": "synchronous = dispatch within the publish call; asynchronous = delivery processed by the delivery processor."
+    },
+    "priority": {
+      "type": "number",
+      "default": 100,
+      "title": "Priority",
+      "description": "Lower numbers dispatch first for synchronous subscribers."
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Is Active"
+    },
+    "retry_policy": {
+      "type": "string",
+      "enum": [
+        "none",
+        "bounded",
+        "aggressive"
+      ],
+      "default": "bounded",
+      "title": "Retry Policy"
+    },
+    "maximum_attempts": {
+      "type": "number",
+      "default": 5,
+      "title": "Maximum Attempts"
+    },
+    "timeout_seconds": {
+      "type": "number",
+      "default": 30,
+      "title": "Timeout (Seconds)"
+    },
+    "activation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activation Date"
+    },
+    "deactivation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Deactivation Date"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "subscriber_id",
+    "subscriber_name",
+    "event_type",
+    "handler_reference"
+  ]
+}

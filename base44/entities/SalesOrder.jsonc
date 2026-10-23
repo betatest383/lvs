@@ -1,0 +1,124 @@
+{
+  "name": "SalesOrder",
+  "type": "object",
+  "properties": {
+    "so_number": {
+      "type": "string",
+      "title": "Sales Order Number",
+      "description": "e.g. SO-000001"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID",
+      "description": "Links to Job record"
+    },
+    "estimate_id": {
+      "type": "string",
+      "title": "Estimate ID",
+      "description": "Links to Estimate record \u2014 the approved estimate that created this SO"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "scope_of_work_id": {
+      "type": "string",
+      "title": "Scope of Work ID",
+      "description": "Links to ScopeOfWork record"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "partially_fulfilled",
+        "fulfilled",
+        "invoiced",
+        "completed",
+        "cancelled"
+      ],
+      "default": "open",
+      "title": "Status"
+    },
+    "execution_type": {
+      "type": "string",
+      "enum": [
+        "perform_today",
+        "schedule_for_later"
+      ],
+      "title": "Execution Type",
+      "description": "Derived from customer decision during presentation"
+    },
+    "service_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Service Date"
+    },
+    "line_items": {
+      "type": "string",
+      "title": "Line Items (JSON)",
+      "description": "JSON array of {inventory_master_id, sku, item_name, quantity_reserved, quantity_transferred, quantity_installed, quantity_returned, quantity_waste, unit_cost, selling_price, chargeable, customer_visible}"
+    },
+    "total_materials_reserved": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Materials Reserved"
+    },
+    "total_materials_transferred": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Materials Transferred"
+    },
+    "total_materials_installed": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Materials Installed"
+    },
+    "invoice_id": {
+      "type": "string",
+      "title": "Invoice ID",
+      "description": "Links to Invoice record once created"
+    },
+    "material_reconciliation_id": {
+      "type": "string",
+      "title": "Material Reconciliation ID",
+      "description": "Links to MaterialReconciliation record"
+    },
+    "reservation_completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Reservation Completed At"
+    },
+    "fulfilled_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Fulfilled At"
+    },
+    "invoiced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Invoiced At"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "job_id",
+    "customer_id",
+    "status"
+  ]
+}

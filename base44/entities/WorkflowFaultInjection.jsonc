@@ -1,0 +1,77 @@
+{
+  "name": "WorkflowFaultInjection",
+  "type": "object",
+  "properties": {
+    "workflow_id": {
+      "type": "string",
+      "title": "Workflow ID"
+    },
+    "test_workflow_marker": {
+      "type": "string",
+      "title": "Isolated Test Marker"
+    },
+    "checkpoint": {
+      "type": "string",
+      "title": "Fault Checkpoint"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "triggered",
+        "cancelled"
+      ],
+      "default": "pending",
+      "title": "Status"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+    },
+    "triggered_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Triggered At"
+    },
+    "mutation_request_id": {
+      "type": "string",
+      "title": "Mutation Request"
+    },
+    "evidence_id": {
+      "type": "string",
+      "title": "Fault Evidence ID"
+    }
+  },
+  "required": [
+    "workflow_id",
+    "test_workflow_marker",
+    "checkpoint",
+    "status",
+    "created_by",
+    "created_at"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": false,
+    "update": false,
+    "delete": false
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "name": "LoadedLaborCost",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "title": "Role",
+      "description": "e.g. Lead Technician, Apprentice, Mason, Supervisor"
+    },
+    "base_hourly_wage": {
+      "type": "number",
+      "default": 0,
+      "title": "Base Hourly Wage ($)"
+    },
+    "payroll_tax_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "Payroll Tax (%)"
+    },
+    "workers_comp_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "Workers' Comp (%)"
+    },
+    "benefit_cost_per_hour": {
+      "type": "number",
+      "default": 0,
+      "title": "Benefit Cost Per Hour ($)"
+    },
+    "insurance_cost_per_hour": {
+      "type": "number",
+      "default": 0,
+      "title": "Insurance Cost Per Hour ($)"
+    },
+    "other_burden_per_hour": {
+      "type": "number",
+      "default": 0,
+      "title": "Other Burden Per Hour ($)"
+    },
+    "loaded_hourly_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Loaded Hourly Cost ($)",
+      "description": "Auto-calculated: base + tax burden + WC burden + benefits + insurance + other"
+    },
+    "effective_start_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Effective Start Date"
+    },
+    "effective_end_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Effective End Date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "archived"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    }
+  },
+  "required": [
+    "role"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

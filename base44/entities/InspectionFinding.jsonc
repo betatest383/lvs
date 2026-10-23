@@ -1,0 +1,167 @@
+{
+  "name": "InspectionFinding",
+  "type": "object",
+  "properties": {
+    "inspection_id": {
+      "type": "string",
+      "title": "Inspection ID"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "finding_location": {
+      "type": "string",
+      "title": "Finding Location",
+      "description": "e.g. Main fireplace, Chimney exterior north, Flue 1"
+    },
+    "interior_exterior": {
+      "type": "string",
+      "enum": [
+        "interior",
+        "exterior",
+        "both"
+      ],
+      "title": "Interior / Exterior"
+    },
+    "deficiency_type": {
+      "type": "string",
+      "title": "Deficiency Type",
+      "description": "e.g. cracked_crown, damaged_flue_liner, spalling_bricks, missing_cap. Inherited from Repair Recommendation Template when repair_template_id is set."
+    },
+    "repair_template_id": {
+      "type": "string",
+      "title": "Repair Template ID",
+      "description": "Links to RepairRecommendationTemplate \u2014 the single source of truth for all repair workflow configuration. When set, deficiency_type, severity, narrative, and all downstream config are inherited from the template."
+    },
+    "appliance_system_type": {
+      "type": "string",
+      "title": "Appliance / System Type",
+      "description": "e.g. fireplace, furnace flue, chimney structure, chimney cap"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "info",
+        "minor",
+        "moderate",
+        "major",
+        "critical"
+      ],
+      "default": "moderate",
+      "title": "Severity"
+    },
+    "safety_concern": {
+      "type": "boolean",
+      "default": false,
+      "title": "Safety Concern"
+    },
+    "nfpa_code_failure": {
+      "type": "boolean",
+      "default": false,
+      "title": "NFPA / Code Failure"
+    },
+    "photo_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Photos"
+    },
+    "photos_internal_only": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Internal-Only Photo URLs",
+      "description": "Photos marked internal-only \u2014 excluded from customer-facing estimates"
+    },
+    "measurements": {
+      "type": "string",
+      "title": "Measurements (JSON)",
+      "description": "JSON object: { flue_height: 25, flue_diameter: 8, crown_area: 12, linear_feet: 18 }"
+    },
+    "recommended_repair": {
+      "type": "string",
+      "title": "Recommended Repair"
+    },
+    "suggested_pricebook_items": {
+      "type": "string",
+      "title": "Suggested Pricebook Items (JSON)",
+      "description": "JSON array of pricebook item names/IDs suggested by the mapping engine"
+    },
+    "material_calculation_inputs": {
+      "type": "string",
+      "title": "Material Calculation Inputs (JSON)",
+      "description": "JSON object of inputs used for material quantity calculations"
+    },
+    "requires_calculation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Calculation",
+      "description": "True when this finding requires a material calculation engine before estimate generation. Set by LogicRule actions for measurement-driven repairs (e.g. concrete crown replacement)."
+    },
+    "calculation_type": {
+      "type": "string",
+      "enum": [
+        "",
+        "crown"
+      ],
+      "default": "",
+      "title": "Calculation Type",
+      "description": "Type of calculation engine to use when requires_calculation is true. crown = Crown Calculation engine."
+    },
+    "customer_facing_explanation": {
+      "type": "string",
+      "title": "Customer-Facing Explanation"
+    },
+    "internal_notes": {
+      "type": "string",
+      "title": "Internal Notes"
+    },
+    "is_deficiency": {
+      "type": "boolean",
+      "default": true,
+      "title": "Is Deficiency",
+      "description": "When false, this is an observation \u2014 excluded from estimate unless configured"
+    },
+    "internal_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Internal Only",
+      "description": "When true, this finding is excluded from customer-facing estimates"
+    },
+    "include_in_estimate": {
+      "type": "boolean",
+      "default": true,
+      "title": "Include in Estimate",
+      "description": "Controls whether this finding contributes to estimate generation"
+    },
+    "recommendations_generated": {
+      "type": "boolean",
+      "default": false,
+      "title": "Recommendations Generated"
+    },
+    "source_rule_id": {
+      "type": "string",
+      "title": "Source Rule ID",
+      "description": "ID of the LogicRule that triggered this finding. Used for deduplication (job_id + source_rule_id)."
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "inspection_id",
+    "finding_location"
+  ]
+}

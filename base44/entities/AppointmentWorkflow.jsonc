@@ -1,0 +1,263 @@
+{
+  "name": "AppointmentWorkflow",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "lead_technician_email": {
+      "type": "string",
+      "title": "Lead Technician Email"
+    },
+    "lead_technician_name": {
+      "type": "string",
+      "title": "Lead Technician Name"
+    },
+    "crew_members": {
+      "type": "string",
+      "title": "Crew Members (JSON)",
+      "description": "JSON array of {email, name, role, employee_id}"
+    },
+    "module_assignments": {
+      "type": "string",
+      "title": "Module Assignments (JSON)",
+      "description": "JSON object: { interior: {assigned_to_email, assigned_to_name, started_at, photos, findings, completion_pct, last_updated}, exterior: {...} }"
+    },
+    "stage_states": {
+      "type": "string",
+      "title": "Stage States (JSON)",
+      "description": "JSON object: { stage_key: {status, started_at, completed_at, completed_by, completed_by_name, time_spent_seconds, notes, device, reopened_at, reopened_by, reopened_reason, previous_status, stale, stale_reason, stale_at, stale_by, stale_source_stage, last_updated} }"
+    },
+    "conflict_locks": {
+      "type": "string",
+      "title": "Conflict Locks (JSON)",
+      "description": "JSON object: { module_key: {locked_by_email, locked_by_name, locked_at} }"
+    },
+    "review_decisions": {
+      "type": "string",
+      "title": "Review Decisions (JSON)",
+      "description": "JSON object: { module_key: {reviewed_by, reviewed_by_name, decision, notes, reviewed_at} }"
+    },
+    "customer_decision": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "declined",
+        "deferred"
+      ],
+      "default": "pending",
+      "title": "Customer Decision",
+      "description": "CURRENT-STATE POINTER (not historical evidence). Reflects the current active customer decision. Historical decisions live in CustomerDecisionRecord (append-only). Mutated only by acceptProposalOption under the decision lock."
+    },
+    "selected_option_id": {
+      "type": "string",
+      "title": "Selected Option ID",
+      "description": "CURRENT-STATE POINTER (not historical evidence). The immutable EstimatePackage ID the customer currently has selected. Mutated only by acceptProposalOption under the decision lock."
+    },
+    "current_customer_decision_record_id": {
+      "type": "string",
+      "title": "Current Customer Decision Record ID",
+      "description": "CURRENT-STATE POINTER to the authoritative CustomerDecisionRecord. Mutated only by acceptProposalOption under the decision lock via a fenced compare-and-set."
+    },
+    "decision_effective_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Decision Effective At",
+      "description": "Timestamp the current customer decision became effective. Current-state pointer."
+    },
+    "decision_lock_owner": {
+      "type": "string",
+      "default": "",
+      "title": "Decision Lock Owner",
+      "description": "Owner token of the active decision lock. Empty when free. Acquired exclusively via Base44 compare-and-set (updateMany with decision_lock_owner in the filter) so exactly one concurrent worker can flip empty\u2192token. Never read-then-written."
+    },
+    "decision_lock_token": {
+      "type": "string",
+      "default": "",
+      "title": "Decision Lock Token",
+      "description": "Fencing token for the active lock owner. Every protected write embeds {decision_lock_owner, decision_lock_generation} in its filter so a late/stolen worker cannot overwrite the new owner."
+    },
+    "decision_lock_generation": {
+      "type": "number",
+      "default": 0,
+      "title": "Decision Lock Generation",
+      "description": "Monotonic fencing token incremented on every acquire and every expiry-recovery. Used in the fenced-release filter to prove the writer is still the owner."
+    },
+    "decision_lock_acquired_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Decision Lock Acquired At"
+    },
+    "decision_lock_expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Decision Lock Expires At",
+      "description": "When the lock is considered stale and eligible for recovery. A recovery worker acquires only via a CAS fenced on the exact stale token + expiry-in-past."
+    },
+    "decision_lock_request_id": {
+      "type": "string",
+      "title": "Decision Lock Request ID",
+      "description": "The WorkflowMutationRequest id that currently holds the lock, for diagnostics."
+    },
+    "decision_invariant_status": {
+      "type": "string",
+      "enum": [
+        "ok",
+        "blocked",
+        "warning"
+      ],
+      "default": "ok",
+      "title": "Decision Invariant Status",
+      "description": "ok = invariants hold; blocked = a duplicate-decision invariant violation was detected and the workflow must NOT progress to scheduling/readiness until a manager resolves; warning = non-blocking anomaly logged for review."
+    },
+    "decision_invariant_reason": {
+      "type": "string",
+      "title": "Decision Invariant Reason",
+      "description": "Human-readable detail of the most recent invariant violation (JSON array of {code, detail, evidence_ids})."
+    },
+    "decision_invariant_detected_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Decision Invariant Detected At"
+    },
+    "overall_progress": {
+      "type": "number",
+      "default": 0,
+      "title": "Overall Progress (%)"
+    },
+    "current_stage": {
+      "type": "string",
+      "title": "Current Active Stage"
+    },
+    "appointment_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Appointment Date"
+    },
+    "selected_modules": {
+      "type": "string",
+      "title": "Selected Modules (JSON)",
+      "description": "JSON array of selected inspection modules from InspectionSetup"
+    },
+    "workflow_version": {
+      "type": "string",
+      "enum": [
+        "legacy",
+        "v2_package"
+      ],
+      "default": "v2_package",
+      "title": "Workflow Version",
+      "description": "Identifies which workflow this appointment uses. New appointments default to v2_package."
+    },
+    "workflow_revision_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Workflow Revision Version",
+      "description": "Monotonic counter incremented on every server-authoritative revision. Used as an optimistic concurrency guard. Mutated only by backend functions under the decision lock."
+    },
+    "last_workflow_mutation_request_id": {
+      "type": "string",
+      "title": "Last Workflow Mutation Request ID",
+      "description": "Authoritative request-specific commit marker. Written only in the fenced workflow commit."
+    },
+    "last_workflow_mutation_action": {
+      "type": "string",
+      "title": "Last Workflow Mutation Action"
+    },
+    "last_workflow_mutation_stage_key": {
+      "type": "string",
+      "title": "Last Workflow Mutation Stage Key"
+    },
+    "last_workflow_mutation_version": {
+      "type": "number",
+      "title": "Last Workflow Mutation Version"
+    },
+    "last_workflow_mutation_committed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Workflow Mutation Committed At"
+    },
+    "test_workflow_marker": {
+      "type": "string",
+      "title": "Isolated Test Workflow Marker",
+      "description": "Server-created marker required for controlled fault injection; never accepted from ordinary mutation payloads."
+    }
+  },
+  "required": [
+    "job_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "operations_manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "technician"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "lead_technician"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "apprentice"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "warehouse_associate"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "inventory_specialist"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "office_manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "csr"
+          }
+        }
+      ]
+    },
+    "create": false,
+    "update": false,
+    "delete": false
+  }
+}

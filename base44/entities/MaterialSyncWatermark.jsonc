@@ -1,0 +1,195 @@
+{
+  "name": "MaterialSyncWatermark",
+  "type": "object",
+  "properties": {
+    "watermark_key": {
+      "type": "string",
+      "title": "Watermark Key",
+      "description": "Unique key identifying this watermark (e.g. 'material_go_live'). One per (tenant, environment) pair."
+    },
+    "sync_strategy": {
+      "type": "string",
+      "enum": [
+        "new_materials_only",
+        "full_historical_backfill"
+      ],
+      "default": "new_materials_only",
+      "title": "Synchronization Strategy"
+    },
+    "activation_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activation Timestamp"
+    },
+    "environment": {
+      "type": "string",
+      "title": "Environment"
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant ID"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "disabled"
+      ],
+      "default": "active",
+      "title": "Status"
+    },
+    "last_modified_scan_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Modified Scan At",
+      "description": "High-water mark for the modifiedOnOrAfter cursor. Only advanced after a full recovery window completes successfully."
+    },
+    "last_created_scan_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Created Scan At"
+    },
+    "recovery_window_start": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Recovery Window Start"
+    },
+    "recovery_window_end": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Recovery Window End"
+    },
+    "recovery_window_status": {
+      "type": "string",
+      "enum": [
+        "idle",
+        "in_progress",
+        "completed",
+        "failed"
+      ],
+      "default": "idle",
+      "title": "Recovery Window Status"
+    },
+    "recovery_window_errors": {
+      "type": "number",
+      "default": 0,
+      "title": "Recovery Window Errors"
+    },
+    "recovery_overlap_minutes": {
+      "type": "number",
+      "default": 5,
+      "title": "Recovery Overlap Minutes"
+    },
+    "materials_imported_since_activation": {
+      "type": "number",
+      "default": 0,
+      "title": "Materials Imported Since Activation"
+    },
+    "materials_imported_on_demand": {
+      "type": "number",
+      "default": 0,
+      "title": "Materials Imported On Demand"
+    },
+    "materials_updated": {
+      "type": "number",
+      "default": 0,
+      "title": "Materials Updated"
+    },
+    "materials_deactivated": {
+      "type": "number",
+      "default": 0,
+      "title": "Materials Deactivated"
+    },
+    "vendor_relationships_created": {
+      "type": "number",
+      "default": 0,
+      "title": "Vendor Relationships Created"
+    },
+    "vendor_relationships_updated": {
+      "type": "number",
+      "default": 0,
+      "title": "Vendor Relationships Updated"
+    },
+    "vendor_relationships_orphan": {
+      "type": "number",
+      "default": 0,
+      "title": "Vendor Relationships Orphan",
+      "description": "Relationships where the referenced ServiceTitan vendor ID has no local Vendor record."
+    },
+    "vendor_relationships_unmatched": {
+      "type": "number",
+      "default": 0,
+      "title": "Vendor Relationships Unmatched"
+    },
+    "materials_deferred_missing_vendor": {
+      "type": "number",
+      "default": 0,
+      "title": "Materials Deferred (Missing Vendor)",
+      "description": "Materials placed into retry because a referenced ServiceTitan vendor ID has no local Vendor record."
+    },
+    "webhook_events_processed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Processed (Total)",
+      "description": "Reserved for future webhook integration."
+    },
+    "webhook_events_failed": {
+      "type": "number",
+      "default": 0,
+      "title": "Webhook Events Failed"
+    },
+    "recovery_events_processed": {
+      "type": "number",
+      "default": 0,
+      "title": "Recovery Events Processed"
+    },
+    "last_successful_sync_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Successful Sync At"
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "backfill_status": {
+      "type": "string",
+      "enum": [
+        "never_started",
+        "disabled",
+        "confirmed",
+        "in_progress",
+        "completed"
+      ],
+      "default": "never_started",
+      "title": "Backfill Status"
+    },
+    "backfill_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Backfill Started At"
+    },
+    "backfill_confirmed_by": {
+      "type": "string",
+      "title": "Backfill Confirmed By"
+    },
+    "backfill_scope_estimate": {
+      "type": "number",
+      "title": "Backfill Scope Estimate"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "watermark_key",
+    "sync_strategy",
+    "environment",
+    "tenant_id"
+  ]
+}

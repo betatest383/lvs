@@ -1,0 +1,73 @@
+{
+  "name": "CapFinishPricing",
+  "type": "object",
+  "properties": {
+    "pricing_name": {
+      "type": "string",
+      "title": "Pricing Entry Name",
+      "description": "e.g. Powder-Coat Small Cap, Powder-Coat Large Multi-Flue"
+    },
+    "finish_type": {
+      "type": "string",
+      "enum": [
+        "powder_coated",
+        "painted",
+        "ceramic_coated",
+        "other"
+      ],
+      "default": "powder_coated",
+      "title": "Finish Type"
+    },
+    "cap_size_tier": {
+      "type": "string",
+      "enum": [
+        "small",
+        "medium",
+        "large",
+        "custom"
+      ],
+      "title": "Cap Size Tier",
+      "description": "Size tier used for tiered finish pricing"
+    },
+    "cap_style": {
+      "type": "string",
+      "title": "Cap Style",
+      "description": "Classification value from MasterClassification (cap_style type). Leave blank for all styles."
+    },
+    "surface_area_min": {
+      "type": "number",
+      "title": "Surface Area Min (sq in)",
+      "description": "Minimum cap surface area for this pricing tier to apply"
+    },
+    "surface_area_max": {
+      "type": "number",
+      "title": "Surface Area Max (sq in)",
+      "description": "Maximum cap surface area for this pricing tier to apply"
+    },
+    "additional_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Additional Price ($)",
+      "description": "Price added to the base cap when this finish is applied"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "priority": {
+      "type": "number",
+      "default": 0,
+      "title": "Priority",
+      "description": "Higher = evaluated first when multiple tiers match"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "pricing_name",
+    "finish_type"
+  ]
+}

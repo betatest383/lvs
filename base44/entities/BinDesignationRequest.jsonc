@@ -1,0 +1,59 @@
+{
+  "name": "BinDesignationRequest",
+  "type": "object",
+  "properties": {
+    "item_name": {
+      "type": "string",
+      "title": "Item Name"
+    },
+    "sku": {
+      "type": "string",
+      "title": "SKU"
+    },
+    "current_location": {
+      "type": "string",
+      "title": "Current Location"
+    },
+    "reason_needed": {
+      "type": "string",
+      "title": "Reason Needed"
+    },
+    "requested_by": {
+      "type": "string",
+      "title": "Requested By"
+    },
+    "photo_upload": {
+      "type": "string",
+      "title": "Photo Upload"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Assigned"
+      ],
+      "default": "Pending",
+      "title": "Status"
+    },
+    "assigned_bin_location": {
+      "type": "string",
+      "title": "Assigned Bin Location"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By"
+    },
+    "related_sop_id": {
+      "type": "string",
+      "title": "Related SOP ID"
+    },
+    "trainual_link": {
+      "type": "string",
+      "title": "Trainual Link"
+    }
+  },
+  "required": [
+    "item_name"
+  ]
+}

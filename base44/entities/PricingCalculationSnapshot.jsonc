@@ -1,0 +1,490 @@
+{
+  "name": "PricingCalculationSnapshot",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID"
+    },
+    "estimate_id": {
+      "type": "string",
+      "title": "Estimate ID"
+    },
+    "proposal_id": {
+      "type": "string",
+      "title": "Proposal ID"
+    },
+    "scope_of_work_id": {
+      "type": "string",
+      "title": "Scope of Work ID"
+    },
+    "estimate_package_id": {
+      "type": "string",
+      "title": "Estimate Package ID"
+    },
+    "estimate_group_id": {
+      "type": "string",
+      "title": "Estimate Group ID",
+      "description": "The EstimateGroup this pricing snapshot belongs to (multi-asset architecture)"
+    },
+    "proposal_option_id": {
+      "type": "string",
+      "title": "Proposal Option ID",
+      "description": "The specific proposal option within the EstimateGroup being priced"
+    },
+    "property_asset_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Property Asset IDs",
+      "description": "PropertyAsset records this pricing covers"
+    },
+    "selected_option_rank": {
+      "type": "number",
+      "default": 0,
+      "title": "Selected Option Rank",
+      "description": "Rank of the selected proposal option (1=Good/Bronze, 2=Better/Silver, 3=Best/Gold)"
+    },
+    "committed_work_keys": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Committed Work Keys",
+      "description": "Stable work identities included in this pricing \u2014 used for overlap protection across groups"
+    },
+    "pricing_version": {
+      "type": "number",
+      "default": 1,
+      "title": "Pricing Version"
+    },
+    "calculation_status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "calculated",
+        "approved",
+        "overridden",
+        "superseded"
+      ],
+      "default": "calculated",
+      "title": "Calculation Status"
+    },
+    "scope_inputs_json": {
+      "type": "string",
+      "title": "Scope Inputs (JSON)"
+    },
+    "scope_hash": {
+      "type": "string",
+      "title": "Scope Hash",
+      "description": "Deterministic hash of pricing-relevant scope values for change detection"
+    },
+    "estimate_items_json": {
+      "type": "string",
+      "title": "Estimate Items (JSON)"
+    },
+    "base_service_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Base Service Price"
+    },
+    "base_material_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Base Material Price"
+    },
+    "base_equipment_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Base Equipment Price"
+    },
+    "base_total_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Base Total Price"
+    },
+    "matched_modifiers_json": {
+      "type": "string",
+      "title": "Matched Modifiers (JSON)"
+    },
+    "modifier_calculation_order_json": {
+      "type": "string",
+      "title": "Modifier Calculation Order (JSON)"
+    },
+    "labor_adjustment": {
+      "type": "number",
+      "default": 0,
+      "title": "Labor Adjustment"
+    },
+    "material_adjustment": {
+      "type": "number",
+      "default": 0,
+      "title": "Material Adjustment"
+    },
+    "equipment_adjustment": {
+      "type": "number",
+      "default": 0,
+      "title": "Equipment Adjustment"
+    },
+    "fixed_adjustment": {
+      "type": "number",
+      "default": 0,
+      "title": "Fixed Adjustment"
+    },
+    "discount_adjustment": {
+      "type": "number",
+      "default": 0,
+      "title": "Discount Adjustment"
+    },
+    "total_adjustment": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Adjustment"
+    },
+    "final_service_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Final Service Price"
+    },
+    "final_material_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Final Material Price"
+    },
+    "final_equipment_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Final Equipment Price"
+    },
+    "final_selling_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Final Selling Price"
+    },
+    "commissionable_subtotal": {
+      "type": "number",
+      "default": 0,
+      "title": "Commissionable Subtotal",
+      "description": "The portion of the selling price that commission is calculated against"
+    },
+    "estimated_commission_total": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimated Commission Total"
+    },
+    "employee_compensation_json": {
+      "type": "string",
+      "title": "Employee Compensation (JSON)",
+      "description": "JSON array of per-employee compensation breakdowns"
+    },
+    "hourly_labor_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Hourly Labor Cost",
+      "description": "Loaded hourly cost for hourly-based crew members only"
+    },
+    "commission_compensation_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Commission Compensation Cost"
+    },
+    "salary_allocation_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Salary Allocation Cost"
+    },
+    "total_employee_compensation_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Employee Compensation Cost",
+      "description": "hourly + commission + salary"
+    },
+    "material_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Material Cost"
+    },
+    "loaded_labor_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Loaded Labor Cost"
+    },
+    "equipment_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Equipment Cost"
+    },
+    "vehicle_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Vehicle Cost"
+    },
+    "subcontractor_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Subcontractor Cost"
+    },
+    "commission_estimate": {
+      "type": "number",
+      "default": 0,
+      "title": "Commission Estimate"
+    },
+    "total_direct_job_cost": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Direct Job Cost"
+    },
+    "gross_profit": {
+      "type": "number",
+      "default": 0,
+      "title": "Gross Profit"
+    },
+    "gross_margin_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "Gross Margin (%)"
+    },
+    "pricing_target_model": {
+      "type": "string",
+      "enum": [
+        "daily",
+        "hourly_capped"
+      ],
+      "default": "daily",
+      "title": "Pricing Target Model",
+      "description": "Which target model produced this price. Legacy snapshots without this field are 'daily'. Makes the calculation reproducible."
+    },
+    "gross_profit_target_per_crew_hour": {
+      "type": "number",
+      "default": 0,
+      "title": "Gross Profit Target per Crew Hour Used ($)",
+      "description": "Hourly GP target actually used (policy or override) for hourly_capped snapshots. Null/0 for daily-model snapshots."
+    },
+    "maximum_target_hours_per_day": {
+      "type": "number",
+      "default": 8,
+      "title": "Maximum Target Hours per Day Used",
+      "description": "The 8-hour daily cap applied. Fixed company policy."
+    },
+    "daily_target_hours_json": {
+      "type": "string",
+      "title": "Daily Target Hours (JSON)",
+      "description": "JSON array of {day_number, actual_crew_hours, target_hours} for each production day. target_hours = min(actual_crew_hours, 8). Stored for reproducibility."
+    },
+    "total_target_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Target Hours",
+      "description": "Sum of daily target_hours. Multiplied by the hourly GP target to produce required_gross_profit."
+    },
+    "total_actual_crew_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Actual Crew Hours",
+      "description": "Sum of actual_daily_crew_hours across all production days. Distinct from total_target_hours (which is capped at 8/day)."
+    },
+    "hourly_gp_target_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Hourly-GP-Target Price",
+      "description": "Lowest price satisfying required_gross_profit under the hourly_capped model (commission-aware): total_direct_job_cost + required_gross_profit. Null for daily-model snapshots."
+    },
+    "required_gross_profit_per_day": {
+      "type": "number",
+      "default": 4000,
+      "title": "Required Gross Profit Per Production Day ($)",
+      "description": "Legacy daily-model field. For hourly_capped snapshots this is 0/n/a; see gross_profit_target_per_crew_hour and total_target_hours instead."
+    },
+    "required_gross_profit": {
+      "type": "number",
+      "default": 0,
+      "title": "Required Gross Profit",
+      "description": "The total gross-profit floor the final price must satisfy. daily model: production_days \u00d7 per_day. hourly_capped model: total_target_hours \u00d7 hourly_target."
+    },
+    "pricing_policy_id": {
+      "type": "string",
+      "title": "Pricing Policy ID",
+      "description": "The PricingPolicy record id whose targets produced this price. Historical estimates always show exactly which policy priced them."
+    },
+    "pricing_policy_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Pricing Policy Version"
+    },
+    "gross_profit_per_day_target": {
+      "type": "number",
+      "default": 0,
+      "title": "Gross Profit per Day Target Used ($)",
+      "description": "Snapshot of the gross-profit-per-day target actually used (daily model or override)."
+    },
+    "minimum_margin_target": {
+      "type": "number",
+      "default": 0,
+      "title": "Minimum Margin Target Used (%)",
+      "description": "Snapshot of the minimum-margin target actually used (policy or override)."
+    },
+    "minimum_net_contribution_per_day_target": {
+      "type": "number",
+      "default": 0,
+      "title": "Minimum Net Contribution per Day Target Used ($)"
+    },
+    "net_contribution_target_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Net-Contribution Target Price"
+    },
+    "technician_discount_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Technician Price Adjustment ($)"
+    },
+    "management_override_applied": {
+      "type": "boolean",
+      "default": false,
+      "title": "Management Pricing Override Applied",
+      "description": "True when a job-specific management override changed the targets for this single calculation only. Never changes the global Pricing Policy and never applies to future jobs."
+    },
+    "management_override_gross_profit_per_day": {
+      "type": "number",
+      "title": "Override \u2014 Gross Profit per Production Day",
+      "description": "Job-specific daily-model override value. Null when no daily-model override was applied."
+    },
+    "management_override_gross_profit_per_crew_hour": {
+      "type": "number",
+      "title": "Override \u2014 Gross Profit per Crew Hour",
+      "description": "Job-specific hourly_capped-model override value. Null when no hourly-model override was applied. The 8-hour cap is never overridable."
+    },
+    "management_override_minimum_margin": {
+      "type": "number",
+      "title": "Override \u2014 Minimum Gross Margin (%)",
+      "description": "Job-specific management override value. Null when no override was applied."
+    },
+    "management_override_reason": {
+      "type": "string",
+      "title": "Override Reason",
+      "description": "Required written reason for the job-specific management override."
+    },
+    "management_override_by": {
+      "type": "string",
+      "title": "Override Authorized By",
+      "description": "Authorizing user for the job-specific override."
+    },
+    "management_override_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Override At"
+    },
+    "configured_minimum_margin": {
+      "type": "number",
+      "default": 0,
+      "title": "Configured Minimum Margin (%)",
+      "description": "The minimum-margin floor the final price must satisfy (from the active pricing policy, or override)."
+    },
+    "margin_target_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Margin-Target Price",
+      "description": "Lowest price satisfying the configured minimum gross margin: total_direct_job_cost / (1 \u2212 min_margin)."
+    },
+    "gross_profit_target_price": {
+      "type": "number",
+      "default": 0,
+      "title": "Gross-Profit-Target Price",
+      "description": "Lowest price satisfying required_gross_profit: total_direct_job_cost + required_gross_profit (commission-aware)."
+    },
+    "controlling_target": {
+      "type": "string",
+      "enum": [
+        "base_price",
+        "gross_profit_target",
+        "margin_target",
+        "net_contribution_target",
+        "none"
+      ],
+      "default": "none",
+      "title": "Controlling Target",
+      "description": "Which floor determined the final selling price: base_price = base+modifiers already met both targets; gross_profit_target = the required-gross-profit floor was binding; margin_target = the minimum-margin floor was binding."
+    },
+    "solver_applied": {
+      "type": "boolean",
+      "default": false,
+      "title": "Solver Applied",
+      "description": "True when the solver raised the selling price above the base+modifier total to meet the required-gross-profit and/or minimum-margin targets."
+    },
+    "estimated_overhead_allocation": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimated Overhead Allocation"
+    },
+    "estimated_net_contribution": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimated Net Contribution"
+    },
+    "estimated_net_margin_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimated Net Margin (%)"
+    },
+    "production_days": {
+      "type": "number",
+      "default": 1,
+      "title": "Production Days"
+    },
+    "total_labor_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Labor Hours"
+    },
+    "revenue_per_production_day": {
+      "type": "number",
+      "default": 0,
+      "title": "Revenue Per Production Day"
+    },
+    "gross_profit_per_production_day": {
+      "type": "number",
+      "default": 0,
+      "title": "Gross Profit Per Production Day"
+    },
+    "revenue_per_labor_hour": {
+      "type": "number",
+      "default": 0,
+      "title": "Revenue Per Labor Hour"
+    },
+    "calculated_by": {
+      "type": "string",
+      "title": "Calculated By"
+    },
+    "calculated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Calculated At"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At"
+    },
+    "override_reason": {
+      "type": "string",
+      "title": "Override Reason",
+      "description": "Reason recorded when pricing was approved below the minimum margin (calculation_status='overridden'). Distinct from a job-specific target override."
+    },
+    "supersedes_snapshot_id": {
+      "type": "string",
+      "title": "Supersedes Snapshot ID"
+    }
+  },
+  "required": [
+    "job_id"
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "name": "InspectionSubmission",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID",
+      "description": "Links to the Appointment record for this inspection"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "address": {
+      "type": "string",
+      "title": "Property Address"
+    },
+    "chimney_label": {
+      "type": "string",
+      "title": "Chimney Label (e.g. Front, Rear, Chimney #2)"
+    },
+    "inspection_type": {
+      "type": "string",
+      "enum": [
+        "interior",
+        "exterior"
+      ],
+      "default": "interior",
+      "title": "Inspection Type"
+    },
+    "date_started": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Date Started"
+    },
+    "date_submitted": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Date Submitted"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "submitted",
+        "reviewed",
+        "approved",
+        "rejected",
+        "reopened"
+      ],
+      "default": "draft",
+      "title": "Status",
+      "description": "reopened = a completed submission was reopened by an authorized manager to add missing documentation. The original submission, answers, findings, signatures, and reports are preserved."
+    },
+    "answers": {
+      "type": "string",
+      "title": "Answers JSON"
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Photos"
+    },
+    "technician_notes": {
+      "type": "string",
+      "title": "Technician Notes"
+    },
+    "property_type": {
+      "type": "string",
+      "enum": [
+        "residential",
+        "commercial"
+      ],
+      "title": "Property Type"
+    },
+    "chimney_type": {
+      "type": "string",
+      "enum": [
+        "masonry",
+        "prefab",
+        "metal",
+        "other"
+      ],
+      "title": "Chimney Type"
+    },
+    "appliance_type": {
+      "type": "string",
+      "enum": [
+        "wood_stove",
+        "wood_insert",
+        "gas",
+        "oil",
+        "pellet",
+        "electric",
+        "other"
+      ],
+      "title": "Appliance Type"
+    },
+    "is_authoritative": {
+      "type": "boolean",
+      "default": true,
+      "title": "Authoritative",
+      "description": "True when this is the current authoritative submission. Only one active authoritative record per job+inspection_type."
+    },
+    "superseded_by_id": {
+      "type": "string",
+      "title": "Superseded By ID",
+      "description": "ID of the submission that replaced this one. Set when a newer submission supersedes an older one."
+    },
+    "manager_override_json": {
+      "type": "string",
+      "title": "Manager Override (JSON)",
+      "description": "JSON array of waived requirements: [{ requirement_id, submission_id, question_id, requirement_type, required_count, actual_count, waived_by, waived_at, reason }]. Idempotent by requirement_id. Only the explicitly selected requirements are waived; unrelated inspection problems remain blocking."
+    },
+    "override_reason": {
+      "type": "string",
+      "title": "Override Reason",
+      "description": "Written reason for the most recent management override applied to this submission."
+    },
+    "override_by": {
+      "type": "string",
+      "title": "Override By",
+      "description": "Email of the manager/admin who applied the most recent override."
+    },
+    "override_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Override At",
+      "description": "When the most recent override was applied."
+    },
+    "override_revoked_json": {
+      "type": "string",
+      "title": "Override Revoked History (JSON)",
+      "description": "Append-only JSON array of revoked waivers: [{ requirement_id, revoked_by, revoked_at, reason }]. Preserves override history when a manager later supplies the missing documentation."
+    },
+    "reopened_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Reopened At",
+      "description": "When a completed inspection was reopened to add missing documentation. The original completion history is preserved."
+    },
+    "reopened_by": {
+      "type": "string",
+      "title": "Reopened By",
+      "description": "Email of the authorized manager who reopened the inspection."
+    },
+    "reopened_reason": {
+      "type": "string",
+      "title": "Reopened Reason",
+      "description": "Written reason for reopening the completed inspection."
+    },
+    "report_stale": {
+      "type": "boolean",
+      "default": false,
+      "title": "Report Stale",
+      "description": "True when the inspection summary/report may have changed (e.g. after reopening to add photos/documentation) and must be regenerated before it can be presented."
+    },
+    "report_stale_reason": {
+      "type": "string",
+      "title": "Report Stale Reason",
+      "description": "Why the report was marked stale (e.g. reopened_for_missing_photos)."
+    }
+  },
+  "required": [
+    "job_id",
+    "customer_id",
+    "technician_email"
+  ]
+}

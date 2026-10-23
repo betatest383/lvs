@@ -1,0 +1,260 @@
+{
+  "name": "CustomerDecisionRecord",
+  "type": "object",
+  "title": "Customer Decision Record",
+  "description": "APPEND-ONLY immutable record of every customer decision (accept, switch, decline, request_revisions, defer, cancel). Each decision is its own record. Once created, a CustomerDecisionRecord must NEVER be updated or deleted through normal application behavior. Corrections create another linked decision record. The authoritative answer to 'What did the customer accept?' comes from these records \u2014 NOT from mutable EstimatePackage.is_selected / status flags. RLS blocks update and delete for all roles.",
+  "properties": {
+    "decision_record_id": {
+      "type": "string",
+      "title": "Decision Record ID",
+      "description": "Human-readable diagnostic identifier, e.g. CDR-<uuid>. Distinct from the platform record id."
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "location_id": {
+      "type": "string",
+      "title": "Location ID"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID"
+    },
+    "workflow_id": {
+      "type": "string",
+      "title": "AppointmentWorkflow ID"
+    },
+    "decision_type": {
+      "type": "string",
+      "enum": [
+        "accept_option",
+        "switch_option",
+        "decline_all",
+        "request_revisions",
+        "defer_decision",
+        "cancel_previous_acceptance"
+      ],
+      "title": "Decision Type"
+    },
+    "decision_sequence_number": {
+      "type": "number",
+      "default": 1,
+      "title": "Decision Sequence Number",
+      "description": "Monotonic per-workflow sequence (1, 2, 3 ...). Each new decision increments."
+    },
+    "previous_decision_record_id": {
+      "type": "string",
+      "title": "Previous Decision Record ID",
+      "description": "The CustomerDecisionRecord ID this decision supersedes (for switch/cancel). Null for the first decision."
+    },
+    "superseded_decision_record_id": {
+      "type": "string",
+      "title": "Superseded Decision Record ID",
+      "description": "The decision record that THIS record supersedes (set on switch/cancel). Distinct from previous_decision_record_id for chain navigation."
+    },
+    "customer_presentation_id": {
+      "type": "string",
+      "title": "CustomerPresentation ID"
+    },
+    "estimate_id": {
+      "type": "string",
+      "title": "Estimate ID"
+    },
+    "estimate_package_id": {
+      "type": "string",
+      "title": "EstimatePackage ID",
+      "description": "The immutable EstimatePackage ID this decision concerns. Null for decline_all/request_revisions/defer when no specific option."
+    },
+    "scope_of_work_id": {
+      "type": "string",
+      "title": "ScopeOfWork ID"
+    },
+    "pricing_snapshot_id": {
+      "type": "string",
+      "title": "PricingCalculationSnapshot ID"
+    },
+    "estimate_version": {
+      "type": "string",
+      "title": "Estimate Version"
+    },
+    "package_version": {
+      "type": "number",
+      "title": "Package Version"
+    },
+    "scope_version": {
+      "type": "number",
+      "title": "Scope Version"
+    },
+    "pricing_version": {
+      "type": "number",
+      "title": "Pricing/Formula Version"
+    },
+    "presentation_version": {
+      "type": "number",
+      "title": "Presentation Version"
+    },
+    "option_label_shown": {
+      "type": "string",
+      "title": "Option Label Shown (display only)",
+      "description": "The exact option label shown to the customer (e.g. 'Good', 'Better', 'Best'). Display only \u2014 NOT the authoritative identity."
+    },
+    "accepted_price": {
+      "type": "number",
+      "title": "Accepted/Presented Price",
+      "description": "The exact price presented to and accepted by the customer."
+    },
+    "price_presented": {
+      "type": "number",
+      "title": "Price Presented"
+    },
+    "subtotal": {
+      "type": "number",
+      "title": "Subtotal"
+    },
+    "tax": {
+      "type": "number",
+      "title": "Tax"
+    },
+    "total": {
+      "type": "number",
+      "title": "Total"
+    },
+    "deposit_requirement": {
+      "type": "number",
+      "title": "Deposit Requirement"
+    },
+    "financing_terms_shown": {
+      "type": "string",
+      "title": "Financing/Terms Shown"
+    },
+    "customer_signature_url": {
+      "type": "string",
+      "title": "Customer Signature Evidence",
+      "description": "File URL of the customer's signature captured at decision time. Immutable evidence."
+    },
+    "customer_acceptance_acknowledgment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Customer Acceptance Acknowledgment"
+    },
+    "decided_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Accepted/Decided Timestamp"
+    },
+    "customer_identity": {
+      "type": "string",
+      "title": "Customer Identity / Authorized Signer"
+    },
+    "recorded_by": {
+      "type": "string",
+      "title": "Technician/User Who Recorded It"
+    },
+    "decision_reason": {
+      "type": "string",
+      "title": "Decision Reason",
+      "description": "Written reason for switch/cancel/revision."
+    },
+    "revision_request_notes": {
+      "type": "string",
+      "title": "Revision-Request Notes"
+    },
+    "cancellation_or_switch_reason": {
+      "type": "string",
+      "title": "Cancellation/Switch Reason"
+    },
+    "source_channel": {
+      "type": "string",
+      "title": "Source Channel",
+      "description": "e.g. in_app_presentation, portal, phone"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "title": "Idempotency Key"
+    },
+    "payload_hash": {
+      "type": "string",
+      "title": "Payload Hash"
+    },
+    "expected_workflow_revision_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Expected Workflow Revision Version"
+    },
+    "resulting_workflow_revision_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Resulting Workflow Revision Version"
+    },
+    "correlation_id": {
+      "type": "string",
+      "title": "Correlation ID"
+    },
+    "mutation_request_id": {
+      "type": "string",
+      "title": "WorkflowMutationRequest ID"
+    },
+    "decision_snapshot_json": {
+      "type": "string",
+      "title": "Immutable Decision Snapshot (JSON)",
+      "description": "Exact protected references / snapshot needed to reproduce what the customer saw: package, scope, pricing, presentation field values at decision time."
+    },
+    "is_current": {
+      "type": "boolean",
+      "default": true,
+      "title": "Is Current",
+      "description": "True when this is the current authoritative decision for the workflow. Set false only by a later decision record (via backend function) \u2014 never by direct update. The workflow's current_customer_decision_record_id is the authoritative current pointer; this flag is a denormalized convenience."
+    }
+  },
+  "required": [
+    "job_id",
+    "workflow_id",
+    "decision_type",
+    "decided_at",
+    "recorded_by"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "operations_manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "technician"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "lead_technician"
+          }
+        }
+      ]
+    },
+    "create": false,
+    "update": false,
+    "delete": false
+  }
+}

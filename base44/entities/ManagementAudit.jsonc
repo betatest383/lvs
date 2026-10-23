@@ -1,0 +1,143 @@
+{
+  "name": "ManagementAudit",
+  "type": "object",
+  "properties": {
+    "audit_number": {
+      "type": "string",
+      "title": "Audit Number",
+      "description": "Auto-generated: MA-000001"
+    },
+    "audit_template_id": {
+      "type": "string",
+      "title": "Audit Template ID"
+    },
+    "audit_template_name": {
+      "type": "string",
+      "title": "Audit Template Name"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Date"
+    },
+    "time": {
+      "type": "string",
+      "title": "Time"
+    },
+    "auditor": {
+      "type": "string",
+      "title": "Auditor"
+    },
+    "auditor_email": {
+      "type": "string",
+      "title": "Auditor Email"
+    },
+    "employee": {
+      "type": "string",
+      "title": "Employee"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "role": {
+      "type": "string",
+      "title": "Role"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "location": {
+      "type": "string",
+      "title": "Location"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "related_sop": {
+      "type": "string",
+      "title": "Related SOP"
+    },
+    "related_workflow": {
+      "type": "string",
+      "title": "Related Workflow"
+    },
+    "related_business_process": {
+      "type": "string",
+      "title": "Related Business Process"
+    },
+    "checklist_results": {
+      "type": "string",
+      "title": "Checklist Results (JSON)"
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Photos"
+    },
+    "comments": {
+      "type": "string",
+      "title": "Comments"
+    },
+    "overall_score": {
+      "type": "number",
+      "title": "Overall Score"
+    },
+    "pass_percentage": {
+      "type": "number",
+      "title": "Pass %"
+    },
+    "failed_items": {
+      "type": "number",
+      "title": "Failed Items"
+    },
+    "critical_failures": {
+      "type": "number",
+      "title": "Critical Failures"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "In Progress",
+        "Completed",
+        "Under Review",
+        "Closed"
+      ],
+      "default": "In Progress",
+      "title": "Status"
+    },
+    "digital_signature": {
+      "type": "string",
+      "title": "Digital Signature"
+    },
+    "signed_by": {
+      "type": "string",
+      "title": "Signed By"
+    },
+    "ai_failure_trends": {
+      "type": "string",
+      "title": "AI Failure Trends"
+    },
+    "ai_coaching_notes": {
+      "type": "string",
+      "title": "AI Coaching Notes"
+    },
+    "ai_risk_score": {
+      "type": "number",
+      "title": "AI Risk Score"
+    }
+  },
+  "required": [
+    "auditor",
+    "employee",
+    "date"
+  ]
+}

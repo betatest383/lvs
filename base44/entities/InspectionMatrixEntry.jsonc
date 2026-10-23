@@ -1,0 +1,587 @@
+{
+  "name": "InspectionMatrixEntry",
+  "type": "object",
+  "properties": {
+    "question_id": {
+      "type": "string",
+      "title": "Question ID",
+      "description": "Links to InspectionQuestion record"
+    },
+    "section": {
+      "type": "string",
+      "title": "Section"
+    },
+    "subsection": {
+      "type": "string",
+      "title": "Subsection"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category (Raw)"
+    },
+    "question_text": {
+      "type": "string",
+      "title": "Question Text"
+    },
+    "question_type": {
+      "type": "string",
+      "title": "Question Type"
+    },
+    "question_role": {
+      "type": "string",
+      "enum": [
+        "observation",
+        "measurement",
+        "photo",
+        "calculation_input",
+        "derived_result",
+        "customer_information",
+        "administrative",
+        "verification"
+      ],
+      "default": "observation",
+      "title": "Question Role",
+      "description": "Classifies the question's purpose \u2014 determines which gap validations apply"
+    },
+    "role_inferred": {
+      "type": "boolean",
+      "default": false,
+      "title": "Role Inferred",
+      "description": "True when the role was auto-inferred from question text/type, false when explicitly set on the InspectionQuestion"
+    },
+    "question_purpose": {
+      "type": "string",
+      "title": "Question Purpose (JSON)",
+      "description": "JSON array of purposes. Auto-inferred from question text, role, mappings, and downstream connections."
+    },
+    "question_category": {
+      "type": "string",
+      "title": "Question Category",
+      "description": "Groups related questions together regardless of form placement. Auto-inferred from question text and existing category."
+    },
+    "purpose_inferred": {
+      "type": "boolean",
+      "default": false,
+      "title": "Purpose Inferred"
+    },
+    "category_inferred": {
+      "type": "boolean",
+      "default": false,
+      "title": "Category Inferred"
+    },
+    "needs_review": {
+      "type": "boolean",
+      "default": false,
+      "title": "Needs Review"
+    },
+    "logic_source": {
+      "type": "string",
+      "enum": [
+        "rule",
+        "manual",
+        "none"
+      ],
+      "default": "none",
+      "title": "Logic Source"
+    },
+    "consumes_measurements": {
+      "type": "boolean",
+      "default": false,
+      "title": "Consumes Measurements?"
+    },
+    "produces_findings": {
+      "type": "boolean",
+      "default": false,
+      "title": "Produces Findings?"
+    },
+    "produces_repair": {
+      "type": "boolean",
+      "default": false,
+      "title": "Produces Repair?"
+    },
+    "produces_estimate": {
+      "type": "boolean",
+      "default": false,
+      "title": "Produces Estimate?"
+    },
+    "produces_material_calculation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Produces Material Calculation?"
+    },
+    "produces_pdf": {
+      "type": "boolean",
+      "default": false,
+      "title": "Produces PDF?"
+    },
+    "produces_gallery": {
+      "type": "boolean",
+      "default": false,
+      "title": "Produces Gallery?"
+    },
+    "produces_timeline": {
+      "type": "boolean",
+      "default": true,
+      "title": "Produces Timeline?"
+    },
+    "inspection_type": {
+      "type": "string",
+      "title": "Inspection Type"
+    },
+    "inspection_module": {
+      "type": "string",
+      "enum": [
+        "inspection_setup",
+        "interior",
+        "exterior",
+        "attic",
+        "roof",
+        "crawl_space",
+        "appliance",
+        "masonry",
+        "commercial",
+        "other"
+      ],
+      "default": "interior",
+      "title": "Inspection Module",
+      "description": "Which inspection module this question belongs to."
+    },
+    "display_order": {
+      "type": "number",
+      "title": "Display Order"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "conditional_logic": {
+      "type": "boolean",
+      "default": false,
+      "title": "Has Conditional Logic"
+    },
+    "shows_when": {
+      "type": "string",
+      "title": "Shows When (JSON)"
+    },
+    "hidden_when": {
+      "type": "string",
+      "title": "Hidden When"
+    },
+    "required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Required"
+    },
+    "required_conditionally": {
+      "type": "boolean",
+      "default": false,
+      "title": "Required Conditionally"
+    },
+    "answer_options": {
+      "type": "string",
+      "title": "Answer Options"
+    },
+    "help_text": {
+      "type": "string",
+      "title": "Help Text"
+    },
+    "photo_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Photo Required"
+    },
+    "photo_optional": {
+      "type": "boolean",
+      "default": false,
+      "title": "Photo Optional"
+    },
+    "photo_category": {
+      "type": "string",
+      "title": "Photo Category"
+    },
+    "photo_labels": {
+      "type": "string",
+      "title": "Photo Labels"
+    },
+    "photo_customer_pdf": {
+      "type": "boolean",
+      "default": false,
+      "title": "Photo Customer PDF"
+    },
+    "photo_internal_report": {
+      "type": "boolean",
+      "default": true,
+      "title": "Photo Internal Report"
+    },
+    "photo_estimate": {
+      "type": "boolean",
+      "default": false,
+      "title": "Photo Estimate"
+    },
+    "photo_repair_system": {
+      "type": "boolean",
+      "default": false,
+      "title": "Photo Repair System"
+    },
+    "photo_timeline": {
+      "type": "boolean",
+      "default": true,
+      "title": "Photo Timeline"
+    },
+    "photo_internal_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Photo Internal Only"
+    },
+    "measurement_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Measurement Required"
+    },
+    "measurement_units": {
+      "type": "string",
+      "title": "Measurement Units"
+    },
+    "measurement_material_calc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Measurement Material Calc"
+    },
+    "measurement_estimate_qty": {
+      "type": "boolean",
+      "default": false,
+      "title": "Measurement Estimate Qty"
+    },
+    "measurement_pdf_report": {
+      "type": "boolean",
+      "default": false,
+      "title": "Measurement PDF Report"
+    },
+    "measurement_repair_system": {
+      "type": "boolean",
+      "default": false,
+      "title": "Measurement Repair System"
+    },
+    "customer_pdf": {
+      "type": "string",
+      "enum": [
+        "show",
+        "hide",
+        "conditional"
+      ],
+      "title": "Customer PDF"
+    },
+    "customer_summary": {
+      "type": "boolean",
+      "default": false,
+      "title": "Customer Summary"
+    },
+    "internal_notes": {
+      "type": "boolean",
+      "default": false,
+      "title": "Internal Notes"
+    },
+    "inspection_summary": {
+      "type": "boolean",
+      "default": true,
+      "title": "Inspection Summary"
+    },
+    "timeline": {
+      "type": "boolean",
+      "default": true,
+      "title": "Timeline"
+    },
+    "job_hub": {
+      "type": "boolean",
+      "default": false,
+      "title": "Job Hub"
+    },
+    "dashboard": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dashboard"
+    },
+    "nfpa_211_question": {
+      "type": "boolean",
+      "default": false,
+      "title": "NFPA 211 Question"
+    },
+    "code_reference": {
+      "type": "string",
+      "title": "Code Reference"
+    },
+    "pass_fail": {
+      "type": "string",
+      "enum": [
+        "pass_fail",
+        "warning",
+        "na",
+        "none"
+      ],
+      "title": "Pass / Fail / Warning / N/A"
+    },
+    "safety_concern": {
+      "type": "boolean",
+      "default": false,
+      "title": "Safety Concern"
+    },
+    "critical_failure": {
+      "type": "boolean",
+      "default": false,
+      "title": "Critical Failure"
+    },
+    "inspection_level": {
+      "type": "string",
+      "enum": [
+        "level_1",
+        "level_2",
+        "both",
+        "na"
+      ],
+      "title": "Inspection Level"
+    },
+    "repair_system": {
+      "type": "string",
+      "title": "Repair System"
+    },
+    "finding_type": {
+      "type": "string",
+      "title": "Finding Type"
+    },
+    "severity": {
+      "type": "string",
+      "title": "Severity"
+    },
+    "recommendation_trigger": {
+      "type": "boolean",
+      "default": false,
+      "title": "Recommendation Trigger"
+    },
+    "grouped_into": {
+      "type": "string",
+      "title": "Grouped Into (Repair System Title)"
+    },
+    "estimate_recommendation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Creates Estimate Recommendation"
+    },
+    "pricebook_mapping": {
+      "type": "boolean",
+      "default": false,
+      "title": "Has Pricebook Mapping"
+    },
+    "good_better_best": {
+      "type": "string",
+      "title": "Good / Better / Best Options"
+    },
+    "confidence_contribution": {
+      "type": "string",
+      "title": "Confidence Contribution"
+    },
+    "feeds_material_calculator": {
+      "type": "boolean",
+      "default": false,
+      "title": "Feeds Material Calculator"
+    },
+    "calculation_type": {
+      "type": "string",
+      "title": "Calculation Type"
+    },
+    "calculation_input_field": {
+      "type": "string",
+      "title": "Calculation Input Field"
+    },
+    "calculation_output_field": {
+      "type": "string",
+      "title": "Calculation Output Field"
+    },
+    "calculation_formula": {
+      "type": "string",
+      "title": "Formula Used"
+    },
+    "creates_recommendation": {
+      "type": "boolean",
+      "default": false,
+      "title": "Creates Recommendation"
+    },
+    "adds_estimate_item": {
+      "type": "boolean",
+      "default": false,
+      "title": "Adds Estimate Item"
+    },
+    "suggests_upgrade": {
+      "type": "boolean",
+      "default": false,
+      "title": "Suggests Upgrade"
+    },
+    "creates_option_group": {
+      "type": "boolean",
+      "default": false,
+      "title": "Creates Option Group"
+    },
+    "customer_facing": {
+      "type": "boolean",
+      "default": false,
+      "title": "Customer Facing"
+    },
+    "estimate_internal_only": {
+      "type": "boolean",
+      "default": false,
+      "title": "Estimate Internal Only"
+    },
+    "workflow_inspection": {
+      "type": "boolean",
+      "default": true,
+      "title": "Workflow: Inspection"
+    },
+    "workflow_pdf": {
+      "type": "boolean",
+      "default": false,
+      "title": "Workflow: PDF"
+    },
+    "workflow_material_calculator": {
+      "type": "boolean",
+      "default": false,
+      "title": "Workflow: Material Calculator"
+    },
+    "workflow_repair_system": {
+      "type": "boolean",
+      "default": false,
+      "title": "Workflow: Repair System"
+    },
+    "workflow_estimate": {
+      "type": "boolean",
+      "default": false,
+      "title": "Workflow: Estimate"
+    },
+    "workflow_scope_of_work": {
+      "type": "boolean",
+      "default": false,
+      "title": "Workflow: Scope of Work"
+    },
+    "workflow_scheduling": {
+      "type": "boolean",
+      "default": false,
+      "title": "Workflow: Scheduling"
+    },
+    "workflow_warehouse": {
+      "type": "boolean",
+      "default": false,
+      "title": "Workflow: Warehouse"
+    },
+    "workflow_fleet": {
+      "type": "boolean",
+      "default": false,
+      "title": "Workflow: Fleet"
+    },
+    "workflow_job_hub": {
+      "type": "boolean",
+      "default": false,
+      "title": "Workflow: Job Hub"
+    },
+    "workflow_timeline": {
+      "type": "boolean",
+      "default": false,
+      "title": "Workflow: Timeline"
+    },
+    "workflow_analytics": {
+      "type": "boolean",
+      "default": false,
+      "title": "Workflow: Analytics"
+    },
+    "validation_unused": {
+      "type": "boolean",
+      "default": false,
+      "title": "Validation: Unused"
+    },
+    "validation_duplicate": {
+      "type": "boolean",
+      "default": false,
+      "title": "Validation: Duplicate"
+    },
+    "validation_incomplete": {
+      "type": "boolean",
+      "default": false,
+      "title": "Validation: Incomplete"
+    },
+    "validation_missing_mapping": {
+      "type": "boolean",
+      "default": false,
+      "title": "Validation: Missing Mapping"
+    },
+    "validation_missing_photo_logic": {
+      "type": "boolean",
+      "default": false,
+      "title": "Validation: Missing Photo Logic"
+    },
+    "validation_missing_repair_mapping": {
+      "type": "boolean",
+      "default": false,
+      "title": "Validation: Missing Repair Mapping"
+    },
+    "validation_missing_pdf_mapping": {
+      "type": "boolean",
+      "default": false,
+      "title": "Validation: Missing PDF Mapping"
+    },
+    "validation_missing_material_calc": {
+      "type": "boolean",
+      "default": false,
+      "title": "Validation: Missing Material Calculation"
+    },
+    "validation_missing_estimate_mapping": {
+      "type": "boolean",
+      "default": false,
+      "title": "Validation: Missing Estimate Mapping"
+    },
+    "validation_flags": {
+      "type": "string",
+      "title": "Validation Flags (JSON)"
+    },
+    "matrix_build_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Matrix Build Date"
+    },
+    "linked_standard_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Linked Inspection Standards"
+    },
+    "standard_names": {
+      "type": "string",
+      "title": "Inspection Standard",
+      "description": "Comma-separated standard names linked to this question"
+    },
+    "standard_authority_levels": {
+      "type": "string",
+      "title": "Authority Level",
+      "description": "Comma-separated authority levels from linked standards"
+    },
+    "standard_severity": {
+      "type": "string",
+      "title": "Standard Severity"
+    },
+    "standard_pass_criteria": {
+      "type": "string",
+      "title": "Pass Criteria"
+    },
+    "standard_fail_criteria": {
+      "type": "string",
+      "title": "Fail Criteria"
+    },
+    "standard_repair_system": {
+      "type": "string",
+      "title": "Standard Repair System"
+    }
+  },
+  "required": [
+    "question_id",
+    "question_text",
+    "section"
+  ]
+}

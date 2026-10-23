@@ -1,0 +1,169 @@
+{
+  "name": "LockAcquisitionTestResult",
+  "type": "object",
+  "title": "Lock Acquisition Test Result",
+  "description": "APPEND-ONLY evidence record for CAS / updateMany race tests. One row per contender per run. RLS blocks update and delete so the evidence cannot be altered after the race.",
+  "properties": {
+    "test_run_id": {
+      "type": "string",
+      "title": "Test Run ID",
+      "description": "e.g. CASRUN-<ts>. Groups the contenders of a single race run."
+    },
+    "variant": {
+      "type": "string",
+      "enum": [
+        "cas",
+        "no_expected_value"
+      ],
+      "title": "Variant",
+      "description": "cas = updateMany with the expected unlocked value in the filter (conditional). no_expected_value = control: filter by id only (not conditional)."
+    },
+    "contender_number": {
+      "type": "number",
+      "title": "Contender Number"
+    },
+    "worker_id": {
+      "type": "string",
+      "title": "Worker ID"
+    },
+    "request_id": {
+      "type": "string",
+      "title": "Request ID"
+    },
+    "workflow_id": {
+      "type": "string",
+      "title": "Lock-Test Workflow ID"
+    },
+    "proposed_lock_token": {
+      "type": "string",
+      "title": "Proposed Lock Token"
+    },
+    "expected_lock_generation": {
+      "type": "number",
+      "title": "Expected Lock Generation"
+    },
+    "start_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Start Timestamp"
+    },
+    "finish_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Finish Timestamp"
+    },
+    "raw_update_many_result": {
+      "type": "string",
+      "title": "Raw updateMany Result (JSON)",
+      "description": "Exact object returned by base44.entities.AppointmentWorkflow.updateMany for this contender."
+    },
+    "updated_count": {
+      "type": "number",
+      "title": "updated count",
+      "description": "The numeric result.updated field, or -1 if absent/error."
+    },
+    "result_success": {
+      "type": "boolean",
+      "title": "result.success"
+    },
+    "result_has_more": {
+      "type": "boolean",
+      "title": "result.has_more"
+    },
+    "believed_won": {
+      "type": "boolean",
+      "title": "Believed It Won",
+      "description": "True when updated_count === 1."
+    },
+    "entered_protected_section": {
+      "type": "boolean",
+      "title": "Entered Protected Section",
+      "description": "True when believed_won (the contender would proceed to the protected section)."
+    },
+    "final_lock_owner_observed": {
+      "type": "string",
+      "title": "Final Lock Owner Observed",
+      "description": "decision_lock_owner on the workflow after all contenders finished."
+    },
+    "final_lock_generation_observed": {
+      "type": "number",
+      "title": "Final Lock Generation Observed"
+    },
+    "final_lock_token_observed": {
+      "type": "string",
+      "title": "Final Lock Token Observed"
+    },
+    "error": {
+      "type": "string",
+      "title": "Error"
+    }
+  },
+  "required": [
+    "test_run_id",
+    "variant",
+    "contender_number",
+    "worker_id",
+    "workflow_id",
+    "proposed_lock_token"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "operations_manager"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "operations_manager"
+          }
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "__lock_test_immutable__"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "__lock_test_immutable__"
+      }
+    }
+  }
+}

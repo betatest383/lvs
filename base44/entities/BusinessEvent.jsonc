@@ -1,0 +1,172 @@
+{
+  "name": "BusinessEvent",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "title": "Event ID",
+      "description": "Publisher-supplied or engine-generated unique identifier for this business occurrence. Used as the primary idempotency key."
+    },
+    "idempotency_key": {
+      "type": "string",
+      "title": "Idempotency Key",
+      "description": "Deterministic deduplication key (e.g. source_system:source_event_id or event_type:entity_id:causation_id). Prevents duplicate event processing from retries or replays."
+    },
+    "event_type": {
+      "type": "string",
+      "title": "Event Type",
+      "description": "Registered event type from EventRegistry (e.g. 'customer.created', 'job.updated', 'po.received')."
+    },
+    "event_version": {
+      "type": "number",
+      "default": 1,
+      "title": "Event Version",
+      "description": "Schema version of this event's payload. Historical events retain their original version."
+    },
+    "event_category": {
+      "type": "string",
+      "enum": [
+        "lifecycle",
+        "inventory",
+        "financial",
+        "operational",
+        "workflow",
+        "system",
+        "integration"
+      ],
+      "title": "Event Category",
+      "description": "Broad classification for subscriber filtering and analytics."
+    },
+    "entity_type": {
+      "type": "string",
+      "title": "Entity Type",
+      "description": "The business entity this event concerns (e.g. 'Customer', 'Job', 'Appointment', 'PurchaseOrder')."
+    },
+    "entity_id": {
+      "type": "string",
+      "title": "Entity ID",
+      "description": "Identifier of the business entity this event concerns."
+    },
+    "source_system": {
+      "type": "string",
+      "title": "Source System",
+      "description": "Which system originated this event (e.g. 'lvc_os', 'servicetitan', 'quickbooks')."
+    },
+    "source_event_id": {
+      "type": "string",
+      "title": "Source Event ID",
+      "description": "Identifier of the originating external or upstream event (e.g. ServiceTitanWebhookEvent entity ID)."
+    },
+    "correlation_id": {
+      "type": "string",
+      "title": "Correlation ID",
+      "description": "Groups a chain of related events that share a common business context."
+    },
+    "causation_id": {
+      "type": "string",
+      "title": "Causation ID",
+      "description": "The BusinessEvent ID that caused this event to be published. Enables causal chain reconstruction."
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant ID",
+      "description": "Multi-tenant readiness. Null/empty for single-tenant."
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Occurred At",
+      "description": "When the business occurrence actually happened (from the publisher's perspective)."
+    },
+    "received_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Received At",
+      "description": "When the engine received the publish request."
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Published At",
+      "description": "When the event was successfully persisted and made available to subscribers."
+    },
+    "payload": {
+      "type": "string",
+      "title": "Payload (JSON)",
+      "description": "Immutable structured event data. Never overwritten after publication."
+    },
+    "payload_hash": {
+      "type": "string",
+      "title": "Payload Hash",
+      "description": "SHA-256 hash of the payload for integrity and duplicate detection."
+    },
+    "metadata": {
+      "type": "string",
+      "title": "Metadata (JSON)",
+      "description": "Non-payload context (actor, source_module, trace info). Mutable for processing context."
+    },
+    "processing_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "dispatching",
+        "processed",
+        "failed",
+        "dead_letter",
+        "ignored"
+      ],
+      "default": "pending",
+      "title": "Processing Status",
+      "description": "Rollup lifecycle: pending=not yet dispatched; dispatching=subscribers in flight; processed=all required subscribers reached terminal success/dead_letter; failed=at least one delivery failed (retryable); dead_letter=all deliveries exhausted; ignored=non-retryable skip."
+    },
+    "processing_attempts": {
+      "type": "number",
+      "default": 0,
+      "title": "Processing Attempts",
+      "description": "Rollup count of delivery dispatch attempts across all subscribers."
+    },
+    "next_retry_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Next Retry At",
+      "description": "Earliest next retry time across pending deliveries. Null when no retries are scheduled."
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error",
+      "description": "Most recent error summary across deliveries."
+    },
+    "dead_lettered_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Dead Lettered At"
+    },
+    "replay_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Replay Count",
+      "description": "Number of times this event's deliveries have been replayed by an administrator."
+    },
+    "last_replayed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Replayed At"
+    },
+    "last_replayed_by": {
+      "type": "string",
+      "title": "Last Replayed By"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "event_id",
+    "idempotency_key",
+    "event_type",
+    "event_version",
+    "entity_type"
+  ]
+}

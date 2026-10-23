@@ -1,0 +1,37 @@
+{
+  "name": "Auto-resolve Zapier Job technician on import",
+  "description": "Auto-resolves the imported ServiceTitan technician on freshly created Jobs (Zapier path) using the shared resolution rules. Skips non-imported and already-assigned jobs.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "entity",
+      "events": [
+        "create"
+      ],
+      "entity_name": "Job"
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "auto_resolve_zapier_job_technician_on_import",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_function": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "resolveJobTechnicianOnImport",
+            "args": {}
+          },
+          "then": "end"
+        }
+      }
+    ]
+  },
+  "x-base44-migrated-from-automation": {
+    "legacy_payload_function": "resolveJobTechnicianOnImport"
+  }
+}

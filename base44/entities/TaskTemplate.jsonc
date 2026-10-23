@@ -1,0 +1,561 @@
+{
+  "name": "TaskTemplate",
+  "type": "object",
+  "properties": {
+    "template_number": {
+      "type": "string",
+      "title": "Template Number",
+      "description": "Server-generated: TPL-000001. Never set by the browser."
+    },
+    "template_name": {
+      "type": "string",
+      "title": "Template Name"
+    },
+    "template_key": {
+      "type": "string",
+      "title": "Template Key",
+      "description": "Normalized unique key (e.g. overflow_shelf_restocking)"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "department_id": {
+      "type": "string",
+      "title": "Department ID"
+    },
+    "department_name_snapshot": {
+      "type": "string",
+      "title": "Department Name Snapshot"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category",
+      "description": "Free-text category for grouping similar templates"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "title": "Version"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "In Review",
+        "Approved",
+        "Published",
+        "Archived"
+      ],
+      "default": "Draft",
+      "title": "Status",
+      "description": "Only Approved/Published templates may be used for automatic task creation."
+    },
+    "data_classification": {
+      "type": "string",
+      "enum": [
+        "production",
+        "test",
+        "archived"
+      ],
+      "default": "production",
+      "title": "Data Classification"
+    },
+    "work_category": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "operational_interruption",
+        "high_priority",
+        "scheduled_primary",
+        "routine",
+        "busy_work"
+      ],
+      "title": "Work Category"
+    },
+    "default_priority": {
+      "type": "string",
+      "enum": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "default": "Medium",
+      "title": "Default Priority"
+    },
+    "default_priority_score": {
+      "type": "number",
+      "title": "Default Priority Score",
+      "description": "Server-calculated composite score"
+    },
+    "business_impact": {
+      "type": "string",
+      "enum": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "severe"
+      ],
+      "default": "none",
+      "title": "Business Impact"
+    },
+    "urgency": {
+      "type": "string",
+      "enum": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "immediate"
+      ],
+      "default": "none",
+      "title": "Urgency"
+    },
+    "priority_reason_template": {
+      "type": "string",
+      "title": "Priority Reason Template",
+      "description": "Template text for priority reasoning, supports {placeholders}"
+    },
+    "interruptibility": {
+      "type": "string",
+      "enum": [
+        "freely_interruptible",
+        "interruptible_with_checkpoint",
+        "manager_approval_required",
+        "non_interruptible",
+        "critical_only"
+      ],
+      "default": "freely_interruptible",
+      "title": "Interruptibility"
+    },
+    "focus_lock_eligible": {
+      "type": "boolean",
+      "default": false,
+      "title": "Focus Lock Eligible"
+    },
+    "may_interrupt_categories": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "critical",
+          "operational_interruption",
+          "high_priority",
+          "scheduled_primary",
+          "routine",
+          "busy_work"
+        ]
+      },
+      "title": "May Interrupt Categories"
+    },
+    "resume_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Resume Required"
+    },
+    "requires_immediate_acknowledgment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Immediate Acknowledgment"
+    },
+    "acknowledgment_deadline_minutes": {
+      "type": "number",
+      "title": "Acknowledgment Deadline (Minutes)"
+    },
+    "assignment_mode": {
+      "type": "string",
+      "enum": [
+        "specific_employee",
+        "multiple_employees",
+        "role_queue",
+        "department_queue",
+        "eligibility_engine",
+        "manager_selects"
+      ],
+      "default": "specific_employee",
+      "title": "Assignment Mode"
+    },
+    "default_employee_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Default Employee IDs"
+    },
+    "default_role_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Default Role IDs"
+    },
+    "default_department_id": {
+      "type": "string",
+      "title": "Default Department ID"
+    },
+    "required_employee_count": {
+      "type": "number",
+      "default": 1,
+      "title": "Required Employee Count"
+    },
+    "claim_mode": {
+      "type": "string",
+      "enum": [
+        "assigned",
+        "claimable",
+        "multi_claim",
+        "manager_assigns",
+        "automatic_eligibility"
+      ],
+      "default": "assigned",
+      "title": "Claim Mode"
+    },
+    "required_capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Capabilities"
+    },
+    "required_training_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Training IDs"
+    },
+    "required_certification_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Certification IDs"
+    },
+    "required_equipment_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Equipment IDs"
+    },
+    "default_due_offset_minutes": {
+      "type": "number",
+      "title": "Default Due Offset (Minutes)",
+      "description": "Minutes from creation to due date"
+    },
+    "must_start_offset_minutes": {
+      "type": "number",
+      "title": "Must Start Offset (Minutes)"
+    },
+    "estimated_duration_minutes": {
+      "type": "number",
+      "title": "Estimated Duration (Minutes)"
+    },
+    "reminder_schedule_json": {
+      "type": "string",
+      "title": "Reminder Schedule (JSON)",
+      "description": "JSON array of {offset_minutes, method, message}"
+    },
+    "overdue_escalation_minutes": {
+      "type": "number",
+      "title": "Overdue Escalation (Minutes)"
+    },
+    "recurrence_rule": {
+      "type": "string",
+      "title": "Recurrence Rule",
+      "description": "iCal-style RRULE or cron expression"
+    },
+    "service_level_target_minutes": {
+      "type": "number",
+      "title": "Service Level Target (Minutes)"
+    },
+    "execution_mode": {
+      "type": "string",
+      "enum": [
+        "simple_action",
+        "checklist",
+        "guided_task",
+        "form",
+        "workflow",
+        "wizard",
+        "automated",
+        "linked_module"
+      ],
+      "default": "simple_action",
+      "title": "Execution Mode"
+    },
+    "execution_route": {
+      "type": "string",
+      "title": "Execution Route",
+      "description": "Frontend route to open when task is started"
+    },
+    "linked_form_id": {
+      "type": "string",
+      "title": "Linked Form ID"
+    },
+    "linked_checklist_id": {
+      "type": "string",
+      "title": "Linked Checklist ID"
+    },
+    "linked_workflow_id": {
+      "type": "string",
+      "title": "Linked Workflow ID"
+    },
+    "linked_wizard_key": {
+      "type": "string",
+      "title": "Linked Wizard Key"
+    },
+    "linked_module": {
+      "type": "string",
+      "title": "Linked Module"
+    },
+    "linked_sop_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Linked SOP IDs"
+    },
+    "linked_training_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Linked Training IDs"
+    },
+    "instructions": {
+      "type": "string",
+      "title": "Instructions"
+    },
+    "completion_conditions_json": {
+      "type": "string",
+      "title": "Completion Conditions (JSON)"
+    },
+    "required_evidence_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Evidence Types"
+    },
+    "minimum_photo_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Minimum Photo Count"
+    },
+    "requires_notes": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Notes"
+    },
+    "requires_signature": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Signature"
+    },
+    "requires_record_id": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Record ID"
+    },
+    "requires_manager_verification": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Manager Verification"
+    },
+    "completion_validation_rules_json": {
+      "type": "string",
+      "title": "Completion Validation Rules (JSON)"
+    },
+    "auto_complete_when_conditions_met": {
+      "type": "boolean",
+      "default": false,
+      "title": "Auto Complete When Conditions Met"
+    },
+    "requires_approval": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Approval"
+    },
+    "approval_role_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Approval Role IDs"
+    },
+    "approval_capability": {
+      "type": "string",
+      "title": "Approval Capability"
+    },
+    "self_approval_prohibited": {
+      "type": "boolean",
+      "default": true,
+      "title": "Self Approval Prohibited"
+    },
+    "escalation_role_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Escalation Role IDs"
+    },
+    "escalation_conditions_json": {
+      "type": "string",
+      "title": "Escalation Conditions (JSON)"
+    },
+    "return_for_correction_behavior": {
+      "type": "string",
+      "enum": [
+        "reopen",
+        "create_corrective_task",
+        "notify_only"
+      ],
+      "default": "reopen",
+      "title": "Return for Correction Behavior"
+    },
+    "trigger_type": {
+      "type": "string",
+      "enum": [
+        "manual",
+        "scheduled",
+        "source_event",
+        "workflow_event",
+        "threshold",
+        "status_change",
+        "external_integration",
+        "recurring",
+        "ai_assisted"
+      ],
+      "default": "manual",
+      "title": "Trigger Type"
+    },
+    "trigger_event_key": {
+      "type": "string",
+      "title": "Trigger Event Key"
+    },
+    "source_entity_type": {
+      "type": "string",
+      "title": "Source Entity Type"
+    },
+    "trigger_conditions_json": {
+      "type": "string",
+      "title": "Trigger Conditions (JSON)"
+    },
+    "deduplication_rule": {
+      "type": "string",
+      "title": "Deduplication Rule",
+      "description": "Key or rule to prevent duplicate task creation"
+    },
+    "cooldown_minutes": {
+      "type": "number",
+      "title": "Cooldown (Minutes)",
+      "description": "Minimum time between triggered tasks from the same template"
+    },
+    "ai_classification_enabled": {
+      "type": "boolean",
+      "default": false,
+      "title": "AI Classification Enabled"
+    },
+    "ai_guidance_enabled": {
+      "type": "boolean",
+      "default": false,
+      "title": "AI Guidance Enabled"
+    },
+    "ai_instruction_scope": {
+      "type": "string",
+      "title": "AI Instruction Scope"
+    },
+    "approved_knowledge_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Approved Knowledge Source IDs"
+    },
+    "ai_may_suggest_assignment": {
+      "type": "boolean",
+      "default": false,
+      "title": "AI May Suggest Assignment"
+    },
+    "ai_may_suggest_priority": {
+      "type": "boolean",
+      "default": false,
+      "title": "AI May Suggest Priority"
+    },
+    "ai_may_suggest_template": {
+      "type": "boolean",
+      "default": false,
+      "title": "AI May Suggest Template"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Updated At"
+    },
+    "submitted_for_review_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Submitted For Review At"
+    },
+    "reviewed_by": {
+      "type": "string",
+      "title": "Reviewed By"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Reviewed At"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At"
+    },
+    "published_by": {
+      "type": "string",
+      "title": "Published By"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Published At"
+    },
+    "change_summary": {
+      "type": "string",
+      "title": "Change Summary"
+    },
+    "previous_version_id": {
+      "type": "string",
+      "title": "Previous Version ID"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "template_number",
+    "template_name",
+    "template_key"
+  ]
+}

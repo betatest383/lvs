@@ -1,0 +1,319 @@
+{
+  "name": "Receipt",
+  "type": "object",
+  "properties": {
+    "receipt_number": {
+      "type": "string",
+      "title": "Receipt Number",
+      "description": "LVC-owned internal receipt number (e.g. RCV-000001). Never overwritten by ServiceTitan."
+    },
+    "purchase_order_id": {
+      "type": "string",
+      "title": "Purchase Order ID",
+      "description": "Links to local PurchaseOrder record. Resolved via servicetitan_purchase_order_id."
+    },
+    "servicetitan_purchase_order_id": {
+      "type": "string",
+      "title": "ServiceTitan Purchase Order ID",
+      "description": "Snapshot of the parent PO's ST ID for display without joining."
+    },
+    "po_number": {
+      "type": "string",
+      "title": "PO Number",
+      "description": "Denormalized for reporting."
+    },
+    "vendor_id": {
+      "type": "string",
+      "title": "Vendor ID",
+      "description": "Links to local Vendor record. Resolved via servicetitan_vendor_id."
+    },
+    "servicetitan_vendor_id": {
+      "type": "string",
+      "title": "ServiceTitan Vendor ID",
+      "description": "Snapshot of the vendor's ST ID for display without joining."
+    },
+    "vendor_name": {
+      "type": "string",
+      "title": "Vendor Name"
+    },
+    "warehouse_location_id": {
+      "type": "string",
+      "title": "Warehouse Location ID",
+      "description": "Links to WarehouseLocation record where items were received."
+    },
+    "warehouse_name": {
+      "type": "string",
+      "title": "Warehouse Name"
+    },
+    "receipt_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Receipt Date",
+      "description": "ServiceTitan-owned. When the receipt was recorded. Overwritten by inbound sync."
+    },
+    "expected_delivery_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Expected Delivery Date",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "partially_received",
+        "received",
+        "voided"
+      ],
+      "default": "pending",
+      "title": "Status",
+      "description": "ServiceTitan-owned source lifecycle status. Overwritten by inbound sync. Contains ONLY source lifecycle values."
+    },
+    "lvc_workflow_status": {
+      "type": "string",
+      "enum": [
+        "awaiting_physical_verification",
+        "verification_in_progress",
+        "verified",
+        "quantity_exception",
+        "damage_exception",
+        "awaiting_ledger_post",
+        "ledger_posted",
+        "closed",
+        "voided"
+      ],
+      "default": "awaiting_physical_verification",
+      "title": "LVC Workflow Status",
+      "description": "LVC-owned physical verification workflow status. NEVER overwritten by ServiceTitan synchronization. A newly synchronized Receipt enters 'awaiting_physical_verification'. Only LVC workflow may advance through physical verification and ledger posting."
+    },
+    "receipt_type": {
+      "type": "string",
+      "enum": [
+        "full",
+        "partial",
+        "over_receive",
+        "blind"
+      ],
+      "title": "Receipt Type",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "total_quantity_received": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Quantity Received",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "subtotal": {
+      "type": "number",
+      "default": 0,
+      "title": "Subtotal",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "tax_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Tax Amount",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "shipping_amount": {
+      "type": "number",
+      "default": 0,
+      "title": "Shipping Amount",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "total": {
+      "type": "number",
+      "default": 0,
+      "title": "Total",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "line_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Line Count",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "lines_sync_status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "pending",
+        "partial",
+        "complete",
+        "failed"
+      ],
+      "default": "not_started",
+      "title": "Lines Sync Status",
+      "description": "LVC-owned. Tracks the completeness of line-level synchronization for this header. A header may be created before all lines are synced."
+    },
+    "lines_expected_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Lines Expected Count",
+      "description": "LVC-owned. Number of lines expected from the source system. Updated during sync."
+    },
+    "lines_synced_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Lines Synced Count",
+      "description": "LVC-owned. Number of lines successfully synchronized."
+    },
+    "lines_last_sync_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Lines Last Sync At",
+      "description": "LVC-owned. Timestamp of the last line synchronization attempt."
+    },
+    "received_by": {
+      "type": "string",
+      "title": "Received By",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "packing_slip_number": {
+      "type": "string",
+      "title": "Packing Slip Number",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "tracking_number": {
+      "type": "string",
+      "title": "Tracking Number",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "ledger_transaction_id": {
+      "type": "string",
+      "title": "Ledger Transaction ID",
+      "description": "LVC-owned. Links to the InventoryTransaction ledger entry that increased warehouse inventory. Never overwritten by ServiceTitan."
+    },
+    "ledger_posted": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ledger Posted",
+      "description": "LVC-owned. True when the inventory ledger transaction has been posted. Never overwritten by ServiceTitan."
+    },
+    "ledger_posted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Ledger Posted At",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "inspection_notes": {
+      "type": "string",
+      "title": "Inspection Notes",
+      "description": "LVC-owned. Receiving inspection notes. Never overwritten by ServiceTitan."
+    },
+    "damage_report_json": {
+      "type": "string",
+      "title": "Damage Report (JSON)",
+      "description": "LVC-owned. JSON array of damaged items {inventory_master_id, quantity, condition, photo_urls}. Never overwritten by ServiceTitan."
+    },
+    "photo_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Receiving Photos",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "exception_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exception Flag",
+      "description": "LVC-owned. Raised when receiving inspection found discrepancies. Never overwritten by ServiceTitan."
+    },
+    "exception_resolution": {
+      "type": "string",
+      "title": "Exception Resolution",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "servicetitan_receipt_id": {
+      "type": "string",
+      "title": "ServiceTitan Receipt ID",
+      "description": "Permanent external identity. Stored as string for int64 safety. The canonical sync key \u2014 matched ONLY by this field. Never by receipt number or PO number."
+    },
+    "servicetitan_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "ServiceTitan Active Status",
+      "description": "ServiceTitan-owned. When false the receipt is preserved and marked voided \u2014 not deleted."
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deferred",
+        "failed",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status"
+    },
+    "servicetitan_last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync"
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At",
+      "description": "Used for event ordering protection \u2014 older events never overwrite newer states."
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On",
+      "description": "Used for stale-event detection."
+    },
+    "servicetitan_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Created On"
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version"
+    },
+    "servicetitan_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "manual",
+        "api"
+      ],
+      "title": "ServiceTitan Source"
+    },
+    "servicetitan_raw_data": {
+      "type": "string",
+      "title": "ServiceTitan Raw Data (JSON)",
+      "description": "Preserved unknown external fields. ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual",
+        "api_export"
+      ],
+      "title": "Import Source"
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes",
+      "description": "LVC-owned internal notes. Never overwritten by ServiceTitan."
+    }
+  },
+  "required": [
+    "servicetitan_receipt_id",
+    "status"
+  ]
+}

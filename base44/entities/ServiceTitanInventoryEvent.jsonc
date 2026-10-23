@@ -1,0 +1,60 @@
+{
+  "name": "ServiceTitanInventoryEvent",
+  "type": "object",
+  "properties": {
+    "st_inventory_event_id": {
+      "type": "string",
+      "title": "ST Inventory Event ID"
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Item Name"
+    },
+    "sku": {
+      "type": "string",
+      "title": "SKU"
+    },
+    "quantity": {
+      "type": "number",
+      "title": "Quantity"
+    },
+    "source_location": {
+      "type": "string",
+      "title": "Source Location"
+    },
+    "destination_location": {
+      "type": "string",
+      "title": "Destination Location"
+    },
+    "truck": {
+      "type": "string",
+      "title": "Truck"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "event_type": {
+      "type": "string",
+      "title": "Event Type"
+    },
+    "event_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Event Date"
+    },
+    "raw_payload": {
+      "type": "string",
+      "title": "Raw Payload (JSON)"
+    },
+    "last_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Synced At"
+    }
+  },
+  "required": [
+    "st_inventory_event_id",
+    "item_name"
+  ]
+}

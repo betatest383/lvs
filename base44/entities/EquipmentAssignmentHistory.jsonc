@@ -1,0 +1,150 @@
+{
+  "name": "EquipmentAssignmentHistory",
+  "type": "object",
+  "properties": {
+    "history_id": {
+      "type": "string",
+      "title": "History ID",
+      "description": "e.g. EAH-000001"
+    },
+    "equipment_master_id": {
+      "type": "string",
+      "title": "Equipment Master ID",
+      "description": "Links to EquipmentMaster catalog item"
+    },
+    "tech_equipment_id": {
+      "type": "string",
+      "title": "Tech Equipment ID",
+      "description": "ID of the original TechEquipment assignment record"
+    },
+    "equipment_id": {
+      "type": "string",
+      "title": "Equipment ID",
+      "description": "e.g. EQ-000001 from TechEquipment"
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Item Name"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category"
+    },
+    "unit": {
+      "type": "string",
+      "title": "Unit",
+      "default": "ea"
+    },
+    "quantity": {
+      "type": "number",
+      "title": "Quantity Assigned",
+      "description": "Original assigned quantity"
+    },
+    "quantity_returned": {
+      "type": "number",
+      "title": "Quantity Returned",
+      "description": "Quantity returned at unassignment"
+    },
+    "employee": {
+      "type": "string",
+      "title": "Employee",
+      "description": "Assigned employee name"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "assigned_by": {
+      "type": "string",
+      "title": "Assigned By",
+      "description": "User who created the assignment"
+    },
+    "assignment_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Assignment Date"
+    },
+    "assignment_type": {
+      "type": "string",
+      "enum": [
+        "permanent",
+        "temporary",
+        "warehouse_stock",
+        "repair",
+        "retired"
+      ],
+      "title": "Assignment Type"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "storage_location": {
+      "type": "string",
+      "title": "Storage Location"
+    },
+    "returned_by": {
+      "type": "string",
+      "title": "Returned By",
+      "description": "User who processed the return"
+    },
+    "return_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Return Date"
+    },
+    "return_condition": {
+      "type": "string",
+      "enum": [
+        "new",
+        "good",
+        "fair",
+        "poor",
+        "damaged",
+        "missing",
+        "out_for_repair"
+      ],
+      "title": "Return Condition"
+    },
+    "return_reason": {
+      "type": "string",
+      "title": "Return Reason"
+    },
+    "disposition": {
+      "type": "string",
+      "enum": [
+        "available",
+        "repair",
+        "retired"
+      ],
+      "title": "Disposition",
+      "description": "Where the equipment went after return: available (warehouse), repair, or retired"
+    },
+    "replacement_cost_per_unit": {
+      "type": "number",
+      "title": "Replacement Cost Per Unit ($)"
+    },
+    "total_value": {
+      "type": "number",
+      "title": "Total Value ($)"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "default": false,
+      "title": "Deleted",
+      "description": "Soft-delete flag. Historical records should never be hard-deleted."
+    }
+  },
+  "required": [
+    "history_id",
+    "item_name",
+    "quantity",
+    "employee",
+    "assignment_date",
+    "return_date"
+  ]
+}

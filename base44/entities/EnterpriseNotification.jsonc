@@ -1,0 +1,391 @@
+{
+  "name": "EnterpriseNotification",
+  "type": "object",
+  "properties": {
+    "notification_id": {
+      "type": "string",
+      "title": "Notification ID",
+      "description": "Server-generated: NOT-000001"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "message": {
+      "type": "string",
+      "title": "Message"
+    },
+    "notification_type": {
+      "type": "string",
+      "enum": [
+        "Information",
+        "Reminder",
+        "Warning",
+        "Critical",
+        "Approval Required",
+        "Success",
+        "Failure",
+        "System",
+        "Customer",
+        "Operational",
+        "Safety",
+        "Task"
+      ],
+      "default": "Information",
+      "title": "Notification Type"
+    },
+    "notification_purpose": {
+      "type": "string",
+      "title": "Notification Purpose",
+      "description": "Semantic purpose for deduplication and lifecycle (e.g. task_assignment, task_reassigned, task_review_requested, task_approved, task_completed, task_blocked, task_changes_requested, task_resume_required, manual)"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "default": "Medium",
+      "title": "Priority"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Sent",
+        "Delivered",
+        "Read",
+        "Acknowledged",
+        "Resolved",
+        "Expired",
+        "Cancelled",
+        "Failed"
+      ],
+      "default": "Pending",
+      "title": "Status",
+      "description": "Lifecycle: Pending→Sent→Delivered→Read→Acknowledged→Resolved. Resolved = underlying action completed/rejected/superseded. Archived is a separate visibility flag (is_archived), not a lifecycle status."
+    },
+    "source_module": {
+      "type": "string",
+      "title": "Source Module"
+    },
+    "source_record_id": {
+      "type": "string",
+      "title": "Source Record ID"
+    },
+    "recipient_employee_registry_id": {
+      "type": "string",
+      "title": "Recipient Employee Registry ID",
+      "description": "Links to EmployeeRegistry record — the single source of truth for notification routing"
+    },
+    "recipient_email": {
+      "type": "string",
+      "title": "Recipient Email",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "recipient_name": {
+      "type": "string",
+      "title": "Recipient Name",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "recipient_user_id": {
+      "type": "string",
+      "title": "Recipient User ID",
+      "description": "The linked Base44 user ID from EmployeeRegistry"
+    },
+    "recipient_role": {
+      "type": "string",
+      "title": "Recipient Role",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "recipient_department": {
+      "type": "string",
+      "title": "Recipient Department",
+      "description": "Auto-populated from EmployeeRegistry"
+    },
+    "assignment_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Assignment Version",
+      "description": "Links this notification to a specific task assignment version. Prevents stale acknowledgments from suppressing new assignment alerts."
+    },
+    "related_task": {
+      "type": "string",
+      "title": "Related Task",
+      "description": "EnterpriseTask entity ID"
+    },
+    "related_task_number": {
+      "type": "string",
+      "title": "Related Task Number",
+      "description": "Snapshot of task_number for display without joining"
+    },
+    "related_task_title": {
+      "type": "string",
+      "title": "Related Task Title",
+      "description": "Snapshot of task title for display without joining"
+    },
+    "related_task_priority": {
+      "type": "string",
+      "title": "Related Task Priority",
+      "description": "Snapshot of task priority for alert queue ordering"
+    },
+    "related_task_due_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Related Task Due Date",
+      "description": "Snapshot of task due_date, updated on due-date change"
+    },
+    "related_employee": {
+      "type": "string",
+      "title": "Related Employee"
+    },
+    "related_role": {
+      "type": "string",
+      "title": "Related Role"
+    },
+    "related_department": {
+      "type": "string",
+      "title": "Related Department"
+    },
+    "related_customer": {
+      "type": "string",
+      "title": "Related Customer"
+    },
+    "related_job": {
+      "type": "string",
+      "title": "Related Job"
+    },
+    "related_truck": {
+      "type": "string",
+      "title": "Related Truck"
+    },
+    "related_equipment": {
+      "type": "string",
+      "title": "Related Equipment"
+    },
+    "related_audit": {
+      "type": "string",
+      "title": "Related Audit"
+    },
+    "related_workflow": {
+      "type": "string",
+      "title": "Related Workflow"
+    },
+    "related_sop": {
+      "type": "string",
+      "title": "Related SOP"
+    },
+    "related_policy": {
+      "type": "string",
+      "title": "Related Policy"
+    },
+    "related_certification": {
+      "type": "string",
+      "title": "Related Certification"
+    },
+    "related_training": {
+      "type": "string",
+      "title": "Related Training"
+    },
+    "related_onboarding": {
+      "type": "string",
+      "title": "Related Onboarding"
+    },
+    "sent_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Sent Date"
+    },
+    "read_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Read Date",
+      "description": "When the recipient opened the notification. Preserved across resolution."
+    },
+    "acknowledged_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Acknowledged Date",
+      "description": "When the recipient explicitly acknowledged awareness. Only set if the actual recipient acknowledged — never fabricated by a resolution action."
+    },
+    "acknowledged_by": {
+      "type": "string",
+      "title": "Acknowledged By",
+      "description": "The recipient who acknowledged. Only set if the actual recipient acknowledged."
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Resolved At",
+      "description": "When the underlying requested action was completed/rejected/superseded."
+    },
+    "resolved_by_user_id": {
+      "type": "string",
+      "title": "Resolved By (User ID)",
+      "description": "Base44 user ID of the person who resolved the underlying action."
+    },
+    "resolved_by_employee_id": {
+      "type": "string",
+      "title": "Resolved By (Employee Registry ID)",
+      "description": "EmployeeRegistry ID of the person who resolved the underlying action."
+    },
+    "resolved_by_name": {
+      "type": "string",
+      "title": "Resolved By (Name)",
+      "description": "Full name of the person who resolved the underlying action."
+    },
+    "resolution_type": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "returned_for_correction",
+        "completed",
+        "cancelled",
+        "superseded",
+        "expired",
+        "no_longer_applicable"
+      ],
+      "title": "Resolution Type",
+      "description": "Controlled vocabulary describing how the underlying action was resolved."
+    },
+    "resolution_reason": {
+      "type": "string",
+      "title": "Resolution Reason",
+      "description": "Human-readable reason for the resolution (e.g. correction reason, cancellation reason)."
+    },
+    "resolution_source_type": {
+      "type": "string",
+      "title": "Resolution Source Type",
+      "description": "Entity type that produced the resolution (e.g. inventory_count_session, enterprise_task, manual)."
+    },
+    "resolution_source_id": {
+      "type": "string",
+      "title": "Resolution Source ID",
+      "description": "Entity ID that produced the resolution."
+    },
+    "resolution_decision": {
+      "type": "string",
+      "title": "Resolution Decision",
+      "description": "Short label for the decision (e.g. 'Warehouse opening count approved')."
+    },
+    "expiration_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Expiration Date"
+    },
+    "delivery_methods": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "In-App",
+          "Email",
+          "SMS",
+          "Push Notification",
+          "Microsoft Teams",
+          "Slack"
+        ]
+      },
+      "title": "Delivery Methods"
+    },
+    "requires_acknowledgment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Acknowledgment"
+    },
+    "escalation_level": {
+      "type": "number",
+      "default": 0,
+      "title": "Escalation Level"
+    },
+    "escalation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Escalation Date"
+    },
+    "is_archived": {
+      "type": "boolean",
+      "default": false,
+      "title": "Archived",
+      "description": "Separate visibility/retention flag. NOT a lifecycle status. A Resolved notification may or may not be archived."
+    },
+    "archived_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Archived At"
+    },
+    "archived_by": {
+      "type": "string",
+      "title": "Archived By",
+      "description": "User who archived this notification."
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "resume_snooze_until": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Resume Snooze Until",
+      "description": "When set on a task_resume_required notification, the notification is snoozed until this timestamp. After this time, the notification reappears in the actionable queue. Server-stored to synchronize across devices."
+    },
+    "resume_checkpoint_id": {
+      "type": "string",
+      "title": "Resume Checkpoint ID",
+      "description": "WorkCheckpoint ID preserved on the resume notification for the frontend to pass back during Resume Work."
+    },
+    "resume_work_session_id": {
+      "type": "string",
+      "title": "Resume Work Session ID",
+      "description": "The interrupted WorkSession ID that should be resumed."
+    },
+    "resume_interrupting_task_number": {
+      "type": "string",
+      "title": "Resume Interrupting Task Number",
+      "description": "Snapshot of the task number that caused the interruption."
+    }
+  },
+  "required": [
+    "notification_id",
+    "title",
+    "message"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "$or": [
+        {
+          "data.recipient_user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

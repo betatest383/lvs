@@ -1,0 +1,116 @@
+{
+  "name": "EquipmentRequest",
+  "type": "object",
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "title": "Request ID",
+      "description": "e.g. REQ-000001"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "request_type": {
+      "type": "string",
+      "enum": [
+        "new_tool",
+        "replacement",
+        "todays_job",
+        "repair",
+        "missing_report",
+        "damage_report"
+      ],
+      "default": "new_tool",
+      "title": "Request Type"
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Item Name"
+    },
+    "category": {
+      "type": "string",
+      "title": "Equipment Category"
+    },
+    "quantity": {
+      "type": "number",
+      "default": 1,
+      "title": "Quantity Requested"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number (if applicable)"
+    },
+    "reason": {
+      "type": "string",
+      "title": "Reason"
+    },
+    "urgency": {
+      "type": "string",
+      "enum": [
+        "low",
+        "normal",
+        "high",
+        "urgent"
+      ],
+      "default": "normal",
+      "title": "Urgency / Priority"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "denied",
+        "assigned",
+        "completed"
+      ],
+      "default": "pending",
+      "title": "Assignment Status"
+    },
+    "admin_notes": {
+      "type": "string",
+      "title": "Admin Notes"
+    },
+    "old_item_disposition": {
+      "type": "string",
+      "enum": [
+        "return_to_inventory",
+        "discard",
+        "reissued"
+      ],
+      "title": "Old Item Disposition"
+    },
+    "quantity_reissued": {
+      "type": "number",
+      "title": "Quantity Reissued"
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Requested At"
+    },
+    "assigned_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Assigned At"
+    },
+    "assigned_by": {
+      "type": "string",
+      "title": "Assigned By"
+    }
+  },
+  "required": [
+    "technician_email",
+    "request_type",
+    "item_name"
+  ]
+}

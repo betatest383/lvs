@@ -1,0 +1,95 @@
+{
+  "name": "ContactSyncRetry",
+  "type": "object",
+  "properties": {
+    "retry_key": {
+      "type": "string",
+      "title": "Retry Key",
+      "description": "Deterministic idempotency key: st_customer_id:contact_retry. Prevents duplicate retry records."
+    },
+    "servicetitan_customer_id": {
+      "type": "string",
+      "title": "ServiceTitan Customer ID"
+    },
+    "local_customer_id": {
+      "type": "string",
+      "title": "Local Customer ID",
+      "description": "Base44 Customer entity ID of the customer whose contacts failed to sync."
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant ID"
+    },
+    "environment": {
+      "type": "string",
+      "title": "Environment"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "resolved",
+        "failed"
+      ],
+      "default": "pending",
+      "title": "Status",
+      "description": "pending = contacts not yet synced; resolved = contacts successfully synced on retry; failed = max retries exceeded."
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "recovery",
+        "hydration",
+        "backfill"
+      ],
+      "title": "Source",
+      "description": "Which creation path triggered the contact sync that failed."
+    },
+    "attempt_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Attempt Count"
+    },
+    "max_attempts": {
+      "type": "number",
+      "default": 10,
+      "title": "Max Attempts"
+    },
+    "last_attempted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Attempted At"
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Resolved At"
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "first_detected_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "First Detected At"
+    },
+    "requires_admin_review": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Admin Review"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "retry_key",
+    "servicetitan_customer_id",
+    "local_customer_id",
+    "status",
+    "first_detected_at"
+  ]
+}

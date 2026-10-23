@@ -1,0 +1,241 @@
+{
+  "name": "InventoryCountSession",
+  "type": "object",
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "title": "Session ID",
+      "description": "e.g. WSS-000001"
+    },
+    "session_type": {
+      "type": "string",
+      "enum": [
+        "initial_inventory"
+      ],
+      "default": "initial_inventory",
+      "title": "Session Type"
+    },
+    "data_classification": {
+      "type": "string",
+      "enum": [
+        "production",
+        "test",
+        "superseded_test"
+      ],
+      "default": "production",
+      "title": "Data Classification",
+      "description": "production = verified business session; test = test/preview session hidden from normal operational views; superseded_test = test session superseded by another. Test sessions appear only under Test Records tab."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "in_progress",
+        "awaiting_review",
+        "approved",
+        "posting",
+        "partially_posted",
+        "completed",
+        "abandoned"
+      ],
+      "default": "in_progress",
+      "title": "Status",
+      "description": "in_progress = entering counts; awaiting_review = submitted for review; approved = counts approved for posting; posting = opening balances being created; partially_posted = some items posted, some failed; completed = all items posted; abandoned = cancelled/archived"
+    },
+    "current_step": {
+      "type": "number",
+      "default": 0,
+      "title": "Current Step (0-5)"
+    },
+    "warehouse_location_id": {
+      "type": "string",
+      "title": "Warehouse Location ID"
+    },
+    "warehouse_location_name": {
+      "type": "string",
+      "title": "Warehouse Location Name"
+    },
+    "started_by": {
+      "type": "string",
+      "title": "Started By",
+      "description": "User email who started this session"
+    },
+    "assigned_to": {
+      "type": "string",
+      "title": "Assigned To",
+      "description": "User email responsible for counting (defaults to started_by)"
+    },
+    "submitted_by": {
+      "type": "string",
+      "title": "Submitted By",
+      "description": "User email who submitted counts for review"
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Submitted At"
+    },
+    "review_acknowledged": {
+      "type": "boolean",
+      "default": false,
+      "title": "Review Acknowledged"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By",
+      "description": "User email who approved the counts for posting"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At"
+    },
+    "approval_snapshot_json": {
+      "type": "string",
+      "title": "Approval Snapshot (JSON)",
+      "description": "Server-calculated immutable snapshot at approval time: { item_id: { count, unit_cost, item_name, bin_location, sku, inventory_type } }"
+    },
+    "approval_count_hash": {
+      "type": "string",
+      "title": "Approval Count Hash",
+      "description": "SHA-256 hash of count_data_json at approval time. Used to detect post-approval changes."
+    },
+    "server_total_items": {
+      "type": "number",
+      "default": 0,
+      "title": "Server-Calculated Total Items"
+    },
+    "server_total_quantity": {
+      "type": "number",
+      "default": 0,
+      "title": "Server-Calculated Total Quantity"
+    },
+    "server_total_value": {
+      "type": "number",
+      "default": 0,
+      "title": "Server-Calculated Total Value ($)"
+    },
+    "activated_by": {
+      "type": "string",
+      "title": "Activated By",
+      "description": "User email who initiated activation"
+    },
+    "activation_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activation Started At"
+    },
+    "activation_completed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Activation Completed"
+    },
+    "assigned_item_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Assigned Item IDs",
+      "description": "InventoryMaster IDs assigned to bins during THIS setup session. Session-scoped \u2014 does not include pre-existing assignments from other sessions."
+    },
+    "no_materials_confirmed": {
+      "type": "boolean",
+      "default": false,
+      "title": "No Materials Confirmed",
+      "description": "When true, the user explicitly confirmed that no materials will be stocked in this warehouse setup. Allows proceeding to Inventory Count with zero items."
+    },
+    "bin_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Bin IDs Created in This Session"
+    },
+    "count_data_json": {
+      "type": "string",
+      "title": "Count Data (JSON)",
+      "description": "JSON: { item_id: { count, notes, counted_at } }"
+    },
+    "activation_results_json": {
+      "type": "string",
+      "title": "Activation Results (JSON)",
+      "description": "JSON array: [{ item_id, item_name, count, unit_cost, idempotency_key, transaction_id, success, error, posted_at, idempotent, resolved, resolved_at, resolved_by, resolution_notes }]. resolved=true marks an activation exception as resolved so it no longer appears in the unresolved exceptions count."
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "evidence_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence URLs",
+      "description": "File URLs of evidence (photos, documents) attached to this session"
+    },
+    "evidence_metadata_json": {
+      "type": "string",
+      "title": "Evidence Metadata (JSON)",
+      "description": "JSON array of {file_url, photo_type, warehouse_name, bin_code, item_name, item_id, step_name, caption, uploaded_by, uploaded_at, post_submission}"
+    },
+    "return_reason": {
+      "type": "string",
+      "title": "Return Reason",
+      "description": "Reason the session was returned for correction"
+    },
+    "return_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Return Count",
+      "description": "Number of times this session has been returned for correction"
+    },
+    "returned_by": {
+      "type": "string",
+      "title": "Returned By",
+      "description": "User email who returned this session for correction"
+    },
+    "returned_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Returned At"
+    },
+    "reopened_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Reopened At",
+      "description": "ISO timestamp when this session was reopened by Owner/Admin"
+    },
+    "reopened_by": {
+      "type": "string",
+      "title": "Reopened By",
+      "description": "User email who reopened this session"
+    },
+    "classification_changed_by": {
+      "type": "string",
+      "title": "Classification Changed By",
+      "description": "User who last changed the data_classification field."
+    },
+    "classification_changed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Classification Changed At"
+    },
+    "classification_reason": {
+      "type": "string",
+      "title": "Classification Reason",
+      "description": "Reason for the last data_classification change."
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "session_id"
+  ]
+}

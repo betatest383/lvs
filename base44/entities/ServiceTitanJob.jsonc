@@ -1,0 +1,72 @@
+{
+  "name": "ServiceTitanJob",
+  "type": "object",
+  "properties": {
+    "st_job_id": {
+      "type": "string",
+      "title": "ST Job ID"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "location": {
+      "type": "string",
+      "title": "Location"
+    },
+    "business_unit": {
+      "type": "string",
+      "title": "Business Unit"
+    },
+    "job_type": {
+      "type": "string",
+      "title": "Job Type"
+    },
+    "appointment_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Appointment Date"
+    },
+    "appointment_time": {
+      "type": "string",
+      "title": "Appointment Time"
+    },
+    "assigned_technician": {
+      "type": "string",
+      "title": "Assigned Technician"
+    },
+    "assigned_truck": {
+      "type": "string",
+      "title": "Assigned Truck"
+    },
+    "job_status": {
+      "type": "string",
+      "title": "Job Status"
+    },
+    "estimate_status": {
+      "type": "string",
+      "title": "Estimate Status"
+    },
+    "invoice_status": {
+      "type": "string",
+      "title": "Invoice Status"
+    },
+    "st_url": {
+      "type": "string",
+      "title": "ServiceTitan URL"
+    },
+    "last_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Synced At"
+    }
+  },
+  "required": [
+    "st_job_id",
+    "job_number"
+  ]
+}

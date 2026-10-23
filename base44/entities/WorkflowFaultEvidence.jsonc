@@ -1,0 +1,61 @@
+{
+  "name": "WorkflowFaultEvidence",
+  "type": "object",
+  "properties": {
+    "workflow_id": {
+      "type": "string",
+      "title": "Workflow ID"
+    },
+    "mutation_request_id": {
+      "type": "string",
+      "title": "Mutation Request"
+    },
+    "checkpoint": {
+      "type": "string",
+      "title": "Fault Checkpoint"
+    },
+    "test_workflow_marker": {
+      "type": "string",
+      "title": "Isolated Test Marker"
+    },
+    "injected_by": {
+      "type": "string",
+      "title": "Injected By"
+    },
+    "injected_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Injected At"
+    },
+    "details_json": {
+      "type": "string",
+      "title": "Evidence JSON"
+    }
+  },
+  "required": [
+    "workflow_id",
+    "checkpoint",
+    "test_workflow_marker",
+    "injected_by",
+    "injected_at"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": false,
+    "update": false,
+    "delete": false
+  }
+}

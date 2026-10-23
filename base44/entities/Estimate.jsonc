@@ -1,0 +1,262 @@
+{
+  "name": "Estimate",
+  "type": "object",
+  "properties": {
+    "estimate_name": {
+      "type": "string",
+      "maxLength": 120,
+      "title": "Estimate Name",
+      "description": "Descriptive name that identifies this estimate when sent to ServiceTitan through Zapier. A job may contain multiple estimates, so each must have its own name."
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID",
+      "description": "The appointment this estimate was created from"
+    },
+    "inspection_id": {
+      "type": "string",
+      "title": "Inspection ID"
+    },
+    "inspection_setup_id": {
+      "type": "string",
+      "title": "Inspection Setup ID"
+    },
+    "property_profile_id": {
+      "type": "string",
+      "title": "Property Profile ID"
+    },
+    "estimate_group_id": {
+      "type": "string",
+      "title": "Estimate Group ID",
+      "description": "The EstimateGroup this customer estimate belongs to (multi-asset architecture)"
+    },
+    "proposal_option_id": {
+      "type": "string",
+      "title": "Proposal Option ID",
+      "description": "The specific proposal option within the EstimateGroup that generated this estimate"
+    },
+    "property_asset_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Property Asset IDs",
+      "description": "PropertyAsset records this estimate covers"
+    },
+    "accepted_status": {
+      "type": "string",
+      "enum": [
+        "",
+        "pending",
+        "accepted",
+        "declined",
+        "deferred",
+        "replaced_by_combined_package"
+      ],
+      "default": "",
+      "title": "Accepted Status",
+      "description": "An estimate is accepted or declined as a complete document. No partial acceptance is permitted; a scope change requires a revised or replacement estimate."
+    },
+    "customer_decision": {
+      "type": "string",
+      "enum": [
+        "",
+        "accepted",
+        "schedule_for_later",
+        "think_about_it",
+        "declined",
+        "replaced_by_combined_package"
+      ],
+      "default": "",
+      "title": "Customer Decision",
+      "description": "An estimate is accepted or declined as a complete document. No partial acceptance is permitted; a scope change requires a revised or replacement estimate."
+    },
+    "pricing_snapshot_id": {
+      "type": "string",
+      "title": "Pricing Snapshot ID",
+      "description": "Links to the approved PricingCalculationSnapshot that generated this customer-facing estimate"
+    },
+    "selected_package_id": {
+      "type": "string",
+      "title": "Selected Package ID",
+      "description": "The approved EstimatePackage this estimate was built from"
+    },
+    "scope_of_work_id": {
+      "type": "string",
+      "title": "Scope of Work ID"
+    },
+    "estimate_number": {
+      "type": "string",
+      "title": "Estimate Number",
+      "description": "Customer-facing estimate number e.g. EST-000001"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "repair_system_recommendation_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Repair System Recommendation IDs",
+      "description": "Accepted RepairSystemRecommendation records this estimate was built from"
+    },
+    "finding_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Finding IDs",
+      "description": "All InspectionFinding and legacy Finding IDs that contributed to this estimate"
+    },
+    "line_items": {
+      "type": "string",
+      "title": "Line Items JSON"
+    },
+    "subtotal": {
+      "type": "number",
+      "title": "Subtotal"
+    },
+    "tax_rate": {
+      "type": "number",
+      "title": "Tax Rate (%)",
+      "default": 0
+    },
+    "tax_amount": {
+      "type": "number",
+      "title": "Tax Amount"
+    },
+    "total": {
+      "type": "number",
+      "title": "Total"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "pending_review",
+        "approved",
+        "execution_plan",
+        "ready_for_presentation",
+        "sent",
+        "accepted",
+        "declined",
+        "ready_for_scheduling"
+      ],
+      "default": "draft",
+      "title": "Status",
+      "description": "LVC OS source-of-truth estimate status. No partial-acceptance status exists; an estimate is accepted or declined as a complete document. A scope change requires a revised or replacement estimate. ServiceTitan synchronization maps these to Open/Sold/Dismissed in sendEstimateToGmail."
+    },
+    "warranty": {
+      "type": "string",
+      "title": "Warranty",
+      "description": "Warranty terms shown to customer"
+    },
+    "terms": {
+      "type": "string",
+      "title": "Terms",
+      "description": "Payment and service terms shown to customer"
+    },
+    "financing": {
+      "type": "string",
+      "title": "Financing Options",
+      "description": "Financing options offered to customer"
+    },
+    "customer_description": {
+      "type": "string",
+      "title": "Customer Description",
+      "description": "Summary description shown at the top of the customer estimate"
+    },
+    "scope_of_work_plan": {
+      "type": "string",
+      "title": "Scope of Work Plan (JSON)",
+      "description": "JSON array of daily work plans"
+    },
+    "total_job_days": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Job Days"
+    },
+    "total_estimated_hours": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Estimated Hours"
+    },
+    "required_special_equipment": {
+      "type": "string",
+      "title": "Required Special Equipment (JSON)"
+    },
+    "scaffold_plan_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Scaffold Plan Required"
+    },
+    "scaffold_plan_status": {
+      "type": "string",
+      "enum": [
+        "not_required",
+        "pending",
+        "attached"
+      ],
+      "default": "not_required",
+      "title": "Scaffold Plan Status"
+    },
+    "additional_fleet_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Additional Fleet Resource Required"
+    },
+    "fleet_resource_requests": {
+      "type": "string",
+      "title": "Fleet Resource Requests (JSON)"
+    },
+    "weather_sensitivity": {
+      "type": "string",
+      "enum": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "none",
+      "title": "Weather Sensitivity"
+    },
+    "customer_scheduling_restrictions": {
+      "type": "string",
+      "title": "Customer Scheduling Restrictions"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "valid_until": {
+      "type": "string",
+      "format": "date",
+      "title": "Valid Until"
+    },
+    "accepted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Accepted At"
+    },
+    "signature_id": {
+      "type": "string",
+      "title": "Signature ID",
+      "description": "Customer acceptance signature"
+    }
+  },
+  "required": [
+    "job_id",
+    "customer_id",
+    "customer_name"
+  ]
+}

@@ -1,0 +1,269 @@
+{
+  "name": "InventoryTransaction",
+  "type": "object",
+  "properties": {
+    "transaction_id": {
+      "type": "string",
+      "title": "Transaction ID",
+      "description": "e.g. ITX-000001 \u2014 permanent, never reused"
+    },
+    "transaction_type": {
+      "type": "string",
+      "enum": [
+        "opening_balance",
+        "receive_purchase",
+        "receive_transfer",
+        "transfer_out",
+        "transfer_in",
+        "reserve",
+        "release_reservation",
+        "pick",
+        "stage",
+        "load",
+        "issue_to_job",
+        "install",
+        "return_to_warehouse",
+        "return_to_truck",
+        "waste",
+        "damage",
+        "loss",
+        "adjustment_increase",
+        "adjustment_decrease",
+        "physical_count",
+        "vendor_return",
+        "warranty_replacement",
+        "disposal",
+        "cycle_count_variance"
+      ],
+      "title": "Transaction Type"
+    },
+    "movement_direction": {
+      "type": "string",
+      "enum": [
+        "inbound",
+        "outbound",
+        "internal",
+        "neutral"
+      ],
+      "title": "Movement Direction",
+      "description": "inbound = quantity increases at destination; outbound = quantity decreases at source; internal = moves between locations; neutral = reservation/adjustment"
+    },
+    "inventory_master_id": {
+      "type": "string",
+      "title": "Inventory Master ID",
+      "description": "Links to InventoryMaster record"
+    },
+    "inventory_item_name": {
+      "type": "string",
+      "title": "Inventory Item"
+    },
+    "inventory_type": {
+      "type": "string",
+      "title": "Inventory Type",
+      "description": "Copied from InventoryMaster for filtering"
+    },
+    "sku": {
+      "type": "string",
+      "title": "SKU",
+      "description": "Copied from InventoryMaster for reporting"
+    },
+    "quantity": {
+      "type": "number",
+      "default": 1,
+      "title": "Quantity",
+      "description": "Always positive. Direction is determined by movement_direction."
+    },
+    "unit_of_measure": {
+      "type": "string",
+      "title": "Unit of Measure",
+      "default": "ea"
+    },
+    "unit_cost": {
+      "type": "number",
+      "title": "Unit Cost ($)",
+      "description": "Cost at time of transaction, from InventoryMaster.average_cost"
+    },
+    "total_cost": {
+      "type": "number",
+      "title": "Total Cost ($)"
+    },
+    "from_location_id": {
+      "type": "string",
+      "title": "From Location ID",
+      "description": "Source WarehouseLocation ID for transfers/issues"
+    },
+    "from_location_name": {
+      "type": "string",
+      "title": "From Location Name"
+    },
+    "to_location_id": {
+      "type": "string",
+      "title": "To Location ID",
+      "description": "Destination WarehouseLocation ID for receipts/transfers"
+    },
+    "to_location_name": {
+      "type": "string",
+      "title": "To Location Name"
+    },
+    "source_document_type": {
+      "type": "string",
+      "enum": [
+        "purchase_order",
+        "receipt",
+        "warehouse_transfer",
+        "sales_order",
+        "material_reconciliation",
+        "inventory_adjustment",
+        "material_return",
+        "manual",
+        "cycle_count"
+      ],
+      "title": "Source Document Type",
+      "description": "What document created this transaction. 'receipt' = LVC receipt verification workflow posting; 'purchase_order' = legacy PO-level posting."
+    },
+    "source_document_id": {
+      "type": "string",
+      "title": "Source Document ID",
+      "description": "ID of the document that created this transaction"
+    },
+    "source_document_number": {
+      "type": "string",
+      "title": "Source Document Number",
+      "description": "Human-readable number (PO-000001, WT-000001, RCV-000001, etc.)"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID",
+      "description": "Links to Job when transaction affects a specific job"
+    },
+    "sales_order_id": {
+      "type": "string",
+      "title": "Sales Order ID"
+    },
+    "purchase_order_id": {
+      "type": "string",
+      "title": "Purchase Order ID",
+      "description": "Links to PurchaseOrder when transaction is from a PO"
+    },
+    "receipt_id": {
+      "type": "string",
+      "title": "Receipt ID",
+      "description": "Links to Receipt when transaction is posted by LVC's receipt verification workflow. LVC-owned traceability \u2014 sync does NOT create ledger entries."
+    },
+    "receipt_line_id": {
+      "type": "string",
+      "title": "Receipt Line ID",
+      "description": "Links to specific ReceiptLine when transaction is line-specific receipt posting. LVC-owned traceability."
+    },
+    "warehouse_transfer_id": {
+      "type": "string",
+      "title": "Warehouse Transfer ID",
+      "description": "Links to WarehouseTransfer when transaction is from a transfer"
+    },
+    "warehouse_transfer_line_id": {
+      "type": "string",
+      "title": "Warehouse Transfer Line ID",
+      "description": "Links to specific WarehouseTransferLine when transaction is line-specific transfer posting. LVC-owned traceability."
+    },
+    "reconciliation_id": {
+      "type": "string",
+      "title": "Material Reconciliation ID"
+    },
+    "vendor_id": {
+      "type": "string",
+      "title": "Vendor ID"
+    },
+    "vendor_name": {
+      "type": "string",
+      "title": "Vendor"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number"
+    },
+    "condition": {
+      "type": "string",
+      "enum": [
+        "excellent",
+        "good",
+        "fair",
+        "damaged",
+        "lost",
+        "repair"
+      ],
+      "title": "Condition"
+    },
+    "barcode_scanned": {
+      "type": "boolean",
+      "default": false,
+      "title": "Barcode Scanned",
+      "description": "True when item was verified via barcode scan"
+    },
+    "is_reversing": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Reversing Transaction",
+      "description": "True when this transaction reverses a previous transaction"
+    },
+    "reversed_transaction_id": {
+      "type": "string",
+      "title": "Reversed Transaction ID",
+      "description": "When is_reversing=true, the ID of the transaction being reversed"
+    },
+    "reversed_by_transaction_id": {
+      "type": "string",
+      "title": "Reversed By Transaction ID",
+      "description": "If this transaction was later reversed, the ID of the reversing transaction"
+    },
+    "reason": {
+      "type": "string",
+      "title": "Reason",
+      "description": "Why did this happen? \u2014 business justification"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Performed By",
+      "description": "Who performed this transaction \u2014 user email or name"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By",
+      "description": "Manager who approved, when approval was required"
+    },
+    "transaction_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Timestamp",
+      "description": "When did this happen? \u2014 exact timestamp"
+    },
+    "posted_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Posted Date",
+      "description": "When the transaction was committed to the ledger"
+    },
+    "audit_reference": {
+      "type": "string",
+      "title": "Audit Reference"
+    }
+  },
+  "required": [
+    "transaction_type",
+    "movement_direction",
+    "inventory_master_id",
+    "quantity",
+    "source_document_type"
+  ]
+}

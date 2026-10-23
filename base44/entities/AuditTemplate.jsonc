@@ -1,0 +1,89 @@
+{
+  "name": "AuditTemplate",
+  "type": "object",
+  "properties": {
+    "audit_id": {
+      "type": "string",
+      "title": "Audit ID",
+      "description": "Auto-generated: AUD-WH-101"
+    },
+    "audit_name": {
+      "type": "string",
+      "title": "Audit Name"
+    },
+    "related_sop": {
+      "type": "string",
+      "title": "Related SOP"
+    },
+    "related_business_process": {
+      "type": "string",
+      "title": "Related Business Process"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "applicable_roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Warehouse Associate",
+          "Warehouse Manager",
+          "Lead Technician",
+          "Apprentice",
+          "CSR",
+          "Dispatcher",
+          "Sales Technician",
+          "Operations Manager",
+          "Office Manager",
+          "Owner"
+        ]
+      },
+      "title": "Applicable Roles"
+    },
+    "audit_frequency": {
+      "type": "string",
+      "enum": [
+        "Daily",
+        "Weekly",
+        "Monthly",
+        "Quarterly",
+        "Annual",
+        "Random"
+      ],
+      "default": "Monthly",
+      "title": "Audit Frequency"
+    },
+    "sections": {
+      "type": "string",
+      "title": "Audit Sections (JSON)",
+      "description": "JSON array of {name, items: [{description, weight, required, photo_required}]}"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Active",
+        "Archived"
+      ],
+      "default": "Active",
+      "title": "Status"
+    },
+    "ai_recommendations": {
+      "type": "string",
+      "title": "AI Recommendations"
+    },
+    "ai_suggested_sop_improvements": {
+      "type": "string",
+      "title": "AI Suggested SOP Improvements"
+    }
+  },
+  "required": [
+    "audit_name"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "StoreItem",
+  "type": "object",
+  "properties": {
+    "item_name": {
+      "type": "string",
+      "title": "Item Name"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "accessories",
+        "maintenance",
+        "tools",
+        "caps",
+        "liners",
+        "services",
+        "other"
+      ],
+      "title": "Category"
+    },
+    "price": {
+      "type": "number",
+      "title": "Price ($)"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "image_url": {
+      "type": "string",
+      "title": "Image URL"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "stock_qty": {
+      "type": "number",
+      "title": "Stock Quantity"
+    }
+  },
+  "required": [
+    "item_name",
+    "price"
+  ]
+}

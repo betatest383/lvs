@@ -1,0 +1,69 @@
+{
+  "name": "WarehouseCleanup",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Date"
+    },
+    "completed_by": {
+      "type": "string",
+      "title": "Completed By"
+    },
+    "warehouse_floor_checked": {
+      "type": "boolean",
+      "default": false,
+      "title": "Warehouse Floor Checked"
+    },
+    "outside_lot_checked": {
+      "type": "boolean",
+      "default": false,
+      "title": "Outside Lot Checked"
+    },
+    "cement_spills_cleaned": {
+      "type": "boolean",
+      "default": false,
+      "title": "Cement Spills Cleaned"
+    },
+    "soot_debris_cleaned": {
+      "type": "boolean",
+      "default": false,
+      "title": "Soot & Debris Cleaned"
+    },
+    "trash_removed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Trash Removed"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "photo_upload": {
+      "type": "string",
+      "title": "Photo Upload"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Complete",
+        "Incomplete"
+      ],
+      "default": "Incomplete",
+      "title": "Status"
+    },
+    "related_sop_id": {
+      "type": "string",
+      "title": "Related SOP ID"
+    },
+    "trainual_link": {
+      "type": "string",
+      "title": "Trainual Link"
+    }
+  },
+  "required": [
+    "date",
+    "completed_by"
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "name": "DeferredDependentRecord",
+  "type": "object",
+  "properties": {
+    "deferred_key": {
+      "type": "string",
+      "title": "Deferred Key",
+      "description": "Deterministic idempotency key: entity_type:st_entity_id:st_customer_id. Prevents duplicate deferred records."
+    },
+    "entity_type": {
+      "type": "string",
+      "enum": [
+        "job",
+        "appointment",
+        "estimate",
+        "invoice",
+        "membership",
+        "project"
+      ],
+      "title": "Entity Type"
+    },
+    "servicetitan_entity_id": {
+      "type": "string",
+      "title": "ServiceTitan Entity ID"
+    },
+    "servicetitan_customer_id": {
+      "type": "string",
+      "title": "ServiceTitan Customer ID",
+      "description": "The missing customer that must be hydrated before this record can be created."
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant ID"
+    },
+    "environment": {
+      "type": "string",
+      "title": "Environment"
+    },
+    "webhook_event_id": {
+      "type": "string",
+      "title": "Webhook Event ID"
+    },
+    "payload_snapshot_json": {
+      "type": "string",
+      "title": "Payload Snapshot (JSON)",
+      "description": "JSON snapshot of the original webhook payload for retry."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "resolved",
+        "failed"
+      ],
+      "default": "pending",
+      "title": "Status"
+    },
+    "attempt_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Attempt Count"
+    },
+    "max_attempts": {
+      "type": "number",
+      "default": 10,
+      "title": "Max Attempts"
+    },
+    "last_attempted_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Attempted At"
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Resolved At"
+    },
+    "resolved_entity_id": {
+      "type": "string",
+      "title": "Resolved Entity ID",
+      "description": "Local entity ID once the dependent record is successfully created."
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "first_detected_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "First Detected At"
+    },
+    "requires_admin_review": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Admin Review"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "deferred_key",
+    "entity_type",
+    "servicetitan_entity_id",
+    "servicetitan_customer_id",
+    "first_detected_at"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "name": "WorkflowRegistry",
+  "type": "object",
+  "properties": {
+    "workflow_id": {
+      "type": "string",
+      "title": "Workflow ID"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "trigger": {
+      "type": "string",
+      "title": "Trigger"
+    },
+    "steps": {
+      "type": "string",
+      "title": "Steps"
+    },
+    "owner": {
+      "type": "string",
+      "title": "Owner"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "In Development",
+        "Testing",
+        "Live"
+      ],
+      "default": "Planned",
+      "title": "Status"
+    },
+    "automation_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Automation Required"
+    },
+    "base44_module": {
+      "type": "string",
+      "title": "Base44 Module"
+    },
+    "trainual_url": {
+      "type": "string",
+      "title": "Trainual URL"
+    },
+    "related_sop_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related SOP IDs"
+    },
+    "related_form_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Form IDs"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    }
+  },
+  "required": [
+    "workflow_id",
+    "title"
+  ]
+}

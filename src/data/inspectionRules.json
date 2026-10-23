@@ -1,0 +1,193 @@
+{
+  "_comment": "This file serves as the master reference for all inspection logic rules. Import into the DB via the Rules Engine admin page. Conditions reference question_id from the InspectionQuestion entity. operator options: equals, not_equals, contains, not_contains, in_list.",
+  "rules": [
+    {
+      "rule_name": "Cracked Firebox Brick",
+      "rule_type": "finding",
+      "category": "firebox",
+      "description": "Triggers when technician reports visible cracks in firebox",
+      "logic": "and",
+      "conditions": [
+        { "question_key": "firebox_cracks_visible", "operator": "equals", "value": "Yes" }
+      ],
+      "output_finding_type": "Cracked Firebox Brick",
+      "output_severity": "major",
+      "output_narrative": "Visible cracks were observed in the firebox brick and mortar joints. This condition can allow heat and combustion gases to penetrate the surrounding structure, creating a fire hazard. Immediate repair is recommended.",
+      "suggested_repair": "Firebox Tuckpointing / Parging"
+    },
+    {
+      "rule_name": "Missing or Damaged Chimney Cap",
+      "rule_type": "finding",
+      "category": "chimney_cap",
+      "description": "Triggers when chimney cap is absent or damaged",
+      "logic": "or",
+      "conditions": [
+        { "question_key": "cap_present", "operator": "equals", "value": "No" },
+        { "question_key": "cap_condition", "operator": "equals", "value": "Damaged" }
+      ],
+      "output_finding_type": "Missing / Damaged Chimney Cap",
+      "output_severity": "moderate",
+      "output_narrative": "The chimney cap is either missing or in a damaged condition. A properly functioning chimney cap prevents water intrusion, animal entry, and debris accumulation in the flue.",
+      "suggested_repair": "Chimney Cap Replacement"
+    },
+    {
+      "rule_name": "Deteriorated Crown",
+      "rule_type": "finding",
+      "category": "crown",
+      "description": "Triggers when chimney crown shows cracking or spalling",
+      "logic": "or",
+      "conditions": [
+        { "question_key": "crown_cracks", "operator": "equals", "value": "Yes" },
+        { "question_key": "crown_condition", "operator": "in_list", "value": ["Poor", "Deteriorated", "Cracked"] }
+      ],
+      "output_finding_type": "Deteriorated Crown",
+      "output_severity": "major",
+      "output_narrative": "The chimney crown shows signs of cracking or deterioration. A damaged crown allows water to seep into the chimney structure, accelerating freeze-thaw damage.",
+      "suggested_repair": "Crown Rebuild / Crown Coat"
+    },
+    {
+      "rule_name": "Flashing Failure",
+      "rule_type": "finding",
+      "category": "flashing",
+      "description": "Triggers when flashing is separated, rusted, or missing",
+      "logic": "or",
+      "conditions": [
+        { "question_key": "flashing_sealed", "operator": "equals", "value": "No" },
+        { "question_key": "flashing_condition", "operator": "in_list", "value": ["Rusted", "Separated", "Missing"] }
+      ],
+      "output_finding_type": "Flashing Failure",
+      "output_severity": "major",
+      "output_narrative": "The chimney flashing is compromised. Failed flashing is a leading cause of roof leaks and water damage at the chimney-roof junction.",
+      "suggested_repair": "Flashing Replacement / Reseal"
+    },
+    {
+      "rule_name": "Damaged Damper",
+      "rule_type": "finding",
+      "category": "damper",
+      "description": "Triggers when damper is broken or missing",
+      "logic": "or",
+      "conditions": [
+        { "question_key": "damper_present", "operator": "equals", "value": "No" },
+        { "question_key": "damper_operational", "operator": "equals", "value": "No" }
+      ],
+      "output_finding_type": "Damaged / Missing Damper",
+      "output_severity": "moderate",
+      "output_narrative": "The throat damper is damaged or non-functional. A working damper is essential for draft control, energy efficiency, and preventing animal or weather infiltration when the fireplace is not in use.",
+      "suggested_repair": "Damper Repair / Top-Mounted Damper Installation"
+    },
+    {
+      "rule_name": "Liner Damage - Masonry",
+      "rule_type": "finding",
+      "category": "liner",
+      "description": "Triggers when liner shows cracks, gaps, or deterioration",
+      "logic": "and",
+      "conditions": [
+        { "question_key": "liner_integrity", "operator": "not_equals", "value": "Good" },
+        { "question_key": "chimney_type", "operator": "equals", "value": "masonry" }
+      ],
+      "output_finding_type": "Deteriorated Flue Liner",
+      "output_severity": "critical",
+      "output_narrative": "The masonry flue liner shows evidence of cracking, spalling, or gaps. A compromised liner is a serious safety hazard, allowing combustion gases including carbon monoxide to enter living spaces.",
+      "suggested_repair": "Stainless Steel Liner Installation"
+    },
+    {
+      "rule_name": "Water Damage Detected",
+      "rule_type": "finding",
+      "category": "water_damage",
+      "description": "Triggers when active or past water damage is present",
+      "logic": "or",
+      "conditions": [
+        { "question_key": "water_staining", "operator": "equals", "value": "Yes" },
+        { "question_key": "efflorescence_present", "operator": "equals", "value": "Yes" },
+        { "question_key": "spalling_brick", "operator": "equals", "value": "Yes" }
+      ],
+      "output_finding_type": "Water Damage / Intrusion",
+      "output_severity": "major",
+      "output_narrative": "Evidence of water damage or moisture intrusion was identified. Chronic water exposure leads to accelerated deterioration of mortar, brick, and metal components.",
+      "suggested_repair": "Waterproofing Application / Source Investigation"
+    },
+    {
+      "rule_name": "Smoke Chamber Needs Parging",
+      "rule_type": "finding",
+      "category": "smoke_chamber",
+      "description": "Triggers when smoke chamber corbeling is exposed or damaged",
+      "logic": "or",
+      "conditions": [
+        { "question_key": "smoke_chamber_parged", "operator": "equals", "value": "No" },
+        { "question_key": "smoke_chamber_condition", "operator": "in_list", "value": ["Poor", "Exposed Corbeling"] }
+      ],
+      "output_finding_type": "Unparged Smoke Chamber",
+      "output_severity": "moderate",
+      "output_narrative": "The smoke chamber has exposed corbeling or is in need of parging. Parging smooths the smoke chamber walls, improving draft efficiency and reducing creosote accumulation.",
+      "suggested_repair": "Smoke Chamber Parging"
+    },
+    {
+      "rule_name": "Level 2 Inspection Recommended - Liner",
+      "rule_type": "finding",
+      "category": "liner",
+      "description": "Triggers when liner cannot be fully inspected from interior",
+      "logic": "and",
+      "conditions": [
+        { "question_key": "liner_fully_visible", "operator": "equals", "value": "No" }
+      ],
+      "output_finding_type": "Level 2 Inspection Required",
+      "output_severity": "info",
+      "output_narrative": "The flue liner could not be fully inspected from the available access points. A Level 2 inspection with video scanning equipment is recommended to assess the full length of the liner.",
+      "suggested_repair": "Level 2 Video Scan"
+    },
+    {
+      "rule_name": "Creosote Buildup - Heavy",
+      "rule_type": "finding",
+      "category": "flue",
+      "description": "Triggers when heavy creosote (Stage 2 or 3) is identified",
+      "logic": "or",
+      "conditions": [
+        { "question_key": "creosote_level", "operator": "in_list", "value": ["Stage 2", "Stage 3", "Heavy"] }
+      ],
+      "output_finding_type": "Heavy Creosote Buildup",
+      "output_severity": "critical",
+      "output_narrative": "Heavy creosote (Stage 2 or 3) was found in the flue. Stage 2/3 creosote is extremely flammable and a leading cause of chimney fires. Immediate professional cleaning and possible chemical treatment is required before using the appliance.",
+      "suggested_repair": "Chemical Creosote Treatment + Deep Cleaning"
+    },
+    {
+      "rule_name": "Carbon Monoxide Risk",
+      "rule_type": "finding",
+      "category": "carbon_monoxide",
+      "description": "Triggers when CO detector is absent or CO signs are present",
+      "logic": "or",
+      "conditions": [
+        { "question_key": "co_detector_present", "operator": "equals", "value": "No" },
+        { "question_key": "co_signs_observed", "operator": "equals", "value": "Yes" }
+      ],
+      "output_finding_type": "Carbon Monoxide Safety Concern",
+      "output_severity": "critical",
+      "output_narrative": "Carbon monoxide safety concerns were identified. CO detectors are absent or signs of CO exposure were observed. CO is an odorless, colorless gas that is immediately life-threatening at elevated concentrations.",
+      "suggested_repair": "CO Detector Installation / Appliance Inspection"
+    },
+    {
+      "rule_name": "Routine Cleaning Needed",
+      "rule_type": "finding",
+      "category": "flue",
+      "description": "Triggers when creosote or debris buildup requires standard cleaning",
+      "logic": "or",
+      "conditions": [
+        { "question_key": "creosote_level", "operator": "in_list", "value": ["Stage 1", "Light", "Moderate"] },
+        { "question_key": "debris_in_flue", "operator": "equals", "value": "Yes" }
+      ],
+      "output_finding_type": "Routine Cleaning Required",
+      "output_severity": "minor",
+      "output_narrative": "Light to moderate creosote or debris was found in the flue. A standard chimney sweep cleaning is recommended annually or after 1 cord of wood.",
+      "suggested_repair": "Standard Chimney Sweep"
+    }
+  ],
+  "visibility_rules": [
+    {
+      "_comment": "These extend per-question visibility. Set on InspectionQuestion records via visibility_rule JSON field.",
+      "examples": [
+        { "question_text": "Describe cap damage", "show_when": { "question_key": "cap_condition", "operator": "equals", "value": "Damaged" } },
+        { "question_text": "Liner material", "show_when": { "question_key": "liner_present", "operator": "equals", "value": "Yes" } },
+        { "question_text": "Stage of creosote", "show_when": { "question_key": "creosote_present", "operator": "equals", "value": "Yes" } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "name": "ImprovementRequest",
+  "type": "object",
+  "properties": {
+    "improvement_id": {
+      "type": "string",
+      "title": "Improvement ID",
+      "description": "Auto-generated: IMP-000001"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Process",
+        "Policy",
+        "Workflow",
+        "Form",
+        "Dashboard",
+        "KPI",
+        "Automation",
+        "Software",
+        "Customer Experience",
+        "Safety",
+        "Inventory",
+        "Equipment",
+        "Training",
+        "Documentation",
+        "Other"
+      ],
+      "title": "Improvement Category"
+    },
+    "submitted_by": {
+      "type": "string",
+      "title": "Employee"
+    },
+    "submitted_by_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "role": {
+      "type": "string",
+      "title": "Role"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "date_submitted": {
+      "type": "string",
+      "format": "date",
+      "title": "Date Submitted"
+    },
+    "current_screen": {
+      "type": "string",
+      "title": "Current Screen"
+    },
+    "current_module": {
+      "type": "string",
+      "title": "Current Module"
+    },
+    "current_page": {
+      "type": "string",
+      "title": "Current Page"
+    },
+    "current_url": {
+      "type": "string",
+      "title": "Current URL"
+    },
+    "sop_id": {
+      "type": "string",
+      "title": "SOP ID"
+    },
+    "business_process": {
+      "type": "string",
+      "title": "Business Process"
+    },
+    "workflow": {
+      "type": "string",
+      "title": "Workflow"
+    },
+    "form_ref": {
+      "type": "string",
+      "title": "Form"
+    },
+    "dashboard_ref": {
+      "type": "string",
+      "title": "Dashboard"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "Critical",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "default": "Medium",
+      "title": "Priority"
+    },
+    "business_impact": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Safety",
+          "Customer Experience",
+          "Revenue",
+          "Efficiency",
+          "Quality",
+          "Inventory",
+          "Compliance",
+          "Training",
+          "Cost Savings",
+          "Employee Satisfaction"
+        ]
+      },
+      "title": "Business Impact"
+    },
+    "estimated_benefit": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Time Saved",
+          "Cost Savings",
+          "Reduced Errors",
+          "Better Customer Experience",
+          "Improved Safety",
+          "Increased Revenue",
+          "Other"
+        ]
+      },
+      "title": "Estimated Benefit"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Attachments"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "New",
+        "Needs Review",
+        "Approved",
+        "Rejected",
+        "In Development",
+        "Testing",
+        "Implemented",
+        "Archived"
+      ],
+      "default": "New",
+      "title": "Status"
+    },
+    "owner": {
+      "type": "string",
+      "title": "Owner"
+    },
+    "assigned_to": {
+      "type": "string",
+      "title": "Assigned To"
+    },
+    "reviewer": {
+      "type": "string",
+      "title": "Reviewer"
+    },
+    "approver": {
+      "type": "string",
+      "title": "Approver"
+    },
+    "target_completion_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Target Completion Date"
+    },
+    "completion_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Completion Date"
+    },
+    "related_sop": {
+      "type": "string",
+      "title": "Related SOP"
+    },
+    "related_workflow": {
+      "type": "string",
+      "title": "Related Workflow"
+    },
+    "related_process_pack": {
+      "type": "string",
+      "title": "Related Process Pack"
+    },
+    "related_dashboard": {
+      "type": "string",
+      "title": "Related Dashboard"
+    },
+    "related_automation": {
+      "type": "string",
+      "title": "Related Automation"
+    },
+    "release_version": {
+      "type": "string",
+      "title": "Release Version"
+    },
+    "management_notes": {
+      "type": "string",
+      "title": "Management Notes"
+    },
+    "discussion": {
+      "type": "string",
+      "title": "Discussion"
+    },
+    "revision_notes": {
+      "type": "string",
+      "title": "Revision Notes"
+    },
+    "final_resolution": {
+      "type": "string",
+      "title": "Final Resolution"
+    },
+    "estimated_time_saved_hours": {
+      "type": "number",
+      "title": "Estimated Time Saved (Hours)"
+    },
+    "estimated_cost_savings": {
+      "type": "number",
+      "title": "Estimated Cost Savings ($)"
+    },
+    "ai_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "AI Tags"
+    },
+    "ai_group_id": {
+      "type": "string",
+      "title": "AI Group ID",
+      "description": "For grouping duplicate ideas"
+    },
+    "ai_priority_score": {
+      "type": "number",
+      "title": "AI Priority Score"
+    },
+    "ai_roi_estimate": {
+      "type": "string",
+      "title": "AI ROI Estimate"
+    },
+    "ai_suggested_sops": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "AI Suggested SOPs"
+    },
+    "ai_implementation_plan": {
+      "type": "string",
+      "title": "AI Implementation Plan"
+    }
+  },
+  "required": [
+    "title"
+  ]
+}

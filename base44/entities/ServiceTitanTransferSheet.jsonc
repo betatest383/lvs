@@ -1,0 +1,112 @@
+{
+  "name": "ServiceTitanTransferSheet",
+  "type": "object",
+  "properties": {
+    "st_transfer_sheet_id": {
+      "type": "string",
+      "title": "ST Transfer Sheet ID"
+    },
+    "transfer_sheet_number": {
+      "type": "string",
+      "title": "Transfer Sheet Number"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "location": {
+      "type": "string",
+      "title": "Location"
+    },
+    "truck": {
+      "type": "string",
+      "title": "Truck"
+    },
+    "technician": {
+      "type": "string",
+      "title": "Technician"
+    },
+    "status": {
+      "type": "string",
+      "title": "ST Status"
+    },
+    "materials_count": {
+      "type": "number",
+      "title": "Materials Count"
+    },
+    "total_quantity": {
+      "type": "number",
+      "title": "Total Quantity"
+    },
+    "total_cost": {
+      "type": "number",
+      "title": "Total Cost"
+    },
+    "items": {
+      "type": "string",
+      "title": "Items (JSON)"
+    },
+    "warehouse_picked_status": {
+      "type": "string",
+      "enum": [
+        "Not Started",
+        "In Progress",
+        "Picked",
+        "N/A"
+      ],
+      "default": "Not Started",
+      "title": "Warehouse Picked Status"
+    },
+    "waiting_for_truck_receipt": {
+      "type": "boolean",
+      "default": false,
+      "title": "Waiting for Truck Receipt"
+    },
+    "technician_received": {
+      "type": "boolean",
+      "default": false,
+      "title": "Technician Received"
+    },
+    "technician_received_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Technician Received At"
+    },
+    "received_signature": {
+      "type": "string",
+      "title": "Received Signature"
+    },
+    "st_url": {
+      "type": "string",
+      "title": "ServiceTitan URL"
+    },
+    "last_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Synced At"
+    },
+    "related_sop_id": {
+      "type": "string",
+      "default": "WH-103",
+      "title": "Related SOP ID"
+    },
+    "related_workflow_id": {
+      "type": "string",
+      "default": "WF-WH-103",
+      "title": "Related Workflow ID"
+    },
+    "related_business_process": {
+      "type": "string",
+      "default": "BP-101",
+      "title": "Related Business Process"
+    }
+  },
+  "required": [
+    "st_transfer_sheet_id",
+    "transfer_sheet_number"
+  ]
+}

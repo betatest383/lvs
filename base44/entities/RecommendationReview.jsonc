@@ -1,0 +1,96 @@
+{
+  "name": "RecommendationReview",
+  "type": "object",
+  "properties": {
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID"
+    },
+    "inspection_id": {
+      "type": "string",
+      "title": "Inspection ID",
+      "description": "InspectionSetup ID this review belongs to"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "complete",
+        "manager_override"
+      ],
+      "default": "not_started",
+      "title": "Status"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "total_deficiencies": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Deficiencies"
+    },
+    "reviewed_deficiencies": {
+      "type": "number",
+      "default": 0,
+      "title": "Reviewed Deficiencies"
+    },
+    "estimate_required_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Estimate Required Count"
+    },
+    "manager_override_used": {
+      "type": "boolean",
+      "default": false,
+      "title": "Manager Override Used"
+    },
+    "override_reason": {
+      "type": "string",
+      "title": "Override Reason"
+    },
+    "override_signature": {
+      "type": "string",
+      "title": "Override Signature (Data URL)"
+    },
+    "override_by": {
+      "type": "string",
+      "title": "Override By"
+    },
+    "override_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Override At"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "job_id"
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "name": "CustomerPresentation",
+  "type": "object",
+  "properties": {
+    "appointment_id": {
+      "type": "string",
+      "title": "Appointment ID"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "inspection_id": {
+      "type": "string",
+      "title": "Inspection ID"
+    },
+    "draft_estimate_id": {
+      "type": "string",
+      "title": "Draft Estimate ID"
+    },
+    "selected_proposal_option": {
+      "type": "string",
+      "title": "Selected Proposal Option",
+      "description": "The ProposalOptionTemplate ID selected during presentation (display/template only \u2014 NOT the authoritative accepted option). The authoritative accepted option is selected_estimate_package_id."
+    },
+    "selected_estimate_package_id": {
+      "type": "string",
+      "title": "Selected Estimate Package ID",
+      "description": "The IMMUTABLE EstimatePackage ID the customer accepted. This is the authoritative accepted-option identity \u2014 never a Good/Better/Best label, package name, array position, scope id, proposal name, or interchangeable proposal-option id. Set server-authoritatively and idempotently by acceptProposalOption when the customer accepts."
+    },
+    "proposal_level": {
+      "type": "string",
+      "enum": [
+        "good",
+        "better",
+        "best",
+        "standalone"
+      ],
+      "title": "Proposal Level"
+    },
+    "customer_signature_url": {
+      "type": "string",
+      "title": "Customer Signature URL",
+      "description": "The file_url of the customer's acceptance signature (uploaded via uploadSignature). The authoritative signature source for scheduling readiness \u2014 not a side-channel log. Set by acceptProposalOption at acceptance."
+    },
+    "accepted_price": {
+      "type": "number",
+      "title": "Accepted Price ($)",
+      "description": "The final selling price the customer accepted, snapshotted from the option's approved PricingCalculationSnapshot at acceptance. Preserved even if pricing is later recalculated."
+    },
+    "price_presented": {
+      "type": "number",
+      "title": "Price Presented ($)",
+      "description": "The price shown to the customer at the moment of acceptance. Equal to accepted_price when acceptance is first recorded."
+    },
+    "presentation_version": {
+      "type": "number",
+      "default": 1,
+      "title": "Presentation Version",
+      "description": "Incremented when the presentation is rerun after a scope/price change requiring renewed acceptance."
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "presentation_status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "complete"
+      ],
+      "default": "not_started",
+      "title": "Presentation Status"
+    },
+    "customer_questions": {
+      "type": "string",
+      "title": "Customer Questions"
+    },
+    "customer_concerns": {
+      "type": "string",
+      "title": "Customer Concerns"
+    },
+    "requested_changes": {
+      "type": "string",
+      "title": "Requested Changes"
+    },
+    "office_follow_up_notes": {
+      "type": "string",
+      "title": "Office Follow-Up Notes"
+    },
+    "checklist_results": {
+      "type": "string",
+      "title": "Checklist Results (JSON)",
+      "description": "JSON object: { item_key: { checked: boolean, checked_at: string } }"
+    },
+    "presented_by": {
+      "type": "string",
+      "title": "Presented By"
+    },
+    "customer_decision": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "perform_work_today",
+        "schedule_for_later",
+        "think_about_it",
+        "declined"
+      ],
+      "default": "pending",
+      "title": "Customer Decision",
+      "description": "An estimate is accepted or declined as a complete document. No partial acceptance is permitted; a scope change requires a revised or replacement estimate. perform_work_today and schedule_for_later are both acceptance decisions."
+    },
+    "customer_decision_notes": {
+      "type": "string",
+      "title": "Customer Decision Notes"
+    },
+    "customer_decision_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Customer Decision At",
+      "description": "The authoritative acceptance date. Set by acceptProposalOption when the customer accepts an option."
+    }
+  },
+  "required": [
+    "job_id"
+  ]
+}

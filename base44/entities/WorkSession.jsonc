@@ -1,0 +1,165 @@
+{
+  "name": "WorkSession",
+  "type": "object",
+  "properties": {
+    "work_session_number": {
+      "type": "string",
+      "title": "Work Session Number",
+      "description": "Server-generated: WS-000001"
+    },
+    "task_id": {
+      "type": "string",
+      "title": "Task ID",
+      "description": "EnterpriseTask ID being worked on"
+    },
+    "task_number": {
+      "type": "string",
+      "title": "Task Number",
+      "description": "Snapshot of task_number for display"
+    },
+    "task_title": {
+      "type": "string",
+      "title": "Task Title",
+      "description": "Snapshot of task title for display"
+    },
+    "workflow_session_id": {
+      "type": "string",
+      "title": "Workflow Session ID",
+      "description": "Optional link to a workflow session (e.g. InventoryCountSession)"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee Registry ID",
+      "description": "EmployeeRegistry ID of the employee performing the work"
+    },
+    "employee_email": {
+      "type": "string",
+      "title": "Employee Email"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "department_id": {
+      "type": "string",
+      "title": "Department ID"
+    },
+    "department_name": {
+      "type": "string",
+      "title": "Department Name"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+    },
+    "last_activity_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Activity At"
+    },
+    "paused_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Paused At"
+    },
+    "resumed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Resumed At"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "paused",
+        "interrupted",
+        "waiting",
+        "completed",
+        "abandoned"
+      ],
+      "default": "active",
+      "title": "Status",
+      "description": "active = working now; paused = manually paused; interrupted = paused by higher priority; waiting = waiting on person/material/approval; completed = finished; abandoned = cancelled"
+    },
+    "is_primary": {
+      "type": "boolean",
+      "default": true,
+      "title": "Is Primary Session",
+      "description": "True when this is the employee's primary active work session. Only one primary active session per employee unless the workflow permits concurrent passive activity."
+    },
+    "current_step": {
+      "type": "number",
+      "default": 0,
+      "title": "Current Step"
+    },
+    "current_route": {
+      "type": "string",
+      "title": "Current Route",
+      "description": "Frontend route the employee was on when work was paused/interrupted"
+    },
+    "elapsed_active_seconds": {
+      "type": "number",
+      "default": 0,
+      "title": "Elapsed Active Seconds"
+    },
+    "elapsed_paused_seconds": {
+      "type": "number",
+      "default": 0,
+      "title": "Elapsed Paused Seconds"
+    },
+    "pause_reason": {
+      "type": "string",
+      "title": "Pause Reason"
+    },
+    "interrupted_by_task_id": {
+      "type": "string",
+      "title": "Interrupted By Task ID",
+      "description": "EnterpriseTask ID that interrupted this session"
+    },
+    "interrupted_by_task_number": {
+      "type": "string",
+      "title": "Interrupted By Task Number"
+    },
+    "resume_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Resume Required",
+      "description": "True when this session must be resumed after the interrupting task completes"
+    },
+    "checkpoint_id": {
+      "type": "string",
+      "title": "Checkpoint ID",
+      "description": "WorkCheckpoint ID created when this session was interrupted"
+    },
+    "device_id": {
+      "type": "string",
+      "title": "Device ID",
+      "description": "Optional device identifier for session tracking"
+    },
+    "concurrent_passive_allowed": {
+      "type": "boolean",
+      "default": false,
+      "title": "Concurrent Passive Allowed",
+      "description": "True when the workflow explicitly permits concurrent passive activity alongside a primary session"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    }
+  },
+  "required": [
+    "work_session_number",
+    "task_id",
+    "employee_id"
+  ]
+}

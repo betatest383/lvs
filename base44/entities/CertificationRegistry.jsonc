@@ -1,0 +1,127 @@
+{
+  "name": "CertificationRegistry",
+  "type": "object",
+  "properties": {
+    "certification_id": {
+      "type": "string",
+      "title": "Certification ID",
+      "description": "e.g. CERT-001"
+    },
+    "certification_name": {
+      "type": "string",
+      "title": "Certification Name"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "certification_type": {
+      "type": "string",
+      "enum": [
+        "Safety",
+        "Equipment",
+        "Technical",
+        "Manufacturer",
+        "Vehicle",
+        "HR",
+        "Software",
+        "Management"
+      ],
+      "title": "Certification Type"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "issuing_organization": {
+      "type": "string",
+      "title": "Issuing Organization"
+    },
+    "required_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Roles"
+    },
+    "related_trainings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Trainings"
+    },
+    "related_policies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Policies"
+    },
+    "related_sops": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related SOPs"
+    },
+    "related_workflows": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Workflows"
+    },
+    "renewal_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Renewal Required"
+    },
+    "renewal_frequency": {
+      "type": "string",
+      "enum": [
+        "Annual",
+        "Semi-Annual",
+        "Quarterly",
+        "Biennial",
+        "Triennial",
+        "5-Year",
+        "On Update"
+      ],
+      "title": "Renewal Frequency"
+    },
+    "expiration_tracking_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Expiration Tracking Required"
+    },
+    "default_validity_period": {
+      "type": "number",
+      "title": "Default Validity Period (Months)",
+      "description": "Number of months the certification is valid before expiration"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Active",
+        "Under Review",
+        "Retired"
+      ],
+      "default": "Draft",
+      "title": "Status"
+    },
+    "trainual_link": {
+      "type": "string",
+      "title": "Trainual Link"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "certification_id",
+    "certification_name"
+  ]
+}

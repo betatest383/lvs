@@ -1,0 +1,84 @@
+{
+  "name": "EquipmentMaster",
+  "type": "object",
+  "properties": {
+    "equipment_id": {
+      "type": "string",
+      "title": "Equipment ID",
+      "description": "e.g. EM-000001"
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Equipment Name"
+    },
+    "category": {
+      "type": "string",
+      "title": "Category"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "unit": {
+      "type": "string",
+      "title": "Unit",
+      "default": "ea"
+    },
+    "quantity_owned": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Owned"
+    },
+    "quantity_available": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Available"
+    },
+    "quantity_assigned": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Assigned"
+    },
+    "quantity_out_for_repair": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Out for Repair"
+    },
+    "quantity_retired": {
+      "type": "number",
+      "default": 0,
+      "title": "Quantity Retired"
+    },
+    "replacement_cost_per_unit": {
+      "type": "number",
+      "title": "Replacement Cost Per Unit ($)"
+    },
+    "required_daily_operations": {
+      "type": "boolean",
+      "default": false,
+      "title": "Required for Daily Operations"
+    },
+    "required_todays_job": {
+      "type": "boolean",
+      "default": false,
+      "title": "Required for Today's Job"
+    },
+    "photo_url": {
+      "type": "string",
+      "title": "Photo URL"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    }
+  },
+  "required": [
+    "item_name",
+    "unit"
+  ]
+}

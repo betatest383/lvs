@@ -1,0 +1,200 @@
+{
+  "name": "ProposalOptionTemplate",
+  "type": "object",
+  "properties": {
+    "template_name": {
+      "type": "string",
+      "title": "Template Name",
+      "description": "e.g. Cracked Crown - Good Option"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "linked_repair_recommendation_template_id": {
+      "type": "string",
+      "title": "Linked Repair Recommendation Template ID",
+      "description": "The RepairRecommendationTemplate this option belongs to"
+    },
+    "linked_repair_recommendation_template_name": {
+      "type": "string",
+      "title": "Linked Repair Recommendation Template Name"
+    },
+    "proposal_level": {
+      "type": "string",
+      "enum": [
+        "good",
+        "better",
+        "best"
+      ],
+      "title": "Proposal Level"
+    },
+    "option_title": {
+      "type": "string",
+      "title": "Option Title",
+      "description": "e.g. CrownSeal Application, Crown Rebuild, Crown Rebuild + Waterproofing"
+    },
+    "customer_description": {
+      "type": "string",
+      "title": "Customer Description"
+    },
+    "customer_benefits": {
+      "type": "string",
+      "title": "Customer Benefits"
+    },
+    "recommended_service_catalog_id": {
+      "type": "string",
+      "title": "Recommended Service Catalog ID",
+      "description": "Primary ServiceCatalog item for this option"
+    },
+    "recommended_service_name": {
+      "type": "string",
+      "title": "Recommended Service Name"
+    },
+    "included_services": {
+      "type": "string",
+      "title": "Included Services (JSON)",
+      "description": "JSON array of {service_catalog_id, service_name, service_code}"
+    },
+    "optional_services": {
+      "type": "string",
+      "title": "Optional Services (JSON)",
+      "description": "JSON array of {service_catalog_id, service_name, service_code}"
+    },
+    "included_materials": {
+      "type": "string",
+      "title": "Included Materials (JSON)",
+      "description": "JSON array of {material_id, material_name, quantity, unit, unit_price, chargeable_to_customer}"
+    },
+    "internal_materials": {
+      "type": "string",
+      "title": "Internal Materials (JSON)",
+      "description": "JSON array of non-chargeable materials"
+    },
+    "estimated_duration": {
+      "type": "string",
+      "title": "Estimated Duration",
+      "description": "e.g. Half day, 1-2 days"
+    },
+    "warranty_messaging": {
+      "type": "string",
+      "title": "Warranty Messaging"
+    },
+    "financing_available": {
+      "type": "boolean",
+      "default": false,
+      "title": "Financing Available"
+    },
+    "display_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Display Order"
+    },
+    "default_selected": {
+      "type": "boolean",
+      "default": false,
+      "title": "Default Selected"
+    },
+    "estimate_group_id": {
+      "type": "string",
+      "title": "Estimate Group ID",
+      "description": "The EstimateGroup this option belongs to (multi-asset architecture)"
+    },
+    "property_asset_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Property Asset IDs",
+      "description": "PropertyAsset records this option covers"
+    },
+    "option_rank": {
+      "type": "number",
+      "default": 0,
+      "title": "Option Rank",
+      "description": "Numeric rank for sorting (1=lowest/best value, 3=highest/most comprehensive). Legacy good=1, better=2, best=3."
+    },
+    "option_position": {
+      "type": "number",
+      "default": 0,
+      "title": "Option Position",
+      "description": "Position within the group (1-based). Maps legacy good=1, better=2, best=3. Future: Bronze=1, Silver=2, Gold=3."
+    },
+    "option_status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "configured",
+        "priced",
+        "presented",
+        "accepted",
+        "declined",
+        "archived"
+      ],
+      "default": "draft",
+      "title": "Option Status"
+    },
+    "recommendation_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Recommendation IDs",
+      "description": "RepairSystemRecommendation IDs included in this option"
+    },
+    "finding_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Finding IDs",
+      "description": "InspectionFinding IDs included in this option"
+    },
+    "estimate_item_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Estimate Item IDs",
+      "description": "DraftEstimateItem IDs included in this option"
+    },
+    "scope_of_work_id": {
+      "type": "string",
+      "title": "Scope of Work ID",
+      "description": "The ScopeOfWork record for this option"
+    },
+    "pricing_snapshot_id": {
+      "type": "string",
+      "title": "Pricing Snapshot ID",
+      "description": "The PricingCalculationSnapshot for this option"
+    },
+    "customer_estimate_id": {
+      "type": "string",
+      "title": "Customer Estimate ID",
+      "description": "The Estimate record generated from this option"
+    },
+    "overlap_reference_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Overlap Reference IDs",
+      "description": "Other ProposalOptionTemplate IDs that share committed work with this option"
+    },
+    "committed_work_key": {
+      "type": "string",
+      "title": "Committed Work Key",
+      "description": "Stable identity for the underlying repair this option commits to. Used for overlap detection."
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "template_name",
+    "linked_repair_recommendation_template_id",
+    "proposal_level"
+  ]
+}

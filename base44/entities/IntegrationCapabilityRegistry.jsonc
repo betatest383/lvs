@@ -1,0 +1,104 @@
+{
+  "name": "IntegrationCapabilityRegistry",
+  "type": "object",
+  "properties": {
+    "capability_id": {
+      "type": "string",
+      "title": "Capability ID",
+      "description": "Server-generated sequence: ICR-000001."
+    },
+    "capability_key": {
+      "type": "string",
+      "title": "Capability Key",
+      "description": "Deterministic unique key: external_system:entity_type:direction:capability."
+    },
+    "external_system": {
+      "type": "string",
+      "title": "External System",
+      "description": "Integration partner (e.g. 'servicetitan', 'quickbooks')."
+    },
+    "entity_type": {
+      "type": "string",
+      "title": "Entity Type",
+      "description": "Business entity this capability applies to (e.g. 'Customer', 'Job')."
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "EXTERNAL_TO_LVC",
+        "LVC_TO_EXTERNAL",
+        "TWO_WAY"
+      ],
+      "title": "Direction",
+      "description": "The synchronization direction this capability describes."
+    },
+    "capability": {
+      "type": "string",
+      "enum": [
+        "READ",
+        "CREATE",
+        "UPDATE",
+        "DELETE",
+        "WEBHOOK_INBOUND",
+        "API_PULL",
+        "API_PUSH",
+        "ATTACHMENTS",
+        "PHOTOS",
+        "NOTES",
+        "STATUS_UPDATES"
+      ],
+      "title": "Capability",
+      "description": "The specific operation this record declares support for."
+    },
+    "is_supported": {
+      "type": "boolean",
+      "default": false,
+      "title": "Is Supported"
+    },
+    "implementation_status": {
+      "type": "string",
+      "enum": [
+        "implemented",
+        "api_supported_not_implemented",
+        "unsupported",
+        "unknown_requires_verification"
+      ],
+      "default": "unknown_requires_verification",
+      "title": "Implementation Status",
+      "description": "implemented = working in production; api_supported_not_implemented = API verified but not wired; unsupported = confirmed unsupported; unknown_requires_verification = not yet verified."
+    },
+    "api_version": {
+      "type": "string",
+      "title": "API Version",
+      "description": "External API version this capability relies on (e.g. 'crm/v2', 'jpm/v2')."
+    },
+    "limitations": {
+      "type": "string",
+      "title": "Limitations",
+      "description": "Known constraints (e.g. 'read-only', 'no date-range filter', 'requires tenant scope')."
+    },
+    "activation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Activation Date"
+    },
+    "deactivation_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Deactivation Date"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    }
+  },
+  "required": [
+    "capability_id",
+    "capability_key",
+    "external_system",
+    "entity_type",
+    "direction",
+    "capability",
+    "implementation_status"
+  ]
+}

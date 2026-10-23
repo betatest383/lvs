@@ -1,0 +1,245 @@
+{
+  "name": "WorkflowRevision",
+  "type": "object",
+  "properties": {
+    "revision_number": {
+      "type": "string",
+      "title": "Revision Number",
+      "description": "e.g. WR-000001"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "workflow_id": {
+      "type": "string",
+      "title": "Workflow ID",
+      "description": "AppointmentWorkflow record ID"
+    },
+    "stage_key": {
+      "type": "string",
+      "title": "Stage Key",
+      "description": "The workflow stage that was reopened or revised"
+    },
+    "stage_label": {
+      "type": "string",
+      "title": "Stage Label"
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "reopen",
+        "request_revision",
+        "view_history",
+        "approve_reopen",
+        "recomplete_stage",
+        "clear_staleness",
+        "complete_stage"
+      ],
+      "title": "Action"
+    },
+    "previous_status": {
+      "type": "string",
+      "title": "Previous Stage Status"
+    },
+    "new_status": {
+      "type": "string",
+      "title": "New Stage Status"
+    },
+    "reason": {
+      "type": "string",
+      "title": "Reason",
+      "description": "Required written reason for the reopen or revision"
+    },
+    "requested_by": {
+      "type": "string",
+      "title": "Requested By",
+      "description": "Email of the user who requested the reopen/revision"
+    },
+    "requested_by_name": {
+      "type": "string",
+      "title": "Requested By Name"
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Requested At"
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By",
+      "description": "Email of the manager/admin who approved the reopen (when required). Must NOT equal requested_by \u2014 the requester can never be the approver."
+    },
+    "approved_by_name": {
+      "type": "string",
+      "title": "Approved By Name"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Approved At"
+    },
+    "manager_approval_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Manager Approval Required"
+    },
+    "approval_status": {
+      "type": "string",
+      "enum": [
+        "not_required",
+        "pending",
+        "approved",
+        "denied"
+      ],
+      "default": "not_required",
+      "title": "Approval Status"
+    },
+    "source_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Record IDs",
+      "description": "IDs of records that were the source of the change"
+    },
+    "new_revision_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "New Revision Record IDs",
+      "description": "IDs of new draft records created during the revision"
+    },
+    "downstream_stages_marked_stale": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Downstream Stages Marked Stale",
+      "description": "Stage keys that were marked stale as a result of this reopen"
+    },
+    "affected_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Record IDs",
+      "description": "IDs of all records affected by this revision (packages, scopes, snapshots, presentations)"
+    },
+    "affected_immutable_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Immutable Record IDs",
+      "description": "IDs of immutable (presented/accepted) records that were preserved \u2014 NOT mutated. New draft versions will be created when the user re-edits. These IDs are for audit traceability only."
+    },
+    "affected_option_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Proposal Option IDs",
+      "description": "The specific EstimatePackage IDs affected by this revision. Used for precise scope invalidation \u2014 only options sharing the changed finding/recommendation are affected, not all options indiscriminately."
+    },
+    "affected_recommendation_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Recommendation IDs",
+      "description": "The RepairSystemRecommendation IDs that triggered this revision. Used to scope staleness precisely \u2014 only packages tracing to these recommendations are affected."
+    },
+    "previous_workflow_version": {
+      "type": "number",
+      "default": 0,
+      "title": "Previous Workflow Version"
+    },
+    "new_workflow_version": {
+      "type": "number",
+      "default": 0,
+      "title": "New Workflow Version"
+    },
+    "customer_accepted_before_reopen": {
+      "type": "boolean",
+      "default": false,
+      "title": "Customer Accepted Before Reopen",
+      "description": "True when the customer had already accepted a proposal before this reopen was requested"
+    },
+    "customer_presented_before_reopen": {
+      "type": "boolean",
+      "default": false,
+      "title": "Customer Presented Before Reopen",
+      "description": "True when the customer had already been presented a proposal before this reopen was requested"
+    },
+    "scheduled_before_reopen": {
+      "type": "boolean",
+      "default": false,
+      "title": "Scheduled Before Reopen",
+      "description": "True when the job was already scheduled before this reopen was requested"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "superseded",
+        "denied",
+        "cancelled"
+      ],
+      "default": "active",
+      "title": "Revision Status"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "job_id",
+    "workflow_id",
+    "stage_key",
+    "action",
+    "reason",
+    "requested_by"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "operations_manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "technician"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "lead_technician"
+          }
+        }
+      ]
+    },
+    "create": false,
+    "update": false,
+    "delete": false
+  }
+}

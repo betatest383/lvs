@@ -1,0 +1,165 @@
+{
+  "name": "OrchestrationDecision",
+  "type": "object",
+  "properties": {
+    "decision_number": {
+      "type": "string",
+      "title": "Decision Number",
+      "description": "Server-generated: OD-000001"
+    },
+    "employee_id": {
+      "type": "string",
+      "title": "Employee Registry ID",
+      "description": "Employee the decision was made for"
+    },
+    "employee_name": {
+      "type": "string",
+      "title": "Employee Name"
+    },
+    "department_id": {
+      "type": "string",
+      "title": "Department ID"
+    },
+    "department_name": {
+      "type": "string",
+      "title": "Department Name"
+    },
+    "evaluated_task_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Evaluated Task IDs",
+      "description": "All task IDs considered during this decision"
+    },
+    "selected_task_id": {
+      "type": "string",
+      "title": "Selected Task ID",
+      "description": "The task the engine recommended (null if no_eligible_work)"
+    },
+    "selected_task_number": {
+      "type": "string",
+      "title": "Selected Task Number"
+    },
+    "selected_task_title": {
+      "type": "string",
+      "title": "Selected Task Title"
+    },
+    "previous_task_id": {
+      "type": "string",
+      "title": "Previous Task ID",
+      "description": "The task the employee was working on before this decision (null if no prior work)"
+    },
+    "previous_task_number": {
+      "type": "string",
+      "title": "Previous Task Number"
+    },
+    "decision_type": {
+      "type": "string",
+      "enum": [
+        "next_work_selected",
+        "interrupt_current_work",
+        "continue_current_work",
+        "resume_previous_work",
+        "focus_required",
+        "no_eligible_work",
+        "manager_override"
+      ],
+      "title": "Decision Type"
+    },
+    "priority_scores_json": {
+      "type": "string",
+      "title": "Priority Scores (JSON)",
+      "description": "JSON array of {task_id, task_number, score, category, reasons[]}"
+    },
+    "rule_results_json": {
+      "type": "string",
+      "title": "Rule Results (JSON)",
+      "description": "JSON array of {rule_id, rule_name, matched, action}"
+    },
+    "decision_reason": {
+      "type": "string",
+      "title": "Decision Reason",
+      "description": "Plain-language explanation of why this task was selected or rejected"
+    },
+    "source_event_type": {
+      "type": "string",
+      "title": "Source Event Type",
+      "description": "Event that triggered the evaluation (e.g. task_completed, delivery_arrived, manual_request)"
+    },
+    "source_event_id": {
+      "type": "string",
+      "title": "Source Event ID"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Created At"
+    },
+    "engine_version": {
+      "type": "string",
+      "title": "Engine Version"
+    },
+    "manager_override": {
+      "type": "boolean",
+      "default": false,
+      "title": "Manager Override"
+    },
+    "override_by": {
+      "type": "string",
+      "title": "Override By",
+      "description": "User email who performed the override"
+    },
+    "override_reason": {
+      "type": "string",
+      "title": "Override Reason"
+    },
+    "requires_interruption": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Interruption"
+    },
+    "requires_acknowledgment": {
+      "type": "boolean",
+      "default": false,
+      "title": "Requires Acknowledgment"
+    },
+    "checkpoint_required": {
+      "type": "boolean",
+      "default": false,
+      "title": "Checkpoint Required"
+    },
+    "rules_applied": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Rules Applied",
+      "description": "IDs of rules that matched during evaluation"
+    },
+    "blocked_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Blocked Reasons",
+      "description": "Reasons why certain tasks were blocked/skipped"
+    },
+    "orchestration_mode": {
+      "type": "string",
+      "enum": [
+        "off",
+        "preview",
+        "assisted",
+        "enforced"
+      ],
+      "title": "Orchestration Mode",
+      "description": "The active mode when this decision was made"
+    }
+  },
+  "required": [
+    "decision_number",
+    "employee_id",
+    "decision_type"
+  ]
+}

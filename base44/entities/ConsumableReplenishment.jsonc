@@ -1,0 +1,172 @@
+{
+  "name": "ConsumableReplenishment",
+  "type": "object",
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "title": "Request ID",
+      "description": "Auto-generated: CR-000001"
+    },
+    "workflow_id": {
+      "type": "string",
+      "title": "Workflow ID",
+      "default": "WF-WH-102"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID",
+      "description": "Links to Job record \u2014 required parent for all consumable requests"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number",
+      "description": "Auto-inherited from Job"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name",
+      "description": "Auto-inherited from Job"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID",
+      "description": "Auto-inherited from Job"
+    },
+    "job_address": {
+      "type": "string",
+      "title": "Service Address",
+      "description": "Auto-inherited from Job"
+    },
+    "city": {
+      "type": "string",
+      "title": "City",
+      "description": "Auto-inherited from Job"
+    },
+    "state": {
+      "type": "string",
+      "title": "State",
+      "description": "Auto-inherited from Job"
+    },
+    "zip": {
+      "type": "string",
+      "title": "Zip",
+      "description": "Auto-inherited from Job"
+    },
+    "technician": {
+      "type": "string",
+      "title": "Technician",
+      "description": "Auto-inherited from Job"
+    },
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email",
+      "description": "Auto-inherited from Job"
+    },
+    "truck_number": {
+      "type": "string",
+      "title": "Truck Number",
+      "description": "Auto-inherited from Job"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Date"
+    },
+    "submitted_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Submitted Time"
+    },
+    "warehouse_associate": {
+      "type": "string",
+      "title": "Warehouse Associate"
+    },
+    "warehouse_associate_email": {
+      "type": "string",
+      "title": "Warehouse Associate Email"
+    },
+    "items": {
+      "type": "string",
+      "title": "Items (JSON)",
+      "description": "JSON array of {category, item_name, unit, quantity}"
+    },
+    "pull_progress": {
+      "type": "string",
+      "title": "Pull Progress (JSON)",
+      "description": "JSON array of pulled item_name strings"
+    },
+    "additional_notes": {
+      "type": "string",
+      "title": "Additional Notes"
+    },
+    "photo_url": {
+      "type": "string",
+      "title": "Photo Upload"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Submitted",
+        "Pulling",
+        "Ready for Pickup",
+        "Completed"
+      ],
+      "default": "Submitted",
+      "title": "Status"
+    },
+    "pulled_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Pulled Time"
+    },
+    "ready_for_pickup_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Ready for Pickup Time"
+    },
+    "completed_time": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed Time"
+    },
+    "technician_signature": {
+      "type": "string",
+      "title": "Technician Signature"
+    },
+    "warehouse_signature": {
+      "type": "string",
+      "title": "Warehouse Associate Signature"
+    },
+    "total_items": {
+      "type": "number",
+      "title": "Total Item Types"
+    },
+    "total_quantity": {
+      "type": "number",
+      "title": "Total Quantity"
+    },
+    "fulfillment_time_minutes": {
+      "type": "number",
+      "title": "Fulfillment Time (minutes)"
+    },
+    "related_sop_id": {
+      "type": "string",
+      "default": "WH-102",
+      "title": "Related SOP ID"
+    },
+    "related_business_process": {
+      "type": "string",
+      "default": "BP-101",
+      "title": "Related Business Process"
+    },
+    "trainual_url": {
+      "type": "string",
+      "title": "Trainual URL"
+    }
+  },
+  "required": [
+    "job_id",
+    "date"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "name": "ServiceTitanWebhookReplay",
+  "type": "object",
+  "properties": {
+    "webhook_event_id": {
+      "type": "string",
+      "title": "Webhook Event ID",
+      "description": "ServiceTitanWebhookEvent entity ID that was replayed"
+    },
+    "event_type": {
+      "type": "string",
+      "title": "Event Type",
+      "description": "Snapshot of the original event type for reporting without joining"
+    },
+    "handler_name": {
+      "type": "string",
+      "title": "Handler Name",
+      "description": "Name of the handler that processed the replayed event"
+    },
+    "replayed_by": {
+      "type": "string",
+      "title": "Replayed By",
+      "description": "Email of the user who initiated the replay"
+    },
+    "replayed_by_user_id": {
+      "type": "string",
+      "title": "Replayed By (User ID)",
+      "description": "Base44 user ID of the user who initiated the replay"
+    },
+    "replayed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Replayed At"
+    },
+    "result": {
+      "type": "string",
+      "title": "Result Summary",
+      "description": "Summary returned by the handler"
+    },
+    "duration_ms": {
+      "type": "number",
+      "title": "Duration (ms)"
+    },
+    "success": {
+      "type": "boolean",
+      "default": false,
+      "title": "Success"
+    },
+    "error": {
+      "type": "string",
+      "title": "Error",
+      "description": "Error message if the replay failed"
+    },
+    "processing_attempt": {
+      "type": "number",
+      "title": "Processing Attempt",
+      "description": "The replay attempt number (1st replay, 2nd replay, etc.)"
+    },
+    "final_status": {
+      "type": "string",
+      "title": "Final Status",
+      "description": "The final processing status determined by the router (processed, ignored, failed)"
+    },
+    "warnings_json": {
+      "type": "string",
+      "title": "Warnings (JSON)",
+      "description": "JSON array of warning strings returned by the handler"
+    }
+  },
+  "required": [
+    "webhook_event_id",
+    "replayed_by",
+    "success"
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "name": "InspectionReport",
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "inspection_id": {
+      "type": "string",
+      "title": "Inspection ID"
+    },
+    "customer_id": {
+      "type": "string",
+      "title": "Customer ID"
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "address": {
+      "type": "string",
+      "title": "Property Address"
+    },
+    "inspection_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Inspection Date"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician"
+    },
+    "inspection_type": {
+      "type": "string",
+      "enum": [
+        "interior",
+        "exterior"
+      ],
+      "default": "interior",
+      "title": "Inspection Type"
+    },
+    "summary": {
+      "type": "string",
+      "title": "Executive Summary"
+    },
+    "findings_json": {
+      "type": "string",
+      "title": "Findings JSON"
+    },
+    "recommendations": {
+      "type": "string",
+      "title": "Recommendations"
+    },
+    "overall_condition": {
+      "type": "string",
+      "enum": [
+        "excellent",
+        "good",
+        "fair",
+        "poor",
+        "critical"
+      ],
+      "title": "Overall Condition"
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Report Photos"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "pending_review",
+        "approved",
+        "published"
+      ],
+      "default": "draft",
+      "title": "Status"
+    },
+    "ai_summary_status": {
+      "type": "string",
+      "enum": [
+        "not_generated",
+        "draft",
+        "edited",
+        "approved"
+      ],
+      "default": "not_generated",
+      "title": "AI Summary Status",
+      "description": "Tracks the workflow state of the AI-assisted inspection report summary."
+    },
+    "ai_summary_draft": {
+      "type": "string",
+      "title": "AI Summary Draft",
+      "description": "The AI-generated summary text, editable by the technician."
+    },
+    "ai_summary_final": {
+      "type": "string",
+      "title": "AI Summary Final (Approved)",
+      "description": "The technician-approved final summary used on the customer PDF report."
+    },
+    "ai_summary_generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "AI Summary Generated At"
+    },
+    "ai_summary_approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "AI Summary Approved At"
+    },
+    "ai_summary_approved_by": {
+      "type": "string",
+      "title": "AI Summary Approved By"
+    },
+    "ai_summary_notes": {
+      "type": "string",
+      "title": "AI Summary Technician Notes",
+      "description": "Manual notes added by the technician during summary review."
+    },
+    "pdf_url": {
+      "type": "string",
+      "title": "Generated PDF URL",
+      "description": "Cached URL of the last generated inspection report PDF."
+    }
+  },
+  "required": [
+    "job_id",
+    "inspection_id",
+    "customer_id"
+  ]
+}

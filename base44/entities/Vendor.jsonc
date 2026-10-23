@@ -1,0 +1,257 @@
+{
+  "name": "Vendor",
+  "type": "object",
+  "properties": {
+    "vendor_code": {
+      "type": "string",
+      "title": "Vendor Code",
+      "description": "e.g. VND-001. LVC-owned internal code. Never overwritten by ServiceTitan."
+    },
+    "name": {
+      "type": "string",
+      "title": "Vendor Name",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "legal_name": {
+      "type": "string",
+      "title": "Legal Name",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "contact_name": {
+      "type": "string",
+      "title": "Contact Name",
+      "description": "LVC-owned internal full contact name. Never overwritten by ServiceTitan. ServiceTitan contact first/last names are stored separately."
+    },
+    "contact_first_name": {
+      "type": "string",
+      "title": "Contact First Name",
+      "description": "ServiceTitan-owned (Vendor.FirstName). Overwritten by inbound sync."
+    },
+    "contact_last_name": {
+      "type": "string",
+      "title": "Contact Last Name",
+      "description": "ServiceTitan-owned (Vendor.LastName). Overwritten by inbound sync."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "title": "Email",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone",
+      "description": "ServiceTitan-owned. Preserved as text. Overwritten by inbound sync."
+    },
+    "fax": {
+      "type": "string",
+      "title": "Fax",
+      "description": "ServiceTitan-owned (Vendor.Fax). Preserved as text. Overwritten by inbound sync."
+    },
+    "website": {
+      "type": "string",
+      "title": "Website",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "address": {
+      "type": "string",
+      "title": "Address",
+      "description": "LVC-owned formatted address. Never overwritten by ServiceTitan. ServiceTitan address components are stored separately."
+    },
+    "street": {
+      "type": "string",
+      "title": "Street",
+      "description": "ServiceTitan-owned (Address.Street). Overwritten by inbound sync."
+    },
+    "unit": {
+      "type": "string",
+      "title": "Unit",
+      "description": "ServiceTitan-owned (Address.Unit). Overwritten by inbound sync."
+    },
+    "city": {
+      "type": "string",
+      "title": "City",
+      "description": "ServiceTitan-owned (Address.City). Overwritten by inbound sync."
+    },
+    "state": {
+      "type": "string",
+      "title": "State",
+      "description": "ServiceTitan-owned (Address.State). Overwritten by inbound sync."
+    },
+    "zip_code": {
+      "type": "string",
+      "title": "Postal Code",
+      "description": "ServiceTitan-owned (Address.Zip). Preserved as text. Overwritten by inbound sync."
+    },
+    "country": {
+      "type": "string",
+      "title": "Country",
+      "description": "ServiceTitan-owned (Address.Country). Overwritten by inbound sync."
+    },
+    "latitude": {
+      "type": "number",
+      "title": "Latitude",
+      "description": "ServiceTitan-owned (Vendor.Latitude). Overwritten by inbound sync."
+    },
+    "longitude": {
+      "type": "number",
+      "title": "Longitude",
+      "description": "ServiceTitan-owned (Vendor.Longitude). Overwritten by inbound sync."
+    },
+    "servicetitan_memo": {
+      "type": "string",
+      "title": "ServiceTitan Vendor Memo",
+      "description": "ServiceTitan-owned (Vendor.Memo). Overwritten by inbound sync. Distinct from LVC-owned notes."
+    },
+    "servicetitan_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "ServiceTitan Active Status",
+      "description": "ServiceTitan-owned (Vendor.Active). Reflects the ST active flag. When false the vendor is preserved and marked inactive \u2014 not deleted."
+    },
+    "servicetitan_is_truck_replenishment": {
+      "type": "boolean",
+      "default": false,
+      "title": "ServiceTitan Truck Replenishment Vendor",
+      "description": "ServiceTitan-owned (Vendor.IsTruckReplenishment). Overwritten by inbound sync."
+    },
+    "account_number": {
+      "type": "string",
+      "title": "Account Number",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "payment_terms": {
+      "type": "string",
+      "title": "Payment Terms",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "default_lead_time_days": {
+      "type": "number",
+      "default": 0,
+      "title": "Default Lead Time (Days)",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "performance_rating": {
+      "type": "string",
+      "enum": [
+        "excellent",
+        "good",
+        "fair",
+        "poor",
+        "unrated"
+      ],
+      "default": "unrated",
+      "title": "Performance Rating",
+      "description": "LVC-owned vendor scorecard. Never overwritten by ServiceTitan."
+    },
+    "fill_rate_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "Fill Rate (%)",
+      "description": "LVC-owned vendor scorecard. Never overwritten by ServiceTitan."
+    },
+    "on_time_delivery_percentage": {
+      "type": "number",
+      "default": 0,
+      "title": "On-Time Delivery (%)",
+      "description": "LVC-owned vendor scorecard. Never overwritten by ServiceTitan."
+    },
+    "total_pos_sent": {
+      "type": "number",
+      "default": 0,
+      "title": "Total POs Sent",
+      "description": "LVC-owned operational counter. Never overwritten by ServiceTitan."
+    },
+    "total_pos_received": {
+      "type": "number",
+      "default": 0,
+      "title": "Total POs Received",
+      "description": "LVC-owned operational counter. Never overwritten by ServiceTitan."
+    },
+    "total_backorders": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Backorders",
+      "description": "LVC-owned operational counter. Never overwritten by ServiceTitan."
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active",
+      "description": "LVC-owned operational active status. Never toggled by ServiceTitan sync \u2014 the ServiceTitan active flag is stored in servicetitan_active."
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes",
+      "description": "LVC-owned internal purchasing notes. Never overwritten by ServiceTitan."
+    },
+    "servicetitan_vendor_id": {
+      "type": "string",
+      "title": "ServiceTitan Vendor ID",
+      "description": "Permanent external identity (Vendor.Id). Stored as a string to safely support ServiceTitan int64 IDs. The canonical sync key \u2014 records are matched ONLY by this field, never by name. Once assigned, this field is not changed through normal UI edits."
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status",
+      "description": "synced = last sync succeeded; pending = awaiting sync; conflict = local/st conflict recorded; deleted = soft-deleted by ServiceTitan."
+    },
+    "servicetitan_last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync",
+      "description": "Timestamp of the most recent ServiceTitan sync that updated this vendor."
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At",
+      "description": "Timestamp when the most recent ServiceTitan event occurred (from modifiedOn). Used for event ordering protection \u2014 an older event never overwrites a newer vendor state."
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On",
+      "description": "modifiedOn timestamp from the ServiceTitan Vendors API. Used for stale-event detection \u2014 an older modifiedOn never overwrites a newer one."
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version",
+      "description": "Incremented on each successful ServiceTitan sync operation."
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual",
+        "api_export"
+      ],
+      "title": "Import Source",
+      "description": "How this vendor was first imported locally. api_recovery = incremental sync; api_export = full backfill."
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At",
+      "description": "When this vendor was first imported locally."
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

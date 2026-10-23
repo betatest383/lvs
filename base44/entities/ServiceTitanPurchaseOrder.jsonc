@@ -1,0 +1,57 @@
+{
+  "name": "ServiceTitanPurchaseOrder",
+  "type": "object",
+  "properties": {
+    "st_po_id": {
+      "type": "string",
+      "title": "ST PO ID"
+    },
+    "po_number": {
+      "type": "string",
+      "title": "PO Number"
+    },
+    "vendor": {
+      "type": "string",
+      "title": "Vendor"
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number"
+    },
+    "status": {
+      "type": "string",
+      "title": "PO Status"
+    },
+    "expected_delivery_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Expected Delivery Date"
+    },
+    "received_date": {
+      "type": "string",
+      "format": "date",
+      "title": "Received Date"
+    },
+    "items": {
+      "type": "string",
+      "title": "Items (JSON)"
+    },
+    "related_truck": {
+      "type": "string",
+      "title": "Related Truck"
+    },
+    "related_job": {
+      "type": "string",
+      "title": "Related Job"
+    },
+    "last_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Synced At"
+    }
+  },
+  "required": [
+    "st_po_id",
+    "po_number"
+  ]
+}

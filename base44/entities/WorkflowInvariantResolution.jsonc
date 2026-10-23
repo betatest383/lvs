@@ -1,0 +1,89 @@
+{
+  "name": "WorkflowInvariantResolution",
+  "type": "object",
+  "properties": {
+    "exception_id": {
+      "type": "string",
+      "title": "Exception ID"
+    },
+    "workflow_id": {
+      "type": "string",
+      "title": "Workflow ID"
+    },
+    "mutation_request_id": {
+      "type": "string",
+      "title": "Workflow Mutation Request"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "resolution_action": {
+      "type": "string",
+      "enum": [
+        "revalidated_clear",
+        "manager_override"
+      ],
+      "title": "Resolution Action"
+    },
+    "reason": {
+      "type": "string",
+      "title": "Resolution Reason"
+    },
+    "resolved_by": {
+      "type": "string",
+      "title": "Resolved By"
+    },
+    "resolved_by_name": {
+      "type": "string",
+      "title": "Resolved By Name"
+    },
+    "resolved_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Resolved At"
+    },
+    "evidence_json": {
+      "type": "string",
+      "title": "Resolution Evidence JSON"
+    }
+  },
+  "required": [
+    "exception_id",
+    "workflow_id",
+    "job_id",
+    "resolution_action",
+    "reason",
+    "resolved_by",
+    "resolved_at"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "owner"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "manager"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "operations_manager"
+          }
+        }
+      ]
+    },
+    "create": false,
+    "update": false,
+    "delete": false
+  }
+}

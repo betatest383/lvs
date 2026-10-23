@@ -1,0 +1,73 @@
+{
+  "name": "KpiRegistry",
+  "type": "object",
+  "properties": {
+    "kpi_id": {
+      "type": "string",
+      "title": "KPI ID"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "measurement": {
+      "type": "string",
+      "title": "Measurement"
+    },
+    "target": {
+      "type": "string",
+      "title": "Target"
+    },
+    "frequency": {
+      "type": "string",
+      "title": "Frequency"
+    },
+    "owner": {
+      "type": "string",
+      "title": "Owner"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "Tracking",
+        "Active",
+        "Retired"
+      ],
+      "default": "Planned",
+      "title": "Status"
+    },
+    "base44_module": {
+      "type": "string",
+      "title": "Base44 Module"
+    },
+    "related_dashboard_id": {
+      "type": "string",
+      "title": "Related Dashboard ID"
+    },
+    "related_sop_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related SOP IDs"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    }
+  },
+  "required": [
+    "kpi_id",
+    "title"
+  ]
+}

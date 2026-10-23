@@ -1,0 +1,172 @@
+{
+  "name": "ServiceTitanWebhookEvent",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "title": "Event ID",
+      "description": "ServiceTitan event identifier when supplied. Used for idempotency deduplication."
+    },
+    "event_type": {
+      "type": "string",
+      "title": "Event Type"
+    },
+    "tenant_id": {
+      "type": "string",
+      "title": "Tenant ID",
+      "description": "ServiceTitan tenant/business unit identifier when supplied"
+    },
+    "object_id": {
+      "type": "string",
+      "title": "Object ID",
+      "description": "Affected job, appointment, customer, invoice, PO, or other record ID"
+    },
+    "object_type": {
+      "type": "string",
+      "title": "Object Type",
+      "description": "Normalized affected record type (job, appointment, customer, invoice, etc.)"
+    },
+    "event_timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Event Timestamp",
+      "description": "Timestamp supplied by ServiceTitan"
+    },
+    "received_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Received At",
+      "description": "Server timestamp when the webhook was received"
+    },
+    "payload_json": {
+      "type": "string",
+      "title": "Payload JSON",
+      "description": "Complete original webhook payload"
+    },
+    "payload_hash": {
+      "type": "string",
+      "title": "Payload Hash",
+      "description": "Deterministic SHA-256 hash of the received payload. Used for idempotency when no event_id is supplied."
+    },
+    "processing_status": {
+      "type": "string",
+      "enum": [
+        "received",
+        "processing",
+        "processed",
+        "ignored",
+        "failed",
+        "dead_letter"
+      ],
+      "default": "received",
+      "title": "Processing Status",
+      "description": "received=queued; processing=in flight; processed=done; ignored=non-retryable skip; failed=retryable error with backoff; dead_letter=max retries exceeded, no more retries"
+    },
+    "processing_attempts": {
+      "type": "number",
+      "default": 0,
+      "title": "Processing Attempts"
+    },
+    "processing_started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Processing Started At",
+      "description": "Timestamp when the current processing claim was acquired. Used for stale-processing detection."
+    },
+    "processing_claimed_by": {
+      "type": "string",
+      "title": "Processing Claimed By",
+      "description": "Email or identifier of the user/function that acquired the current processing claim."
+    },
+    "processing_claim_id": {
+      "type": "string",
+      "title": "Processing Claim ID",
+      "description": "Unique identifier generated for each processing claim. Appears in timeline, logs, replay history, and audit records."
+    },
+    "processing_recovered_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Processing Recovered At",
+      "description": "Timestamp of the most recent stale-processing recovery. Does not erase original claim information."
+    },
+    "processing_recovered_by": {
+      "type": "string",
+      "title": "Processing Recovered By",
+      "description": "Who recovered the stale event (system or admin email)."
+    },
+    "processing_recovery_reason": {
+      "type": "string",
+      "title": "Processing Recovery Reason",
+      "description": "Reason for the most recent stale-processing recovery."
+    },
+    "processing_recovery_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Processing Recovery Count",
+      "description": "Number of times this event has been recovered from a stale processing state."
+    },
+    "processed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Processed At"
+    },
+    "last_error": {
+      "type": "string",
+      "title": "Last Error"
+    },
+    "next_retry_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Next Retry At"
+    },
+    "dead_letter_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Dead Letter At",
+      "description": "When the event entered the Dead Letter Queue."
+    },
+    "dead_letter_reason": {
+      "type": "string",
+      "title": "Dead Letter Reason",
+      "description": "Why the event was moved to the Dead Letter Queue."
+    },
+    "dead_letter_by_system": {
+      "type": "boolean",
+      "default": false,
+      "title": "Dead Letter By System",
+      "description": "True when the system automatically moved this event to the Dead Letter Queue after exceeding max retries."
+    },
+    "source": {
+      "type": "string",
+      "default": "servicetitan",
+      "title": "Source"
+    },
+    "replay_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Replay Count",
+      "description": "Number of times this webhook has been replayed by an administrator."
+    },
+    "last_replay_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Last Replay At",
+      "description": "Timestamp of the most recent replay."
+    },
+    "last_replay_by": {
+      "type": "string",
+      "title": "Last Replay By",
+      "description": "Email of the user who last replayed this webhook."
+    },
+    "last_replay_result": {
+      "type": "string",
+      "title": "Last Replay Result",
+      "description": "Summary of the most recent replay result."
+    }
+  },
+  "required": [
+    "event_type",
+    "payload_json",
+    "payload_hash"
+  ]
+}

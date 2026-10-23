@@ -1,0 +1,65 @@
+{
+  "name": "FormRegistry",
+  "type": "object",
+  "properties": {
+    "form_id": {
+      "type": "string",
+      "title": "Form ID"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "purpose": {
+      "type": "string",
+      "title": "Purpose"
+    },
+    "owner": {
+      "type": "string",
+      "title": "Owner"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "Draft",
+        "Active",
+        "Retired"
+      ],
+      "default": "Draft",
+      "title": "Status"
+    },
+    "base44_module": {
+      "type": "string",
+      "title": "Base44 Module"
+    },
+    "trainual_url": {
+      "type": "string",
+      "title": "Trainual URL"
+    },
+    "related_sop_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related SOP IDs"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    }
+  },
+  "required": [
+    "form_id",
+    "title"
+  ]
+}

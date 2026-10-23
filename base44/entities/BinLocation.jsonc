@@ -1,0 +1,55 @@
+{
+  "name": "BinLocation",
+  "type": "object",
+  "properties": {
+    "bin_code": {
+      "type": "string",
+      "title": "Bin Code",
+      "description": "e.g. A-12"
+    },
+    "name": {
+      "type": "string",
+      "title": "Bin Name"
+    },
+    "warehouse_location_id": {
+      "type": "string",
+      "title": "Warehouse Location ID",
+      "description": "Links to WarehouseLocation record"
+    },
+    "warehouse_location_name": {
+      "type": "string",
+      "title": "Warehouse Location Name",
+      "description": "Auto-populated display name"
+    },
+    "zone": {
+      "type": "string",
+      "title": "Zone"
+    },
+    "aisle": {
+      "type": "string",
+      "title": "Aisle"
+    },
+    "shelf": {
+      "type": "string",
+      "title": "Shelf"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "title": "Sort Order"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "name",
+    "warehouse_location_id"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "name": "CrownCalculationSettings",
+  "type": "object",
+  "properties": {
+    "default_crown_thickness_inches": {
+      "type": "number",
+      "default": 4,
+      "title": "Default Crown Thickness (in)"
+    },
+    "default_bag_weight_lbs": {
+      "type": "number",
+      "default": 80,
+      "title": "Default Bag Weight (lbs)"
+    },
+    "default_yield_per_bag_cubic_feet": {
+      "type": "number",
+      "default": 0.6,
+      "title": "Default Yield per Bag (cu ft)"
+    },
+    "small_form_max_inches": {
+      "type": "number",
+      "default": 28.01,
+      "title": "Small Form Max (in)"
+    },
+    "medium_form_max_inches": {
+      "type": "number",
+      "default": 56,
+      "title": "Medium Form Max (in)"
+    },
+    "large_form_max_inches": {
+      "type": "number",
+      "default": 92,
+      "title": "Large Form Max (in)"
+    },
+    "foam_package_length_inches": {
+      "type": "number",
+      "default": 192,
+      "title": "Foam Package Length (in)",
+      "description": "Package length of expansion foam product for purchase quantity calculation"
+    },
+    "concrete_material_id": {
+      "type": "string",
+      "title": "Concrete Material ID"
+    },
+    "wire_grid_material_id": {
+      "type": "string",
+      "title": "Wire Grid Material ID"
+    },
+    "expansion_foam_material_id": {
+      "type": "string",
+      "title": "Expansion Foam Material ID"
+    },
+    "small_form_material_id": {
+      "type": "string",
+      "title": "Small Form Material ID"
+    },
+    "medium_form_material_id": {
+      "type": "string",
+      "title": "Medium Form Material ID"
+    },
+    "large_form_material_id": {
+      "type": "string",
+      "title": "Large Form Material ID"
+    },
+    "custom_form_material_id": {
+      "type": "string",
+      "title": "Custom Form Material ID"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    }
+  },
+  "required": []
+}

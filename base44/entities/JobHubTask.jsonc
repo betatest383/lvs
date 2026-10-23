@@ -1,0 +1,92 @@
+{
+  "name": "JobHubTask",
+  "type": "object",
+  "properties": {
+    "technician_email": {
+      "type": "string",
+      "title": "Technician Email"
+    },
+    "technician_name": {
+      "type": "string",
+      "title": "Technician Name"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "title": "Task Date"
+    },
+    "task_type": {
+      "type": "string",
+      "enum": [
+        "material_return",
+        "equipment_return",
+        "consumable_request",
+        "truck_cleanup",
+        "warehouse_support",
+        "setup_workflow",
+        "morning_workflow",
+        "truck_readiness",
+        "material_transfer_receive",
+        "dispatch"
+      ],
+      "title": "Task Type"
+    },
+    "title": {
+      "type": "string",
+      "title": "Task Title"
+    },
+    "description": {
+      "type": "string",
+      "title": "Task Description"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "in_progress",
+        "completed",
+        "skipped"
+      ],
+      "default": "pending",
+      "title": "Task Status"
+    },
+    "linked_entity_id": {
+      "type": "string",
+      "title": "Linked Entity ID",
+      "description": "ID of the related record (e.g., MaterialReturn, ConsumableRequest, Job)"
+    },
+    "linked_entity_type": {
+      "type": "string",
+      "title": "Linked Entity Type"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At"
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "medium",
+      "title": "Priority"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "technician_email",
+    "date",
+    "task_type",
+    "title"
+  ]
+}

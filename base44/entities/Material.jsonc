@@ -1,0 +1,54 @@
+{
+  "name": "Material",
+  "type": "object",
+  "properties": {
+    "repair_id": {
+      "type": "string",
+      "title": "Repair ID"
+    },
+    "repair_name": {
+      "type": "string",
+      "title": "Repair Name"
+    },
+    "item_name": {
+      "type": "string",
+      "title": "Material Name"
+    },
+    "quantity": {
+      "type": "number",
+      "title": "Default Quantity"
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "each",
+        "feet",
+        "sq_ft",
+        "gallons",
+        "lbs",
+        "bags",
+        "tubes",
+        "rolls",
+        "boxes"
+      ],
+      "title": "Unit"
+    },
+    "unit_cost": {
+      "type": "number",
+      "title": "Unit Cost ($)"
+    },
+    "supplier": {
+      "type": "string",
+      "title": "Supplier"
+    },
+    "sku": {
+      "type": "string",
+      "title": "SKU"
+    }
+  },
+  "required": [
+    "item_name",
+    "quantity",
+    "unit"
+  ]
+}

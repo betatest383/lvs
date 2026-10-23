@@ -1,0 +1,393 @@
+{
+  "name": "WarehouseTransfer",
+  "type": "object",
+  "properties": {
+    "transfer_number": {
+      "type": "string",
+      "title": "Transfer Number",
+      "description": "LVC-owned internal number (e.g. WT-000001). Never overwritten by ServiceTitan."
+    },
+    "transfer_type": {
+      "type": "string",
+      "enum": [
+        "warehouse_to_warehouse",
+        "warehouse_to_truck",
+        "truck_to_warehouse",
+        "truck_to_truck",
+        "warehouse_to_job_site",
+        "job_site_to_warehouse"
+      ],
+      "title": "Transfer Type",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "source_location_id": {
+      "type": "string",
+      "title": "Source Location ID",
+      "description": "Links to WarehouseLocation record. Resolved via servicetitan_warehouse_id."
+    },
+    "source_location_name": {
+      "type": "string",
+      "title": "Source Location Name",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "servicetitan_source_warehouse_id": {
+      "type": "string",
+      "title": "ServiceTitan Source Warehouse ID",
+      "description": "Snapshot of the source warehouse's ST ID."
+    },
+    "destination_location_id": {
+      "type": "string",
+      "title": "Destination Location ID",
+      "description": "Links to WarehouseLocation record. Resolved via servicetitan_warehouse_id."
+    },
+    "destination_location_name": {
+      "type": "string",
+      "title": "Destination Location Name",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "servicetitan_destination_warehouse_id": {
+      "type": "string",
+      "title": "ServiceTitan Destination Warehouse ID",
+      "description": "Snapshot of the destination warehouse's ST ID."
+    },
+    "sales_order_id": {
+      "type": "string",
+      "title": "Sales Order ID",
+      "description": "LVC-owned. Links to SalesOrder when transfer fulfills a job. Never overwritten by ServiceTitan."
+    },
+    "so_number": {
+      "type": "string",
+      "title": "Sales Order Number",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "job_id": {
+      "type": "string",
+      "title": "Job ID",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "job_number": {
+      "type": "string",
+      "title": "Job Number",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "dispatched",
+        "in_transit",
+        "partially_received",
+        "received",
+        "completed",
+        "cancelled"
+      ],
+      "default": "pending",
+      "title": "Status",
+      "description": "ServiceTitan-owned source lifecycle status. Overwritten by inbound sync. Contains ONLY source lifecycle values \u2014 no LVC workflow states."
+    },
+    "lvc_workflow_status": {
+      "type": "string",
+      "enum": [
+        "requested",
+        "awaiting_manager_approval",
+        "approved",
+        "pick_assigned",
+        "picking",
+        "picked",
+        "staged",
+        "loaded",
+        "released",
+        "in_transit",
+        "partially_received",
+        "received",
+        "shortage_exception",
+        "damage_exception",
+        "closed",
+        "cancelled"
+      ],
+      "default": "requested",
+      "title": "LVC Workflow Status",
+      "description": "LVC-owned internal transfer workflow status. NEVER overwritten by ServiceTitan synchronization. Separate from the ST-owned status field."
+    },
+    "dispatch_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Dispatch Date",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "expected_arrival_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Expected Arrival Date",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "actual_arrival_date": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Actual Arrival Date",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "line_items": {
+      "type": "string",
+      "title": "Line Items (JSON)",
+      "description": "ServiceTitan-owned. JSON array of line summaries. Overwritten by inbound sync. Full line data lives in WarehouseTransferLine records."
+    },
+    "total_quantity": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Quantity",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "total_quantity_dispatched": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Quantity Dispatched",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "total_quantity_received": {
+      "type": "number",
+      "default": 0,
+      "title": "Total Quantity Received",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "replenishment_origin": {
+      "type": "boolean",
+      "default": false,
+      "title": "Created from Truck Replenishment",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "lines_sync_status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "pending",
+        "partial",
+        "complete",
+        "failed"
+      ],
+      "default": "not_started",
+      "title": "Lines Sync Status",
+      "description": "LVC-owned. Tracks the completeness of line-level synchronization for this header. A header may be created before all lines are synced."
+    },
+    "lines_expected_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Lines Expected Count",
+      "description": "LVC-owned. Number of lines expected from the source system. Updated during sync."
+    },
+    "lines_synced_count": {
+      "type": "number",
+      "default": 0,
+      "title": "Lines Synced Count",
+      "description": "LVC-owned. Number of lines successfully synchronized."
+    },
+    "lines_last_sync_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Lines Last Sync At",
+      "description": "LVC-owned. Timestamp of the last line synchronization attempt."
+    },
+    "picked_by": {
+      "type": "string",
+      "title": "Picked By",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "picked_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Picked At",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "staged_by": {
+      "type": "string",
+      "title": "Staged By",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "staged_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Staged At",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "loaded_by": {
+      "type": "string",
+      "title": "Loaded By",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "loaded_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Loaded At",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "received_by": {
+      "type": "string",
+      "title": "Received By",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "received_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Received At",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Completed At",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "cancelled_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Cancelled At",
+      "description": "ServiceTitan-owned. Overwritten by inbound sync."
+    },
+    "pickup_photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Pickup Photos",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "delivery_photos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Delivery Photos",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "exception_flag": {
+      "type": "boolean",
+      "default": false,
+      "title": "Exception Flag",
+      "description": "LVC-owned. Raised when transfer has lost/damaged/short items. Never overwritten by ServiceTitan."
+    },
+    "exception_resolution": {
+      "type": "string",
+      "title": "Exception Resolution",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "ledger_transaction_id": {
+      "type": "string",
+      "title": "Ledger Transaction ID",
+      "description": "LVC-owned. Links to the InventoryTransaction ledger entry. Never overwritten by ServiceTitan."
+    },
+    "ledger_posted": {
+      "type": "boolean",
+      "default": false,
+      "title": "Ledger Posted",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "servicetitan_transfer_id": {
+      "type": "string",
+      "title": "ServiceTitan Transfer ID",
+      "description": "Permanent external identity. Stored as string for int64 safety. The canonical sync key \u2014 matched ONLY by this field, never by transfer number."
+    },
+    "servicetitan_transfer_number": {
+      "type": "string",
+      "title": "ServiceTitan Transfer Number",
+      "description": "ServiceTitan-owned. Human-readable number from ST. Overwritten by inbound sync."
+    },
+    "servicetitan_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "ServiceTitan Active Status"
+    },
+    "servicetitan_sync_status": {
+      "type": "string",
+      "enum": [
+        "synced",
+        "pending",
+        "conflict",
+        "deferred",
+        "failed",
+        "deleted"
+      ],
+      "default": "synced",
+      "title": "ServiceTitan Sync Status"
+    },
+    "servicetitan_last_sync": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Sync"
+    },
+    "servicetitan_last_event_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Last Event At"
+    },
+    "servicetitan_modified_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Modified On"
+    },
+    "servicetitan_created_on": {
+      "type": "string",
+      "format": "date-time",
+      "title": "ServiceTitan Created On"
+    },
+    "servicetitan_sync_version": {
+      "type": "number",
+      "default": 0,
+      "title": "ServiceTitan Sync Version"
+    },
+    "servicetitan_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "manual",
+        "api"
+      ],
+      "title": "ServiceTitan Source"
+    },
+    "servicetitan_raw_data": {
+      "type": "string",
+      "title": "ServiceTitan Raw Data (JSON)"
+    },
+    "import_source": {
+      "type": "string",
+      "enum": [
+        "webhook",
+        "api_recovery",
+        "on_demand_hydration",
+        "manual",
+        "api_export"
+      ],
+      "title": "Import Source"
+    },
+    "imported_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Imported At"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "approved_by": {
+      "type": "string",
+      "title": "Approved By",
+      "description": "LVC-owned. Never overwritten by ServiceTitan."
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes",
+      "description": "LVC-owned internal notes. Never overwritten by ServiceTitan."
+    }
+  },
+  "required": [
+    "source_location_id",
+    "destination_location_id",
+    "transfer_type",
+    "status"
+  ]
+}

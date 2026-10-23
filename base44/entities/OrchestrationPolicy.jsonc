@@ -1,0 +1,144 @@
+{
+  "name": "OrchestrationPolicy",
+  "type": "object",
+  "properties": {
+    "policy_key": {
+      "type": "string",
+      "title": "Policy Key",
+      "description": "Unique key identifying this policy (e.g. default, warehouse_dept, field_service_dept)"
+    },
+    "policy_name": {
+      "type": "string",
+      "title": "Policy Name"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "department": {
+      "type": "string",
+      "title": "Department",
+      "description": "Department this policy applies to. Empty = company-wide default."
+    },
+    "orchestration_mode": {
+      "type": "string",
+      "enum": [
+        "off",
+        "preview",
+        "assisted",
+        "enforced"
+      ],
+      "default": "preview",
+      "title": "Orchestration Mode",
+      "description": "off = engine disabled; preview = read-only recommendations; assisted = suggestions with user dismiss; enforced = engine controls work priority"
+    },
+    "priority_weights_json": {
+      "type": "string",
+      "title": "Priority Weights (JSON)",
+      "description": "JSON: { category_base: {...}, urgency_multiplier: {...}, overdue_bonus, business_impact_bonus: {...}, waiting_time_bonus_per_minute, task_age_bonus_per_hour, max_task_age_bonus }"
+    },
+    "category_ranking": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "critical",
+          "operational_interruption",
+          "high_priority",
+          "scheduled_primary",
+          "routine",
+          "busy_work"
+        ]
+      },
+      "title": "Category Ranking",
+      "description": "Ordered list of categories from highest to lowest priority"
+    },
+    "acknowledgment_deadline_minutes": {
+      "type": "number",
+      "default": 15,
+      "title": "Acknowledgment Deadline (Minutes)"
+    },
+    "critical_acknowledgment_deadline_minutes": {
+      "type": "number",
+      "default": 5,
+      "title": "Critical Acknowledgment Deadline (Minutes)"
+    },
+    "overdue_escalation_minutes": {
+      "type": "number",
+      "default": 60,
+      "title": "Overdue Escalation (Minutes)",
+      "description": "Minutes after due time before high-priority work enters Focus Required"
+    },
+    "interruptibility_defaults_json": {
+      "type": "string",
+      "title": "Interruptibility Defaults (JSON)",
+      "description": "JSON: { critical: 'critical_only', operational_interruption: 'freely_interruptible', ... }"
+    },
+    "focus_lock_eligible_categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Focus Lock Eligible Categories",
+      "description": "Work categories eligible for Focus Required mode"
+    },
+    "manager_override_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Manager Override Roles",
+      "description": "Role keys allowed to perform manager overrides"
+    },
+    "rules_json": {
+      "type": "string",
+      "title": "Rules (JSON)",
+      "description": "JSON array of configurable priority rules: {id, name, condition, action, priority_weight, is_active}"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "title": "Active"
+    },
+    "version": {
+      "type": "number",
+      "default": 1,
+      "title": "Version"
+    },
+    "emergency_disabled": {
+      "type": "boolean",
+      "default": false,
+      "title": "Emergency Disabled",
+      "description": "When true, enforced orchestration is disabled company-wide regardless of mode setting. Requires reason and records who disabled it."
+    },
+    "emergency_disabled_by": {
+      "type": "string",
+      "title": "Emergency Disabled By"
+    },
+    "emergency_disabled_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Emergency Disabled At"
+    },
+    "emergency_disabled_reason": {
+      "type": "string",
+      "title": "Emergency Disabled Reason"
+    },
+    "created_by": {
+      "type": "string",
+      "title": "Created By"
+    },
+    "updated_by": {
+      "type": "string",
+      "title": "Updated By"
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    }
+  },
+  "required": [
+    "policy_key",
+    "policy_name"
+  ]
+}
